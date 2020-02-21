@@ -24,6 +24,11 @@ public class MainTravelAgency {
         this.customers = new CustomerDirectory();
         
     }
+    
+    public void addAirliner(Airliner airliner){
+        airliners.add(airliner);
+    
+    }
 
     public CustomerDirectory getCustomers() {
         return customers;
@@ -67,8 +72,24 @@ public class MainTravelAgency {
         return arr;
     }    
     
-        
     
+    public Boolean airlineNameExists(String name){
+        for(Airliner airliner  : this.getAirliners()){
+            if(airliner.getAirlineName().equalsIgnoreCase(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+        
+    public Boolean airlineCodeExists(String name){
+        for(Airliner airliner  : this.getAirliners()){
+            if(airliner.getAirlineCode().equalsIgnoreCase(name)){
+                return true;
+            }
+        }
+        return false;
+    }    
     
     
     

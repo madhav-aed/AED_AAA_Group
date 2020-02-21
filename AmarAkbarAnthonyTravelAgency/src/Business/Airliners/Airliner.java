@@ -14,7 +14,15 @@ import java.util.ArrayList;
 public class Airliner {
     String airlineName;
     String airlineCode;
-    ArrayList<Fleet> fleet;
+    Fleet fleet;
+
+    public Fleet getFleet() {
+        return fleet;
+    }
+
+    public void setFleet(Fleet fleet) {
+        this.fleet = fleet;
+    }
 
     public String getAirlineName() {
         return airlineName;
@@ -32,18 +40,16 @@ public class Airliner {
         this.airlineCode = airlineCode;
     }
 
-    public ArrayList<Fleet> getFleet() {
-        return fleet;
-    }
 
-    public void setFleet(ArrayList<Fleet> fleet) {
-        this.fleet = fleet;
-    }
-
-    public Airliner(String airlineName, String airlineCode, ArrayList<Fleet> fleet) {
+    public Airliner(String airlineName, String airlineCode) {
         this.airlineName = airlineName;
         this.airlineCode = airlineCode;
-        this.fleet = fleet;
+        this.fleet = new Fleet();
+    }
+
+    @Override
+    public String toString() {
+        return this.getAirlineName();
     }
     
 
