@@ -16,6 +16,20 @@ public class Airplane {
     int noOfSeats;
     Flight flightDetails;
 
+    public Airplane() {
+    }
+
+    public Airplane(String name, String type, int noOfSeats) {
+        this.name = name;
+        this.type = type;
+        this.noOfSeats = noOfSeats;
+        this.flightDetails = new Flight();
+        
+    }
+    
+    
+    
+
     public String getType() {
         return type;
     }
@@ -57,7 +71,7 @@ public class Airplane {
     
     @Override
     public String toString() {
-        return "Airplane{" + "name=" + name + ", noOfSeats=" + noOfSeats + '}';
+        return this.getName();
     }
 
     

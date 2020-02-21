@@ -5,14 +5,14 @@
  */
 package Business.TravelOffice;
 
-import Business.Airliners.Seats;
+import Business.Airliners.FlightDates;
 
 /**
  *
  * @author rohit
  */
 public class Reservations {
-    Seats seat;
+    FlightDates seat;
     Customer customer;
     
     

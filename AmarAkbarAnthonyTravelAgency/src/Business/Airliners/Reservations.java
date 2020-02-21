@@ -12,11 +12,11 @@ import Business.TravelOffice.Customer;
  * @author rohit
  */
 public class Reservations {
-    Seats seat;
+    FlightDates seat;
     Customer customer;
     
     
-    public void bookTickets(Customer customer, Seats seats){
+    public void bookTickets(Customer customer, FlightDates seats){
     
     
     

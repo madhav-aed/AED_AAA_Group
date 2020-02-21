@@ -5,6 +5,7 @@
  */
 package Business.Airliners;
 
+import Business.TravelOffice.MainTravelAgency;
 import java.util.ArrayList;
 
 /**
@@ -12,10 +13,17 @@ import java.util.ArrayList;
  * @author rohit
  */
 public class MasterFlightSchedule {
+    
+    String airlineName;
+    String code;
+    String origin;
+    
     private ArrayList<Flight> flights;
 
     public MasterFlightSchedule() {
         this.flights = new ArrayList<>();
+        
+        
     }
 
     
