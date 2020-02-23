@@ -249,5 +249,102 @@ public class AnalysisHelper {
             temp.put(aa.getKey(), aa.getValue()); 
         } 
         return temp; 
-    }         
+    }
+
+
+public void usersCount() {
+         
+          Map<Integer, User> users = DataStore.getInstance().getUsers();
+          Map<Integer, Comment> comments = DataStore.getInstance().getComments();
+          Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+          Map<Integer, Integer> userTotalCount = new HashMap<>();
+          int totCount = 0;
+          for (User user : users.values()) {
+             totCount = 0; 
+            for (Comment c : user.getComments()) {
+                
+                if (userTotalCount.containsKey(user.getId())) {
+                    totCount = userTotalCount.get(user.getId());
+                }
+                totCount = totCount + c.getLikes() + 1;
+                userTotalCount.put(user.getId(), totCount);
+            }
+            
+            for (Post p : posts.values()) {
+                if(p.getUserId() == (user.getId())){
+                 if (userTotalCount.containsKey(user.getId())) {
+                    totCount = userTotalCount.get(user.getId());
+                }
+                totCount += totCount;
+                userTotalCount.put(user.getId(), totCount);
+            }   
+                
+            }
+        }
+          
+      
+        
+        List<Map.Entry<Integer,Integer>> finalList = new ArrayList<>(userTotalCount.entrySet());
+        Collections.sort(finalList, new Comparator<Map.Entry<Integer, Integer>>(){
+            @Override
+            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+            
+        });
+
+        System.out.println("Top 5 Inactive users");
+        for(int i = 0;i<5;i++){
+            Integer userID = finalList.get(i).getKey();
+            Integer inActiveCount = finalList.get(i).getValue();
+            System.out.printf("%d. user ID: %d ; Number of Comments/Posts/Likes : %d \n",i+1,userID,inActiveCount);
+        }
+        
+        
+        
+        
+        List<Map.Entry<Integer,Integer>> descList = new ArrayList<>(userTotalCount.entrySet());
+        Collections.sort(descList, new Comparator<Map.Entry<Integer, Integer>>(){
+            @Override
+            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+            
+        });
+        
+        
+        System.out.println("Top 5 Proactive Users ");
+       for(int i = 0;i<5;i++){
+           Integer userID = descList.get(i).getKey();
+           Integer proCount = descList.get(i).getValue();
+           System.out.printf("%d. user ID: %d ; Number of Comments/Posts/Likes %d \n",i+1,userID,proCount);
+       }
+         
+         
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 }
