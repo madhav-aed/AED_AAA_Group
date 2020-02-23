@@ -70,6 +70,89 @@ public class AnalysisHelper {
     }
    
 
+
+    public void getAverageNumberOfLikesPerComment(){
+        int count = 0;
+        int totalLikes = 0;
+//        Map<Integer,Integer> commentLikes = new HashMap<>();
+        Map<Integer,Comment> commentMap = DataStore.getInstance().getComments();
+        int commentCount = commentMap.size();
+        for(Comment c:commentMap.values()){
+            count = count +1;
+            totalLikes = totalLikes + c.getLikes();
+            
+        }
+        double average = totalLikes/commentCount;
+            System.out.println("Total likes are :" + totalLikes);
+            System.out.println("Total comments are :"+commentCount);
+            System.out.println("Average comments are :"+average);
+    }
+    
+    public void postWithMostLikedComments(){
+        
+       
+        Map<Integer, Integer> postLikesCount = new HashMap<>();
+        Map<Integer,Post> postMap = DataStore.getInstance().getPosts();
+        int likesCounter = 0;
+        for(Post p: postMap.values()){
+            for (Comment c : p.getComments()) {
+                
+                int likes = 0;
+                if (postLikesCount.containsKey(p.getPostId())) {
+                    likes = postLikesCount.get(p.getPostId());
+                }
+                likes += c.getLikes();
+                postLikesCount.put(p.getPostId(), likes);
+            }
+        }
+    
+        
+        int max = 0;
+        int maxId = 0;
+        for (int id : postLikesCount.keySet()) {
+            if (postLikesCount.get(id) > max) {
+                max = postLikesCount.get(id);
+                maxId = id;
+            }
+        }
+        System.out.println("Post with most liked Comments: " + max + "\n" 
+            + postMap.get(maxId));
+        
+    }
+    
+    public void postWithMostComments(){
+        int v1 = 0;
+        int v2 = 0;
+        int pMax = 0;
+    Map<Integer,Post> postMap = DataStore.getInstance().getPosts();
+    List<Post> postList = new ArrayList<>(postMap.values());
+    
+//    for(Post p: postMap.values()){
+//         v2 = p.getComments().size();
+//         if(v2>v1){
+//             v1 = v2;
+//             pMax = p.getPostId();
+//         }
+//    }
+    
+    
+        
+         Collections.sort(postList, new Comparator<Post>() {
+            @Override
+            public int compare(Post p1, Post p2) {
+                return p2.getComments().size()-p1.getComments().size();
+            }
+        });
+        
+        System.out.println("Post with most comments has most comments as : "+postList.get(0).getComments().size() + "\n"+
+                postList.get(0)
+                );
+    
+ //       System.out.println(" Post with Most comments is :"+pMax+" and count of most comments is :"+v2);
+    }
+
+
+
     public void getFiveInactiveUsersTotalPostsNums(){
         Map<Integer, Post> postMap = DataStore.getInstance().getPosts();
         HashMap<Integer, Integer> totalPosts = new HashMap<>();
