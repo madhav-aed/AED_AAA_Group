@@ -48,4 +48,14 @@ public class Post {
         this.postId = postId;
     }
     
+	
+	
+	
+	@Override
+    public String toString(){
+        return "Post: { " + "postId: " + this.postId + "  userId: "+ this.userId + "}  ";
+    }
+	
+	
+	
 }
