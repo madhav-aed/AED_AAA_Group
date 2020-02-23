@@ -103,8 +103,7 @@ public class Lab7 {
 	 
         helper.getFiveInactiveUsersTotalPostsNums();
         helper.inactiveUsersBasedOnComments();
-//		helper.
-//		helper.
-
+		helper.usersCount();
+		
     }
 }
