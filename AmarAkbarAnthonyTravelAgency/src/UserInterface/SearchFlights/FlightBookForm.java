@@ -10,11 +10,13 @@ import Business.Airliners.Airplane;
 import Business.Airliners.FlightDates;
 import Business.TravelOffice.MainTravelAgency;
 import Business.TravelOffice.Customer;
+import Business.TravelOffice.Reservations;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.util.*;
+import javax.swing.JOptionPane;
 ;
 
 /**
@@ -105,6 +107,11 @@ public class FlightBookForm extends javax.swing.JPanel {
         jLabel2.setText("Flight Number");
 
         outFlightDep.setEditable(false);
+        outFlightDep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outFlightDepActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Departure");
 
@@ -210,12 +217,63 @@ public class FlightBookForm extends javax.swing.JPanel {
         
                  String parName = " ";
                  String parTime = " ";
+                 ArrayList<Reservations> c1 = new ArrayList<Reservations>();
         
                 
                 hmap1 = tempFlightDate.getSeatsAllocation();
                 int hashCounter = 0;
                 
-                for (Map.Entry mapElement : hmap1.entrySet()) { 
+            
+           
+                int min = 100;
+                int max = 999;
+                
+      
+                int random_int = (int) (Math.random() * (max - min + 1) + min); 
+      
+
+                String parFlight = outFlightNum.getText();
+                String parDate   = outFlightDate.getText();
+                String parOrigin = outFlightDep.getText();
+                String parDest   = outFlightArr.getText();
+                String parSeats  = " ";
+                String parPNR = " ";
+                
+                String airliner  = tempAirliner.getAirlineName();
+                float  chkTime   = tempFlightDate.getFlightTime();
+                
+                
+                
+                String custName = " ";
+                
+                 custName = String.valueOf(inComboCustomer.getSelectedItem());
+                
+                if("null".equals(custName)){
+                    JOptionPane.showMessageDialog(null, "Please enter a customer");
+                      return;}
+                
+                if (custName!= "null"){
+                Customer cusObj = this.mainTravelAgency.getCustomers().searchAccount(custName);
+     
+                if (cusObj!= null){
+               // parTime =  String.valueOf(tempFlightDate.getFlightTime());
+                parTime =  String.format("%.2f", tempFlightDate.getFlightTime()).replace(' ', '0');
+                c1 = cusObj.getReservationsAList();
+                
+                for(Reservations r1 : c1){
+                    
+                    if(r1.getDate().equals(parDate))
+                      if(Float.parseFloat(r1.getTime()) < chkTime + 4){
+                      JOptionPane.showMessageDialog(null, "Passenger has another reservation in this time frame");
+                      return;
+                      }
+                }
+                
+               
+                
+                // Block the Seat
+                
+                    for (Map.Entry mapElement : hmap1.entrySet()) { 
                 boolean check = (boolean) mapElement.getValue();
                 if(check == true)
                     hashCounter = hashCounter + 1;
@@ -232,36 +290,14 @@ public class FlightBookForm extends javax.swing.JPanel {
                 
                 }
                 
-           
-                int min = 100;
-                int max = 999;
-                
-      
-                int random_int = (int) (Math.random() * (max - min + 1) + min); 
-      
-
-                String parFlight = outFlightNum.getText();
-                String parDate   = outFlightDate.getText();
-                String parOrigin = outFlightDep.getText();
-                String parDest   = outFlightArr.getText();
-                String parSeats  = String.valueOf(hashCounter+1);
-                String airliner  = tempAirliner.getAirlineName();
-                
-                
-                String parPNR    = "HEF" + String.valueOf(random_int);  
-                
-                String custName = String.valueOf(inComboCustomer.getSelectedItem());
-                
-                if (custName != " "){
-                Customer cusObj = this.mainTravelAgency.getCustomers().searchAccount(custName);
-                
-                if (cusObj!= null){
-                parTime =  String.valueOf(tempFlightDate.getFlightTime());
+                 // Add a Reservation object and attach it to Customer
+                parSeats  = String.valueOf(hashCounter+1);
+                parPNR    = "HEF" + String.valueOf(random_int); 
                 
                 
                 cusObj.addReservation(parSeats,parOrigin,parDest ,parDate,parTime,parFlight,airliner);
                 parName = cusObj.getfirstName();
-            //    cusObj = cusObj.
+            
                 
                 }
                 }
@@ -289,16 +325,23 @@ public class FlightBookForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_inComboCustomerActionPerformed
 
+    private void outFlightDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outFlightDepActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_outFlightDepActionPerformed
+
     private void initialize(){
         
+        
+        //Search for the selected record;
+         recFound = ' ';
         
      for(Airliner ar1 : this.mainTravelAgency.getAirliners()){
             for(Airplane ap1 : ar1.getFleet().getAirplanes()){
                 String chkFlightNum = ap1.getFlightDetails().getFlightNumber();
                 
-                if (chkFlightNum.equals(this.flightNum) == true)
+                 if (chkFlightNum.equals(this.flightNum) == true)
                     
-                fl1 = ap1.getFlightDetails().getFlightDates();
+                     fl1 = ap1.getFlightDetails().getFlightDates();
                 
    
                      for(FlightDates flCheck : fl1){
@@ -308,19 +351,17 @@ public class FlightBookForm extends javax.swing.JPanel {
                      strDatChk = formatter1.format(flCheck.getDates()); 
                      
                      
-                     if(this.flightDate.equals(strDatChk))
-                       tempFlightDate =   flCheck;
-                       tempAirplane   =   ap1;
-                       tempAirliner   =   ar1;
-                       
-                      
-                   //  String abc = ap1.getFlightDetails().getOriginCity();
-                   //  String def = ap1.getFlightDetails().getDestinationCity();
-               outFlightArr.setText(ap1.getFlightDetails().getOriginCity());
-               outFlightDep.setText(ap1.getFlightDetails().getDestinationCity());
+                     if(this.flightDate.equals(strDatChk)){
+                        tempFlightDate =   flCheck;
+                        tempAirplane   =   ap1;
+                        tempAirliner   =   ar1;
+          
+                        outFlightDep.setText(ap1.getFlightDetails().getOriginCity());
+                        outFlightArr.setText(ap1.getFlightDetails().getDestinationCity());
                
                recFound = 'y';
                  break;
+                     }
             }
                      if(recFound == 'y')
                          break;
@@ -329,20 +370,21 @@ public class FlightBookForm extends javax.swing.JPanel {
                        break;
         }
         
-          // Fill the combobox with Customers
+          
+         // Fill the combobox with Customers
            inComboCustomer.removeAllItems();
            cust1 = this.mainTravelAgency.getCustomers().getCustomers();
            
-           if(cust1 != null){
+            if(cust1 != null){
                
            
-           for (int i = 0; i < cust1.size(); i++){
+              for (int i = 0; i < cust1.size(); i++){
 
-             inComboCustomer.addItem(cust1.get(i).getfirstName());
-            }
+                inComboCustomer.addItem(cust1.get(i).getfirstName());
+               }
            
           
-    }
+              }
         
     } 
         
