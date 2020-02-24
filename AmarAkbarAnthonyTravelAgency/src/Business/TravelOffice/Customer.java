@@ -5,22 +5,57 @@
  */
 package Business.TravelOffice;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author rohit
  */
 public class Customer {
-    String name;
+    String firstName;
+    String lastName;
     String age;
-   
-    
-    
-    public String getName() {
-        return name;
+    String gender;
+    int contactNumber;
+    String email;
+    ArrayList<Reservations> reservationsAList;
+
+    public Customer(){
+        
+    }
+    public Customer(String firstName, String lastName, String age, String gender, int contactNumber, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.contactNumber = contactNumber;
+        this.email = email;
+        reservationsAList = new ArrayList();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public ArrayList<Reservations> getReservationsAList() {
+        return reservationsAList;
+    }
+    
+    
+    public void addReservation(String seat, String origin, String destination, String date, String time, String flightNo, String airLineName){
+        Reservations rs = new Reservations(seat,origin,destination,date,time,flightNo,airLineName);
+        this.reservationsAList.add(rs);
+    }
+    public String getfirstName() {
+        return firstName;
+    }
+
+    public void setfirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAge() {
@@ -31,6 +66,32 @@ public class Customer {
         this.age = age;
     }
     
-    
-    
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(int contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+   
+    @Override
+    public String toString() {
+        return firstName;
+    }
 }

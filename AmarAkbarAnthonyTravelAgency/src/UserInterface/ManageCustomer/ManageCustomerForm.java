@@ -5,8 +5,12 @@
  */
 package UserInterface.ManageCustomer;
 
+import Business.TravelOffice.Customer;
 import Business.TravelOffice.MainTravelAgency;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,12 +21,29 @@ public class ManageCustomerForm extends javax.swing.JPanel {
     /**
      * Creates new form ManageCustomerForm
      */
-    JPanel displayPanel;
-    MainTravelAgency mainTravelAgency;
+    private JPanel displayPanel;
+    private MainTravelAgency mainTravelAgency;
     public ManageCustomerForm(JPanel displayPanel, MainTravelAgency mainTravelAgency) {
         initComponents();
         this.displayPanel = displayPanel;
         this.mainTravelAgency = mainTravelAgency;
+        populateCustomerTable();
+//        btnClearSearch.setEnabled(False);
+        
+    }
+    
+    public void populateCustomerTable(){
+    DefaultTableModel dtm = (DefaultTableModel) tblCustomers.getModel();
+        dtm.setRowCount(0);
+        for(Customer customer: mainTravelAgency.getCustomers().getCustomers()) {
+            Object[] row = new Object[4];
+            row[0]=customer;
+            row[1]=customer.getLastName();
+            row[2]=customer.getAge();
+            row[3]=customer.getGender();
+            
+            dtm.addRow(row);
+        }
     }
 
     /**
@@ -35,29 +56,213 @@ public class ManageCustomerForm extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCustomers = new javax.swing.JTable();
+        btnCreateCustomer = new javax.swing.JButton();
+        btnViewCustomer = new javax.swing.JButton();
+        btnRemoveCustomer = new javax.swing.JButton();
+        txtSearchCustomer = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        btnClearSearch = new javax.swing.JButton();
 
-        jLabel1.setText("Manage Customer Form");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Manage Customers");
+
+        tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "First Name", "Last Name", "Age", "Gender"
+            }
+        ));
+        jScrollPane1.setViewportView(tblCustomers);
+
+        btnCreateCustomer.setText("Create Customer");
+        btnCreateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateCustomerActionPerformed(evt);
+            }
+        });
+
+        btnViewCustomer.setText("View Customer");
+        btnViewCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewCustomerActionPerformed(evt);
+            }
+        });
+
+        btnRemoveCustomer.setText("Remove Customer");
+        btnRemoveCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveCustomerActionPerformed(evt);
+            }
+        });
+
+        txtSearchCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchCustomerActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setText("Search Customer");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnClearSearch.setText("Clear Search");
+        btnClearSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(105, 105, 105)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addGap(94, 94, 94))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnCreateCustomer)
+                .addGap(18, 18, 18)
+                .addComponent(btnViewCustomer)
+                .addGap(18, 18, 18)
+                .addComponent(btnRemoveCustomer)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSearch))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnClearSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnViewCustomer)
+                    .addComponent(btnRemoveCustomer)
+                    .addComponent(btnCreateCustomer))
+                .addGap(114, 114, 114))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(47, 47, 47)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSearch)
+                        .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnClearSearch)
+                    .addGap(15, 15, 15)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCreateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCustomerActionPerformed
+        // TODO add your handling code here:
+        CreateCustomerJPanel panel = new CreateCustomerJPanel(displayPanel, mainTravelAgency);
+        displayPanel.add("CreateCustomerJPanel", panel);
+        CardLayout layout = (CardLayout) displayPanel.getLayout();
+        layout.next(displayPanel);
+    }//GEN-LAST:event_btnCreateCustomerActionPerformed
+
+    private void btnViewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewCustomerActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblCustomers.getSelectedRow();
+         if(selectedRow<0) {
+             JOptionPane.showMessageDialog(null, "Please select a row from table first to view Customer details","Warning",JOptionPane.WARNING_MESSAGE);
+         }
+         else {
+           Customer customer = (Customer)tblCustomers.getValueAt(selectedRow,0);
+           ViewCustomerJPanel viewCustomerJPanel = new ViewCustomerJPanel(displayPanel,customer);
+           displayPanel.add("ViewCustomerJPanel",viewCustomerJPanel);
+           CardLayout layout = (CardLayout) displayPanel.getLayout();
+           layout.next(displayPanel);
+         }
+    }//GEN-LAST:event_btnViewCustomerActionPerformed
+
+    private void txtSearchCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchCustomerActionPerformed
+
+    private void btnClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSearchActionPerformed
+        // TODO add your handling code here:
+        
+        txtSearchCustomer.setText("");
+        
+        btnSearch.setEnabled(true);
+    }//GEN-LAST:event_btnClearSearchActionPerformed
+
+    private void btnRemoveCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveCustomerActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblCustomers.getSelectedRow();
+         if(selectedRow<0) {
+             JOptionPane.showMessageDialog(null, "Please select a row from table to delete that Customer details","Warning",JOptionPane.WARNING_MESSAGE);
+         }
+         else {
+           int dialogButton = JOptionPane.YES_NO_OPTION;
+           int dialogResult = JOptionPane.showConfirmDialog(null,"Would you like to delete the Customer ?","Warning",dialogButton);
+           if(dialogResult == JOptionPane.YES_OPTION){
+           Customer customer = (Customer)tblCustomers.getValueAt(selectedRow,0);
+           mainTravelAgency.getCustomers().deleteProduct(customer);
+           populateCustomerTable();
+           }
+         }
+       
+    }//GEN-LAST:event_btnRemoveCustomerActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        String searchText = txtSearchCustomer.getText();
+        if(searchText.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter Customer FirstName or LastName to Search ");
+        }
+        else {
+            DefaultTableModel dtm = (DefaultTableModel) tblCustomers.getModel();
+            dtm.setRowCount(0);
+            for(Customer customer: mainTravelAgency.getCustomers().getCustomers()) {
+            if(customer.getfirstName().equalsIgnoreCase(searchText) || customer.getLastName().equalsIgnoreCase(searchText)){
+                Object[] row = new Object[4];
+                row[0]=customer;
+                row[1]=customer.getLastName();
+                row[2]=customer.getAge();
+                row[3]=customer.getGender();
+
+                dtm.addRow(row);
+            }
+          }
+            btnClearSearch.setEnabled(true);
+            btnSearch.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClearSearch;
+    private javax.swing.JButton btnCreateCustomer;
+    private javax.swing.JButton btnRemoveCustomer;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnViewCustomer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblCustomers;
+    private javax.swing.JTextField txtSearchCustomer;
     // End of variables declaration//GEN-END:variables
 }
