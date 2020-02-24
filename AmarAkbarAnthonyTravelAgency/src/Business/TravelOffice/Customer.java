@@ -19,19 +19,13 @@ public class Customer {
     int contactNumber;
     String email;
     ArrayList<Reservations> reservationsAList;
-
+    
     public Customer(){
-        
-    }
-    public Customer(String firstName, String lastName, String age, String gender, int contactNumber, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.gender = gender;
-        this.contactNumber = contactNumber;
-        this.email = email;
-        reservationsAList = new ArrayList();
-    }
+    
+    this.reservationsAList = new ArrayList<>();}
+    
+   
+    
 
     public ArrayList<Reservations> getReservationsAList() {
         return reservationsAList;

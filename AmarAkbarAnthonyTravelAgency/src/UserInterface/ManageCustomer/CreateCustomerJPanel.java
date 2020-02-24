@@ -311,7 +311,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         
         else {
  
-            Customer customer = new Customer();
+          Customer customer = new Customer();
             
             customer.setfirstName(firstName);
             customer.setLastName(lastName);
