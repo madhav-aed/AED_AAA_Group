@@ -33,7 +33,7 @@ public class CustomerDirectory {
     
     public Customer searchAccount(String name){
         for(Customer customer : this.customers){
-            if(customer.getfirstName().equalsIgnoreCase(name)){
+            if(customer.getName().equalsIgnoreCase(name)){
                 return customer;
             }
         }
@@ -47,7 +47,7 @@ public class CustomerDirectory {
         ArrayList<String> arr = new ArrayList<>();
             for(int i = 0; i < customers.size(); i++)
             {
-                arr.add(customers.get(i).getfirstName());
+                arr.add(customers.get(i).getName());
             }
 
         return arr;

@@ -9,7 +9,6 @@ import Business.TravelOffice.MainTravelAgency;
 import UserInterface.ManageCustomer.ManageCustomerForm;
 import UserInterface.SearchFlights.ViewSearchFlightsForm;
 import java.awt.CardLayout;
-import javax.swing.JFrame;
 
 /**
  *
@@ -17,7 +16,6 @@ import javax.swing.JFrame;
  */
 public class AAATravelAgencyJFrame extends javax.swing.JFrame {
 
-    
     
     private MainTravelAgency mainTravelAgency;
     
@@ -27,7 +25,6 @@ public class AAATravelAgencyJFrame extends javax.swing.JFrame {
     public AAATravelAgencyJFrame() {
         initComponents();
         mainTravelAgency = new MainTravelAgency();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
         
     }
 
@@ -52,16 +49,7 @@ public class AAATravelAgencyJFrame extends javax.swing.JFrame {
 
         jSplitPane1.setDividerLocation(100);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane1.setPreferredSize(new java.awt.Dimension(1400, 800));
 
-        controlPanel.setBackground(new java.awt.Color(204, 0, 255));
-        controlPanel.setForeground(new java.awt.Color(204, 204, 255));
-        controlPanel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        controlPanel.setPreferredSize(new java.awt.Dimension(1280, 900));
-
-        manageAirlinesBtn.setBackground(new java.awt.Color(0, 0, 0));
-        manageAirlinesBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        manageAirlinesBtn.setForeground(new java.awt.Color(255, 255, 255));
         manageAirlinesBtn.setText("Manage Airlines");
         manageAirlinesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,9 +57,6 @@ public class AAATravelAgencyJFrame extends javax.swing.JFrame {
             }
         });
 
-        searchFlightsBtn.setBackground(new java.awt.Color(0, 0, 0));
-        searchFlightsBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        searchFlightsBtn.setForeground(new java.awt.Color(255, 255, 255));
         searchFlightsBtn.setText("Search Flights");
         searchFlightsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,9 +64,6 @@ public class AAATravelAgencyJFrame extends javax.swing.JFrame {
             }
         });
 
-        manageCustomersBtn.setBackground(new java.awt.Color(0, 0, 0));
-        manageCustomersBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        manageCustomersBtn.setForeground(new java.awt.Color(255, 255, 255));
         manageCustomersBtn.setText("Manage Customer");
         manageCustomersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +71,6 @@ public class AAATravelAgencyJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("<html> <b> <u> AAA Travel Agency <b>");
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
@@ -97,16 +78,18 @@ public class AAATravelAgencyJFrame extends javax.swing.JFrame {
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap(451, Short.MAX_VALUE)
-                .addComponent(manageAirlinesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchFlightsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageCustomersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(450, 450, 450))
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(manageAirlinesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchFlightsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(manageCustomersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addGap(283, 283, 283)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,12 +101,11 @@ public class AAATravelAgencyJFrame extends javax.swing.JFrame {
                     .addComponent(searchFlightsBtn)
                     .addComponent(manageCustomersBtn)
                     .addComponent(manageAirlinesBtn))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(controlPanel);
 
-        displayPanel.setBackground(new java.awt.Color(255, 255, 204));
         displayPanel.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(displayPanel);
 

@@ -49,7 +49,7 @@ public class FlightDates {
 
     @Override
     public String toString() {
-        return (""+this.getDates()).substring(0,10);
+        return " "+this.getDates();
     }
     
     

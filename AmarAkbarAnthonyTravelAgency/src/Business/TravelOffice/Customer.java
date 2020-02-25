@@ -5,51 +5,22 @@
  */
 package Business.TravelOffice;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author rohit
  */
 public class Customer {
-    String firstName;
-    String lastName;
+    String name;
     String age;
-    String gender;
-    String contactNumber;
-    String email;
-    ArrayList<Reservations> reservationsAList;
-    
-    public Customer(){
-    
-    this.reservationsAList = new ArrayList<>();}
-    
    
     
-
-    public ArrayList<Reservations> getReservationsAList() {
-        return reservationsAList;
-    }
     
-    
-    public void addReservation(String seat, String origin, String destination, String date, String time, String flightNo, String airLineName){
-        Reservations rs = new Reservations(seat,origin,destination,date,time,flightNo,airLineName);
-        this.reservationsAList.add(rs);
-    }
-    public String getfirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setfirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAge() {
@@ -60,32 +31,6 @@ public class Customer {
         this.age = age;
     }
     
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-   
-    @Override
-    public String toString() {
-        return firstName;
-    }
+    
+    
 }
