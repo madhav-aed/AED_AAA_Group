@@ -5,6 +5,8 @@
  */
 package Business.Airliners;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author rohit
@@ -15,8 +17,12 @@ public class Airplane {
     String type;
     int noOfSeats;
     Flight flightDetails;
+    ArrayList<AircraftFlights> flights;
+    
+    
 
     public Airplane() {
+
     }
 
     public Airplane(String name, String type, int noOfSeats) {
@@ -24,7 +30,16 @@ public class Airplane {
         this.type = type;
         this.noOfSeats = noOfSeats;
         this.flightDetails = new Flight();
+        this.flights = new ArrayList<>();
         
+    }
+
+    public ArrayList<AircraftFlights> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(ArrayList<AircraftFlights> flights) {
+        this.flights = flights;
     }
     
     

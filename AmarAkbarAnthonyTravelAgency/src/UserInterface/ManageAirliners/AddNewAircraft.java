@@ -11,6 +11,8 @@ import Business.TravelOffice.MainTravelAgency;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -194,25 +196,37 @@ public class AddNewAircraft extends javax.swing.JPanel {
             
         
         }
-        else{
+//        else{
+//            warningNameLbl.setVisible(false);
+//        
+//        }
+//        if(!(type.length() == 0)){
+//        
+//        }
+//        else{
+//            warningTypeLbl.setVisible(true);
+//            warningTypeLbl.setForeground(Color.red);
+//            warningTypeLbl.setText("Aircraft Type can't be empty");
+//                
+//        
+//        }
+
+
+
+        if(!(type.length() == 0) && (airliner.getFleet().searchPlanes(name).isEmpty()) 
+                && aircraftNameCheck()
+                && aircraftTypeCheck()
+                && aircraftSeatsCheck()
+                ){
+            
             warningNameLbl.setVisible(false);
-        
-        }
-        if(!(type.length() == 0)){
-        
-        }
-        else{
-            warningNameLbl.setVisible(true);
-            warningNameLbl.setForeground(Color.red);
-            warningNameLbl.setText("Aircraft Type can't be empty");
-                
-        
-        }
-        if(!(type.length() == 0) && (airliner.getFleet().searchPlanes(name).isEmpty())){
+            warningNoLbl.setVisible(false);
+            warningTypeLbl.setVisible(false);
+            
             
             Airplane aircraft = new Airplane(name,type, i);
             airliner.getFleet().addAirplane(aircraft); 
-            mainTravelAgency.getMasterFlightSchedule().addAeroplane(aircraft);
+          //  mainTravelAgency.getMasterFlightSchedule().addAeroplane(aircraft);
             JOptionPane.showMessageDialog(null, "Aircraft added successfully!");
             
         }        
@@ -223,7 +237,57 @@ public class AddNewAircraft extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_addAircraftBtnActionPerformed
+    
+        private boolean aircraftNameCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]+$");
+        Matcher m = p.matcher(aircraftNametxt.getText());
+        boolean b = m.matches();
+        if(b == false){
+            warningNameLbl.setVisible(true);
+            warningNameLbl.setForeground(Color.red);
+            warningNameLbl.setText("Aircraft Name can only be alphanumberic");
+        }
+        else
+            warningNameLbl.setVisible(false);             
 
+        return b;
+    
+        }
+        private boolean aircraftTypeCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]+$");
+        Matcher m = p.matcher(aircraftTypetxt.getText());
+        boolean b = m.matches();
+        if(b == false){
+            warningTypeLbl.setVisible(true);
+            warningTypeLbl.setForeground(Color.red);
+            warningTypeLbl.setText("Aircraft Type can only be alphanumberic");        
+        }
+        else{
+            warningTypeLbl.setVisible(false);
+        
+        }
+        return b;
+    
+        }
+        
+        private boolean aircraftSeatsCheck(){
+        Pattern p = Pattern.compile("^[0-9]+$");
+        Matcher m = p.matcher(seatsTxt.getText());
+        boolean b = m.matches();
+        if(b == false){
+            warningNoLbl.setVisible(true);
+            warningNoLbl.setForeground(Color.red);
+            warningNoLbl.setText("please insert valid number.");        
+        }    
+        else{
+            warningNoLbl.setVisible(false);
+        
+        }
+        return b;
+    
+    }        
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         
@@ -241,12 +305,6 @@ public class AddNewAircraft extends javax.swing.JPanel {
         CardLayout layout = (CardLayout)displayPanel.getLayout();
         displayPanel.remove(this);
         layout.previous(displayPanel);
-        
-        
-
-                
-        
-        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

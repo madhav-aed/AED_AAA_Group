@@ -11,6 +11,8 @@ import Business.TravelOffice.MainTravelAgency;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -218,7 +220,12 @@ public class UpdateAircraft extends javax.swing.JPanel {
         
         
         if(!aircraft.getName().equals(name)){
-                    if(!aircraftNameExists(name) && !(type.length() == 0) && (i != 0))
+                    if(!aircraftNameExists(name) 
+                       && !(type.length() == 0) && (i != 0)
+                       && aircraftNameCheck()
+                       && aircraftTypeCheck()
+                       && aircraftSeatsCheck()
+                       )
                     {
                         aircraft.setName(name);
                         aircraft.setNoOfSeats(i);
@@ -277,11 +284,58 @@ public class UpdateAircraft extends javax.swing.JPanel {
                 warningNameLbl.setVisible(false);
                 return false;
             }    
-    
-    
-    
-    
     }
+    
+    
+        private boolean aircraftNameCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]+$");
+        Matcher m = p.matcher(aircraftNametxt.getText());
+        boolean b = m.matches();
+        if(b == false){
+            warningNameLbl.setVisible(true);
+            warningNameLbl.setForeground(Color.red);
+            warningNameLbl.setText("Aircraft Name can only be alphanumberic");
+        }
+        else
+            warningNameLbl.setVisible(false);             
+
+        return b;
+    
+        }
+        private boolean aircraftTypeCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]+$");
+        Matcher m = p.matcher(aircraftTypetxt.getText());
+        boolean b = m.matches();
+        if(b == false){
+            warningTypeLbl.setVisible(true);
+            warningTypeLbl.setForeground(Color.red);
+            warningTypeLbl.setText("Aircraft Type can only be alphanumberic");        
+        }
+        else{
+            warningTypeLbl.setVisible(false);
+        
+        }
+        return b;
+    
+        }
+        
+        private boolean aircraftSeatsCheck(){
+        Pattern p = Pattern.compile("^[0-9]+$");
+        Matcher m = p.matcher(aircraftSeatsTxt.getText());
+        boolean b = m.matches();
+        if(b == false){
+            warningNoLbl.setVisible(true);
+            warningNoLbl.setForeground(Color.red);
+            warningNoLbl.setText("please insert valid number.");        
+        }    
+        else{
+            warningNoLbl.setVisible(false);
+        
+        }
+        return b;
+    
+    }        
+        
     
     
     
@@ -322,13 +376,10 @@ public class UpdateAircraft extends javax.swing.JPanel {
         aircraftTypetxt.setEnabled(true);
         aircraftSeatsTxt.setEnabled(true);
         
-        
-        
-        
-        
-        
     }//GEN-LAST:event_updateBtnActionPerformed
 
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField aircraftNametxt;

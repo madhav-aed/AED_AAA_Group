@@ -44,11 +44,11 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="addFlightbtn" min="-2" pref="137" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="viewFlightBtn2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="viewFlightBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="viewFlightBtn1" min="-2" max="-2" attributes="0"/>
+                              <Component id="updateBtn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="deleteBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -57,7 +57,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,13 +82,13 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="248" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="209" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="viewFlightBtn1" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="deleteBtn" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="addFlightbtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="updateBtn" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="viewFlightBtn" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="viewFlightBtn2" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
           </Group>
@@ -173,7 +173,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="viewFlightBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Update Flight Details"/>
+        <Property name="text" type="java.lang.String" value="View Flight Details"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewFlightBtnActionPerformed"/>
@@ -197,20 +197,20 @@
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;font size=5&gt; aircraftCode"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="viewFlightBtn1">
+    <Component class="javax.swing.JButton" name="deleteBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete Flight Details"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewFlightBtn1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="viewFlightBtn2">
+    <Component class="javax.swing.JButton" name="updateBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View Flight Details"/>
+        <Property name="text" type="java.lang.String" value="Update Flight Details"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewFlightBtn2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

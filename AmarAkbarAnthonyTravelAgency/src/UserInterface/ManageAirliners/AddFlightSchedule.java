@@ -5,6 +5,7 @@
  */
 package UserInterface.ManageAirliners;
 
+import Business.Airliners.AircraftFlights;
 import Business.Airliners.Airliner;
 import Business.Airliners.Airplane;
 import Business.Airliners.Flight;
@@ -35,8 +36,7 @@ public class AddFlightSchedule extends javax.swing.JPanel {
     
 //    Airliner airliner;
     MainTravelAgency mainTravelAgency;
-    JPanel displayPanel;
-    
+    JPanel displayPanel; 
     Airplane aircraft;
 
     
@@ -259,7 +259,7 @@ public class AddFlightSchedule extends javax.swing.JPanel {
                                             .addComponent(warningtimeLbl)
                                             .addComponent(warningSchLbl)))))
                             .addComponent(addScheduleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,9 +321,9 @@ public class AddFlightSchedule extends javax.swing.JPanel {
                 .addComponent(infoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addScheduleBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(warningSpecificLbl)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -349,12 +349,7 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         double price = 0.0;
         
         
-        if(this.mainTravelAgency.getMasterFlightSchedule().flightNumberExists(flightNum))
-        {
-            warningFlightNumberLbl.setForeground(Color.red);
-            warningFlightNumberLbl.setText("Flight number already exists!");         
-        }
-        
+        checkFlightNum();
         
         
         try{
@@ -371,14 +366,20 @@ public class AddFlightSchedule extends javax.swing.JPanel {
       //   time = Float.parseFloat(timeTxt.getText());
          
          int hr = Integer.parseInt(getTimeHr.getSelectedItem().toString());
-         int min = Integer.parseInt(getTimeMins.getSelectedItem().toString());
+         
+         String mins = getTimeMins.getSelectedItem().toString();
+         if(mins.length() == 2)
+             if(mins.toCharArray()[1] == '0')
+                 mins = mins+"11";
+         int min = Integer.parseInt(mins);
          String s = hr+"."+min;
          time = Float.parseFloat(s);
          
         }
         catch(Exception e){
             warningtimeLbl.setVisible(true);
-            warningtimeLbl.setText("Invalid time. Use 24-hour clock digit seperated by a dot ( . )  ");            
+                        warningtimeLbl.setForeground(Color.red);
+            warningtimeLbl.setText("Invalid time.");            
             
         
         }
@@ -395,6 +396,7 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         if(origin.length() == 0){
             
             warningOriginLbl.setVisible(true);
+            warningOriginLbl.setForeground(Color.red);
             warningOriginLbl.setText("Origin City cannot be empty");
         
         
@@ -406,6 +408,7 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         
         if(dest.length() == 0){
             warningDestLbl.setVisible(true);
+                        warningDestLbl.setForeground(Color.red);
             warningDestLbl.setText("Destination City cannot be empty");        
         
         }
@@ -417,64 +420,102 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         
         if(origin.equals(dest)){
             warningOriginLbl.setVisible(true);
+                        warningOriginLbl.setForeground(Color.RED);
             warningOriginLbl.setText("Origin and Destination city cannot be same");              
            
         }
 
         
-        if((origin.length() != 0) &&
-            (dest.length() != 0) &&
-                (price != 0) && (d1 != null || i != 0) &&
-                (time != 0) &&
-                (flightNum.length() != 0) &&
-                !(this.mainTravelAgency.getMasterFlightSchedule().flightNumberExists(flightNum)) &&
-                !(origin.equals(dest))
-                ){
+        if((origin.length() != 0) 
+                &&
+          (dest.length() != 0) 
+                &&
+          (price != 0) 
+                && 
+          (d1 != null || i != 0) 
+                &&
+          (time != 0) 
+                &&
+          (flightNum.length() != 0) 
+                &&
+           !(origin.equals(dest))
+                &&  
+            !checkFlightNum()){
             
-            warningDestLbl.setText("");
-            warningOriginLbl.setText("");
-            warningFlightNumberLbl.setText("");
-            warningSchLbl.setText("");
-            warningtTckLbl.setText("");
-            warningtimeLbl.setText("");
+                warningDestLbl.setText("");
+                warningOriginLbl.setText("");
+                warningFlightNumberLbl.setText("");
+                warningSchLbl.setText("");
+                warningtTckLbl.setText("");
+                warningtimeLbl.setText("");
 
 
-            if(d1 != null && i == 0){
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Date dateWithoutTime;
-                try {
-                    dateWithoutTime = sdf.parse(sdf.format(d1));
-                    FlightDates flightdate = new FlightDates(dateWithoutTime, time, aircraft.getNoOfSeats());
-                    aircraft.getFlightDetails().setFlightSchedule(flightNum, origin,  dest, price, flightdate);
-//                    mainTravelAgency.getMasterFlightSchedule().addFlights(new Flight(flightNum, origin, dest, price, flightdate));
-                    
-                } catch (ParseException ex) {
-                    Logger.getLogger(AddFlightSchedule.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                    JOptionPane.showMessageDialog(null, "Successfully added!");
-            }
-            else if(d1 == null && i != 0)
-            {
-                Date d2 = new Date();
-                for(int j = 0; j < i; j++)
-                {
-                    try {
-                        d2 = getNextDate(d2);
+                if(d1 != null 
+                     && specificDateRadBtn.isSelected()
+                    ){
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        Date dateWithoutTime = sdf.parse(sdf.format(d2));
-                        FlightDates flightdate = new FlightDates(dateWithoutTime, time, aircraft.getNoOfSeats());         
-                        aircraft.getFlightDetails().setFlightSchedule(flightNum, origin,  dest, price, flightdate);
+                        Date dateWithoutTime;
+                    try {
+                        dateWithoutTime = sdf.parse(sdf.format(d1));
+                        FlightDates flightdate = new FlightDates(dateWithoutTime, time, aircraft.getNoOfSeats(), price);
+                        AircraftFlights flight = new AircraftFlights(flightNum, origin,  dest, price, flightdate);
+                        aircraft.getFlights().add(flight);
+                        mainTravelAgency.getMasterFlightSchedule().addFlights(flight);
+    //                    aircraft.getFlightDetails().setFlightSchedule(flightNum, origin,  dest, price, flightdate);
+    //                    mainTravelAgency.getMasterFlightSchedule().addFlights(new Flight(flightNum, origin, dest, price, flightdate));
+
                     } catch (ParseException ex) {
                         Logger.getLogger(AddFlightSchedule.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                
+                        JOptionPane.showMessageDialog(null, "Successfully added!");
                 }
-                    JOptionPane.showMessageDialog(null, "Successfully added!");
-            }
+                else if(scheduleRadio.isSelected() && i != 0 
+                        )
+
+                {
+                    Date d2 = new Date();
+                    for(int j = 0; j < i; j++)
+                    {
+                        try {
+                            d2 = getNextDate(d2);
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            Date dateWithoutTime = sdf.parse(sdf.format(d2));
+                            FlightDates flightdate = new FlightDates(dateWithoutTime, time, aircraft.getNoOfSeats(), price);  
+                            AircraftFlights flight = new AircraftFlights(flightNum, origin,  dest, price, flightdate);
+                            aircraft.getFlights().add(flight);
+                            mainTravelAgency.getMasterFlightSchedule().addFlights(flight);
+    //                        aircraft.getFlightDetails().setFlightSchedule(flightNum, origin,  dest, price, flightdate);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(AddFlightSchedule.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                        JOptionPane.showMessageDialog(null, "Successfully added!");
+                }
         }
 
     }//GEN-LAST:event_addScheduleBtnActionPerformed
 
+    public boolean checkFlightNum(){
+            boolean b = this.mainTravelAgency.getMasterFlightSchedule().flightNumberExists(flightNumTxt.getText());
+            if(b == true)
+            {
+                warningFlightNumberLbl.setVisible(true);
+                warningFlightNumberLbl.setForeground(Color.red);
+                warningFlightNumberLbl.setText("Flight number already exists!");   
+                
+            }
+            else
+            {
+                warningFlightNumberLbl.setVisible(false);
+            }
+            
+            return b;
+    }
+    
+    
+    
+    
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
 
         Component[] comps = this.displayPanel.getComponents();

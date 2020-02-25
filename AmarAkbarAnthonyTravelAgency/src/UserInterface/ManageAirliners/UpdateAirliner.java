@@ -10,6 +10,8 @@ import Business.TravelOffice.MainTravelAgency;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -167,7 +169,9 @@ public class UpdateAirliner extends javax.swing.JPanel {
         
 
         // Name same, code different..
-        if(name.equals(airliner.getAirlineName())){
+        if(name.equals(airliner.getAirlineName())
+                               && airlinerTypeCheck()
+                ){
         
             warningLbl.setVisible(false);
             if(!airlineCodeExists(code)){
@@ -185,7 +189,9 @@ public class UpdateAirliner extends javax.swing.JPanel {
         if(code.equals(airliner.getAirlineCode())){
     
             warningLabel2.setVisible(false);
-            if(!airlineNameExists(name)){
+            if(!airlineNameExists(name) 
+               && airlinerNameCheck()    
+                    ){
                 airliner.setAirlineName(name);
                 JOptionPane.showMessageDialog(null,"Airliner Details Updated successfully");
                 saveAirlinerBtn.setEnabled(false);
@@ -206,6 +212,8 @@ public class UpdateAirliner extends javax.swing.JPanel {
         
 // Adding if both do not exist already..
         if(!mainTravelAgency.airlineCodeExists(code) && !mainTravelAgency.airlineNameExists(name)
+               && airlinerNameCheck()
+                && airlinerTypeCheck()
                 ){
             if(code.isEmpty() || name.isEmpty()){
             }
@@ -263,7 +271,47 @@ public class UpdateAirliner extends javax.swing.JPanel {
             }
     }
         
+      private boolean airlinerNameCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]*$");
+        Matcher m = p.matcher(airlinerNametxt.getText());
+        boolean b = m.matches();
+                
+        if(b == false)
+        {
+                 warningLbl.setVisible(true);
+                warningLbl.setText("Only alphanumeric characters allowed");       
+        
+        }
+        else{
+                         warningLbl.setVisible(false);
+        
+        }
+        
+        return b;
     
+    }
+
+ 
+    private boolean airlinerTypeCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]*$");
+        Matcher m = p.matcher(airlinerCodetxt.getText());
+        boolean b = m.matches();
+        
+        if(b == false)
+        {
+        warningLabel2.setVisible(true);
+        warningLabel2.setText("Only alphanumeric characters allowed.");       
+        
+        }
+        else{
+        warningLabel2.setVisible(false);
+        
+        }
+        
+        
+      return b;
+    }
+     
     
     
     
