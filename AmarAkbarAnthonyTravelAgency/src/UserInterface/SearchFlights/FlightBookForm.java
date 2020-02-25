@@ -5,6 +5,7 @@
  */
 package UserInterface.SearchFlights;
 
+import Business.Airliners.AircraftFlights;
 import Business.Airliners.Airliner;
 import Business.Airliners.Airplane;
 import Business.Airliners.FlightDates;
@@ -337,11 +338,13 @@ public class FlightBookForm extends javax.swing.JPanel {
         
      for(Airliner ar1 : this.mainTravelAgency.getAirliners()){
             for(Airplane ap1 : ar1.getFleet().getAirplanes()){
-                String chkFlightNum = ap1.getFlightDetails().getFlightNumber();
+                
+                   for(AircraftFlights newF1 : ap1.getFlights()){
+                String chkFlightNum = newF1.getFlightNumber();
                 
                  if (chkFlightNum.equals(this.flightNum) == true)
                     
-                     fl1 = ap1.getFlightDetails().getFlightDates();
+                     fl1 = newF1.getFlightDates();
                 
    
                      for(FlightDates flCheck : fl1){
@@ -356,8 +359,8 @@ public class FlightBookForm extends javax.swing.JPanel {
                         tempAirplane   =   ap1;
                         tempAirliner   =   ar1;
           
-                        outFlightDep.setText(ap1.getFlightDetails().getOriginCity());
-                        outFlightArr.setText(ap1.getFlightDetails().getDestinationCity());
+                        outFlightDep.setText(newF1.getOriginCity());
+                        outFlightArr.setText(newF1.getDestinationCity());
                
                recFound = 'y';
                  break;
@@ -369,8 +372,10 @@ public class FlightBookForm extends javax.swing.JPanel {
             if(recFound == 'y')
                        break;
         }
+            if(recFound == 'y')
+                       break;
         
-          
+     }
          // Fill the combobox with Customers
            inComboCustomer.removeAllItems();
            cust1 = this.mainTravelAgency.getCustomers().getCustomers();

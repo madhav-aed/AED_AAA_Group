@@ -34,6 +34,7 @@ public class ViewSearchFlightsForm extends javax.swing.JPanel {
     MainTravelAgency mainTravelAgency;
     JPanel displayPanel;
     char f1 = ' ';
+    FlightDates tempFlightDates;
     
     public ViewSearchFlightsForm(JPanel displayPanel, MainTravelAgency mainTravelAgency) {
         initComponents();
@@ -342,11 +343,13 @@ public class ViewSearchFlightsForm extends javax.swing.JPanel {
              
              
              for(Airplane ap1 : ar1.getFleet().getAirplanes()){
-              String arrNumber = ap1.getFlightDetails().getFlightNumber();
-              String arrOrig = ap1.getFlightDetails().getOriginCity();  
-              String arrDest = ap1.getFlightDetails().getDestinationCity();
+                 
+                 for(AircraftFlights newF1 : ap1.getFlights()){
+              String arrNumber = newF1.getFlightNumber();
+              String arrOrig = newF1.getOriginCity();  
+              String arrDest = newF1.getDestinationCity();
               
-              ArrayList<FlightDates> fl1 = ap1.getFlightDetails().getFlightDates();
+              ArrayList<FlightDates> fl1 = newF1.getFlightDates();
               
               char found = ' ';
               strDat1 = " ";
@@ -376,6 +379,7 @@ public class ViewSearchFlightsForm extends javax.swing.JPanel {
                       
                       hmap1 = flCheck.getSeatsAllocation();
                       found = 'y';
+                      tempFlightDates = flCheck;
                       break;
                   }
                   
@@ -401,20 +405,23 @@ public class ViewSearchFlightsForm extends javax.swing.JPanel {
             
             int avlSeatCounter = ap1.getNoOfSeats()- hashCounter;
             
+            if(avlSeatCounter == 0)
+                continue;
+            
             if(!inFlightPrice.getText().isEmpty()){
             
             Double chkPrice = Double.parseDouble(inFlightPrice.getText());
             
           
             
-            if(ap1.getFlightDetails().getPrice() > chkPrice)
+            if(tempFlightDates.getPrice() > chkPrice)
                 continue;
             
             
              }
                 
              
-            String arrPrice = String.valueOf(ap1.getFlightDetails().getPrice());
+            String arrPrice = String.valueOf(tempFlightDates.getPrice());
               
               
             // Search validations to skip this iteration
@@ -451,7 +458,7 @@ public class ViewSearchFlightsForm extends javax.swing.JPanel {
         
         
     
-     
+             }
 
 }
     }
@@ -497,12 +504,12 @@ public class ViewSearchFlightsForm extends javax.swing.JPanel {
         //dateOne.setTime(1000999); 
   
             
-          FlightDates flightdate = new FlightDates(dateOne, 9.30f, air1.getNoOfSeats());
-          air1.getFlightDetails().setFlightSchedule("AEN123", "MUM",  "DEL", 250d, flightdate);  
+        //  FlightDates flightdate = new FlightDates(dateOne, 9.30f, air1.getNoOfSeats());
+        //  air1.getFlightDetails().setFlightSchedule("AEN123", "MUM",  "DEL", 250d, flightdate);  
           
           
-          FlightDates flightdate1 = new FlightDates(dateOne1, 15.30f, air1.getNoOfSeats());
-          air3.getFlightDetails().setFlightSchedule("VIS123", "DEL",  "CHN", 300d, flightdate1);
+       //   FlightDates flightdate1 = new FlightDates(dateOne1, 15.30f, air1.getNoOfSeats());
+       //   air3.getFlightDetails().setFlightSchedule("VIS123", "DEL",  "CHN", 300d, flightdate1);
           
           
           ArrayList<Airliner> airliners = new ArrayList<Airliner>();
