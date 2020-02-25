@@ -14,27 +14,77 @@ import java.util.ArrayList;
  */
 public class MasterFlightSchedule {
     
-    String airlineName;
-    String code;
-    String origin;
+    private ArrayList<Airliner> allAirliners;
+    private ArrayList<AircraftFlights> allFlights;
     
-    private ArrayList<Flight> flights;
+    public ArrayList<Airliner> getAllAirliners() {
+        return allAirliners;
+    }
 
+    public void setAllAirliners(ArrayList<Airliner> allAirliners) {
+        this.allAirliners = allAirliners;
+    }
+
+    public ArrayList<AircraftFlights> getAllFlights() {
+        return allFlights;
+    }
+
+    public void setAllFlights(ArrayList<AircraftFlights> allFlights) {
+        this.allFlights = allFlights;
+    }
+
+    
+    
+    
     public MasterFlightSchedule() {
-        this.flights = new ArrayList<>();
-        
-        
-    }
+        allAirliners = new ArrayList<>();
+        allFlights = new ArrayList<>();
+       // allAirplane = new ArrayList<>();
 
+    }
     
     
-    public ArrayList<Flight> getFlights() {
-        return flights;
-    }
+    public boolean flightNumberExists(String flightNum){
+    
+        boolean result = false;
+        if(!this.allFlights.isEmpty()){
+            for(AircraftFlights flight: this.allFlights){
+                if(flight.getFlightNumber().equalsIgnoreCase(flightNum)){
+                    result = true;
+                       break;}
+                else{
+                    result = false;
 
-    public void setFlights(ArrayList<Flight> flights) {
-        this.flights = flights;
+                }
+            }
+        }
+        return result;
     }
+    
+    
+    
+    public void addAirliners(Airliner airliner){
+        allAirliners.add(airliner);
+
+    }    
+    
+    public void removeAirliners(Airliner airliner){
+        allAirliners.remove(airliner);
+
+    }    
+    
+    public void addFlights(AircraftFlights flight){
+        allFlights.add(flight);
+
+    }        
+    
+    public void removeFlights(AircraftFlights flight){
+        allFlights.remove(flight);
+    }     
+    
+   
+    
+        
     
     
     

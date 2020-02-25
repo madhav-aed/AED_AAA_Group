@@ -16,11 +16,21 @@ public class FlightDates {
     Date dates;
     float flightTime;
     HashMap<Integer, Boolean> seatsAllocation;
+    Double price;
 
-    public FlightDates(Date dates, float flightTime, int numberOfSeats) {
+    public FlightDates(Date dates, float flightTime, int numberOfSeats, Double price) {
         this.dates = dates;
         this.flightTime = flightTime;
         this.seatsAllocation = new HashMap<>(numberOfSeats);
+        this.price = price;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
     
     public float getFlightTime() {
@@ -49,7 +59,7 @@ public class FlightDates {
 
     @Override
     public String toString() {
-        return " "+this.getDates();
+        return (""+this.getDates()).substring(0,10);
     }
     
     

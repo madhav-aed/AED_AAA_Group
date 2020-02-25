@@ -9,6 +9,12 @@ import Business.TravelOffice.MainTravelAgency;
 import UserInterface.ManageCustomer.ManageCustomerForm;
 import UserInterface.SearchFlights.ViewSearchFlightsForm;
 import java.awt.CardLayout;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -25,7 +31,13 @@ public class AAATravelAgencyJFrame extends javax.swing.JFrame {
     public AAATravelAgencyJFrame() {
         initComponents();
         mainTravelAgency = new MainTravelAgency();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/airplane_resize.png")));
         
+    //    ImageIcon iconLogo = new ImageIcon(getClass().getResource("/images/airplane_Takeoff.png").getIm);
+
+   //     ImageIcon iconLogo = new ImageIcon(getClass().getResource("/images/airplane_resize.png"));
+       
+   //     imageLbl.setIcon(iconLogo);
     }
 
     /**
@@ -50,58 +62,55 @@ public class AAATravelAgencyJFrame extends javax.swing.JFrame {
         jSplitPane1.setDividerLocation(100);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        manageAirlinesBtn.setText("Manage Airlines");
+        manageAirlinesBtn.setText("<html> <b> Manage Airlines");
         manageAirlinesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageAirlinesBtnActionPerformed(evt);
             }
         });
 
-        searchFlightsBtn.setText("Search Flights");
+        searchFlightsBtn.setText("<html> <b> Search Flights");
         searchFlightsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchFlightsBtnActionPerformed(evt);
             }
         });
 
-        manageCustomersBtn.setText("Manage Customer");
+        manageCustomersBtn.setText("<html> <b> Manage Customer");
         manageCustomersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageCustomersBtnActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("<html> <b> <u> AAA Travel Agency <b>");
+        jLabel1.setText("<html> <font size=6> <b> <u> AAA Travel Office <b>");
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addComponent(manageAirlinesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(manageAirlinesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchFlightsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(manageCustomersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addGap(283, 283, 283)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                        .addComponent(manageCustomersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(searchFlightsBtn)
                     .addComponent(manageCustomersBtn)
                     .addComponent(manageAirlinesBtn))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jSplitPane1.setLeftComponent(controlPanel);

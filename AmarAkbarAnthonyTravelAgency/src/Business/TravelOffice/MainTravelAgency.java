@@ -89,8 +89,15 @@ public class MainTravelAgency {
             }
         }
         return false;
-    }    
+    }  
     
+        
+    public void deleteAirline(Airliner name){
+        airliners.remove(name);
+        
+        
+    } 
+
     
     
     

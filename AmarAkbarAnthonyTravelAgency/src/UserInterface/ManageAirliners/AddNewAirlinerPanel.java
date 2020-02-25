@@ -10,6 +10,8 @@ import Business.TravelOffice.MainTravelAgency;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -95,19 +97,19 @@ public class AddNewAirlinerPanel extends javax.swing.JPanel {
                         .addGap(145, 145, 145)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(aircraftNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(109, 109, 109)
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(addAirlinerBtn)
-                                    .addComponent(aircraftTypetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(aircraftTypetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addAirlinerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(105, 105, 105)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(aircraftNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(warningLbl)
@@ -143,24 +145,44 @@ public class AddNewAirlinerPanel extends javax.swing.JPanel {
         
         String name = aircraftNametxt.getText();
         String code = aircraftTypetxt.getText();
+        if(!airlinerNameCheck())
+        {
+            warningLbl.setVisible(true);
+            warningLbl.setText("Only Alphanumeric names allowed");        
+        
+        }
+//        else
+//            warningLbl.setVisible(false);
+//        
+        if(!airlinerTypeCheck())
+        {
+            warningLabel2.setVisible(true);
+            warningLabel2.setText("Only Alphanumeric names allowed");        
+        
+        }
+//        else
+//            warningLabel2.setVisible(false);
+//        
+//        
+                
         
         if(mainTravelAgency.airlineNameExists(name)){
             warningLbl.setVisible(true);
             warningLbl.setText("Name already exists! Please enter unique Name.");        
         
         }
-        else{
-           warningLbl.setVisible(false);        
-        }
+//        else{
+//           warningLbl.setVisible(false);        
+//        }
         if(mainTravelAgency.airlineCodeExists(code)){
             warningLabel2.setVisible(true);
             warningLabel2.setText("Code already exists! Please enter unique code.");
         
         }
-        else{
-           warningLbl.setVisible(false);        
-        
-        }
+//        else{
+//           warningLbl.setVisible(false);        
+//        
+//        }
         if(name.isEmpty()){
             JOptionPane.showMessageDialog(null, "Name can't be empty");
         
@@ -171,6 +193,8 @@ public class AddNewAirlinerPanel extends javax.swing.JPanel {
         }
         
         if(!mainTravelAgency.airlineCodeExists(code) && !mainTravelAgency.airlineNameExists(name)
+                && airlinerNameCheck() && airlinerTypeCheck()
+                
                 ){
             if(code.isEmpty() || name.isEmpty()){
             
@@ -179,46 +203,47 @@ public class AddNewAirlinerPanel extends javax.swing.JPanel {
             else{
                 
                 warningLbl.setVisible(false);
-                warningLabel2.setVisible(false);
-                
-                
+                warningLabel2.setVisible(false);             
                 Airliner airliner = new Airliner(name, code);
                 mainTravelAgency.addAirliner(airliner);
+                mainTravelAgency.getMasterFlightSchedule().addAirliners(airliner);
                 JOptionPane.showMessageDialog(null,"Airliner Successfully Added");
             }
-        }
-        
-        
-        
-        
-        
+        }       
     }//GEN-LAST:event_addAirlinerBtnActionPerformed
 
+    private boolean airlinerNameCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]*$");
+        Matcher m = p.matcher(aircraftNametxt.getText());
+        boolean b = m.matches();
+        return b;
+    
+    }
+
+ 
+    private boolean airlinerTypeCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]*$");
+        Matcher m = p.matcher(aircraftTypetxt.getText());
+        boolean b = m.matches();
+        return b;
+    
+    }
+   
+    
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-
-
-        
+       
         Component[] comps = this.displayPanel.getComponents();
         for(Component comp: comps){
             if(comp instanceof ManageAirlinersJPanel){
                 ManageAirlinersJPanel manageAdmin = (ManageAirlinersJPanel) comp;
                 manageAdmin.populate();
-            
             }
-        
-        
-        }
-        
+        }      
         CardLayout layout = (CardLayout)displayPanel.getLayout();
         displayPanel.remove(this);
         layout.previous(displayPanel);
-        
-        
-
-        
-
-        
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

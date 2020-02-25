@@ -5,16 +5,22 @@
  */
 package UserInterface.ManageAirliners;
 
+import Business.Airliners.AircraftFlights;
 import Business.Airliners.Airliner;
 import Business.Airliners.Airplane;
 import Business.Airliners.Flight;
 import Business.Airliners.FlightDates;
 import Business.TravelOffice.MainTravelAgency;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -30,8 +36,7 @@ public class AddFlightSchedule extends javax.swing.JPanel {
     
 //    Airliner airliner;
     MainTravelAgency mainTravelAgency;
-    JPanel displayPanel;
-    
+    JPanel displayPanel; 
     Airplane aircraft;
 
     
@@ -41,8 +46,8 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         this.mainTravelAgency = mainTravelAgency;
         this.aircraft = aircraft;
         
-        aircraftNameTxt.setText(aircraft.getName());
-        AircraftCodeTxt.setText(aircraft.getType());
+        aircraftNameTxt.setText("<html> Aircraft Type <font size=5>"+aircraft.getName());
+        AircraftCodeTxt.setText("<html> Aircraft Type <font size=5>"+aircraft.getType());
         
         buttonGroup1.add(specificDateRadBtn);
         buttonGroup1.add(scheduleRadio);
@@ -50,6 +55,9 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         specificDates.setVisible(false);
         scheduleTxt.setVisible(false);    
         infoLabel.setVisible(false);
+        
+
+        
         
     }
 
@@ -72,15 +80,12 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         destTxt = new javax.swing.JTextField();
-        timeTxt = new javax.swing.JTextField();
         originTxt = new javax.swing.JTextField();
         specificDates = new org.jdesktop.swingx.JXDatePicker();
         specificDateRadBtn = new javax.swing.JRadioButton();
         scheduleRadio = new javax.swing.JRadioButton();
         scheduleTxt = new javax.swing.JTextField();
         infoLabel = new javax.swing.JLabel();
-        aircraftNameTxt = new javax.swing.JTextField();
-        AircraftCodeTxt = new javax.swing.JTextField();
         flightNumTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         addScheduleBtn = new javax.swing.JButton();
@@ -94,6 +99,12 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         warningSpecificLbl = new javax.swing.JLabel();
         warningSchLbl = new javax.swing.JLabel();
         warningtimeLbl = new javax.swing.JLabel();
+        aircraftNameTxt = new javax.swing.JLabel();
+        AircraftCodeTxt = new javax.swing.JLabel();
+        getTimeHr = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        getTimeMins = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,6 +165,18 @@ public class AddFlightSchedule extends javax.swing.JPanel {
 
         jLabel8.setText("Time :");
 
+        aircraftNameTxt.setText("<html><font size = 3>");
+
+        AircraftCodeTxt.setText("mn");
+
+        getTimeHr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+
+        jLabel6.setText("<html><i>Hrs");
+
+        getTimeMins.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
+
+        jLabel9.setText("<html> <i> Minutes");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,152 +185,156 @@ public class AddFlightSchedule extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backBtn)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(81, 81, 81)
+                                .addComponent(aircraftNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(224, 224, 224)
+                                .addComponent(AircraftCodeTxt))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(121, 121, 121)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(jLabel8)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(flightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(87, 87, 87)
+                                        .addComponent(warningSpecificLbl))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(originTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(destTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(getTimeHr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(getTimeMins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(flightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(originTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(destTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(warningFlightNumberLbl)
+                            .addComponent(warningOriginLbl)
+                            .addComponent(warningDestLbl)
+                            .addComponent(warningtTckLbl)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(scheduleRadio)
                                     .addComponent(specificDateRadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(infoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(specificDates, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(scheduleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(addScheduleBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(timeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(warningFlightNumberLbl)
-                                    .addComponent(warningOriginLbl)
-                                    .addComponent(warningDestLbl)
-                                    .addComponent(warningtTckLbl)))
-                            .addComponent(warningtimeLbl)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(warningSpecificLbl)
-                                    .addComponent(warningSchLbl)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(aircraftNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(AircraftCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(specificDates, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(scheduleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(warningtimeLbl)
+                                            .addComponent(warningSchLbl)))))
+                            .addComponent(addScheduleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aircraftNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AircraftCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(aircraftNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AircraftCodeTxt)))
+                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(flightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(warningFlightNumberLbl))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(warningFlightNumberLbl)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(originTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(warningOriginLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(destTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(warningDestLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(warningtTckLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(getTimeHr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(getTimeMins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(warningtimeLbl))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(flightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(originTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(destTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(timeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)))
+                            .addComponent(jLabel5)
+                            .addComponent(specificDateRadBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scheduleRadio))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(warningOriginLbl)
+                        .addComponent(specificDates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(specificDateRadBtn))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(scheduleRadio))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(specificDates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(scheduleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(infoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(warningDestLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(warningtTckLbl)
-                                .addGap(36, 36, 36)
-                                .addComponent(warningSpecificLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(warningSchLbl)
-                                .addGap(62, 62, 62)
-                                .addComponent(warningtimeLbl)))))
-                .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(scheduleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(warningSchLbl))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(infoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addScheduleBtn)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(warningSpecificLbl)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void specificDateRadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_specificDateRadBtnActionPerformed
         specificDates.setVisible(true);
-        scheduleTxt.setVisible(false);
-        
+        scheduleTxt.setVisible(false);      
         infoLabel.setVisible(false);
     }//GEN-LAST:event_specificDateRadBtnActionPerformed
 
     private void scheduleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleRadioActionPerformed
         specificDates.setVisible(false);
-
         infoLabel.setVisible(true);
         scheduleTxt.setVisible(true);
     }//GEN-LAST:event_scheduleRadioActionPerformed
@@ -320,8 +347,15 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         int i = 0;
         float time = 0.0F;
         double price = 0.0;
+        
+        
+        checkFlightNum();
+        
+        
         try{
-         i = Integer.parseInt(scheduleTxt.getText());
+             if(!scheduleTxt.getText().trim().isEmpty())
+                i = Integer.parseInt(scheduleTxt.getText());
+             
         }
         catch(Exception e){
             warningSchLbl.setVisible(true);
@@ -329,11 +363,23 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         
         }
         try{
-         time = Float.parseFloat(timeTxt.getText());        
+      //   time = Float.parseFloat(timeTxt.getText());
+         
+         int hr = Integer.parseInt(getTimeHr.getSelectedItem().toString());
+         
+         String mins = getTimeMins.getSelectedItem().toString();
+         if(mins.length() == 2)
+             if(mins.toCharArray()[1] == '0')
+                 mins = mins+"11";
+         int min = Integer.parseInt(mins);
+         String s = hr+"."+min;
+         time = Float.parseFloat(s);
+         
         }
         catch(Exception e){
             warningtimeLbl.setVisible(true);
-            warningtimeLbl.setText("Invalid time. Use 24-hour clock digit seperated by a dot ( . )  ");            
+                        warningtimeLbl.setForeground(Color.red);
+            warningtimeLbl.setText("Invalid time.");            
             
         
         }
@@ -350,6 +396,7 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         if(origin.length() == 0){
             
             warningOriginLbl.setVisible(true);
+            warningOriginLbl.setForeground(Color.red);
             warningOriginLbl.setText("Origin City cannot be empty");
         
         
@@ -361,6 +408,7 @@ public class AddFlightSchedule extends javax.swing.JPanel {
         
         if(dest.length() == 0){
             warningDestLbl.setVisible(true);
+                        warningDestLbl.setForeground(Color.red);
             warningDestLbl.setText("Destination City cannot be empty");        
         
         }
@@ -370,67 +418,118 @@ public class AddFlightSchedule extends javax.swing.JPanel {
             warningDestLbl.setText("Origin City cannot be empty");              
         }
         
+        if(origin.equals(dest)){
+            warningOriginLbl.setVisible(true);
+                        warningOriginLbl.setForeground(Color.RED);
+            warningOriginLbl.setText("Origin and Destination city cannot be same");              
+           
+        }
+
         
-        if((origin.length() != 0) &&
-            (dest.length() != 0) &&
-                (price != 0) && (d1 != null || i != 0) &&
-                (time != 0) &&
-                (flightNum.length() != 0)
-                ){
+        if((origin.length() != 0) 
+                &&
+          (dest.length() != 0) 
+                &&
+          (price != 0) 
+                && 
+          (d1 != null || i != 0) 
+                &&
+          (time != 0) 
+                &&
+          (flightNum.length() != 0) 
+                &&
+           !(origin.equals(dest))
+                &&  
+            !checkFlightNum()){
             
-            
-            if(d1 != null && i == 0){
-                FlightDates flightdate = new FlightDates(d1, time, aircraft.getNoOfSeats());
-                aircraft.getFlightDetails().setFlightSchedule(flightNum, origin,  dest, price, flightdate);
-                    JOptionPane.showMessageDialog(null, "Successfully added!");
-            }
-            else if(d1 == null && i != 0)
-            {
-                Date d2 = new Date();
-                for(int j = 0; j < i; j++)
-                {
-                    d2 = getNextDate(d2);
-                    FlightDates flightdate = new FlightDates(d2, time, aircraft.getNoOfSeats());
-                    aircraft.getFlightDetails().setFlightSchedule(flightNum, origin,  dest, price, flightdate);         
-                
+                warningDestLbl.setText("");
+                warningOriginLbl.setText("");
+                warningFlightNumberLbl.setText("");
+                warningSchLbl.setText("");
+                warningtTckLbl.setText("");
+                warningtimeLbl.setText("");
+
+
+                if(d1 != null 
+                     && specificDateRadBtn.isSelected()
+                    ){
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date dateWithoutTime;
+                    try {
+                        dateWithoutTime = sdf.parse(sdf.format(d1));
+                        FlightDates flightdate = new FlightDates(dateWithoutTime, time, aircraft.getNoOfSeats(), price);
+                        AircraftFlights flight = new AircraftFlights(flightNum, origin,  dest, price, flightdate);
+                        aircraft.getFlights().add(flight);
+                        mainTravelAgency.getMasterFlightSchedule().addFlights(flight);
+    //                    aircraft.getFlightDetails().setFlightSchedule(flightNum, origin,  dest, price, flightdate);
+    //                    mainTravelAgency.getMasterFlightSchedule().addFlights(new Flight(flightNum, origin, dest, price, flightdate));
+
+                    } catch (ParseException ex) {
+                        Logger.getLogger(AddFlightSchedule.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        JOptionPane.showMessageDialog(null, "Successfully added!");
                 }
-                    JOptionPane.showMessageDialog(null, "Successfully added!");
-            }
+                else if(scheduleRadio.isSelected() && i != 0 
+                        )
+
+                {
+                    Date d2 = new Date();
+                    for(int j = 0; j < i; j++)
+                    {
+                        try {
+                            d2 = getNextDate(d2);
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            Date dateWithoutTime = sdf.parse(sdf.format(d2));
+                            FlightDates flightdate = new FlightDates(dateWithoutTime, time, aircraft.getNoOfSeats(), price);  
+                            AircraftFlights flight = new AircraftFlights(flightNum, origin,  dest, price, flightdate);
+                            aircraft.getFlights().add(flight);
+                            mainTravelAgency.getMasterFlightSchedule().addFlights(flight);
+    //                        aircraft.getFlightDetails().setFlightSchedule(flightNum, origin,  dest, price, flightdate);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(AddFlightSchedule.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                        JOptionPane.showMessageDialog(null, "Successfully added!");
+                }
         }
 
     }//GEN-LAST:event_addScheduleBtnActionPerformed
 
+    public boolean checkFlightNum(){
+            boolean b = this.mainTravelAgency.getMasterFlightSchedule().flightNumberExists(flightNumTxt.getText());
+            if(b == true)
+            {
+                warningFlightNumberLbl.setVisible(true);
+                warningFlightNumberLbl.setForeground(Color.red);
+                warningFlightNumberLbl.setText("Flight number already exists!");   
+                
+            }
+            else
+            {
+                warningFlightNumberLbl.setVisible(false);
+            }
+            
+            return b;
+    }
+    
+    
+    
+    
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
 
-                Component[] comps = this.displayPanel.getComponents();
+        Component[] comps = this.displayPanel.getComponents();
         for(Component comp: comps){
             if(comp instanceof ViewAircraftDetails){
                 ViewAircraftDetails viewAircraftDet = (ViewAircraftDetails) comp;
-                viewAircraftDet.populate();
-            
+                viewAircraftDet.populate();            
             }
-        
-        
+    
         }
         
         CardLayout layout = (CardLayout)displayPanel.getLayout();
         displayPanel.remove(this);
         layout.previous(displayPanel);
-        
-        
-        
-        
-        
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
     }//GEN-LAST:event_backBtnActionPerformed
     public static Date getNextDate(Date  curDate) {
       final Calendar calendar = Calendar.getInstance();
@@ -440,21 +539,25 @@ public class AddFlightSchedule extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField AircraftCodeTxt;
+    private javax.swing.JLabel AircraftCodeTxt;
     private javax.swing.JButton addScheduleBtn;
-    private javax.swing.JTextField aircraftNameTxt;
+    private javax.swing.JLabel aircraftNameTxt;
     private javax.swing.JButton backBtn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField destTxt;
     private javax.swing.JTextField flightNumTxt;
+    private javax.swing.JComboBox<String> getTimeHr;
+    private javax.swing.JComboBox<String> getTimeMins;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
@@ -464,7 +567,6 @@ public class AddFlightSchedule extends javax.swing.JPanel {
     private javax.swing.JTextField scheduleTxt;
     private javax.swing.JRadioButton specificDateRadBtn;
     private org.jdesktop.swingx.JXDatePicker specificDates;
-    private javax.swing.JTextField timeTxt;
     private javax.swing.JLabel warningDestLbl;
     private javax.swing.JLabel warningFlightNumberLbl;
     private javax.swing.JLabel warningOriginLbl;

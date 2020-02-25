@@ -11,6 +11,8 @@ import Business.TravelOffice.MainTravelAgency;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -33,6 +35,9 @@ public class AddNewAircraft extends javax.swing.JPanel {
         this.displayPanel = displayPanel;
         this.mainTravelAgency = mainTravelAgency;
         this.airliner = airliner;
+        
+        airlineName.setText("<html> Airline : <font size=5> "+airliner.getAirlineName());
+        airlineCode.setText("<html> Type : <font size=5> "+airliner.getAirlineCode());
 
         warningNameLbl.setVisible(false);
         warningTypeLbl.setVisible(false);
@@ -63,10 +68,12 @@ public class AddNewAircraft extends javax.swing.JPanel {
         warningNameLbl = new javax.swing.JLabel();
         warningTypeLbl = new javax.swing.JLabel();
         warningNoLbl = new javax.swing.JLabel();
+        airlineName = new javax.swing.JLabel();
+        airlineCode = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(600, 400));
 
-        jLabel1.setText("<html><font size=4> <u> <b>Create New Aircraft");
+        jLabel1.setText("<html><font size=5> <u> <b>Add New Aircraft");
 
         jLabel2.setText("Aircraft Name :");
 
@@ -88,6 +95,16 @@ public class AddNewAircraft extends javax.swing.JPanel {
             }
         });
 
+        warningNameLbl.setText("name");
+
+        warningTypeLbl.setText("type");
+
+        warningNoLbl.setText("Num");
+
+        airlineName.setText("jLabel5");
+
+        airlineCode.setText("jLabel6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,44 +113,48 @@ public class AddNewAircraft extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(116, 116, 116)
+                        .addComponent(airlineName)
+                        .addGap(163, 163, 163)
+                        .addComponent(airlineCode))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(92, 92, 92)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(aircraftNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(warningNameLbl))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(aircraftTypetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(warningTypeLbl))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(seatsTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(warningNoLbl))
-                            .addComponent(addAircraftBtn)))
+                            .addComponent(aircraftNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(aircraftTypetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(seatsTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addAircraftBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(warningNameLbl)
+                            .addComponent(warningTypeLbl)
+                            .addComponent(warningNoLbl)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(airlineName)
+                    .addComponent(airlineCode))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -151,7 +172,7 @@ public class AddNewAircraft extends javax.swing.JPanel {
                     .addComponent(warningNoLbl))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addAircraftBtn)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -175,24 +196,37 @@ public class AddNewAircraft extends javax.swing.JPanel {
             
         
         }
-        else{
+//        else{
+//            warningNameLbl.setVisible(false);
+//        
+//        }
+//        if(!(type.length() == 0)){
+//        
+//        }
+//        else{
+//            warningTypeLbl.setVisible(true);
+//            warningTypeLbl.setForeground(Color.red);
+//            warningTypeLbl.setText("Aircraft Type can't be empty");
+//                
+//        
+//        }
+
+
+
+        if(!(type.length() == 0) && (airliner.getFleet().searchPlanes(name).isEmpty()) 
+                && aircraftNameCheck()
+                && aircraftTypeCheck()
+                && aircraftSeatsCheck()
+                ){
+            
             warningNameLbl.setVisible(false);
-        
-        }
-        if(!(type.length() == 0)){
-        
-        }
-        else{
-            warningNameLbl.setVisible(true);
-            warningNameLbl.setForeground(Color.red);
-            warningNameLbl.setText("Aircraft Type can't be empty");
-                
-        
-        }
-        if(!(type.length() == 0) && (airliner.getFleet().searchPlanes(name).isEmpty())){
+            warningNoLbl.setVisible(false);
+            warningTypeLbl.setVisible(false);
+            
             
             Airplane aircraft = new Airplane(name,type, i);
-            airliner.getFleet().addAirplane(aircraft);             
+            airliner.getFleet().addAirplane(aircraft); 
+          //  mainTravelAgency.getMasterFlightSchedule().addAeroplane(aircraft);
             JOptionPane.showMessageDialog(null, "Aircraft added successfully!");
             
         }        
@@ -203,7 +237,57 @@ public class AddNewAircraft extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_addAircraftBtnActionPerformed
+    
+        private boolean aircraftNameCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]+$");
+        Matcher m = p.matcher(aircraftNametxt.getText());
+        boolean b = m.matches();
+        if(b == false){
+            warningNameLbl.setVisible(true);
+            warningNameLbl.setForeground(Color.red);
+            warningNameLbl.setText("Aircraft Name can only be alphanumberic");
+        }
+        else
+            warningNameLbl.setVisible(false);             
 
+        return b;
+    
+        }
+        private boolean aircraftTypeCheck(){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-]+$");
+        Matcher m = p.matcher(aircraftTypetxt.getText());
+        boolean b = m.matches();
+        if(b == false){
+            warningTypeLbl.setVisible(true);
+            warningTypeLbl.setForeground(Color.red);
+            warningTypeLbl.setText("Aircraft Type can only be alphanumberic");        
+        }
+        else{
+            warningTypeLbl.setVisible(false);
+        
+        }
+        return b;
+    
+        }
+        
+        private boolean aircraftSeatsCheck(){
+        Pattern p = Pattern.compile("^[0-9]+$");
+        Matcher m = p.matcher(seatsTxt.getText());
+        boolean b = m.matches();
+        if(b == false){
+            warningNoLbl.setVisible(true);
+            warningNoLbl.setForeground(Color.red);
+            warningNoLbl.setText("please insert valid number.");        
+        }    
+        else{
+            warningNoLbl.setVisible(false);
+        
+        }
+        return b;
+    
+    }        
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         
@@ -222,12 +306,6 @@ public class AddNewAircraft extends javax.swing.JPanel {
         displayPanel.remove(this);
         layout.previous(displayPanel);
         
-        
-
-                
-        
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -235,6 +313,8 @@ public class AddNewAircraft extends javax.swing.JPanel {
     private javax.swing.JButton addAircraftBtn;
     private javax.swing.JTextField aircraftNametxt;
     private javax.swing.JTextField aircraftTypetxt;
+    private javax.swing.JLabel airlineCode;
+    private javax.swing.JLabel airlineName;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -13,7 +13,7 @@ import java.util.Date;
  * @author rohit
  */
 public class Flight {
-    String flightNumber;
+    String flightNumber; // Needs to be unique
     String originCity;
     String destinationCity;
 //    Date dateFlight;
@@ -48,7 +48,7 @@ public class Flight {
     
     @Override
     public String toString() {
-        return "Flight{" + "flightNumber=" + flightNumber + '}';
+        return this.flightNumber;
     }
 
     public String getFlightNumber() {
