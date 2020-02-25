@@ -65,9 +65,6 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
     public void populate(){
          DefaultTableModel dtm = (DefaultTableModel)tblDirectory.getModel();
         dtm.setRowCount(0);
-        
-        
-
             for(FlightDates a : flight.getFlightDates()){
                 Object[] row = new Object[dtm.getColumnCount()];
                 row[0]=a;
@@ -80,7 +77,8 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                }
                else
                 row[1] = arrOfStr[0]+ " : "+ arrOfStr[1]+ " ";
-               row[2] = a.getPrice();
+               row[2] = a.getArrivalTime();
+               row[3] = a.getPrice();
 
                dtm.addRow(row);
             }
@@ -184,17 +182,17 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
 
         tblDirectory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Dates", "Departure Time", "Price"
+                "Dates", "Departure Time", "Arrival Time", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -261,7 +259,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                         .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +300,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateFlightTime, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -441,6 +439,9 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
       
 
     }
+   
+    
+    
     
     
     public void setFieldsEnabled(boolean b){
