@@ -92,30 +92,44 @@ public class ConfirmedTicketForm extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ticket Confirmation");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Flight Number");
 
         outFlightDep.setEditable(false);
+        outFlightDep.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Departure");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Arrival");
 
         outFlightArr.setEditable(false);
+        outFlightArr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         outFlightDate.setEditable(false);
+        outFlightDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Date");
 
         outFlightNum.setEditable(false);
+        outFlightNum.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Main Passenger");
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Seat Number");
 
         outPassenger.setEditable(false);
+        outPassenger.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         outPassenger.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 outPassengerActionPerformed(evt);
@@ -123,51 +137,53 @@ public class ConfirmedTicketForm extends javax.swing.JPanel {
         });
 
         outSeats.setEditable(false);
+        outSeats.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        BarcodeLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         BarcodeLabel.setText("Barcode");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Airline PNR");
 
         outAirPNR.setEditable(false);
+        outAirPNR.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Flight time");
 
         outFltTime.setEditable(false);
+        outFltTime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel5)
-                            .addComponent(BarcodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(outFlightDate, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(outFlightArr)
-                            .addComponent(outFlightDep)
-                            .addComponent(outFlightNum)
-                            .addComponent(outPassenger)
-                            .addComponent(outSeats)
-                            .addComponent(outAirPNR))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(outFltTime, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(jLabel1)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel5)
+                    .addComponent(BarcodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(outFlightDate, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(outFlightArr)
+                    .addComponent(outFlightDep)
+                    .addComponent(outFlightNum)
+                    .addComponent(outPassenger)
+                    .addComponent(outSeats)
+                    .addComponent(outAirPNR))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(outFltTime, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +220,7 @@ public class ConfirmedTicketForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(outAirPNR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(BarcodeLabel)
                 .addGap(28, 28, 28))
         );
@@ -225,7 +241,8 @@ public class ConfirmedTicketForm extends javax.swing.JPanel {
         outSeats.setText(fltSeats);
         outFltTime.setText(fltTime);
         
-        ImageIcon icon = new ImageIcon("/Users/madhav437/Barcode.png");
+       // ImageIcon icon = new ImageIcon("/Users/madhav437/Barcode.png");
+       ImageIcon icon = new ImageIcon(getClass().getResource("/images/Barcode.png"));
         Image image = icon.getImage();
        
        Image newimg = image.getScaledInstance(300,80,  java.awt.Image.SCALE_SMOOTH);

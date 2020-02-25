@@ -16,7 +16,7 @@ public class Customer {
     String lastName;
     String age;
     String gender;
-    int contactNumber;
+    String contactNumber;
     String email;
     ArrayList<Reservations> reservationsAList;
     
@@ -68,11 +68,11 @@ public class Customer {
         this.gender = gender;
     }
 
-    public int getContactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(int contactNumber) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 

@@ -11,6 +11,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -28,8 +29,10 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     
     public CreateCustomerJPanel(JPanel displayPanel, MainTravelAgency mainTravelAgency) {
         initComponents();
+        
         this.displayPanel = displayPanel;
         this.mainTravelAgency = mainTravelAgency;
+        
     }
 //customer.getContactNumber() == Integer.parseInt(contactNumber)) 
     public boolean userIdFound(String email){
@@ -65,7 +68,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     
     
     public boolean checkContactNumber(String number){
-        Pattern p = Pattern.compile("^[0-9]{10}$");
+        Pattern p = Pattern.compile("^[2-9]\\d{2}-\\d{3}-\\d{4}$");
         Matcher m = p.matcher(number);
         boolean b = m.matches();
         return b;
@@ -104,39 +107,60 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         radioMale = new javax.swing.JRadioButton();
         radioFemale = new javax.swing.JRadioButton();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        setBackground(new java.awt.Color(255, 255, 204));
+        setPreferredSize(new java.awt.Dimension(1100, 750));
+
+        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Create a Customer Record");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("First Name:");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Last Name:");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Age:");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Gender:");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Contact Number:");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Email Address:");
 
+        txtFirstName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFirstNameActionPerformed(evt);
             }
         });
 
+        txtLastName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLastNameActionPerformed(evt);
             }
         });
 
+        txtAge.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        txtContactNumber.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtContactNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtContactNumberActionPerformed(evt);
             }
         });
 
+        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        btnCreateCustomer.setBackground(new java.awt.Color(0, 0, 0));
+        btnCreateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnCreateCustomer.setForeground(new java.awt.Color(255, 255, 255));
         btnCreateCustomer.setText("Create");
         btnCreateCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +168,10 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnBack.setText("<--Back");
+        btnBack.setBackground(new java.awt.Color(0, 0, 0));
+        btnBack.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 51, 51));
+        btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -152,92 +179,91 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         });
 
         btnGroupMorF.add(radioMale);
+        radioMale.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         radioMale.setText("Male");
 
         btnGroupMorF.add(radioFemale);
+        radioFemale.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         radioFemale.setText("Female");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(71, 71, 71))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(179, 179, 179)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(radioMale)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(radioFemale))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtEmail)
-                                .addComponent(txtContactNumber)
-                                .addComponent(txtAge)
-                                .addComponent(txtLastName)
-                                .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(58, 58, 58))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(btnCreateCustomer))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(btnBack)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCreateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(78, 78, 78)
+                                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 387, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(radioMale)
-                            .addComponent(radioFemale))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(20, 20, 20)
-                .addComponent(btnCreateCustomer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(btnBack)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(radioMale)
+                    .addComponent(radioFemale))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreateCustomer)
+                    .addComponent(btnBack))
+                .addContainerGap(379, Short.MAX_VALUE))
         );
+
+        btnBack.getAccessibleContext().setAccessibleName("Back");
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirstNameActionPerformed
@@ -299,7 +325,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select appropriate Gender");
         }
         else if(!checkContactNumber(contactNumber)){
-            JOptionPane.showMessageDialog(null, "Please enter valid contact number. Number must be 10 Digits!");
+            JOptionPane.showMessageDialog(null, "Please enter valid contact number. Number must be of 10 digits in the format of XXX-XXX-XXXX");
         }
         else if(!checkEmail(email)){
             JOptionPane.showMessageDialog(null, "Username form should be XXX_XXX@xxx.com");
@@ -317,7 +343,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             customer.setLastName(lastName);
                 customer.setAge(age);
   //          System.out.println("Cotact Number"+Integer.parseInt(contactNumber));
-            customer.setContactNumber(Integer.parseInt(contactNumber));
+            customer.setContactNumber(contactNumber);
             customer.setEmail(email);
             
             if((radioMale.isSelected())){
