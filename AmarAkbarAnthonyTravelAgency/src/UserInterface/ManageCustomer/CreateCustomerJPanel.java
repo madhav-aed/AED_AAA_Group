@@ -355,7 +355,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             
             mainTravelAgency.getCustomers().addCustomer(customer);
            
-            JOptionPane.showMessageDialog(null, "Customer details updated Successfully"+customer.getfirstName());
+            JOptionPane.showMessageDialog(null, "Customer details updated Successfully");
             
             txtFirstName.setText("");
             txtLastName.setText("");
