@@ -15,26 +15,50 @@ import java.util.ArrayList;
 public class MasterFlightSchedule {
     
     private ArrayList<Airliner> allAirliners;
-    private ArrayList<Flight> allFlights;
-    private ArrayList<Airplane> allAirplane;
+    private ArrayList<AircraftFlights> allFlights;
+    
+    public ArrayList<Airliner> getAllAirliners() {
+        return allAirliners;
+    }
+
+    public void setAllAirliners(ArrayList<Airliner> allAirliners) {
+        this.allAirliners = allAirliners;
+    }
+
+    public ArrayList<AircraftFlights> getAllFlights() {
+        return allFlights;
+    }
+
+    public void setAllFlights(ArrayList<AircraftFlights> allFlights) {
+        this.allFlights = allFlights;
+    }
+
     
     
     
     public MasterFlightSchedule() {
         allAirliners = new ArrayList<>();
         allFlights = new ArrayList<>();
-        allAirplane = new ArrayList<>();
+       // allAirplane = new ArrayList<>();
 
     }
     
     
     public boolean flightNumberExists(String flightNum){
     
-        for(Flight flight: this.allFlights){
-            if(flight.flightNumber.equals(flightNum))
-                return true;
-        }        
-        return false;
+        boolean result = false;
+        if(!this.allFlights.isEmpty()){
+            for(AircraftFlights flight: this.allFlights){
+                if(flight.getFlightNumber().equalsIgnoreCase(flightNum)){
+                    result = true;
+                       break;}
+                else{
+                    result = false;
+
+                }
+            }
+        }
+        return result;
     }
     
     
@@ -49,24 +73,16 @@ public class MasterFlightSchedule {
 
     }    
     
-    public void addFlights(Flight flight){
+    public void addFlights(AircraftFlights flight){
         allFlights.add(flight);
 
     }        
     
-    public void removeFlights(Flight flight){
+    public void removeFlights(AircraftFlights flight){
         allFlights.remove(flight);
     }     
     
-    
-    public void addAeroplane(Airplane airplane){
-        allAirplane.add(airplane);
-
-    }        
-    
-    public void removeAeroplane(Airplane airplane){
-        allAirplane.remove(airplane);
-    }     
+   
     
         
     

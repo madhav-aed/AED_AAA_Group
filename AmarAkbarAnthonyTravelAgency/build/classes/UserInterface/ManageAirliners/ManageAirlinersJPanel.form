@@ -17,36 +17,37 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="addAirlineBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="searchFieldTxt" min="-2" pref="200" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="searchAirlinerBtn" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="viewAirlineBtn" min="-2" pref="122" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="updateAirliner" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deleteAirline" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                      <Component id="addAirlineBtn" min="-2" pref="175" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="212" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="viewAirlineBtn" min="-2" pref="157" max="-2" attributes="0"/>
+                      <Component id="searchFieldTxt" min="-2" pref="261" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="updateAirliner" min="-2" pref="157" max="-2" attributes="0"/>
+                      <Component id="searchAirlinerBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="deleteAirline" min="-2" pref="144" max="-2" attributes="0"/>
+                      <Component id="masterSchedule" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="212" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -61,17 +62,18 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="searchAirlinerBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="searchFieldTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="masterSchedule" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="338" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="243" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="viewAirlineBtn" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="addAirlineBtn" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="deleteAirline" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="updateAirliner" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -137,6 +139,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="searchFieldTxt">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchFieldTxtActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="searchAirlinerBtn">
       <Properties>
@@ -160,6 +165,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateAirlinerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="masterSchedule">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Master Schedule"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="masterScheduleActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
