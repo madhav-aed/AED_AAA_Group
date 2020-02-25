@@ -80,6 +80,8 @@ public class masterSchedule extends javax.swing.JPanel {
         tblDirectory = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 204));
+
         tblDirectory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -98,7 +100,10 @@ public class masterSchedule extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblDirectory);
 
-        backButton.setText("<<");
+        backButton.setBackground(new java.awt.Color(0, 0, 0));
+        backButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        backButton.setForeground(new java.awt.Color(255, 0, 102));
+        backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
@@ -110,9 +115,9 @@ public class masterSchedule extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(44, 44, 44)
                 .addComponent(backButton)
-                .addContainerGap(698, Short.MAX_VALUE))
+                .addContainerGap(695, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(84, Short.MAX_VALUE)
@@ -121,10 +126,10 @@ public class masterSchedule extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(386, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addGap(74, 74, 74))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(141, 141, 141)
