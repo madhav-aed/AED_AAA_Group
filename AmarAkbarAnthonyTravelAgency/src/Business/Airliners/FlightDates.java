@@ -15,14 +15,16 @@ import java.util.HashMap;
 public class FlightDates {
     Date dates;
     float flightTime;
+    String arrivalTime;
     HashMap<Integer, Boolean> seatsAllocation;
     Double price;
 
-    public FlightDates(Date dates, float flightTime, int numberOfSeats, Double price) {
+    public FlightDates(Date dates, float flightTime, int numberOfSeats, Double price, String arrivalTime) {
         this.dates = dates;
         this.flightTime = flightTime;
         this.seatsAllocation = new HashMap<>(numberOfSeats);
         this.price = price;
+        this.arrivalTime = arrivalTime;
     }
 
     public Double getPrice() {
@@ -35,6 +37,14 @@ public class FlightDates {
     
     public float getFlightTime() {
         return flightTime;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public void setFlightTime(float flightTime) {

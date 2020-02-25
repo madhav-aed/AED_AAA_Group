@@ -66,7 +66,9 @@ public class ViewAircraftDetails extends javax.swing.JPanel {
                }
                else
                 row[5] = arrOfStr[0]+ " : "+ arrOfStr[1]+ " ";
-                
+               
+               row[6] = a.getArrivalTime();
+                                
                dtm.addRow(row);
             }
         }
@@ -104,11 +106,11 @@ public class ViewAircraftDetails extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Flight Number", "Origin", "Destination", "Price", "Date", "Departure Time"
+                "Flight Number", "Origin", "Destination", "Price", "Date", "Departure Time", "Arrival Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -205,7 +207,7 @@ public class ViewAircraftDetails extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)

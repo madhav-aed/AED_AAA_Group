@@ -6,11 +6,24 @@
 package UserInterface.SearchFlights;
 
 import Business.TravelOffice.MainTravelAgency;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+import javax.swing.table.DefaultTableModel;
+import java.util.*;
+
+import java.util.Date; 
+import java.util.Calendar;
+
+import Business.Airliners.*;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+
 
 /**
  *
- * @author rohit
+ * @author madhav
  */
 public class ViewSearchFlightsForm extends javax.swing.JPanel {
 
@@ -20,11 +33,17 @@ public class ViewSearchFlightsForm extends javax.swing.JPanel {
     
     MainTravelAgency mainTravelAgency;
     JPanel displayPanel;
+    char f1 = ' ';
+    FlightDates tempFlightDates;
     
     public ViewSearchFlightsForm(JPanel displayPanel, MainTravelAgency mainTravelAgency) {
         initComponents();
         this.displayPanel = displayPanel;
         this.mainTravelAgency = mainTravelAgency;
+        
+     
+
+        
     }
 
     /**
@@ -36,30 +55,505 @@ public class ViewSearchFlightsForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel1 = new java.awt.Panel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        inFlightNum = new javax.swing.JTextField();
+        inFlightDep = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        inFlightArr = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        inComboBoxTime = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDirectory = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        inFlightDate = new org.jdesktop.swingx.JXDatePicker();
+        inBook = new javax.swing.JButton();
+        inFlightPrice = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
+        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Search Flight");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Flight Number");
+
+        inFlightNum.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        inFlightNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inFlightNumActionPerformed(evt);
+            }
+        });
+
+        inFlightDep.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        inFlightDep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inFlightDepActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Departure");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Arrival");
+
+        inFlightArr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Preferred Time of the day");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Date");
+
+        inComboBoxTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Morning", "Day time", "Evening" }));
+        inComboBoxTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inComboBoxTimeActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Search ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        tblDirectory.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Airliners Name", "Flight Number", "Date", "Time", "Source", "Destination", "Seats Avl", "Price"
+            }
+        ));
+        jScrollPane1.setViewportView(tblDirectory);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Flight Details");
+
+        inFlightDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inFlightDateActionPerformed(evt);
+            }
+        });
+
+        inBook.setBackground(new java.awt.Color(0, 0, 0));
+        inBook.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        inBook.setForeground(new java.awt.Color(255, 255, 255));
+        inBook.setText("Book Seat");
+        inBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inBookActionPerformed(evt);
+            }
+        });
+
+        inFlightPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Price Limit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(jLabel1)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inBook, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(34, 34, 34)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(inFlightNum, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(inFlightDep, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(inFlightArr, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(32, 32, 32)
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(inFlightPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(inComboBoxTime, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(27, 27, 27)
+                            .addComponent(jLabel6)
+                            .addGap(18, 18, 18)
+                            .addComponent(inFlightDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(26, 26, 26)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(51, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inFlightNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(inFlightDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(inFlightArr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(inFlightPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inComboBoxTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(inFlightDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(inBook, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void inComboBoxTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inComboBoxTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inComboBoxTimeActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         String flightNum = inFlightNum.getText();
+         String flightDep = inFlightDep.getText();
+         String flightArr = inFlightArr.getText();
+         String flightPref = inComboBoxTime.getSelectedItem().toString();
+          
+        
+         
+           
+         
+            
+             if (flightNum.isEmpty()){
+         
+             
+             if (flightDep.isEmpty()){
+                 JOptionPane.showMessageDialog(null, "Please enter a Departure location"); 
+             return;}
+             
+              if (flightArr.isEmpty()){
+                 JOptionPane.showMessageDialog(null, "Please enter a Arrival location"); 
+             return;}
+             
+             }
+             
+             Date dat1 = inFlightDate.getDate();
+               if(dat1 == null){
+               JOptionPane.showMessageDialog(null, "Please enter a Date"); 
+               return;}
+               
+             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");  
+             String strDate = formatter.format(dat1); 
+             
+        //     if (strDate.isEmpty()){
+        //          JOptionPane.showMessageDialog(null, "Please enter a Date"); 
+        //     return;}
+                     
+             
+            
+             
+           //  populate1();
+            
+             populate(flightNum,flightDep,flightArr,strDate,flightPref);
+             
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void inFlightNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inFlightNumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inFlightNumActionPerformed
+
+    private void inFlightDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inFlightDepActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inFlightDepActionPerformed
+
+    private void inFlightDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inFlightDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inFlightDateActionPerformed
+
+    private void inBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inBookActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = tblDirectory.getSelectedRow();
+        if(selectedRow>=0){
+            
+                String parFlight = String.valueOf(tblDirectory.getValueAt(selectedRow, 1));
+                String parDate =   String.valueOf(tblDirectory.getValueAt(selectedRow, 2));
+                
+                CardLayout layout = (CardLayout)displayPanel.getLayout();
+                displayPanel.add(new FlightBookForm(displayPanel, mainTravelAgency,parFlight,parDate));
+                layout.next(displayPanel);
+                
+                
+            }
+        else{
+            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+        }
+        
+        
+        
+    }//GEN-LAST:event_inBookActionPerformed
+
+    private void populate(String flightNum, String flightDep,String flightArr,String strDate,String flightPref) {
+        
+         DefaultTableModel dtm = (DefaultTableModel)tblDirectory.getModel();
+         dtm.setRowCount(0);
+         for(Airliner ar1 : this.mainTravelAgency.getAirliners()){
+             
+             String arrAirName = ar1.getAirlineName();
+             String strDat1 = " ";
+             String strDat2 = " ";
+             Float arrTime = 0.00f;
+             HashMap<Integer, Boolean> hmap1 = new HashMap<Integer, Boolean>();
+             
+             
+             for(Airplane ap1 : ar1.getFleet().getAirplanes()){
+                 
+                 for(AircraftFlights newF1 : ap1.getFlights()){
+              String arrNumber = newF1.getFlightNumber();
+              String arrOrig = newF1.getOriginCity();  
+              String arrDest = newF1.getDestinationCity();
+              
+              ArrayList<FlightDates> fl1 = newF1.getFlightDates();
+              
+              char found = ' ';
+              strDat1 = " ";
+              arrTime = 0.0f;
+              
+              for(FlightDates flCheck : fl1){
+                  
+                 SimpleDateFormat formatter1 = new SimpleDateFormat("yyyyMMdd");  
+                 SimpleDateFormat formatter2 = new SimpleDateFormat("MM/dd/YYYY");
+                 strDat2 = formatter2.format(flCheck.getDates()); 
+                  
+                   
+                  strDat1 = formatter1.format(flCheck.getDates()); 
+                  if( strDate.equals(strDat1) == true){
+                      arrTime = flCheck.getFlightTime();
+                      
+                      if(flightPref.equals("Morning"))
+                              if (arrTime > 11)
+                          continue;
+                      if(flightPref.equals("Day time"))
+                          if(arrTime < 11 || arrTime > 17)
+                          continue;
+                      if(flightPref.equals("Evening" ))
+                              if(arrTime < 17)
+                          continue;
+                      
+                      
+                      hmap1 = flCheck.getSeatsAllocation();
+                      found = 'y';
+                      tempFlightDates = flCheck;
+                      break;
+                  }
+                  
+                
+                      
+              }
+              
+              // Skip the iteration if no flight found matching date and time
+              
+              if(found == ' ')
+                      continue;
+              
+              // Check the number of seats allocated if flight found
+              
+            int hashCounter = 0;
+            for (Map.Entry mapElement : hmap1.entrySet()) { 
+                boolean check = (boolean) mapElement.getValue();
+                if(check == true)
+                    hashCounter = hashCounter + 1;
+            }
+            
+            // Check available seats
+            
+            int avlSeatCounter = ap1.getNoOfSeats()- hashCounter;
+            
+            if(avlSeatCounter == 0)
+                continue;
+            
+            if(!inFlightPrice.getText().isEmpty()){
+            
+            Double chkPrice = Double.parseDouble(inFlightPrice.getText());
+            
+          
+            
+            if(tempFlightDates.getPrice() > chkPrice)
+                continue;
+            
+            
+             }
+                
+             
+            String arrPrice = String.valueOf(tempFlightDates.getPrice());
+              
+              
+            // Search validations to skip this iteration
+              
+              if(!"".equals(flightNum))
+                      if(flightNum.equalsIgnoreCase(arrNumber) == false)
+                  continue;
+              
+              if(!"".equals(flightDep))
+                      if(flightDep.equalsIgnoreCase(arrOrig) == false)
+                  continue;
+              
+              if(!"".equals(flightArr))
+                      if(flightArr.equalsIgnoreCase(arrDest) == false)
+                  continue;
+              
+              
+            
+             
+              
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0]=arrAirName;
+            row[1]=arrNumber;
+            row[2]=strDat2;
+            row[3]=arrTime;
+            row[3]=String.format("%.2f", arrTime).replace(' ', '0');
+            row[4]=arrOrig;
+            row[5]=arrDest;
+            row[6]=avlSeatCounter;
+            row[7]=arrPrice;
+                    
+            dtm.addRow(row);
+        }
+        
+        
+    
+             }
+
+}
+    }
+    
+    public void populate1(){
+        
+        Airliner a1 = new Airliner("Indigo", "INO");
+        Airliner a2 = new Airliner("SpiceJet", "SPI");
+        Airliner a3 = new Airliner("Vistara", "VIS");
+        
+        Airplane air1 = new Airplane("Airbus12","A123", 50);
+        Airplane air2 = new Airplane("Airbus22","A234", 25);
+        Airplane air3 = new Airplane("Boeing","B88", 35);
+        
+        
+            a1.getFleet().addAirplane(air1);
+            a1.getFleet().addAirplane(air2);
+            
+          
+            a3.getFleet().addAirplane(air3);
+            a3.getFleet().addAirplane(air3);
+            
+            
+        Calendar c1 = Calendar.getInstance(); 
+        Calendar c2 = Calendar.getInstance();
+    
+       
+        c1.set(Calendar.MONTH, 0); 
+        c1.set(Calendar.DATE, 24);  
+        c1.set(Calendar.YEAR, 2020); 
+      
+        Date dateOne = c1.getTime(); 
+  
+        c2.set(Calendar.MONTH, 01); 
+        c2.set(Calendar.DATE, 24);  
+        c2.set(Calendar.YEAR, 2020); 
+      
+        Date dateOne1 = c2.getTime(); 
+        //System.out.println("Date initially: "
+        //                   + dateOne); 
+  
+        // Sets the time 
+        //dateOne.setTime(1000999); 
+  
+            
+        //  FlightDates flightdate = new FlightDates(dateOne, 9.30f, air1.getNoOfSeats());
+        //  air1.getFlightDetails().setFlightSchedule("AEN123", "MUM",  "DEL", 250d, flightdate);  
+          
+          
+       //   FlightDates flightdate1 = new FlightDates(dateOne1, 15.30f, air1.getNoOfSeats());
+       //   air3.getFlightDetails().setFlightSchedule("VIS123", "DEL",  "CHN", 300d, flightdate1);
+          
+          
+          ArrayList<Airliner> airliners = new ArrayList<Airliner>();
+          airliners.add(a1);
+          airliners.add(a2);
+          airliners.add(a3);
+          
+          this.mainTravelAgency.setAirliners(airliners);
+            
+            
+        
+    }
+    
+    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton inBook;
+    private javax.swing.JComboBox<String> inComboBoxTime;
+    private javax.swing.JTextField inFlightArr;
+    private org.jdesktop.swingx.JXDatePicker inFlightDate;
+    private javax.swing.JTextField inFlightDep;
+    private javax.swing.JTextField inFlightNum;
+    private javax.swing.JTextField inFlightPrice;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.Panel panel1;
+    private javax.swing.JTable tblDirectory;
     // End of variables declaration//GEN-END:variables
 }

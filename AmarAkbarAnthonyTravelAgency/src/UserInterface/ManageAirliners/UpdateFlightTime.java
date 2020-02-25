@@ -44,6 +44,7 @@ public class UpdateFlightTime extends javax.swing.JPanel {
         this.flightDates = flightDates;
         this.airliner = airliner;
         this.mainTravelAgency= mainTravelAgency;
+        
 
 
         
@@ -59,7 +60,7 @@ public class UpdateFlightTime extends javax.swing.JPanel {
     void setValues(){
         origin.setText("<html><font size=4> Origin City: <i> <b>"+flight.getOriginCity());
         dest.setText("<html><font size=4> Destination City: <i><b>"+flight.getDestinationCity());
-        price.setText("<html><font size=4> Price : <i><b>"+flight.getPrice());        
+     //   price.setText("<html><font size=4> Price : <i><b>"+flight.getPrice());        
         flightNum.setText("<html><font size=4> Flight Number : <i><b>"+flight.getFlightNumber());
         aircraftName.setText("<html><font size=4> Flight Number : <i><b>"+aircraft.getName());
         aircraftSeats.setText("<html><font size=4> Flight Number : <i><b>"+aircraft.getNoOfSeats());
@@ -72,7 +73,18 @@ public class UpdateFlightTime extends javax.swing.JPanel {
         String min =   arrOfStr[1];
         getTimeHr.setSelectedItem(hr);
         getTimeMins.setSelectedItem(min);
-              
+        priceTxt.setText(Double.toString(flightDates.getPrice()));
+        
+        String time1= flightDates.getArrivalTime();
+        String[] arrOfStr1 = time1.split("\\.");
+        String hr1 =   arrOfStr[0];
+        String min1 =   arrOfStr[1];
+        getTimeHr1.setSelectedItem(hr1);
+        getTimeMins1.setSelectedItem(min1);
+
+        
+        
+        
         datePick.setDate(flightDates.getDates());
         
     }
@@ -100,7 +112,6 @@ public class UpdateFlightTime extends javax.swing.JPanel {
         flightNum = new javax.swing.JLabel();
         origin = new javax.swing.JLabel();
         dest = new javax.swing.JLabel();
-        price = new javax.swing.JLabel();
         aircraftName = new javax.swing.JLabel();
         aircraftType = new javax.swing.JLabel();
         aircraftSeats = new javax.swing.JLabel();
@@ -108,12 +119,20 @@ public class UpdateFlightTime extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         getTimeMins = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        getTimeHr1 = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        getTimeMins1 = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        arrLbl = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        priceTxt = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(600, 400));
 
         jLabel1.setText("<html><font size=5> <u> <b>Update Flight Time");
 
-        jLabel2.setText("Flight Time* :");
+        jLabel2.setText("Departure* :");
 
         jLabel3.setText("Flight Date* :");
 
@@ -144,8 +163,6 @@ public class UpdateFlightTime extends javax.swing.JPanel {
 
         dest.setText("destination");
 
-        price.setText("price");
-
         aircraftName.setText("aircraftName");
 
         aircraftType.setText("aircraftType");
@@ -160,6 +177,18 @@ public class UpdateFlightTime extends javax.swing.JPanel {
 
         jLabel6.setText("<html><i>Hrs");
 
+        getTimeHr1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+
+        jLabel10.setText("<html> <i> Minutes");
+
+        getTimeMins1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" }));
+
+        jLabel7.setText("<html><i>Hrs");
+
+        jLabel4.setText("Arrival* :");
+
+        jLabel5.setText("Price* :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,37 +202,59 @@ public class UpdateFlightTime extends javax.swing.JPanel {
                         .addGap(175, 175, 175)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
+                        .addContainerGap(138, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGap(1, 1, 1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(saveAirlinerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(getTimeHr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(getTimeMins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(13, 13, 13)
-                                                .addComponent(datePick, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(getTimeHr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(getTimeMins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(62, 62, 62)
+                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(getTimeHr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(getTimeMins1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(16, 16, 16))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel5)
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(saveAirlinerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel3)
+                                                    .addGap(13, 13, 13)
+                                                    .addComponent(datePick, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(arrLbl)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(origin)
+                                            .addComponent(dest))
+                                        .addGap(283, 283, 283)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(warningLbl)
                                     .addComponent(warningLabel2)))
-                            .addComponent(origin)
-                            .addComponent(dest)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -214,9 +265,8 @@ public class UpdateFlightTime extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(aircraftType)
                                         .addGap(64, 64, 64)))
-                                .addComponent(aircraftSeats))
-                            .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(136, Short.MAX_VALUE))
+                                .addComponent(aircraftSeats)))))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,35 +285,48 @@ public class UpdateFlightTime extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(flightNum)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(warningLbl)
                         .addGap(23, 23, 23)
-                        .addComponent(warningLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(warningLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(origin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dest)
-                        .addGap(10, 10, 10)
-                        .addComponent(price)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(getTimeHr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(getTimeMins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(datePick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saveAirlinerBtn)
-                            .addComponent(updateBtn))
-                        .addGap(84, 84, 84))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(arrLbl))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(getTimeHr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(getTimeMins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(getTimeHr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(getTimeMins1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(datePick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(saveAirlinerBtn)
+                                    .addComponent(updateBtn))))))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -272,22 +335,49 @@ public class UpdateFlightTime extends javax.swing.JPanel {
         boolean resultDate = true;
         int hr = Integer.parseInt(getTimeHr.getSelectedItem().toString());
         int min = Integer.parseInt(getTimeMins.getSelectedItem().toString());
+        Double price= 0.0;
+        
+        
+        
+        // added
+        String arr = getTimeHr1.getSelectedItem().toString() + "." +getTimeMins1.getSelectedItem().toString();
+        
         
         String s = hr+"."+min;
         
         Float time = Float.parseFloat(s);
-          
+        Float arrF = Float.parseFloat(arr);
+        arrGreaterDep(arrF, time);  
+        
+        
+        
         if(!d1.equals(flightDates.getDates())){
             for(FlightDates f : flight.getFlightDates()){
                 if(f.equals(d1)){
                     JOptionPane.showMessageDialog(null, "Flight already scheduled for the given date.");
                     resultDate = false;    
                 }
-                else{
-                    resultDate = true;
-                }
 
             }
+        }
+        
+        if(arrGreaterDep(arrF,time)
+                &&
+           resultDate){
+            try{   
+               price = Double.parseDouble(priceTxt.getText());
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Price input not valid");
+            }
+            
+            flightDates.setDates(d1);
+            flightDates.setFlightTime(time);
+            flightDates.setPrice(price);
+            flightDates.setArrivalTime(arr);
+
+
+
         }
         
     }//GEN-LAST:event_saveAirlinerBtnActionPerformed
@@ -315,6 +405,25 @@ public class UpdateFlightTime extends javax.swing.JPanel {
        
     }//GEN-LAST:event_backButtonActionPerformed
 
+    public boolean arrGreaterDep(Float arr, Float dept){
+        
+        if(arr > dept){
+           
+            arrLbl.setVisible(false);            
+            return true;
+                        
+        }
+            arrLbl.setForeground(Color.red);
+            arrLbl.setVisible(true);
+            arrLbl.setText("Departure cannot be greater than Arrival ");
+             
+            return false;
+    
+    }
+    
+    
+    
+    
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         saveAirlinerBtn.setEnabled(true);
         updateBtn.setEnabled(false);
@@ -327,21 +436,28 @@ public class UpdateFlightTime extends javax.swing.JPanel {
     private javax.swing.JLabel aircraftName;
     private javax.swing.JLabel aircraftSeats;
     private javax.swing.JLabel aircraftType;
+    private javax.swing.JLabel arrLbl;
     private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private org.jdesktop.swingx.JXDatePicker datePick;
     private javax.swing.JLabel dest;
     private javax.swing.JLabel flightNum;
     private javax.swing.JComboBox<String> getTimeHr;
+    private javax.swing.JComboBox<String> getTimeHr1;
     private javax.swing.JComboBox<String> getTimeMins;
+    private javax.swing.JComboBox<String> getTimeMins1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel origin;
-    private javax.swing.JLabel price;
+    private javax.swing.JTextField priceTxt;
     private javax.swing.JButton saveAirlinerBtn;
     private javax.swing.JButton updateBtn;
     private javax.swing.JLabel warningLabel2;
