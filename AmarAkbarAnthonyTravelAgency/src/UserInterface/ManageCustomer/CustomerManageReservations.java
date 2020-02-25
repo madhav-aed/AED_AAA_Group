@@ -27,10 +27,12 @@ public class CustomerManageReservations extends javax.swing.JPanel {
     public CustomerManageReservations(JPanel displayPanel, Customer customer) {
         initComponents();
         this.customer = customer;
+        this.displayPanel = displayPanel;
+        populateCustomerReservationTable();
     }
 
-    public void populateCustomerTable(){
-    DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+    public void populateCustomerReservationTable(){
+    DefaultTableModel dtm = (DefaultTableModel) tblCusRes.getModel();
         dtm.setRowCount(0);
         for(Reservations res: customer.getReservationsAList()) {
             Object[] row = new Object[7];
@@ -56,14 +58,19 @@ public class CustomerManageReservations extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCusRes = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Customer Reservations ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCusRes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tblCusRes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -73,9 +80,8 @@ public class CustomerManageReservations extends javax.swing.JPanel {
                 "AirLine Name", "Flight Number", "Date", "Time", "Seat Number", "Source", "Destination"
             }
         ));
-        jTable1.setMinimumSize(new java.awt.Dimension(300, 64));
-        jTable1.setPreferredSize(new java.awt.Dimension(525, 64));
-        jScrollPane1.setViewportView(jTable1);
+        tblCusRes.setMinimumSize(new java.awt.Dimension(300, 64));
+        jScrollPane1.setViewportView(tblCusRes);
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -89,26 +95,23 @@ public class CustomerManageReservations extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(btnBack)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBack)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBack)
                 .addGap(86, 86, 86))
         );
@@ -125,7 +128,7 @@ public class CustomerManageReservations extends javax.swing.JPanel {
             if(c instanceof ViewCustomerJPanel)
             {
                 ViewCustomerJPanel panel=(ViewCustomerJPanel) c;
-  //              panel.populateCustomerTable();
+                panel.populateCustomerDetails();
                 
             }
         }
@@ -136,6 +139,6 @@ public class CustomerManageReservations extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblCusRes;
     // End of variables declaration//GEN-END:variables
 }

@@ -79,7 +79,11 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
         radioMale = new javax.swing.JRadioButton();
         radioFemale = new javax.swing.JRadioButton();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel1.setBackground(new java.awt.Color(204, 204, 255));
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(" Customer Details");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -122,6 +126,9 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
 
         txtAge.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        btnEdit.setBackground(new java.awt.Color(0, 0, 0));
+        btnEdit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,20 +136,29 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnManageReservations.setText("Manage Reservations -->");
+        btnManageReservations.setBackground(new java.awt.Color(0, 0, 0));
+        btnManageReservations.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnManageReservations.setForeground(new java.awt.Color(255, 255, 255));
+        btnManageReservations.setText("Manage Reservations");
         btnManageReservations.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageReservationsActionPerformed(evt);
             }
         });
 
-        btnBack.setText("<--Back");
+        btnBack.setBackground(new java.awt.Color(0, 0, 0));
+        btnBack.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 0, 51));
+        btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
 
+        btnSave.setBackground(new java.awt.Color(0, 0, 0));
+        btnSave.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,62 +167,57 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
         });
 
         btnGroupMorF.add(radioMale);
+        radioMale.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         radioMale.setText("Male");
 
         btnGroupMorF.add(radioFemale);
+        radioFemale.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         radioFemale.setText("Female");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(140, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(114, 114, 114))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnManageReservations)
-                .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(119, 119, 119)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnEdit)
-                        .addComponent(jLabel7)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtEmail)
+                    .addComponent(txtContactNumber)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEmail)
-                            .addComponent(txtContactNumber)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(radioMale)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radioFemale)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGender))
-                            .addComponent(txtAge)
-                            .addComponent(txtLastName)
-                            .addComponent(txtFirstName)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(btnSave)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                        .addComponent(radioMale)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioFemale)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtGender))
+                    .addComponent(txtAge)
+                    .addComponent(txtLastName)
+                    .addComponent(txtFirstName)
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnManageReservations, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -233,11 +244,11 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEdit)
                     .addComponent(btnSave))
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(btnManageReservations))
@@ -269,7 +280,7 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
     
     
     public boolean checkContactNumber(String number){
-        Pattern p = Pattern.compile("^[1-9]{1}[0-9]{9}$");
+        Pattern p = Pattern.compile("^[1-9]\\d{2}-\\d{3}-\\d{4}$");
         Matcher m = p.matcher(number);
         boolean b = m.matches();
         return b;
@@ -337,7 +348,7 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select appropriate Gender");
         }
         else if(!checkContactNumber(contactNumber)){
-            JOptionPane.showMessageDialog(null, "Please enter valid contact number. Number must be 10 Digits!");
+            JOptionPane.showMessageDialog(null, "Please enter valid contact number. Number must be of 10 digits in the format of XXX-XXX-XXXX");
         }
         else if(!checkEmail(email)){
             JOptionPane.showMessageDialog(null, "Please enter valid email address");
@@ -349,14 +360,16 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
             customer.setfirstName(firstName);
             customer.setLastName(lastName);
             customer.setAge(age);
-            customer.setContactNumber(Integer.parseInt(contactNumber));
+            customer.setContactNumber(contactNumber);
             customer.setEmail(email);
             
             if((radioMale.isSelected())){
             customer.setGender("MALE");
+            txtGender.setText("MALE");
             }
             if((radioFemale.isSelected())){
             customer.setGender("FEMALE");
+            txtGender.setText("FEMALE");
             }
             
             JOptionPane.showMessageDialog(null, "Customer details updated Successfully");
