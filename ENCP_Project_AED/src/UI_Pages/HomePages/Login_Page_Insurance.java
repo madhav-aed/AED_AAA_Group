@@ -249,8 +249,8 @@ public class Login_Page_Insurance extends javax.swing.JFrame {
             @Override
             public void run() {
                 //after validating let's show the main Jframe
-            Customer_WorkSpace m = new Customer_WorkSpace();
-             m.setExtendedState(MAXIMIZED_BOTH);
+//            Customer_WorkSpace m = new Customer_WorkSpace();
+//             m.setExtendedState(MAXIMIZED_BOTH);
            //    m.setSize(new Dimension(750, 450));
 /*                Customer_Dashboard m = new Customer_Dashboard();
                 containerPanel.add("customerDashboard",m);
@@ -258,7 +258,7 @@ public class Login_Page_Insurance extends javax.swing.JFrame {
                 layout.next(containerPanel); */
               // after successfull loggin let's close the login window
               //call:
-             m.show();
+ //            m.show();
               dispose();
               
               //
