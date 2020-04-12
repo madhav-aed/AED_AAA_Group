@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class EmployeeDirectory {
     
     private ArrayList<Employee> employeeList;
+    
 
     public EmployeeDirectory() {
         employeeList = new ArrayList();
@@ -28,6 +29,11 @@ public class EmployeeDirectory {
         employeeList.add(employee);
         return employee;
     }
- 
+//  Created for Populating doc specialization in combobox Specialist type in Book an Appointment
     
+    private ArrayList<Employee.DocType> docSpecializationList;
+    
+    public ArrayList<Employee.DocType> getDocSpecializationList() {
+        return docSpecializationList;
+    }
 }

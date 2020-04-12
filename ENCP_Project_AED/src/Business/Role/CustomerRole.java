@@ -22,7 +22,7 @@ public class CustomerRole extends Role{
 
     @Override
     public JFrame createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,DB4OUtil dB4OUtil) {
-        return new Customer_WorkSpace(); //To change body of generated methods, choose Tools | Templates.
+        return new Customer_WorkSpace(userProcessContainer,account,organization,enterprise,business,dB4OUtil); //To change body of generated methods, choose Tools | Templates.
     }
     
     

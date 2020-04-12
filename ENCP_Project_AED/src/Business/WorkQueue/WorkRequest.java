@@ -25,6 +25,25 @@ public abstract class WorkRequest {
     private String  RefBy;
     private String doctor;
     private String WorkRequestType;
+    
+    private String appointmentType;
+    private String specialistType;
+
+    public String getAppointmentType() {
+        return appointmentType;
+    }
+
+    public void setAppointmentType(String appointmentType) {
+        this.appointmentType = appointmentType;
+    }
+
+    public String getSpecialistType() {
+        return specialistType;
+    }
+
+    public void setSpecialistType(String specialistType) {
+        this.specialistType = specialistType;
+    }
 
     public String getWorkRequestType() {
         return WorkRequestType;
