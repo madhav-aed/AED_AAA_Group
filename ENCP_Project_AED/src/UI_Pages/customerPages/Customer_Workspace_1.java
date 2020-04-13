@@ -5,6 +5,11 @@
  */
 package UI_Pages.customerPages;
 
+import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
+import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
+import Business.UserAccount.UserAccount;
 import UI_Pages.*;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -20,11 +25,22 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
      */
     
     JPanel panelRight;
-    public Customer_Workspace_1(JPanel panelRight) {
-        this.panelRight = panelRight;
+    UserAccount userAccount;
+    Organization organization;
+    Enterprise enterprise;
+    EcoSystem business;
+    DB4OUtil dB4OUtil;
+    
+    public Customer_Workspace_1(JPanel panelRight, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
+        
         
         initComponents();
-        
+        this.panelRight = panelRight;
+        this.userAccount = userAccount;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.business = business;
+        this.dB4OUtil = dB4OUtil;
         String name = "Jon" + " Snow";
         userNameLabel.setText(name);
         
@@ -34,6 +50,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -420,9 +437,11 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
 
     private void bookAppointmentbtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentbtMousePressed
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new patientAppointmentJPanel(panelRight));
+        panelRight.add(new patientAppointmentJPanel(panelRight,userAccount,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
         // Book appointment panel calling here
+        
+      
                
                
                

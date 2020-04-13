@@ -20,53 +20,17 @@ public abstract class WorkRequest {
     private String status;
     private Date requestDate;
     private Date resolveDate;
+    
+    /*
     private Enterprise enterprise;
     private String patient;
     private String  RefBy;
     private String doctor;
     private String WorkRequestType;
-
-    public String getWorkRequestType() {
-        return WorkRequestType;
-    }
-
-    public void setWorkRequestType(String WorkRequestType) {
-        this.WorkRequestType = WorkRequestType;
-    }
-
-    public String getPatient() {
-        return patient;
-    }
-
-    public void setPatient(String patient) {
-        this.patient = patient;
-    }
-
-    public String getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
-    }
-
-    public Enterprise getEnterprise() {
-        return enterprise;
-    }
-
-    public void setEnterprise(Enterprise enterprise) {
-        this.enterprise = enterprise;
-    }
-
-    public String getRefBy() {
-        return RefBy;
-    }
-
-    public void setRefBy(String RefBy) {
-        this.RefBy = RefBy;
-    }
-
-   
+    
+    private String appointmentType;
+    private String specialistType;
+*/
     
    
     

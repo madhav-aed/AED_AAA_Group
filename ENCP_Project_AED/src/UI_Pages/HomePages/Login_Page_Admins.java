@@ -7,6 +7,8 @@ package UI_Pages.HomePages;
 
 import Business.Database.DB4OUtil;
 import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
+import Business.Network.Network;
 import Business.Role.AdminRole;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
@@ -36,6 +38,7 @@ public class Login_Page_Admins extends javax.swing.JFrame {
     
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private int check = 0;
     
     
     public Login_Page_Admins() {
@@ -251,36 +254,10 @@ public class Login_Page_Admins extends javax.swing.JFrame {
         // Get user name
         String username = txt_email.getText();
         String password = txt_pwd.getText();
+
+    // Check for Sysadmin
         UserAccount ua = system.getUserAccountDirectory().authenticateUser(username, password);
         if((ua != null)){
-            
-            // Admin logging in
-         //   if(ua.getRole().equals(new AdminRole()))
-        //    {
-                     loader.show();
-                    login.hide();
-                    new java.util.Timer().schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-
-                            JFrame m =  ua.getRole().createWorkArea(
-                                containerPanel, 
-                                ua, 
-                                null,  
-                                ua.getEmployee().getEnterprise(),
-                                system, 
-                                dB4OUtil);
-                 //       SysAdmin_WorkSpace m = new SysAdmin_WorkSpace();
-                         m.setExtendedState(MAXIMIZED_BOTH);
-                         m.show();
-                         dispose();
-
-                           }
-                    },1000*5);
-           /* }
-            // Sys admin logging in            
-            else if(ua.getRole() == new SystemAdminRole())
-            {
                     loader.show();
                     login.hide();
                     new java.util.Timer().schedule(new TimerTask() {
@@ -291,47 +268,49 @@ public class Login_Page_Admins extends javax.swing.JFrame {
                                 containerPanel, 
                                 ua, 
                                 null,  
-                                null,
-                                system);
-                 //       SysAdmin_WorkSpace m = new SysAdmin_WorkSpace();
-                         m.setExtendedState(MAXIMIZED_BOTH);
-                         m.show();
-                         dispose();
-
+                                null, // ua.getEmployee().getEnterprise(),
+                                system, 
+                                dB4OUtil);
+                                m.setExtendedState(MAXIMIZED_BOTH);
+                                m.show();
+                                dispose();
                            }
-                    },1000*5);
-            
-            
-            } */
+                    },1000*3);
+           }
+// Check for Admin
+    else if(ua == null){
+        
+        for(Network net : system.getNetworkList()){
+            for(Enterprise e : net.getEnterpriseDirectory().getEnterpriseList()){
+              UserAccount ua1  =   e.getUserAccountDirectory().authenticateUser(username, password);
+                if((ua1 != null)){
+                            loader.show();
+                            login.hide();
+                            new java.util.Timer().schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                        JFrame m =  ua1.getRole().createWorkArea(
+                                        containerPanel, 
+                                        ua1, 
+                                        null,  
+                                        e,
+                                        system, 
+                                        dB4OUtil);
+                                        m.setExtendedState(MAXIMIZED_BOTH);
+                                        m.show();
+                                        dispose();
+                                        check = 1;
+                                   }
+                            },1000*3);
+                        }
+                    }              
+                }
         }
-        else{
-        
-            JOptionPane.showMessageDialog(null, "Incorrect username or password! Please check..");
-            
-        
+    else if((ua == null) && (check != 1)){
+            JOptionPane.showMessageDialog(null, "Check username/password and try again!");
         }
-
-
-
-
-
-
         
         
-        
-
-
-                
-         //       Customer_Dashboard m = new Customer_Dashboard();
-                
-                
-         //       containerPanel.add("customerDashboard",m);
-         //       CardLayout layout = (CardLayout) containerPanel.getLayout();
-         //       layout.next(containerPanel);
-          //      m.setVisible(true);
-         //       m.show();
-         //       System.out.println("time pass");
-
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void txt_emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_emailFocusGained

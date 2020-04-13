@@ -321,7 +321,7 @@ public class Admin_WorkSpace extends javax.swing.JFrame {
         // Set Panel view
                 // TODO add your handling code here:
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new Customer_Workspace_1(panelRight));
+//        panelRight.add(new Customer_Workspace_1(panelRight));
         layout.next(panelRight);
 
         

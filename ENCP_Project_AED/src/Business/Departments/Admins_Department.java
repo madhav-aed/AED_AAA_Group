@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class Admins_Department extends Organization{
 
-    public Admins_Department() {
-        super(Type.Admin.getValue());
+    public Admins_Department(String name) {
+        super(name,Type.Admin.getValue());
     }
     
     @Override

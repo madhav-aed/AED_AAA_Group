@@ -7,6 +7,7 @@ package UI_Pages.adminPages;
 
 import Business.Database.DB4OUtil;
 import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
@@ -31,14 +32,14 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
     UserAccount account;
     EcoSystem system;
     DB4OUtil dB4OUtil;
+    Enterprise enterprise;
     
-    
-    public Hospital_Admin_WorkSpace(JPanel userProcessContainer, UserAccount account,  EcoSystem system, DB4OUtil dB4OUtil ) {
+    public Hospital_Admin_WorkSpace(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem system, DB4OUtil dB4OUtil ) {
   
        this.account = account;
-         this.system = system;
-         
-         this.dB4OUtil = dB4OUtil;
+       this.system = system;
+       this.enterprise = enterprise;  
+       this.dB4OUtil = dB4OUtil;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
@@ -52,7 +53,7 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
        // home = jPanel3;
         CardLayout layout = (CardLayout)panelRight.getLayout();
       //  panelRight.add(new SysAdmin_WorkArea(this.panelRight, account, system, dB4OUtil));
-        panelRight.add(new Hospital_Admin_WorkArea(this.panelRight, account, system, dB4OUtil));
+        panelRight.add(new Hospital_Admin_WorkArea(this.panelRight, account,enterprise, system, dB4OUtil));
         layout.next(panelRight);
     
     }
@@ -134,7 +135,7 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(181, 77, 180));
-        jLabel1.setText("Home Hospital");
+        jLabel1.setText("Home");
 
         javax.swing.GroupLayout Button1Layout = new javax.swing.GroupLayout(Button1);
         Button1.setLayout(Button1Layout);
@@ -144,7 +145,7 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
                 .addComponent(Indicator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(jLabel1)
-                .addGap(0, 91, Short.MAX_VALUE))
+                .addGap(0, 139, Short.MAX_VALUE))
         );
         Button1Layout.setVerticalGroup(
             Button1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,7 +335,7 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
         // Set Panel view
                 // TODO add your handling code here:
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new Hospital_Admin_WorkArea(this.panelRight, account, system, dB4OUtil));
+        panelRight.add(new Hospital_Admin_WorkArea(this.panelRight, account,enterprise, system, dB4OUtil));
         layout.next(panelRight);
 
         
@@ -380,7 +381,7 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)panelRight.getLayout();
       //  panelRight.add(new Test_Panel_4());
       
-        panelRight.add(new Hospital_Admin_WorkArea(this.panelRight, account, system, dB4OUtil));
+        panelRight.add(new Hospital_Admin_WorkArea(this.panelRight, account,enterprise, system, dB4OUtil));
         layout.next(panelRight);
         
         

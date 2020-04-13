@@ -5,6 +5,7 @@
  */
 package Business.Network;
 
+import Business.Enterprises.Enterprise;
 import Business.Enterprises.EnterpriseDirectory;
 import Business.WorkQueue.WorkQueue;
 
@@ -46,6 +47,16 @@ public class Network {
     @Override
     public String toString(){
         return name;
+    }
+    
+    
+    public boolean checkEnterpriseNameUnique(String name){
+        for(Enterprise e: this.enterpriseDirectory.getEnterpriseList()){
+            if(e.getName().equals(name)){
+                return false;
+            }
+        }
+        return true; 
     }
     
 }

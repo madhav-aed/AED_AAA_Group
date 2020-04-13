@@ -118,20 +118,25 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
                          
                             emp += 1; // et.getEmployeeDirectory().getEmployeeList().size();
                         }
-                
+        
+        for(Network net : system.getNetworkList()){
+            for(Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()){
+                for(Employee e : ent.getEmployeeDirectory().getEmployeeList())
+                    emp += 1;
+            }
+          }
+                        
         
       
         int ent = 0;
-/*        for(Network net : system.getNetworkList()){
-                ent += net.getEnterpriseDirectory().getEnterpriseList().size();
+        for(Network net : system.getNetworkList()){
+             //   ent += net.getEnterpriseDirectory().getEnterpriseList().size();
                 for(Enterprise et : net.getEnterpriseDirectory().getEnterpriseList()){
-                    for(Employee e : et.getEmployeeDirectory().getEmployeeList()){
-                         
-                            emp += 1; // et.getEmployeeDirectory().getEmployeeList().size();
-                        }
+                            ent += 1; // et.getEmployeeDirectory().getEmployeeList().size();
+                       
                 
                 }
-        } */        
+        }         
         //        system.getNetworkList() 
         enterpriseNoLbl.setText(""+ent);
         employeesNoLbl.setText(""+emp);
@@ -183,14 +188,10 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
 
         welcomelabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        networkEnterpriseTable = new javax.swing.JTable();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
         addNetBtn = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         networkNoLbl = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -206,7 +207,6 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        addNetworkBtn = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         networkName = new javax.swing.JTextField();
@@ -214,41 +214,25 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         networkLocation = new javax.swing.JComboBox<>(states);
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        networkEnterpriseTable = new javax.swing.JTable();
+        addNetworkBtn = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(247, 247, 247));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         welcomelabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         welcomelabel.setForeground(new java.awt.Color(96, 83, 150));
         welcomelabel.setText("Hello");
+        add(welcomelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 22, -1, 33));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(96, 83, 150));
         jLabel7.setText("Networks");
-
-        jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        networkEnterpriseTable.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        networkEnterpriseTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null}
-            },
-            new String [] {
-                "Name", "Location"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        networkEnterpriseTable.setGridColor(new java.awt.Color(247, 247, 247));
-        networkEnterpriseTable.setRowHeight(20);
-        networkEnterpriseTable.setSelectionBackground(new java.awt.Color(96, 83, 150));
-        jScrollPane1.setViewportView(networkEnterpriseTable);
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 293, 228, 41));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -276,6 +260,8 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, -1, -1));
+
         addNetBtn.setBackground(new java.awt.Color(247, 247, 247));
         addNetBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/Images/icons8_add_40px_1.png"))); // NOI18N
         addNetBtn.setOpaque(false);
@@ -284,6 +270,7 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
                 addNetBtnActionPerformed(evt);
             }
         });
+        add(addNetBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 506, -1, -1));
 
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -291,18 +278,14 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
+            .addGap(0, 1035, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        jButton3.setBackground(new java.awt.Color(247, 247, 247));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-delete_database.png"))); // NOI18N
-
-        jButton4.setBackground(new java.awt.Color(247, 247, 247));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-data_backup.png"))); // NOI18N
+        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 83, 1035, -1));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -350,6 +333,8 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 175, -1, -1));
+
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -377,6 +362,8 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         );
 
         jPanel5.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 10));
+
+        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 175, -1, 80));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -406,31 +393,30 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         jLabel20.setText("Total");
         jPanel6.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 40, 10));
 
+        add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 175, -1, 80));
+
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(96, 83, 150));
         jLabel12.setText("Employees");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 139, 124, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(96, 83, 150));
         jLabel13.setText("Running Networks");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 139, 124, 30));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(96, 83, 150));
         jLabel14.setText("Running Enterprise");
-
-        addNetworkBtn.setBackground(new java.awt.Color(247, 247, 247));
-        addNetworkBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/Images/icons8_database_view_48px.png"))); // NOI18N
-        addNetworkBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addNetworkBtnActionPerformed(evt);
-            }
-        });
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 139, 124, 30));
 
         jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 413, 270, 10));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(96, 83, 150));
         jLabel4.setText("Network Name");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 348, -1, -1));
 
         networkName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         networkName.setBorder(null);
@@ -440,118 +426,97 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
                 networkNameMouseClicked(evt);
             }
         });
+        add(networkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 383, 270, 30));
 
         jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
+        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 490, 270, 10));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(96, 83, 150));
         jLabel8.setText("Network Location");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 423, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(96, 83, 150));
         jLabel9.setText("Add New Network?");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 293, 228, 41));
+        add(networkLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 448, 270, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(networkName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(networkLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addNetBtn))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(addNetworkBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(158, 158, 158))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(welcomelabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
+
+        jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        networkEnterpriseTable.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        networkEnterpriseTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "Name", "Location"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        networkEnterpriseTable.setGridColor(new java.awt.Color(247, 247, 247));
+        networkEnterpriseTable.setRowHeight(20);
+        networkEnterpriseTable.setSelectionBackground(new java.awt.Color(96, 83, 150));
+        jScrollPane1.setViewportView(networkEnterpriseTable);
+
+        addNetworkBtn.setBackground(new java.awt.Color(247, 247, 247));
+        addNetworkBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/Images/icons8_database_view_48px.png"))); // NOI18N
+        addNetworkBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNetworkBtnActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(247, 247, 247));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-delete_database.png"))); // NOI18N
+
+        jButton4.setBackground(new java.awt.Color(247, 247, 247));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-data_backup.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(addNetworkBtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4)
+                            .addComponent(jButton3))))
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 41, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(addNetworkBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(welcomelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(addNetworkBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel4)
-                        .addGap(16, 16, 16)
-                        .addComponent(networkName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(networkLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addNetBtn)))
-                .addContainerGap())
-        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 600, 290));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -565,12 +530,19 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         
         String name = networkName.getText();
         String loc = (String)networkLocation.getSelectedItem();
-        Network network = system.createAndAddNetwork();
-        network.setName(name);
-        network.setLocation(loc);
-        populateNetworkTable();
-        init();
         
+        if(this.system.checkIfNetworkLocationUnique(loc))
+        {
+            Network network = system.createAndAddNetwork();
+            network.setName(name);
+            network.setLocation(loc);
+            populateNetworkTable();
+            init();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Network for "+loc+ " already present.");
+        
+        }
         
     }//GEN-LAST:event_addNetBtnActionPerformed
 
@@ -621,6 +593,7 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;

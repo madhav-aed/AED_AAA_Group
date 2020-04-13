@@ -144,7 +144,36 @@ public class Employee {
         this.primDoc = primDoc;
     }
 
-   
+   //below is included for doctors type.
     
+    private String docSpeciality;
+
+    public String getDocSpeciality() {
+         return docSpeciality;
+    }
+
+    public void setDocSpeciality(Employee.DocType docType ) {
+        this.docSpeciality = docType.getValue();
+    }
+    
+    public enum DocType{
+        PrimaryPhysician("Primary Physician"), 
+        
+        Cardiologist("Cardiologist"), 
+        Rheumatologist("Rheumatologist"),
+        Surgeon("General Surgeon"), 
+        
+        Psychiatrist("Psychiatrist"), 
+        Dermatologist("Dermatologist"),        
+        Neurologist("Neurologist");
+        
+        private String value;
+        private DocType(String value) {
+            this.value = value;
+        }
+        public String getValue() {
+            return value;
+        }
+    }
     
 }

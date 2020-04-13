@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class Insurance_Management_Department extends Organization{
 
-    public Insurance_Management_Department() {
-        super(Type.InsuranceManager.getValue());
+    public Insurance_Management_Department(String name) {
+        super(name,Type.InsuranceManager.getValue());
     }
     
     @Override
