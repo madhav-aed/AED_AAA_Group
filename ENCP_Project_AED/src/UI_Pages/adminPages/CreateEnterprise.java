@@ -30,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author madhav437
+ * @author Rohit
  */
 public class CreateEnterprise extends javax.swing.JPanel {
 
@@ -408,7 +408,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
         addAdminPanelLayout.setVerticalGroup(
             addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addAdminPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(44, 44, 44)
                 .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addAdminPanelLayout.createSequentialGroup()
                         .addGap(199, 199, 199)
@@ -615,17 +615,19 @@ public class CreateEnterprise extends javax.swing.JPanel {
     private void addNetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNetBtnActionPerformed
         // TODO add your handling code here:
 
-        //Enterprise.EnterpriseType type =  Enterprise.EnterpriseType.Hospital; 
-        //(Enterprise.EnterpriseType) enterpriseComboBox.getSelectedItem();
 
         String name = enterpriseName.getText();
         Enterprise.EnterpriseType selectedType = (Enterprise.EnterpriseType) enterpriseTypeJComboBox.getSelectedItem();
         
         System.out.println(""+selectedType);
-        Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, selectedType);
-
-        populateEnterpriseTable();
-
+        
+        if(network.checkEnterpriseNameUnique(name)){
+            Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, selectedType);
+            populateEnterpriseTable();
+            }
+        else {
+            JOptionPane.showMessageDialog(null, "Enterprise with the name already exists!");
+        }
     }//GEN-LAST:event_addNetBtnActionPerformed
 
     private void enterpriseNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enterpriseNameMouseClicked
@@ -635,10 +637,11 @@ public class CreateEnterprise extends javax.swing.JPanel {
 
     private void addAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAdminActionPerformed
         // TODO add your handling code here:
-        addAdminPanel.setVisible(true);
         int selectedRow = networkEnterpriseTable.getSelectedRow();
         if(selectedRow >= 0)
         {
+
+            addAdminPanel.setVisible(true);
             Enterprise et  = (Enterprise) networkEnterpriseTable.getValueAt(selectedRow, 0);
             this.enterprise = et;
             
@@ -672,32 +675,40 @@ public class CreateEnterprise extends javax.swing.JPanel {
         String name = adminName.getText();
         
         
-        
+        // Validations
       for(UserAccount ua : this.enterprise.getUserAccountDirectory().getUserAccountList()){
             if (ua!= null){;
             if(ua.getUsername().equals(username)){
                  JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
-            return;}}
+            return;}
+            }
       }
+      for(UserAccount ua : this.system.getUserAccountDirectory().getUserAccountList()){
+            if (ua!= null){;
+            if(ua.getUsername().equals(username)){
+                 JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
+            return;}
+            }
+      }      
       
             if (usernamePatternCorrect()==false){
-    adminUser.setForeground (Color.red);
-    adminusername.setBorder(BorderFactory.createLineBorder(Color.RED));
-    JOptionPane.showMessageDialog(null, "Username should be in the format of xx_xx@xx.xx");
-    return;
-} else{
-    adminUser.setForeground (Color.BLACK);
-    adminusername.setBorder(BorderFactory.createLineBorder(Color.black));
-}
-if (passwordPatternCorrect()==false){
-    adminPasswordLabel.setForeground (Color.red);
-    adminpassword.setBorder(BorderFactory.createLineBorder(Color.RED));
-    JOptionPane.showMessageDialog(null, "Password should be at least 6 digits and contain at least one upper case letter, one lower case letter, one digit and one special character $, *, # or &.");
-    return;
-}else{
-    adminPasswordLabel.setForeground (Color.BLACK);
-    adminpassword.setBorder(BorderFactory.createLineBorder(Color.black));
-}
+                        adminUser.setForeground (Color.red);
+                        adminusername.setBorder(BorderFactory.createLineBorder(Color.RED));
+                        JOptionPane.showMessageDialog(null, "Username should be in the format of xx_xx@xx.xx");
+                        return;
+               } else{
+                        adminUser.setForeground (Color.BLACK);
+                        adminusername.setBorder(BorderFactory.createLineBorder(Color.black));
+                     }
+            if (passwordPatternCorrect()==false){
+                        adminPasswordLabel.setForeground (Color.red);
+                        adminpassword.setBorder(BorderFactory.createLineBorder(Color.RED));
+                        JOptionPane.showMessageDialog(null, "Password should be at least 6 digits and contain at least one upper case letter, one lower case letter, one digit and one special character $, *, # or &.");
+                        return;
+            }else{
+                        adminPasswordLabel.setForeground (Color.BLACK);
+                        adminpassword.setBorder(BorderFactory.createLineBorder(Color.black));
+            }
 
         
         Employee employee = this.enterprise.getEmployeeDirectory().createEmployee(name);
@@ -711,20 +722,20 @@ if (passwordPatternCorrect()==false){
         
         // Adding to lists..
         
-        this.system.getEmployeeDirectory().getEmployeeList().add(employee);
-        this.enterprise.getEmployeeDirectory().getEmployeeList().add(employee);
+     //   this.system.getEmployeeDirectory().getEmployeeList().add(employee);
+     //    this.enterprise.getEmployeeDirectory().getEmployeeList().add(employee);
         
         if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital){
                 // Create account Within the enterprise
                 UserAccount account = this.enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
                 // Create account  Within the ecosystem
-                this.system.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
+       //         this.system.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
         }
         else if(enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Insurance){
                 // Create account Within the enterprise
                 UserAccount account = this.enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new InsuranceAdminRole());
                 // Create account  Within the ecosystem
-                this.system.getUserAccountDirectory().createUserAccount(username, password, employee, new InsuranceAdminRole());
+       //         this.system.getUserAccountDirectory().createUserAccount(username, password, employee, new InsuranceAdminRole());
         }
         JOptionPane.showMessageDialog(null, "User Created");
       

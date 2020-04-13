@@ -23,6 +23,14 @@ public abstract class Organization {
     private int organizationID;
     private static int counter=0;
     
+
+    // 13th
+    private String organizationType;
+
+    public String getOrganizationType() {
+        return organizationType;
+    }
+    
     public enum Type{
         Admin("Admin Organization"), 
         
@@ -43,9 +51,9 @@ public abstract class Organization {
         }
     }
 
-    public Organization(String name) {
+    public Organization(String name, String type) {
         this.name = name;
-      
+        this.organizationType = type;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
         userAccountDirectory = new UserAccountDirectory();

@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class Insurance_Sales_Department extends Organization{
 
-    public Insurance_Sales_Department() {
-        super(Type.Sales.getValue());
+    public Insurance_Sales_Department(String name) {
+        super(name,Type.Sales.getValue());
     }
     
     @Override

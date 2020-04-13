@@ -11,10 +11,13 @@ import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 */
 
+import Business.Customer.Patient;
+import Business.Customer.PatientDirectory;
 import Business.Departments.Organization;
 import Business.Network.Network;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
+import Business.UserAccount.UserAccountDirectory;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +29,15 @@ public class EcoSystem  extends Organization
     
     private static EcoSystem business;
     private ArrayList<Network> networkList;
+    
+    
+    // New changes
+    private  PatientDirectory patientDirectory;   // customerDirectory
+
+    public PatientDirectory getPatientDirectory() {
+        return patientDirectory;
+    }
+
     
     
     
@@ -48,8 +60,9 @@ public class EcoSystem  extends Organization
         return roleList;
     } 
     private EcoSystem(){
-        super(null);
+        super(null, null);
         networkList=new ArrayList<Network>();
+        patientDirectory = new PatientDirectory();
     }
 
     public ArrayList<Network> getNetworkList() {
@@ -59,7 +72,7 @@ public class EcoSystem  extends Organization
     public void setNetworkList(ArrayList<Network> networkList) {
         this.networkList = networkList;
     }
-    
+    // For employee user check
     public boolean checkIfUserIsUnique(String userName){
         if(!this.getUserAccountDirectory().checkIfUsernameIsUnique(userName)){
             return false;
@@ -68,5 +81,16 @@ public class EcoSystem  extends Organization
             
         }
         return true;
-    } 
+    }
+    
+    // For Network present for same location
+    public boolean checkIfNetworkLocationUnique(String location){
+        for(Network n : this.networkList){
+           if(n.getLocation().equals(location))
+               return false;        
+        }
+        return true;
+    }
+    
+    
 }
