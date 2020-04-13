@@ -5,6 +5,7 @@
  */
 package UI_Pages.HomePages;
 
+import Business.Customer.Patient;
 import Business.Database.DB4OUtil;
 import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
@@ -274,7 +275,7 @@ public class Login_Page_Customer extends javax.swing.JFrame {
         
         String username = txt_email.getText();
         String password = txt_pwd.getText();
-        UserAccount ua = system.getUserAccountDirectory().authenticateUser(username, password);
+        Patient ua = system.getPatientDirectory().authenticateUser(username, password);
         if((ua != null)){
         loader.show();
         login.hide();
@@ -286,10 +287,9 @@ public class Login_Page_Customer extends javax.swing.JFrame {
                                 containerPanel, 
                                 ua, 
                                 null,  
-                                ua.getEmployee().getEnterprise(),
+                                null,
                                 system, 
                                 dB4OUtil);
-                 //       SysAdmin_WorkSpace m = new SysAdmin_WorkSpace();
                          m.setExtendedState(MAXIMIZED_BOTH);
                          m.show();
                          dispose();

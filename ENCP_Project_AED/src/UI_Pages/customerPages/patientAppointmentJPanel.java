@@ -534,14 +534,13 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         String specialistType = comboBoxSpecialistType.getSelectedItem().toString();
         String doctor = comboBoxDoctor.getSelectedItem().toString();
         Date date = jDateChooser1.getDate();
-        
+        /*
         workReq.setDoctor(doctor);
         workReq.setPatient(userAccount.getEmployee().getName());
         workReq.setEnterprise(enterprise);
         workReq.setRequestDate(date);
         workReq.setAppointmentType(appointmentType);
-        
-        
+        */
         
         
     //}    

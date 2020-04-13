@@ -5,6 +5,7 @@
  */
 package UI_Pages.customerPages;
 
+import Business.Customer.Patient;
 import Business.Database.DB4OUtil;
 import Business.EcoSystem;
 import Business.Employees.Employee;
@@ -350,21 +351,21 @@ public class Create_New_Patient extends javax.swing.JFrame {
         String emerMobile = txtEmergencyMobile.getText();
         String primDoc = txtPrimaryDoctor.getText();
 
-        UserAccount ua = business.getUserAccountDirectory().authenticateUser(userId, pwd);
+//        UserAccount ua = business.getPatientDirectory().checkIfUsernameIsUnique(userId); //  authenticateUser(userId, pwd)  getUserAccountDirectory().authenticateUser(userId, pwd);
 
-        if(ua!= null){
-            JOptionPane.showMessageDialog(null, "User Id already exists");
+        if(!business.getPatientDirectory().checkIfUsernameIsUnique(userId)){
+            JOptionPane.showMessageDialog(null, "Email already registered. Please sign in!");
         }
 
         else{
             //    UserAccount newCustomer =  business.getUserAccountDirectory().createUserAccount(userId, pwd, business.getCusDirectory().createEmployee(cusName,userId,dob,insDetail,mobno,emerName,emerMobile,primDoc), new CustomerRole());
            
-            Employee e = new Employee();
+            Patient e = new Patient();
             e. setDob(dob);
             e.setEmerMobile(emerMobile);
             e.setName(cusName);
-            business.getEmployeeDirectory().getEmployeeList().add(e);
-            business.getUserAccountDirectory().createUserAccount(userId, pwd, e, new CustomerRole());
+            business.getPatientDirectory().createUserAccount(userId, pwd, cusName, new CustomerRole()); //  getUserAccountList().add(e);  // getEmployeeDirectory().getEmployeeList().add(e);
+           // business.get  createUserAccount(userId, pwd, e, new CustomerRole());
 
             //    getUserAccountDirectory().createUserAccount(userId, pwd, business.getCusDirectory().createEmployee(cusName,userId,dob,insDetail,mobno,emerName,emerMobile,primDoc), new CustomerRole());
 

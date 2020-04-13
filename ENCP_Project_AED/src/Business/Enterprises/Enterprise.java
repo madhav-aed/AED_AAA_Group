@@ -54,7 +54,7 @@ public abstract class Enterprise extends Organization{
     }
     
     public Enterprise(String name,EnterpriseType type){
-        super(name);
+        super(name, type.Sysadmin.getValue());
         enterpriseCount++;
         this.enterpriseType=type;
         organizationDirectory=new OrganizationDirectory();

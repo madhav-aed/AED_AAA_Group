@@ -118,20 +118,25 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
                          
                             emp += 1; // et.getEmployeeDirectory().getEmployeeList().size();
                         }
-                
+        
+        for(Network net : system.getNetworkList()){
+            for(Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()){
+                for(Employee e : ent.getEmployeeDirectory().getEmployeeList())
+                    emp += 1;
+            }
+          }
+                        
         
       
         int ent = 0;
-/*        for(Network net : system.getNetworkList()){
-                ent += net.getEnterpriseDirectory().getEnterpriseList().size();
+        for(Network net : system.getNetworkList()){
+             //   ent += net.getEnterpriseDirectory().getEnterpriseList().size();
                 for(Enterprise et : net.getEnterpriseDirectory().getEnterpriseList()){
-                    for(Employee e : et.getEmployeeDirectory().getEmployeeList()){
-                         
-                            emp += 1; // et.getEmployeeDirectory().getEmployeeList().size();
-                        }
+                            ent += 1; // et.getEmployeeDirectory().getEmployeeList().size();
+                       
                 
                 }
-        } */        
+        }         
         //        system.getNetworkList() 
         enterpriseNoLbl.setText(""+ent);
         employeesNoLbl.setText(""+emp);
@@ -437,6 +442,8 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 293, 228, 41));
         add(networkLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 448, 270, 30));
 
+        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
+
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -523,12 +530,19 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         
         String name = networkName.getText();
         String loc = (String)networkLocation.getSelectedItem();
-        Network network = system.createAndAddNetwork();
-        network.setName(name);
-        network.setLocation(loc);
-        populateNetworkTable();
-        init();
         
+        if(this.system.checkIfNetworkLocationUnique(loc))
+        {
+            Network network = system.createAndAddNetwork();
+            network.setName(name);
+            network.setLocation(loc);
+            populateNetworkTable();
+            init();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Network for "+loc+ " already present.");
+        
+        }
         
     }//GEN-LAST:event_addNetBtnActionPerformed
 

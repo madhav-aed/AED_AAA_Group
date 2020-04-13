@@ -47,12 +47,12 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                 //    test = ArrayUtils.remove(test, 2);
 
     
-    public Hospital_Admin_WorkArea(JPanel rightPanel, UserAccount account,  EcoSystem system,DB4OUtil dB4OUtil ) {
+    public Hospital_Admin_WorkArea(JPanel rightPanel, UserAccount account,Enterprise enterprise,  EcoSystem system,DB4OUtil dB4OUtil ) {
         this.rightPanel = rightPanel;
         this.account = account;
         this.system = system;
         this.dB4OUtil = dB4OUtil;
-        this.enterprise = account.getEmployee().getEnterprise();
+        this.enterprise = enterprise;
         this.directory = enterprise.getOrganizationDirectory();
         
         initComponents();
@@ -64,6 +64,9 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
     public void init(){
         welcomelabel.setText("Welcome "+account.getEmployee().getName());
      //   btn_close.setVisible(false);
+     
+        namelabel.setText("Enterprise : "+enterprise.getName());
+        
         int emp = system.getEmployeeDirectory().getEmployeeList().size();
       
         int ent = 0;
@@ -109,9 +112,9 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         
         for (Organization organization : directory.getOrganizationList()){
             Object[] row = new Object[2];
-            row[0] = organization.getOrganizationID();
-            row[1] = organization;
-            
+            row[0] = organization;
+            row[1] = organization.getOrganizationType();
+//            row[3] = organization.getOrganizationType();
             model.addRow(row);
         }
 
@@ -161,6 +164,7 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         departmentTypeJComboBox = new javax.swing.JComboBox();
+        namelabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(247, 247, 247));
 
@@ -181,24 +185,9 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "ID", "Name"
+                "Name", "Type"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         organizationJTable.setGridColor(new java.awt.Color(247, 247, 247));
         organizationJTable.setRowHeight(20);
         organizationJTable.setSelectionBackground(new java.awt.Color(96, 83, 150));
@@ -394,6 +383,10 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
 
         departmentTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        namelabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        namelabel.setForeground(new java.awt.Color(96, 83, 150));
+        namelabel.setText("Hello");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -407,7 +400,8 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(namelabel))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -454,7 +448,9 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                         .addComponent(welcomelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(namelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -499,7 +495,17 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
 
     private void addNetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNetBtnActionPerformed
         Type type = (Type) departmentTypeJComboBox.getSelectedItem();
-        directory.createOrganization(type);
+        String name = networkName.getText();
+        if(!directory.checkIfDepartmentTypePresent(type.getValue()) &&
+           !directory.checkIfDepartmentNamePresent(name)
+                )
+            {   
+                 directory.createOrganization(networkName.getText(), type);
+            }
+        else{
+                JOptionPane.showMessageDialog(null, "Similar Department "+type.getValue()+" already present");
+                
+            }
         init();
         
        
@@ -516,7 +522,8 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                 &&        
                 !type.getValue().equals(Type.InsuranceManager.getValue())                  
                     )
-                departmentTypeJComboBox.addItem(type);
+
+                    departmentTypeJComboBox.addItem(type);
         }
     }
     
@@ -552,85 +559,20 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addAdminBtn;
-    private javax.swing.JButton addAdminBtn1;
-    private javax.swing.JButton addAdminBtn2;
-    private javax.swing.JButton addAdminBtn3;
-    private javax.swing.JButton addAdminBtn4;
-    private javax.swing.JPanel addAdminPanel;
-    private javax.swing.JPanel addAdminPanel1;
-    private javax.swing.JPanel addAdminPanel2;
-    private javax.swing.JPanel addAdminPanel3;
-    private javax.swing.JPanel addAdminPanel4;
     private javax.swing.JButton addEmployees;
     private javax.swing.JButton addNetBtn;
-    private javax.swing.JLabel adminLabel;
-    private javax.swing.JLabel adminLabel1;
-    private javax.swing.JLabel adminLabel2;
-    private javax.swing.JLabel adminLabel3;
-    private javax.swing.JLabel adminLabel4;
-    private javax.swing.JTextField adminName;
-    private javax.swing.JTextField adminName1;
-    private javax.swing.JTextField adminName2;
-    private javax.swing.JTextField adminName3;
-    private javax.swing.JTextField adminName4;
-    private javax.swing.JLabel adminPasswordLabel;
-    private javax.swing.JLabel adminPasswordLabel1;
-    private javax.swing.JLabel adminPasswordLabel2;
-    private javax.swing.JLabel adminPasswordLabel3;
-    private javax.swing.JLabel adminPasswordLabel4;
-    private javax.swing.JTable adminTable;
-    private javax.swing.JTable adminTable1;
-    private javax.swing.JTable adminTable2;
-    private javax.swing.JTable adminTable3;
-    private javax.swing.JTable adminTable4;
-    private javax.swing.JLabel adminUser;
-    private javax.swing.JLabel adminUser1;
-    private javax.swing.JLabel adminUser2;
-    private javax.swing.JLabel adminUser3;
-    private javax.swing.JLabel adminUser4;
-    private javax.swing.JPasswordField adminpassword;
-    private javax.swing.JPasswordField adminpassword1;
-    private javax.swing.JPasswordField adminpassword2;
-    private javax.swing.JPasswordField adminpassword3;
-    private javax.swing.JPasswordField adminpassword4;
-    private javax.swing.JTextField adminusername;
-    private javax.swing.JTextField adminusername1;
-    private javax.swing.JTextField adminusername2;
-    private javax.swing.JTextField adminusername3;
-    private javax.swing.JTextField adminusername4;
     private javax.swing.JComboBox departmentTypeJComboBox;
     private javax.swing.JLabel employeesNoLbl;
     private javax.swing.JLabel enterpriseNoLbl;
-    private javax.swing.JButton inPhotoBtn1;
-    private javax.swing.JButton inPhotoBtn2;
-    private javax.swing.JButton inPhotoBtn3;
-    private javax.swing.JButton inPhotoBtn4;
-    private javax.swing.JButton inPhotoBtn5;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -642,19 +584,10 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JLabel jPhoto1;
-    private javax.swing.JLabel jPhoto2;
-    private javax.swing.JLabel jPhoto3;
-    private javax.swing.JLabel jPhoto4;
-    private javax.swing.JLabel jPhoto5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JLabel namelabel;
     private javax.swing.JTextField networkName;
     private javax.swing.JLabel networkNoLbl;
     private javax.swing.JTable organizationJTable;
