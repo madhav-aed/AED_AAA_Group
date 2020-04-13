@@ -27,6 +27,10 @@ public abstract class Organization {
     // 13th
     private String organizationType;
 
+    public void setOrganizationType(Organization.Type orgType) {
+        this.organizationType = orgType.getValue();
+    }
+
     public String getOrganizationType() {
         return organizationType;
     }
