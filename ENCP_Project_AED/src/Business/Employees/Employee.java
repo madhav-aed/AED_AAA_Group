@@ -7,6 +7,9 @@ package Business.Employees;
 import Business.Departments.Organization;
 import Business.Enterprises.Enterprise;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -144,36 +147,55 @@ public class Employee {
         this.primDoc = primDoc;
     }
 
-   //below is included for doctors type.
+   //below is included for doctors and lab techincian type. get/set speciality is used 
+   //for both lab and doctor organization
     
-    private String docSpeciality;
+    
+    private String Speciality;
 
-    public String getDocSpeciality() {
-         return docSpeciality;
+    public String getSpeciality() {
+         return Speciality;
     }
 
-    public void setDocSpeciality(Employee.DocType docType ) {
-        this.docSpeciality = docType.getValue();
+    public void setSpeciality(Employee.DocLabType docType ) {
+        this.Speciality = docType.getValue();
     }
     
-    public enum DocType{
-        PrimaryPhysician("Primary Physician"), 
+    public enum DocLabType{
         
+        PrimaryPhysician("Primary Physician"), 
         Cardiologist("Cardiologist"), 
         Rheumatologist("Rheumatologist"),
         Surgeon("General Surgeon"), 
-        
         Psychiatrist("Psychiatrist"), 
         Dermatologist("Dermatologist"),        
-        Neurologist("Neurologist");
+        Neurologist("Neurologist"),
+        
+        LabTechnician("Lab Technician");
+        
+		
         
         private String value;
-        private DocType(String value) {
+        private DocLabType(String value) {
             this.value = value;
         }
         public String getValue() {
             return value;
         }
+		
+		
+		private static final List<String> VALUES;
+		
+		static {
+        VALUES = new ArrayList<>();
+        for (DocLabType docType : DocLabType.values()) {
+            VALUES.add(docType.value);
+			}
+		}
+		
+		public static List<String> getValues() {
+        return Collections.unmodifiableList(VALUES);
+		}
     }
     
 }

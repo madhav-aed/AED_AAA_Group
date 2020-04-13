@@ -10,13 +10,16 @@ import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Employees.Employee;
 import Business.Enterprises.Enterprise;
+import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -44,118 +47,258 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.business = business;
         this.dB4OUtil = dB4OUtil;
-   //     this.workReq = business.getNetworkList()
-        //populateSpecialistComboBox();
-           
-    }
-
-    public String[] populateDoctorComboBox(String s1){
-//      DONOT DELETE ---UNCODE WHEN THE OBJECT CALL IS DONE
-
-//        int count = 0;
-//        String sp[] = new String[10];
-//           
-//          ArrayList<Employee> empList;
-//          
-//          empList = business.getEmployeeDirectory().getEmployeeList();
-//          
-//          for(Employee emp:empList ){
-//              if(emp.getDocSpeciality().equals(s1)){
-//                  sp[count] = emp.getName();
-//                  count++;
-//                }
-//          }
-          
-         
-        
-        String s[] = new String[10]; 
-         if(s1.equals("Primary Physician")){
-            s[0]="Julia Brown";
-         }
-         if(s1.equals("Cardiologist")){
-            s[0]="Deepak BalaSubramaniam";
-            s[1]="Zhang Wei";
-         }
-         if(s1.equals("Rheumatologist")){
-            s[0]="Ryan Gosling";
-            s[1]="Emma Watson";
-         }
-         if(s1.equals("General Surgeon")){
-            s[0]="Bruce Lee";
-            s[1]="Jackie Chan";
-         }
-         if(s1.equals("Psychiatrist")){
-            s[0]="Rihanna";
-            s[1]="Kal Penn";
-         }
-         if(s1.equals("Dermatologist")){
-            s[0]="Cameroon Diaz";
-            s[1]="Charlize Theron";
-         }
-         if(s1.equals("Neurologist")){
-            s[0]="Erner Werhard";
-            s[1]="James Cameroon";
-         }
-         
-//       comboBoxSpecialistType.setModel(dm);
-        return s;
+//        this.workReq = business.getWorkQueue().createWorkRequest();
+ //       populateComboBox();
+ 
     }
     
+//  DONOT DELETE---UNCOMMENT ONCE THE CONNECTION IS MADE    
+//    public void populateComboBox(){
+//         DefaultComboBoxModel dm=new DefaultComboBoxModel();
+//           for(Network n:business.getNetworkList()){
+//           dm.addElement(n);    
+//   }
+//       comboBoxCityNetwork.setModel(dm);
+//    }
     
-       public String[] populateSpecialistComboBox(String s1){
+    public String[] populateHospitalEnterpriseComboBox(String s1){
+    
 //         DONOT DELETE ------ Uncode when the object call is successfully done -------
+//            public Enterprise[] populateHospitalEnterpriseComboBox(Network s1){
+//            String sp[] = new String[5];
+//            Enterprise epList[] = new Enterprise[5];
+//            int count = 0;
+//            for(Network n:business.getNetworkList()){
+//                if(n.equals(s1)){
+//                 for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
+//                     epList[count] = e;
+//                     count++;
+//                 }
+//                }
+//            }
+//            return epList;
 
-//          String sp[] = new String[10];
-//           
-//          ArrayList<Employee.DocType> docSpecializationList;
-//          
-//          docSpecializationList = business.getEmployeeDirectory().getDocSpecializationList();
-//          
-//         if((s1.equals("Lab Appointment"))||(s1.equals("Tests for Insurance"))){
-//            sp[0]= "Lab Technician";
-//         }
-//           
-//          if(s1.equals("Doctor Appointment"))   {
-//              
-//              if(docSpecializationList.contains(Employee.DocType.PrimaryPhysician)){
-//              sp[0] ="Primary Physician";
-//              }
-//
-//              if(docSpecializationList.contains(Employee.DocType.Cardiologist)){
-//              sp[1] ="Cardiologist";
-//              }
-//              if(docSpecializationList.contains(Employee.DocType.Rheumatologist)){
-//              sp[2] ="Rheumatologist";
-//              }
-//              if(docSpecializationList.contains(Employee.DocType.Surgeon)){
-//              sp[3] ="General Surgeon";
-//              }
-//              if(docSpecializationList.contains(Employee.DocType.Psychiatrist)){
-//              sp[4] ="Psychiatrist";
-//              }
-//              if(docSpecializationList.contains(Employee.DocType.Dermatologist)){
-//              sp[5] ="Dermatologist";
-//              }
-//              if(docSpecializationList.contains(Employee.DocType.Neurologist)){
-//              sp[6] ="Neurologist";
-//              }
-//       }
 
-        String s[] = new String[10]; 
-         if((s1.equals("Lab Appointment"))||(s1.equals("Tests for Insurance"))){
-            s[0]= "Lab Technician";
+        String s[] = new String[3]; 
+         if(s1.equals("Massachussets")){
+            s[0]= "Boston City Hospital";
+            s[1]= "Cambridge Lifeline Hospital";
+            
          }
-         if(s1.equals("Doctor Appointment")){
-             s[0]= "Primary Physician";
-             s[1]= "Cardiologist";
-             s[2]= "Rheumatologist";
-             s[3]= "General Surgeon";
-             s[4]= "Psychiatrist";
-             s[5]= "Dermatologist";
-             s[6]= "Neurologist";
+         if(s1.equals("California")){
+             s[0]= "Valley Sunshine Hospital";
+             s[1]= "Fremont RedCross Hospital";
+             
        }
 
         return s;
+    }
+
+    
+       public String[] populateDoctorComboBox(String s1){
+//      DONOT DELETE ---UNCODE WHEN THE OBJECT CALL IS DONE
+
+//          int count = 0;
+//          String sp[] = new String[10];
+//          
+//          List<String> docLabSpecializationList;
+//          docLabSpecializationList = business.getEmployeeDirectory().getDocLabSpecializationList();
+//          Network n1 = (Network)comboBoxStateNetwork.getSelectedItem();
+//          Enterprise e1 = (Enterprise)comboBoxhospitalEnterprise.getSelectedItem();
+////          String speciality = comboBoxSpecialistType.getSelectedItem().toString();
+//          
+//          for(Network n : business.getNetworkList()){
+//              if(n.equals(n1)){
+//              for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+//                  if(e.equals(e1)){
+//                  for(Organization org : e.getOrganizationDirectory().getOrganizationList()){
+//                      if(org.getOrgType()=="Doctor Organization"){
+//                      for(String l : docLabSpecializationList){
+//                          if(l.equals(s1)){
+//                          for(Employee emp : org.getEmployeeDirectory().getEmployeeList()){
+//                              sp[count] = emp.getName();
+//                              count++;
+////                              continue;
+//                          }
+//                          }else{
+//                          sp[count] = "No Doctor";     
+//                          }
+//                      }
+//                          
+//                      }
+//                      
+//                      
+//                      if(org.getOrgType()=="Lab Organization"){
+//                      for(String l : docLabSpecializationList){
+//                          if(l.equals(s1)){
+//                          for(Employee emp : org.getEmployeeDirectory().getEmployeeList()){
+//                              sp[count] = emp.getName();
+//                              count++;
+////                              continue;
+//                          }
+//                          }else{
+//                          sp[count] = "No LabPerson";     
+//                          }
+//                      }
+//                          
+//                      }
+//                 
+//                  }
+//                  }else{
+//                      sp[count] = "No Hospitals";
+//                     }
+//              }
+//              } else{
+//                  sp[count] = "No network";
+//                  }
+//          }
+//         return sp;
+
+
+
+
+   
+        String sp[] = new String[10]; 
+         if(s1.equals("Primary Physician")){
+            sp[0]="Julia Brown";
+         }
+         if(s1.equals("Cardiologist")){
+            sp[0]="Deepak BalaSubramaniam";
+            sp[1]="Zhang Wei";
+         }
+         if(s1.equals("Rheumatologist")){
+            sp[0]="Ryan Gosling";
+            sp[1]="Emma Watson";
+         }
+         if(s1.equals("General Surgeon")){
+            sp[0]="Bruce Lee";
+            sp[1]="Jackie Chan";
+         }
+         if(s1.equals("Psychiatrist")){
+            sp[0]="Rihanna";
+            sp[1]="Kal Penn";
+         }
+         if(s1.equals("Dermatologist")){
+            sp[0]="Cameroon Diaz";
+            sp[1]="Charlize Theron";
+         }
+         if(s1.equals("Neurologist")){
+            sp[0]="Erner Werhard";
+            sp[1]="James Cameroon";
+         }
+         
+        return sp;
+    }
+    
+    
+    
+  
+//      DONOT DELETE ---UNCODE WHEN THE OBJECT CALL IS DONE   
+       
+    public String[] populateAppointmentTypeOrganizationComboBox(String s1){
+//    //    public Organization[] populateAppointmentTypeOrganizationComboBox(Enterprise s1){
+
+//       public String[] populateAppointmentTypeOrganizationComboBox(Enterprise s1){ 
+//            Organization org[] = new Organization[5];
+//            String sp[] = new String[5];
+//            int count = 0;
+//            
+//            
+//            for(Network n:business.getNetworkList()){
+//                for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
+//                    if(e.equals(s1)){
+
+//                       for(Organization o1: e.getOrganizationDirectory().getOrganizationList()){
+//                           if(o1.getOrgType()=="Doctor Organization"){
+//                               sp[count] = "Doctor";
+//                               org[count] = o1;
+//                               count++;
+//                          //     continue;
+//                           }
+//                           if(o1.getOrgType()=="Lab Organization"){
+//                               sp[count] = "Vitals Test";
+//                               org[count] = o1;
+//                               count++;
+//                               sp[count] = "Tests For Insurance";
+//                               org[count] = o1;
+//                          //     continue;
+//                           }
+//                            
+//                       }
+//                       
+//                    }
+//                }
+//            }
+//            return sp;
+//    //        return org;
+            
+            
+// ---CODE ABOVE DONOT DELETE ------            
+        String s[] = new String[3];
+         s[0] = "Doctor Appointment";
+         s[1] = "Lab Appointment";
+         s[2] = "Tests for Insurance";
+          
+
+        
+        return s;
+    
+    }
+    
+       public String[] populateSpecialistComboBox(String s1){
+//         DONOT DELETE ------ Uncode when the object call is successfully done -------
+//
+//          int count = 0;
+//          String sp[] = new String[10];
+//          
+//          List<String> docLabSpecializationList;
+//          docLabSpecializationList = business.getEmployeeDirectory().getDocLabSpecializationList();
+//          Network n1 = (Network)comboBoxStateNetwork.getSelectedItem();
+//          Enterprise e1 = (Enterprise)comboBoxhospitalEnterprise.getSelectedItem();
+//          for(Network n : business.getNetworkList()){
+//              if(n.equals(n1)){
+//              for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+//                  if(e.equals(e1)){
+//                  for(Organization org : e.getOrganizationDirectory().getOrganizationList()){
+//                      if((org.getOrgType()=="Doctor Organization")&&(s1=="Doctor")){
+//                          for(Employee emp : org.getEmployeeDirectory().getEmployeeList()){
+//                              sp[count] = emp.getSpeciality();
+//                              count++;
+////                              continue;
+//                          }
+//                      }
+//                      
+//                      if((org.getOrgType()=="Lab Organization")&&((s1=="Vitals Test")||(s1=="Tests For Insurance"))){
+//                          for(Employee emp : org.getEmployeeDirectory().getEmployeeList()){
+//                              sp[count] = emp.getSpeciality();
+//                              count++;
+////                              continue;
+//                          }
+//                      }
+//                  }
+//                  }
+//              }
+//              }
+//          }
+//         return sp;
+// ---DONOT DELETE ABOVE----
+
+        String sp[] = new String[10]; 
+      
+         if((s1.equals("Lab Appointment"))||(s1.equals("Tests for Insurance"))){
+            sp[0]= "Lab Technician";
+         }
+         if(s1.equals("Doctor Appointment")){
+             sp[0]= "Primary Physician";
+             sp[1]= "Cardiologist";
+             sp[2]= "Rheumatologist";
+             sp[3]= "General Surgeon";
+             sp[4]= "Psychiatrist";
+             sp[5]= "Dermatologist";
+             sp[6]= "Neurologist";
+         }
+
+        return sp;
     }
 
     /**
@@ -174,9 +317,13 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         comboBoxSpecialistType = new javax.swing.JComboBox<>();
-        comboBoxAppmntType = new javax.swing.JComboBox<>();
+        comboBoxAppTypeOrganization = new javax.swing.JComboBox<>();
         comboBoxDoctor = new javax.swing.JComboBox<>();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        comboBoxStateNetwork = new javax.swing.JComboBox<>();
+        comboBoxhospitalEnterprise = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -193,10 +340,6 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         btnBookAppointment = new java.awt.Button();
         btnCancel = new java.awt.Button();
         btnChange = new java.awt.Button();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblTrackAppointment = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -222,7 +365,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel16.setText("Doctor");
+        jLabel16.setText("Doctor/Lab");
 
         comboBoxSpecialistType.setEditable(true);
         comboBoxSpecialistType.addItemListener(new java.awt.event.ItemListener() {
@@ -236,21 +379,55 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
             }
         });
 
-        comboBoxAppmntType.setEditable(true);
-        comboBoxAppmntType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lab Appointment", "Doctor Appointment", "Tests for Insurance", " " }));
-        comboBoxAppmntType.addItemListener(new java.awt.event.ItemListener() {
+        comboBoxAppTypeOrganization.setEditable(true);
+        comboBoxAppTypeOrganization.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboBoxAppmntTypeItemStateChanged(evt);
+                comboBoxAppTypeOrganizationItemStateChanged(evt);
             }
         });
-        comboBoxAppmntType.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxAppTypeOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxAppmntTypeActionPerformed(evt);
+                comboBoxAppTypeOrganizationActionPerformed(evt);
             }
         });
 
         comboBoxDoctor.setEditable(true);
-        comboBoxDoctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jDateChooser1.setMinSelectableDate(new java.util.Date(1586581275000L));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel9.setText("Hospital Name");
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel17.setText("State");
+
+        comboBoxStateNetwork.setEditable(true);
+        comboBoxStateNetwork.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Massachussets", "California", " " }));
+        comboBoxStateNetwork.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBoxStateNetworkItemStateChanged(evt);
+            }
+        });
+        comboBoxStateNetwork.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxStateNetworkActionPerformed(evt);
+            }
+        });
+
+        comboBoxhospitalEnterprise.setEditable(true);
+        comboBoxhospitalEnterprise.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        comboBoxhospitalEnterprise.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBoxhospitalEnterpriseItemStateChanged(evt);
+            }
+        });
+        comboBoxhospitalEnterprise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxhospitalEnterpriseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -263,42 +440,59 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comboBoxSpecialistType, javax.swing.GroupLayout.Alignment.TRAILING, 0, 159, Short.MAX_VALUE)
-                            .addComponent(comboBoxAppmntType, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboBoxDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxSpecialistType, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE)
+                            .addComponent(comboBoxAppTypeOrganization, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxhospitalEnterprise, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxStateNetwork, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxStateNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxhospitalEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBoxAppmntType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboBoxAppTypeOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxSpecialistType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addGap(65, 65, 65))
         );
 
-        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 320, 390));
+        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 320, 410));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -346,14 +540,14 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 570, 220));
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 570, 220));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -448,7 +642,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
                 btnCancelActionPerformed(evt);
             }
         });
-        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 580, 130, 40));
+        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, 130, 40));
 
         btnChange.setBackground(new java.awt.Color(96, 83, 150));
         btnChange.setForeground(new java.awt.Color(255, 255, 255));
@@ -458,59 +652,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
                 btnChangeActionPerformed(evt);
             }
         });
-        add(btnChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 580, 130, 40));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Track Appointment");
-
-        jScrollPane2.setBackground(new java.awt.Color(247, 247, 247));
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        tblTrackAppointment.setBackground(new java.awt.Color(247, 247, 247));
-        tblTrackAppointment.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        tblTrackAppointment.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Allan", "XLS", "2hrs"},
-                {"Brian", "React", "1hr"},
-                {"Romeo", "C#", "3 Days"},
-                {"Alex", "C++ ", "10 hrs"}
-            },
-            new String [] {
-                "Date", "Doctor ", "Appointment"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tblTrackAppointment.setGridColor(new java.awt.Color(247, 247, 247));
-        tblTrackAppointment.setRowHeight(20);
-        tblTrackAppointment.setSelectionBackground(new java.awt.Color(96, 83, 150));
-        jScrollPane2.setViewportView(tblTrackAppointment);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 570, 210));
+        add(btnChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 130, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -528,19 +670,45 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
     private void btnBookAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookAppointmentActionPerformed
         // TODO add your handling code here:
         
-        
-  //      if (workReq.isEmpty() == false){
-        String appointmentType= comboBoxAppmntType.getSelectedItem().toString();
+        String org;
+        String state = comboBoxStateNetwork.getSelectedItem().toString();
+        String hospital = comboBoxhospitalEnterprise.getSelectedItem().toString();
+        String appointmentType= comboBoxAppTypeOrganization.getSelectedItem().toString();
+        if(appointmentType=="Doctor"){
+             org = "Doctor Organization";
+        }else{
+            org = "Lab Organization";
+        }
         String specialistType = comboBoxSpecialistType.getSelectedItem().toString();
         String doctor = comboBoxDoctor.getSelectedItem().toString();
         Date date = jDateChooser1.getDate();
-        /*
+        
+        
+        workReq.setNetworkState(state);
+        workReq.setEnterpriseHospital(hospital);
+        workReq.setOrgRequested(state);
+        workReq.setAppointmentType(appointmentType);
+        workReq.setSpecialistType(specialistType);
+        workReq.setRequestDate(date);
         workReq.setDoctor(doctor);
         workReq.setPatient(userAccount.getEmployee().getName());
-        workReq.setEnterprise(enterprise);
         workReq.setRequestDate(date);
-        workReq.setAppointmentType(appointmentType);
-        */
+        workReq.setStatus("Appointment requested");
+        workReq.setUserName(userAccount.getEmployee().getUserId());
+        workReq.setInsDetail(userAccount.getEmployee().getInsDetail());
+        workReq.setPatientEmpId(userAccount.getEmployee().getId());
+        
+        
+        JOptionPane.showMessageDialog(null, "Appointment is requested");
+        
+//        populateBookingHistory();
+        
+        comboBoxStateNetwork.removeAllItems();
+        comboBoxhospitalEnterprise.removeAllItems();
+        comboBoxAppTypeOrganization.removeAllItems();
+        comboBoxSpecialistType.removeAllItems();
+        comboBoxDoctor.removeAllItems();
+        
         
         
     //}    
@@ -554,12 +722,12 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnChangeActionPerformed
 
-    private void comboBoxAppmntTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAppmntTypeActionPerformed
+    private void comboBoxAppTypeOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAppTypeOrganizationActionPerformed
         // TODO add your handling code here:
      //   comboBoxDoctor.removeAllItems();
         
         
-    }//GEN-LAST:event_comboBoxAppmntTypeActionPerformed
+    }//GEN-LAST:event_comboBoxAppTypeOrganizationActionPerformed
 
     private void comboBoxSpecialistTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSpecialistTypeActionPerformed
         // TODO add your handling code here:
@@ -567,20 +735,18 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
        
     }//GEN-LAST:event_comboBoxSpecialistTypeActionPerformed
 
-    private void comboBoxAppmntTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxAppmntTypeItemStateChanged
+    private void comboBoxAppTypeOrganizationItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxAppTypeOrganizationItemStateChanged
 
         // TODO add your handling code here:
         
-        
-        
-        
         if(evt.getStateChange()==ItemEvent.SELECTED){
+           
             comboBoxDoctor.removeAllItems();
-            if(this.comboBoxAppmntType.getSelectedIndex()>=0){
-                this.comboBoxSpecialistType.setModel(new DefaultComboBoxModel(this.populateSpecialistComboBox(this.comboBoxAppmntType.getSelectedItem().toString())));
+            if(this.comboBoxAppTypeOrganization.getSelectedIndex()>=0){
+                this.comboBoxSpecialistType.setModel(new DefaultComboBoxModel(this.populateSpecialistComboBox(this.comboBoxAppTypeOrganization.getSelectedItem().toString())));
             }
         }
-    }//GEN-LAST:event_comboBoxAppmntTypeItemStateChanged
+    }//GEN-LAST:event_comboBoxAppTypeOrganizationItemStateChanged
 
     private void comboBoxSpecialistTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxSpecialistTypeItemStateChanged
         // TODO add your handling code here:
@@ -594,37 +760,73 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_comboBoxSpecialistTypeItemStateChanged
 
+    private void comboBoxStateNetworkItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxStateNetworkItemStateChanged
+        // TODO add your handling code here:
+        
+        if(evt.getStateChange()==ItemEvent.SELECTED){
+            comboBoxAppTypeOrganization.removeAllItems();
+            comboBoxSpecialistType.removeAllItems();
+            comboBoxDoctor.removeAllItems();
+            if(this.comboBoxStateNetwork.getSelectedIndex()>=0){
+                this.comboBoxhospitalEnterprise.setModel(new DefaultComboBoxModel(this.populateHospitalEnterpriseComboBox(this.comboBoxStateNetwork.getSelectedItem().toString())));
+//                this.comboBoxhospitalEnterprise.setModel(new DefaultComboBoxModel(this.populateHospitalEnterpriseComboBox((Network)this.comboBoxStateNetwork.getSelectedItem())));
+            }
+        }  
+    }//GEN-LAST:event_comboBoxStateNetworkItemStateChanged
+
+    private void comboBoxStateNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxStateNetworkActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxStateNetworkActionPerformed
+
+    private void comboBoxhospitalEnterpriseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxhospitalEnterpriseItemStateChanged
+        // TODO add your handling code here:
+        
+        if(evt.getStateChange()==ItemEvent.SELECTED){
+           
+            comboBoxSpecialistType.removeAllItems();
+            comboBoxDoctor.removeAllItems();
+            if(this.comboBoxhospitalEnterprise.getSelectedIndex()>=0){
+                this.comboBoxAppTypeOrganization.setModel(new DefaultComboBoxModel(this.populateAppointmentTypeOrganizationComboBox(this.comboBoxhospitalEnterprise.getSelectedItem().toString())));
+//                this.comboBoxAppTypeOrganization.setModel(new DefaultComboBoxModel(this.populateAppointmentTypeOrganizationComboBox((Enterprise)this.comboBoxhospitalEnterprise.getSelectedItem())));
+            }
+        }
+    }//GEN-LAST:event_comboBoxhospitalEnterpriseItemStateChanged
+
+    private void comboBoxhospitalEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxhospitalEnterpriseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxhospitalEnterpriseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnBookAppointment;
     private java.awt.Button btnCancel;
     private java.awt.Button btnChange;
     private javax.swing.JLabel btn_close;
-    private javax.swing.JComboBox<String> comboBoxAppmntType;
+    private javax.swing.JComboBox<String> comboBoxAppTypeOrganization;
     private javax.swing.JComboBox<String> comboBoxDoctor;
     private javax.swing.JComboBox<String> comboBoxSpecialistType;
+    private javax.swing.JComboBox<String> comboBoxStateNetwork;
+    private javax.swing.JComboBox<String> comboBoxhospitalEnterprise;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelIcon;
     private javax.swing.JLabel lblAppointmentDate;
     private javax.swing.JLabel lblAppointmentDoc1;
     private javax.swing.JLabel lblPatientName;
     private javax.swing.JTable tblBooking;
-    private javax.swing.JTable tblTrackAppointment;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
 package Business.Employees;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -31,9 +32,8 @@ public class EmployeeDirectory {
     }
 //  Created for Populating doc specialization in combobox Specialist type in Book an Appointment
     
-    private ArrayList<Employee.DocType> docSpecializationList;
-    
-    public ArrayList<Employee.DocType> getDocSpecializationList() {
-        return docSpecializationList;
+    public List<String> getDocLabSpecializationList() {
+         List<String> values = Employee.DocLabType.getValues();
+         return values;
     }
 }

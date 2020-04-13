@@ -21,4 +21,10 @@ public class WorkQueue {
     public ArrayList<WorkRequest> getWorkRequestList() {
         return workRequestList;
     }
+    
+//    public WorkRequest createWorkRequest(){
+//        WorkRequest req = new WorkRequest(); 
+//        workRequestList.add(req);
+//        return req;
+//    }
 }
