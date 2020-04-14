@@ -5,6 +5,7 @@
 package Business.Customer;
 
 import Business.Employees.*;
+import Business.Medical.MedicalHistory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.WorkQueue;
@@ -29,11 +30,21 @@ public class Patient extends UserAccount {
     private String emerName;
     private String emerMobile;
     private String primDoc;
+//    private String MedicalfileNumber;
     private static int totalPatients = 1;
     
     private Role role;
     private WorkQueue workQueue;
     
+    private MedicalHistory medHist;
+
+    public MedicalHistory getMedHist() {
+        return medHist;
+    }
+
+    public void setMedHist(MedicalHistory medHist) {
+        this.medHist = medHist;
+    }
     
 
     public Patient()  {

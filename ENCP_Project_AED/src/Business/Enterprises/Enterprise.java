@@ -13,6 +13,8 @@ import Business.Departments.OrganizationDirectory;
  * @author MyPC1
  */
 public abstract class Enterprise extends Organization{
+    
+    private String name;
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
     private static int enterpriseCount = 0;
@@ -54,9 +56,21 @@ public abstract class Enterprise extends Organization{
     }
     
     public Enterprise(String name,EnterpriseType type){
+        
         super(name, type.Sysadmin.getValue());
+        this.name = name;
         enterpriseCount++;
         this.enterpriseType=type;
         organizationDirectory=new OrganizationDirectory();
     }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
+    
+    
+    
+    
+    
 }

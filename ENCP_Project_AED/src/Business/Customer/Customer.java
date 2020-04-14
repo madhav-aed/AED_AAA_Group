@@ -13,6 +13,9 @@ import Business.Employees.*;
 public class Customer {
     
     private String name;
+
+    private int insuranceFileNumber = 0;
+
     private int id;
     private static int count = 1;
 

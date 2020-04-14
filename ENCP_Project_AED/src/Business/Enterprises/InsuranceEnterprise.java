@@ -18,9 +18,12 @@ public class InsuranceEnterprise extends Enterprise {
     public InsuranceEnterprise(String name){
         super(name, EnterpriseType.Insurance);
     }
-   @Override
+/*   @Override
    public ArrayList<Role> getSupportedRole() {
         return null;
     }
-  
+*/
+   public Role getSupportedRole() {
+        return null;
+    }
 }

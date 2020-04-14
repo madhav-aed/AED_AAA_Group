@@ -21,9 +21,13 @@ public abstract class Role {
     public enum RoleType{
         Admin("Admin"),
         Doctor("Doctor"),
+
         LabAssistant("Lab Assistant"),
         DoctorAssistant("Doctor Assistant"),
+        BillingAccountant("Billing Accountant"),
 
+
+        
         InsuranceManager("Insurance Manager"),
         InsuranceSales("Insurance Sales"),
         InsuranceClaims("Insurance Claims");

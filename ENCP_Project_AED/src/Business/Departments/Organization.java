@@ -27,24 +27,21 @@ public abstract class Organization {
     // 13th
     private String organizationType;
 
-    public void setOrganizationType(Organization.Type orgType) {
-        this.organizationType = orgType.getValue();
-    }
-
     public String getOrganizationType() {
         return organizationType;
     }
     
     public enum Type{
-        Admin("Admin Organization"), 
+        Admin_Organization("Admin Organization"), 
         
-        Doctor("Doctor Organization"), 
-        Lab("Lab Organization"),
-        DoctorAssistant("DA Organization"), 
+        Doctor_Organization("Doctor Organization"), 
+        Lab_Organization("Lab Organization"),
+        Doctor_Assistant_Organization("DA Organization"), 
+        Billing_Organization("Hospital Billing Organization"), 
         
-        InsuranceManager("Insurance Manager Organization"), 
-        Claims("Claims  Organization"),        
-        Sales("Sales Organization");
+        Insurance_Manager_Organization("Insurance Manager Organization"), 
+        Claims_Organization("Claims  Organization"),        
+        Sales_Organization("Sales Organization");
         
         private String value;
         private Type(String value) {
@@ -53,6 +50,13 @@ public abstract class Organization {
         public String getValue() {
             return value;
         }
+
+        @Override
+        public String toString() {
+            return value; //To change body of generated methods, choose Tools | Templates.
+        }
+        
+        
     }
 
     public Organization(String name, String type) {
@@ -65,7 +69,8 @@ public abstract class Organization {
         ++counter;
     }
 
-    public abstract ArrayList<Role> getSupportedRole();
+ //   public abstract ArrayList<Role> getSupportedRole();
+      public abstract Role getSupportedRole();
     
     public int getOrganizationID() {
         return organizationID;

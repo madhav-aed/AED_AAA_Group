@@ -25,29 +25,33 @@ public class OrganizationDirectory {
     
     public Organization createOrganization(String name, Type type){
         Organization organization = null;
-        if (type.getValue().equals(Type.Doctor.getValue())){
+        if (type.getValue().equals(Type.Doctor_Organization.getValue())){
             
             organization = new Hospital_Doctor_Department(name);
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.Lab.getValue())){
+        else if (type.getValue().equals(Type.Lab_Organization.getValue())){
             organization = new Hospital_LabTest_Department(name);
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.InsuranceManager.getValue())){
+        else if (type.getValue().equals(Type.Insurance_Manager_Organization.getValue())){
             organization = new Insurance_Management_Department(name);
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.Claims.getValue())){
+        else if (type.getValue().equals(Type.Claims_Organization.getValue())){
             organization = new Insurance_Claims_Department(name);
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.Sales.getValue())){
+        else if (type.getValue().equals(Type.Sales_Organization.getValue())){
             organization = new Insurance_Sales_Department(name);
             organizationList.add(organization);
         }
-        else if (type.getValue().equals(Type.DoctorAssistant.getValue())){
+        else if (type.getValue().equals(Type.Doctor_Assistant_Organization.getValue())){
             organization = new Hospital_DoctorAssistant_Department(name);
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Type.Billing_Organization.getValue())){
+            organization = new Hospital_Billing_Department(name);
             organizationList.add(organization);
         }
         return organization;

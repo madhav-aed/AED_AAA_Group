@@ -5,6 +5,7 @@
  */
 package UI_Pages.adminPages;
 
+import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Employees.Employee;
@@ -14,6 +15,7 @@ import Business.Role.AdminRole;
 import Business.Role.DoctorAssistantRole;
 import Business.Role.DoctorRole;
 import Business.Role.HospitalAdminRole;
+import Business.Role.HospitalBillingRole;
 import Business.Role.InsuranceAdminRole;
 import Business.Role.LabAssistantRole;
 import Business.Role.Role;
@@ -48,15 +50,21 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
     Organization org;
     Image image;
     String orgType; //
+    DB4OUtil db4outil;
+    Role role;
+    
     
 
-    public Add_Hospital_Employees(JPanel rightPanel, UserAccount ua, Enterprise e, Organization org ,EcoSystem system) {
+    public Add_Hospital_Employees(JPanel rightPanel, UserAccount ua, Enterprise e, Organization org ,EcoSystem system, DB4OUtil db4outil) {
         this.network = network;
         this.rightPanel =rightPanel;
         this.userAccount =ua;
         this.system = system;
         this.org = org;
+        this.role = org.getSupportedRole();
         this.enterprise = e;
+        this.db4outil = db4outil;
+        
         
         
         initComponents();
@@ -73,7 +81,7 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
          // Setting welcome string
          
          welcomelabel.setText(" Hospital Name : "+enterprise.getName()+" "+enterprise.getEnterpriseType());
-            
+         DepartmentNameLabel.setText("Department Name : "+this.org.getName());
     //     jLabel7.setText("Department Name : "+this.org.getName());
                
             
@@ -103,17 +111,20 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
     public void populateAdminTable(){
        DefaultTableModel model1 = (DefaultTableModel) adminTable.getModel();
         model1.setRowCount(0);
-       for (UserAccount userAccount : this.enterprise.getUserAccountDirectory().getUserAccountList())
+       for (UserAccount userAccount : this.org.getUserAccountDirectory().getUserAccountList())
                {
                         Object[] row = new Object[5];
                         
-                        if(userAccount.getRole().equals(new HospitalAdminRole())){
+                        if(userAccount.getRole() == this.org.getSupportedRole())
+                        {
                             row[0] = userAccount.getEmployee().getOrg();
                             row[1] = userAccount.getEmployee().getName();
                             row[2] = userAccount.getEmployee().getId();
                             row[3] = userAccount;
                             row[4] = userAccount.getPassword();
-                            model1.addRow(row);                }
+                            model1.addRow(row);                
+                        
+                        }
           }
     
     }   
@@ -145,7 +156,7 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         adminTable = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        DepartmentNameLabel = new javax.swing.JLabel();
         employeeTypeJComboBox = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
 
@@ -284,9 +295,9 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel7.setText("Enterprises");
+        DepartmentNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        DepartmentNameLabel.setForeground(new java.awt.Color(96, 83, 150));
+        DepartmentNameLabel.setText("Enterprises");
 
         employeeTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -304,85 +315,79 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
                         .addGap(96, 96, 96)
                         .addComponent(jLabel1))
                     .addGroup(addAdminPanelLayout.createSequentialGroup()
-                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(addAdminPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(487, 487, 487))
-                            .addGroup(addAdminPanelLayout.createSequentialGroup()
-                                .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(12, 12, 12)
+                                .addComponent(jPhoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(addAdminPanelLayout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jPhoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(121, 121, 121)
+                                        .addComponent(inPhotoBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(addAdminBtn))
+                                    .addGroup(addAdminPanelLayout.createSequentialGroup()
                                         .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(addAdminPanelLayout.createSequentialGroup()
-                                                .addGap(121, 121, 121)
-                                                .addComponent(inPhotoBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(addAdminBtn))
-                                            .addGroup(addAdminPanelLayout.createSequentialGroup()
-                                                .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(adminUser)
-                                                    .addComponent(adminPasswordLabel)
-                                                    .addComponent(adminLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(adminusername, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(adminpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addGroup(addAdminPanelLayout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel8)
+                                            .addComponent(adminUser)
+                                            .addComponent(adminPasswordLabel)
+                                            .addComponent(adminLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(employeeTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)))
+                                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(adminusername, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(adminpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(addAdminPanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(employeeTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(addAdminPanelLayout.createSequentialGroup()
+                .addGap(305, 305, 305)
+                .addComponent(DepartmentNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addAdminPanelLayout.setVerticalGroup(
             addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addAdminPanelLayout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addAdminPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(addAdminPanelLayout.createSequentialGroup()
-                                .addGap(212, 212, 212)
-                                .addComponent(jPhoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(addAdminPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(addAdminPanelLayout.createSequentialGroup()
-                                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(employeeTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(adminLabel))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(adminUser)
-                                            .addComponent(adminusername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(11, 11, 11)
-                                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(adminPasswordLabel)
-                                            .addComponent(adminpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(addAdminBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(inPhotoBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                    .addGroup(addAdminPanelLayout.createSequentialGroup()
-                        .addGap(217, 217, 217)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5)
                         .addGap(67, 67, 67)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(addAdminPanelLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(DepartmentNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPhoto1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(addAdminPanelLayout.createSequentialGroup()
+                                    .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(employeeTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(adminLabel))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(adminUser)
+                                        .addComponent(adminusername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(11, 11, 11)
+                                    .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(adminPasswordLabel)
+                                        .addComponent(adminpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(addAdminBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(inPhotoBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -424,10 +429,10 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
-                Component[] comps = this.rightPanel.getComponents();
+                Component[] comps = this.rightPanel.getComponents();// k nnm,nm
         for(Component comp: comps){
-            if(comp instanceof SysAdmin_WorkArea){
-                SysAdmin_WorkArea manageAdmin = (SysAdmin_WorkArea) comp;
+            if(comp instanceof Hospital_Admin_WorkArea){
+                Hospital_Admin_WorkArea manageAdmin = (Hospital_Admin_WorkArea) comp;
                 manageAdmin.populateNetworkTable();
                 manageAdmin.init();
             
@@ -464,10 +469,9 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
     
     private void populateComboBox() {
         employeeTypeJComboBox.removeAllItems();
-         
-            employeeTypeJComboBox.addItem(Role.RoleType.Doctor);
-            employeeTypeJComboBox.addItem(Role.RoleType.DoctorAssistant);
-            employeeTypeJComboBox.addItem(Role.RoleType.LabAssistant);
+        
+            employeeTypeJComboBox.addItem(this.org.getSupportedRole());
+           // employeeTypeJComboBox.addItem(Role.RoleType.LabAssistant);
 
     }
     
@@ -486,36 +490,40 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         
         
         
-      for(UserAccount ua : this.enterprise.getUserAccountDirectory().getUserAccountList()){
+      for(UserAccount ua : this.org.getUserAccountDirectory().getUserAccountList()){
             if (ua!= null){;
             if(ua.getUsername().equals(username)){
                  JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
             return;}}
-      }
+            }
       
             if (usernamePatternCorrect()==false){
-    adminUser.setForeground (Color.red);
-    adminusername.setBorder(BorderFactory.createLineBorder(Color.RED));
-    JOptionPane.showMessageDialog(null, "Username should be in the format of xx_xx@xx.xx");
-    return;
-} else{
-    adminUser.setForeground (Color.BLACK);
-    adminusername.setBorder(BorderFactory.createLineBorder(Color.black));
-}
-if (passwordPatternCorrect()==false){
-    adminPasswordLabel.setForeground (Color.red);
-    adminpassword.setBorder(BorderFactory.createLineBorder(Color.RED));
-    JOptionPane.showMessageDialog(null, "Password should be at least 6 digits and contain at least one upper case letter, one lower case letter, one digit and one special character $, *, # or &.");
-    return;
-}else{
-    adminPasswordLabel.setForeground (Color.BLACK);
-    adminpassword.setBorder(BorderFactory.createLineBorder(Color.black));
-}
+                adminUser.setForeground (Color.red);
+                adminusername.setBorder(BorderFactory.createLineBorder(Color.RED));
+                JOptionPane.showMessageDialog(null, "Username should be in the format of xx_xx@xx.xx");
+                return;
+        } else{
+            adminUser.setForeground (Color.BLACK);
+            adminusername.setBorder(BorderFactory.createLineBorder(Color.black));
+        }
+            if (passwordPatternCorrect()==false){
+            adminPasswordLabel.setForeground (Color.red);
+            adminpassword.setBorder(BorderFactory.createLineBorder(Color.RED));
+            JOptionPane.showMessageDialog(null, "Password should be at least 6 digits and contain at least one upper case letter, one lower case letter, one digit and one special character $, *, # or &.");
+            return;
+        }else{
+            adminPasswordLabel.setForeground (Color.BLACK);
+            adminpassword.setBorder(BorderFactory.createLineBorder(Color.black));
+        }
 
         
-        Employee employee = this.enterprise.getEmployeeDirectory().createEmployee(name);
+        Employee employee = this.org.getEmployeeDirectory().createEmployee(name);
+        
+        // below two are just for the sake of it..
+        
         employee.setEnterprise(enterprise);
         employee.setOrg(org);
+        
         if (image != null)
         {
             
@@ -525,35 +533,39 @@ if (passwordPatternCorrect()==false){
         
         // Adding to lists..
         this.org.getEmployeeDirectory().getEmployeeList().add(employee);
-        this.system.getEmployeeDirectory().getEmployeeList().add(employee);
-        this.enterprise.getEmployeeDirectory().getEmployeeList().add(employee);
+//        this.system.getEmployeeDirectory().getEmployeeList().add(employee);
+//        this.enterprise.getEmployeeDirectory().getEmployeeList().add(employee);
         //String s = (String)(((Role.RoleType)employeeTypeJComboBox.getSelectedItem()).getValue());
-        String s = ((Role.RoleType)employeeTypeJComboBox.getSelectedItem()).getValue();
+//        String s = ((Role.RoleType)employeeTypeJComboBox.getSelectedItem()).getValue();
+        UserAccount account = this.org.getUserAccountDirectory().createUserAccount(username, password, employee, this.org.getSupportedRole());
+        
+        
+   /*     
         if(s.equals("Lab Assistant")){
         
         // Create account Within the enterprise
-        UserAccount account = this.enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
+        UserAccount account = this.org.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
         // Create account  Within the ecosystem
-        this.system.getUserAccountDirectory().createUserAccount(username, password, employee, new LabAssistantRole());
+     //   this.system.getUserAccountDirectory().createUserAccount(username, password, employee, new LabAssistantRole());
         
         }
         else if(s.equals("Doctor Assistant")){
         // Create account Within the enterprise
-        
-        UserAccount account = this.enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
-        // Create account  Within the ecosystem
-        this.system.getUserAccountDirectory().createUserAccount(username, password, employee, new DoctorAssistantRole());
-        
-        }
-        else if(s.equals("Doctor")){
-        // Create account Within the enterprise
-        
-        UserAccount account = this.enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
-        // Create account  Within the ecosystem
-        this.system.getUserAccountDirectory().createUserAccount(username, password, employee, new DoctorRole());
-        
+            System.out.println("DA");
+        UserAccount account = this.org.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
+        // Create account  Within the Organization
+       // this.org.getUserAccountDirectory().createUserAccount(username, password, employee, new DoctorAssistantRole());
         
         }
+        else if(s.equals("Billing Accountant")){
+        // Create account Within the Organization
+        
+        UserAccount account = this.org.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalBillingRole());
+        // Create account  Within the ecosystem
+       // this.org.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalBillingRole());
+        
+        
+        } */
         
         
         
@@ -630,6 +642,7 @@ if (passwordPatternCorrect()==false){
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel DepartmentNameLabel;
     private javax.swing.JButton addAdminBtn;
     private javax.swing.JPanel addAdminPanel;
     private javax.swing.JLabel adminLabel;
@@ -644,7 +657,6 @@ if (passwordPatternCorrect()==false){
     private javax.swing.JButton inPhotoBtn1;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel15;

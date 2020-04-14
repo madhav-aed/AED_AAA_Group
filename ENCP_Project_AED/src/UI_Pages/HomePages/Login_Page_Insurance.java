@@ -270,7 +270,7 @@ public class Login_Page_Insurance extends javax.swing.JFrame {
               //it will include on Github
               
                }
-        },1000*5);
+        },1000*2);
 
 
 
