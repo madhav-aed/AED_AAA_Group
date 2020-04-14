@@ -57,40 +57,51 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         LblTestType.setVisible(false);
         JTextFieldDateEditor editor = (JTextFieldDateEditor) jDateChooser1.getDateEditor();
         editor.setEditable(false);
-        this.docWorkReq = business.getWorkQueue().createCustomerDoctorWorkRequest();
-        this.labWorkReq = business.getWorkQueue().createCustomerLabWorkRequest();
+        
+  //      this.docWorkReq = business.getWorkQueue().createCustomerDoctorWorkRequest();
+ //       this.labWorkReq = business.getWorkQueue().createCustomerLabWorkRequest();
 //        this.labWorkReq = 
- //       populateComboBox();
+        populateComboBox();
+   //     popEnterprise(); DELETE THIS METHOD
  
     }
     
 //  DONOT DELETE---UNCOMMENT ONCE THE CONNECTION IS MADE    
-//    public void populateComboBox(){
-//         DefaultComboBoxModel dm=new DefaultComboBoxModel();
-//           for(Network n:business.getNetworkList()){
-//           dm.addElement(n);    
-//   }
-//       comboBoxCityNetwork.setModel(dm);
-//    }
+    public void populateComboBox(){
+         DefaultComboBoxModel dm=new DefaultComboBoxModel();
+           for(Network n:business.getNetworkList()){
+           dm.addElement(n);    
+   }
+           comboBoxStateNetwork.setModel(dm);
+    }
     
-    public String[] populateHospitalEnterpriseComboBox(String s1){
+ //   public String[] populateHospitalEnterpriseComboBox(String s1){
     
 //         DONOT DELETE ------ Uncode when the object call is successfully done -------
-//            public Enterprise[] populateHospitalEnterpriseComboBox(Network s1){
-//            String sp[] = new String[5];
-//            Enterprise epList[] = new Enterprise[5];
-//            int count = 0;
-//            for(Network n:business.getNetworkList()){
-//                if(n.equals(s1)){
-//                 for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
-//                     epList[count] = e;
-//                     count++;
-//                 }
-//                }
-//            }
-//            return epList;
+            public Enterprise[] populateHospitalEnterpriseComboBox(Network s1){
+            Enterprise epList[] = new Enterprise[s1.getEnterpriseDirectory().getEnterpriseList().size()];
+            int count = 0;
+            for(Enterprise e : s1.getEnterpriseDirectory().getEnterpriseList()){
+                     
+                    if(e.getEnterpriseType().getValue().equals("Hospital"))
+                    {   
+                         epList[count] = e;
+                         count++;
+                    }
+            }
+            
+            
+           /* for(Network n:business.getNetworkList()){
+                if(n.equals(s1)){
+                 for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
+                     epList[count] = e;
+                     count++;
+                 }
+                }
+            } */   
+            return epList;
 
-
+/*
         String s[] = new String[3]; 
          if(s1.equals("Massachussets")){
             s[0]= "Boston City Hospital";
@@ -103,77 +114,77 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
              
        }
 
-        return s;
+        return s; */
     }
 
-    public String[] populateDoctorComboBox(String s1){
-//       public UserAccount[] populateDoctorComboBox(String s1){
-////      DONOT DELETE ---UNCODE WHEN THE OBJECT CALL IS DONE
-//
-//          int count = 0;
-////          String sp[] = new String[10];
-//          UserAccount doctor[] =  new UserAccount[15];
-//          
-//          List<String> docLabSpecializationList;
-//          docLabSpecializationList = business.getEmployeeDirectory().getDocLabSpecializationList();
-//          Network n1 = (Network)comboBoxStateNetwork.getSelectedItem();
-//          Enterprise e1 = (Enterprise)comboBoxhospitalEnterprise.getSelectedItem();
-////          String speciality = comboBoxSpecialistType.getSelectedItem().toString();
-//          
-//          for(Network n : business.getNetworkList()){
-//              if(n.equals(n1)){
-//              for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
-//                  if(e.equals(e1)){
-//                  for(Organization org : e.getOrganizationDirectory().getOrganizationList()){
-//                      if(org.getOrganizationType()=="Doctor Organization"){
+   // public String[] populateDoctorComboBox(String s1){
+       public UserAccount[] populateDoctorComboBox(String s1){
+//      DONOT DELETE ---UNCODE WHEN THE OBJECT CALL IS DONE
+
+          int count = 0;
+//          String sp[] = new String[10];
+          UserAccount doctor[] =  new UserAccount[15];
+          
+          List<String> docLabSpecializationList;
+          docLabSpecializationList = business.getEmployeeDirectory().getDocLabSpecializationList();
+          Network n1 = (Network)comboBoxStateNetwork.getSelectedItem();
+          Enterprise e1 = (Enterprise)comboBoxhospitalEnterprise.getSelectedItem();
+//          String speciality = comboBoxSpecialistType.getSelectedItem().toString();
+          
+          for(Network n : business.getNetworkList()){
+              if(n.equals(n1)){
+              for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+                  if(e.equals(e1)){
+                  for(Organization org : e.getOrganizationDirectory().getOrganizationList()){
+                      if(org.getOrganizationType()=="Doctor Organization"){
+                      for(String l : docLabSpecializationList){
+                          if(l.equals(s1)){
+                          for(UserAccount ua : org.getUserAccountDirectory().getUserAccountList()){
+                              
+                              doctor[count] = ua;
+                              count++;
+//                              continue;
+                          }
+                          }else{
+                          doctor[count] = null;     
+                          }
+                      }
+                          
+                      }
+                      
+                      
+//                      if(org.getOrganizationType()=="Lab Organization"){
 //                      for(String l : docLabSpecializationList){
 //                          if(l.equals(s1)){
-//                          for(UserAccount ua : org.getUserAccountDirectory().getUserAccountList()){
-//                              
-//                              doctor[count] = ua;
+//                          for(Employee emp : org.getEmployeeDirectory().getEmployeeList()){
+//                              sp[count] = emp.getName();
 //                              count++;
 ////                              continue;
 //                          }
 //                          }else{
-//                          doctor[count] = null;     
+//                          sp[count] = "No LabPerson";     
 //                          }
 //                      }
 //                          
 //                      }
-//                      
-//                      
-////                      if(org.getOrganizationType()=="Lab Organization"){
-////                      for(String l : docLabSpecializationList){
-////                          if(l.equals(s1)){
-////                          for(Employee emp : org.getEmployeeDirectory().getEmployeeList()){
-////                              sp[count] = emp.getName();
-////                              count++;
-//////                              continue;
-////                          }
-////                          }else{
-////                          sp[count] = "No LabPerson";     
-////                          }
-////                      }
-////                          
-////                      }
-//                 
-//                  }
-//                  }else{
-//                      //No Hospitals
-//                      doctor[count] = null;
-//                     }
-//              }
-//              } else{
-//                  //No Network
-//                      doctor[count] = null;
-//                  }
-//          }
-//         return doctor;
-//
-//
+                 
+                  }
+                  }else{
+                      //No Hospitals
+                      doctor[count] = null;
+                     }
+              }
+              } else{
+                  //No Network
+                      doctor[count] = null;
+                  }
+          }
+         return doctor;
 
 
-   
+
+
+   /*
         String sp[] = new String[10]; 
          if(s1.equals("Primary Physician")){
             sp[0]="Julia Brown";
@@ -203,7 +214,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
             sp[1]="James Cameroon";
          }
          
-        return sp;
+        return sp; */
     }
     
     
@@ -211,33 +222,41 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
   
 //      DONOT DELETE ---UNCODE WHEN THE OBJECT CALL IS DONE   
        
-    public String[] populateAppointmentTypeOrganizationComboBox(String s1){
-//        public Organization[] populateAppointmentTypeOrganizationComboBox(Enterprise s1){
-//
-//        
-//            Organization org[] = new Organization[10];
-//           
-//            int count = 0;
-//            
-//            
-//            for(Network n:business.getNetworkList()){
-//                
-//                for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
-//                    if(e.equals(s1)){
-//
-//                       for(Organization o1: e.getOrganizationDirectory().getOrganizationList()){
-//                               org[count] = o1;
-//                               count++;
-//                             
-//                       }
-//                       
-//                    }
-//                }
-//            }
-//            
-//            return org;
+//    public String[] populateAppointmentTypeOrganizationComboBox(String s1){
+        public Organization[] populateAppointmentTypeOrganizationComboBox(Enterprise s1){
+
+        
+            Organization org[] = new Organization[s1.getOrganizationDirectory().getOrganizationList().size()];
+           
+            int count = 0;
+            
+            for(Organization o : s1.getOrganizationDirectory().getOrganizationList()){
+                               
+                               org[count] = o;
+                               count++;
+                
             
             
+            }
+            
+         /*   for(Network n:business.getNetworkList()){
+                
+                for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
+                    if(e.equals(s1)){
+
+                       for(Organization o1: e.getOrganizationDirectory().getOrganizationList()){
+                               org[count] = o1;
+                               count++;
+                             
+                       }
+                       
+                    }
+                }
+            }  */
+            
+            return org;
+            
+      /*      
 // ---CODE ABOVE DONOT DELETE ------            
         String s[] = new String[3];
          s[0] = "Doctor Appointment";
@@ -246,62 +265,62 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
           
 
         
-        return s;
+        return s; */
     
     }
     
-       public String[] populateSpecialistComboBox(String s1){
+ //      public String[] populateSpecialistComboBox(String s1){
 //         DONOT DELETE ------ Uncode when the object call is successfully done -------
-//       public String[] populateSpecialistComboBox(Organization s1){
-//          int count = 0;
-//          String sp[] = new String[10];
-//          
-//          List<String> docLabSpecializationList;
-//          docLabSpecializationList = business.getEmployeeDirectory().getDocLabSpecializationList();
-//          Network n1 = (Network)comboBoxStateNetwork.getSelectedItem();
-//          Enterprise e1 = (Enterprise)comboBoxhospitalEnterprise.getSelectedItem();
-//          for(Network n : business.getNetworkList()){
-//              if(n.equals(n1)){
-//              for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
-//                  if(e.equals(e1)){
-//                  for(Organization org : e.getOrganizationDirectory().getOrganizationList()){
-//                      if(org.equals(s1)&&(org.getOrganizationType().equals("Doctor Organization"))){
-//                        comboBoxSpecialistType.setEnabled(true);
-//                        comboBoxDoctor.setEnabled(true);
-//                        LblTestType.setVisible(false);
-//                        rBtnVitalsTest.setVisible(false);
-//                        rBtnInsuranceTest.setVisible(false);
-//                        rBtnVitalsTest.setEnabled(false);
-//                        rBtnInsuranceTest.setEnabled(false);
+       public String[] populateSpecialistComboBox(Organization s1){
+          int count = 0;
+          String sp[] = new String[10];
+          
+          List<String> docLabSpecializationList;
+          docLabSpecializationList = business.getEmployeeDirectory().getDocLabSpecializationList();
+          Network n1 = (Network)comboBoxStateNetwork.getSelectedItem();
+          Enterprise e1 = (Enterprise)comboBoxhospitalEnterprise.getSelectedItem();
+          for(Network n : business.getNetworkList()){
+              if(n.equals(n1)){
+              for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+                  if(e.equals(e1)){
+                  for(Organization org : e.getOrganizationDirectory().getOrganizationList()){
+                      if(org.equals(s1)&&(org.getOrganizationType().equals("Doctor Organization"))){
+                        comboBoxSpecialistType.setEnabled(true);
+                        comboBoxDoctor.setEnabled(true);
+                        LblTestType.setVisible(false);
+                        rBtnVitalsTest.setVisible(false);
+                        rBtnInsuranceTest.setVisible(false);
+                        rBtnVitalsTest.setEnabled(false);
+                        rBtnInsuranceTest.setEnabled(false);
+                          for(Employee emp : org.getEmployeeDirectory().getEmployeeList()){
+                              sp[count] = emp.getDocSpeciality();
+                              count++;
+//                              continue;
+                          }
+                      }
+                      
+                      if((org.getOrganizationType()=="Lab Organization")&&(org.equals(s1))){
+                          comboBoxSpecialistType.setEnabled(false);
+                          comboBoxDoctor.setEnabled(false);
+                          jDateChooser1.setEnabled(true);
+                          LblTestType.setVisible(true);
+                          rBtnVitalsTest.setVisible(true);
+                          rBtnInsuranceTest.setVisible(true);
+                          rBtnVitalsTest.setEnabled(true);
+                          rBtnInsuranceTest.setEnabled(true);
 //                          for(Employee emp : org.getEmployeeDirectory().getEmployeeList()){
 //                              sp[count] = emp.getSpeciality();
 //                              count++;
 ////                              continue;
 //                          }
-//                      }
-//                      
-//                      if((org.getOrganizationType()=="Lab Organization")&&(org.equals(s1))){
-//                          comboBoxSpecialistType.setEnabled(false);
-//                          comboBoxDoctor.setEnabled(false);
-//                          jDateChooser1.setEnabled(true);
-//                          LblTestType.setVisible(true);
-//                          rBtnVitalsTest.setVisible(true);
-//                          rBtnInsuranceTest.setVisible(true);
-//                          rBtnVitalsTest.setEnabled(true);
-//                          rBtnInsuranceTest.setEnabled(true);
-////                          for(Employee emp : org.getEmployeeDirectory().getEmployeeList()){
-////                              sp[count] = emp.getSpeciality();
-////                              count++;
-//////                              continue;
-////                          }
-//                      }
-//                  }
-//                  }
-//              }
-//              }
-//          }
-//         return sp;
-
+                      }
+                  }
+                  }
+              }
+              }
+          }
+         return sp;
+/*
 // ---DONOT DELETE ABOVE----
 
         String sp[] = new String[10]; 
@@ -333,7 +352,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
              sp[6]= "Neurologist";
          }
 
-        return sp;
+        return sp; */
     }
 
     /**
@@ -446,7 +465,6 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         jLabel17.setText("State");
 
         comboBoxStateNetwork.setEditable(true);
-        comboBoxStateNetwork.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Massachussets", "California", " " }));
         comboBoxStateNetwork.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxStateNetworkItemStateChanged(evt);
@@ -459,7 +477,6 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         });
 
         comboBoxhospitalEnterprise.setEditable(true);
-        comboBoxhospitalEnterprise.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         comboBoxhospitalEnterprise.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxhospitalEnterpriseItemStateChanged(evt);
@@ -519,7 +536,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
                         .addComponent(rBtnVitalsTest)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rBtnInsuranceTest)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -752,7 +769,8 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         String testType ="";
         
         
-        if(org.getOrganizationType()=="Lab Organization"){
+        if(org.getOrganizationType() == "Lab Organization"){
+            
             specialistType = "";
             doctor = null;
             if(rBtnVitalsTest.isSelected()){
@@ -761,6 +779,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
             if(rBtnInsuranceTest.isSelected()){
                 testType = "Tests For Insurance";
             }
+
         }
         
         if(org.getOrganizationType()=="Doctor Organization"){
@@ -784,7 +803,18 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         docWorkReq.setMessage("");
         docWorkReq.setTestResult("");
         
+        CustomerDoctorWorkRequest cusWorkReq = new CustomerDoctorWorkRequest();
+        org.getWorkQueue().getWorkRequestList().add(cusWorkReq);
+        
         JOptionPane.showMessageDialog(null, "Doctor Appointment is requested");
+        
+        comboBoxStateNetwork.removeAllItems();
+        comboBoxhospitalEnterprise.removeAllItems();
+        comboBoxAppTypeOrganization.removeAllItems();
+        comboBoxSpecialistType.removeAllItems();
+        comboBoxDoctor.removeAllItems();
+        jDateChooser1.setDate(null);
+        
         }
         if(org.getOrganizationType()=="Lab Organization"){
             
@@ -800,10 +830,12 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         labWorkReq.setRefBy("Self");
         labWorkReq.setMessage("");
         labWorkReq.setTestResult("");
-        
+        CustomerLabWorkRequest labWorkReq = new CustomerLabWorkRequest();
+        org.getWorkQueue().getWorkRequestList().add(labWorkReq);
         JOptionPane.showMessageDialog(null, "Lab Appointment is requested");
         
-        //        populateBookingHistory();
+        
+        
         
         comboBoxStateNetwork.removeAllItems();
         comboBoxhospitalEnterprise.removeAllItems();
@@ -811,19 +843,8 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         comboBoxSpecialistType.removeAllItems();
         comboBoxDoctor.removeAllItems();
         jDateChooser1.setDate(null);
+            } 
         }
-   
-        }
-
-        
-        
-        
-        
-
-        
-        
-        
-    //}    
     }//GEN-LAST:event_btnBookAppointmentActionPerformed
    
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -855,8 +876,8 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
            
             comboBoxDoctor.removeAllItems();
             if(this.comboBoxAppTypeOrganization.getSelectedIndex()>=0){
-//                this.comboBoxSpecialistType.setModel(new DefaultComboBoxModel(this.populateSpecialistComboBox((Organization)this.comboBoxAppTypeOrganization.getSelectedItem())));
-                this.comboBoxSpecialistType.setModel(new DefaultComboBoxModel(this.populateSpecialistComboBox(this.comboBoxAppTypeOrganization.getSelectedItem().toString())));
+                this.comboBoxSpecialistType.setModel(new DefaultComboBoxModel(this.populateSpecialistComboBox((Organization)this.comboBoxAppTypeOrganization.getSelectedItem())));
+//                this.comboBoxSpecialistType.setModel(new DefaultComboBoxModel(this.populateSpecialistComboBox(this.comboBoxAppTypeOrganization.getSelectedItem().toString())));
             }
         }
     }//GEN-LAST:event_comboBoxAppTypeOrganizationItemStateChanged
@@ -881,9 +902,13 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
             comboBoxAppTypeOrganization.removeAllItems();
             comboBoxSpecialistType.removeAllItems();
             comboBoxDoctor.removeAllItems();
-            if(this.comboBoxStateNetwork.getSelectedIndex()>=0){
-                this.comboBoxhospitalEnterprise.setModel(new DefaultComboBoxModel(this.populateHospitalEnterpriseComboBox(this.comboBoxStateNetwork.getSelectedItem().toString())));
-//                this.comboBoxhospitalEnterprise.setModel(new DefaultComboBoxModel(this.populateHospitalEnterpriseComboBox((Network)this.comboBoxStateNetwork.getSelectedItem())));
+            
+            
+            if(this.comboBoxStateNetwork.getSelectedIndex()>0){
+                
+                System.out.println("Selected network");
+ //               this.comboBoxhospitalEnterprise.setModel(new DefaultComboBoxModel(this.populateHospitalEnterpriseComboBox(this.comboBoxStateNetwork.getSelectedItem().toString())));
+               this.comboBoxhospitalEnterprise.setModel(new DefaultComboBoxModel(this.populateHospitalEnterpriseComboBox((Network)this.comboBoxStateNetwork.getSelectedItem())));
             }
         }  
     }//GEN-LAST:event_comboBoxStateNetworkItemStateChanged
@@ -900,12 +925,24 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
             comboBoxSpecialistType.removeAllItems();
             comboBoxDoctor.removeAllItems();
             if(this.comboBoxhospitalEnterprise.getSelectedIndex()>=0){
-                this.comboBoxAppTypeOrganization.setModel(new DefaultComboBoxModel(this.populateAppointmentTypeOrganizationComboBox(this.comboBoxhospitalEnterprise.getSelectedItem().toString())));
-//                this.comboBoxAppTypeOrganization.setModel(new DefaultComboBoxModel(this.populateAppointmentTypeOrganizationComboBox((Enterprise)this.comboBoxhospitalEnterprise.getSelectedItem())));
+//                this.comboBoxAppTypeOrganization.setModel(new DefaultComboBoxModel(this.populateAppointmentTypeOrganizationComboBox(this.comboBoxhospitalEnterprise.getSelectedItem().toString())));
+                this.comboBoxAppTypeOrganization.setModel(new DefaultComboBoxModel(this.populateAppointmentTypeOrganizationComboBox((Enterprise)this.comboBoxhospitalEnterprise.getSelectedItem())));
             }
         }
     }//GEN-LAST:event_comboBoxhospitalEnterpriseItemStateChanged
+private void popEnterprise(){
 
+        
+            comboBoxSpecialistType.removeAllItems();
+            comboBoxDoctor.removeAllItems();
+            if(this.comboBoxhospitalEnterprise.getSelectedIndex()>=0){
+//                this.comboBoxAppTypeOrganization.setModel(new DefaultComboBoxModel(this.populateAppointmentTypeOrganizationComboBox(this.comboBoxhospitalEnterprise.getSelectedItem().toString())));
+                this.comboBoxAppTypeOrganization.setModel(new DefaultComboBoxModel(this.populateAppointmentTypeOrganizationComboBox((Enterprise)this.comboBoxhospitalEnterprise.getSelectedItem())));
+            
+        }
+
+
+}
     private void comboBoxhospitalEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxhospitalEnterpriseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxhospitalEnterpriseActionPerformed

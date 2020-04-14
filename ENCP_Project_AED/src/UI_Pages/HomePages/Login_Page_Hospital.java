@@ -276,7 +276,7 @@ public class Login_Page_Hospital extends javax.swing.JFrame {
               //it will include on Github
               
                }
-        },1000*5);
+        },1000*2);
 
         }
         else{

@@ -15,16 +15,20 @@ import java.util.ArrayList;
 public class Hospital_LabTest_Department extends Organization{
 
     public Hospital_LabTest_Department(String name) {
-        super(name, Organization.Type.Lab.getValue());
+        super(name, Organization.Type.Lab_Organization.getValue());
     }
-
+/*
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
         roles.add(new LabAssistantRole());
         return roles;
     }
-     
+*/     
+    @Override
+    public Role getSupportedRole() {
+        return new LabAssistantRole();
+    }
    
     
     

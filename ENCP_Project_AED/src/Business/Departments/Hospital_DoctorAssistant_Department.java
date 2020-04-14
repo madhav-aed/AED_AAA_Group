@@ -16,17 +16,21 @@ import java.util.ArrayList;
 public class Hospital_DoctorAssistant_Department extends Organization{
 
     public Hospital_DoctorAssistant_Department(String name) {
-        super(name,Organization.Type.DoctorAssistant.getValue());
+        super(name,Organization.Type.Doctor_Assistant_Organization.getValue());
     }
-
+/*
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
         roles.add(new DoctorAssistantRole());
         return roles;
     }
-     
-   
+  */   
+    @Override
+    public Role getSupportedRole() {
+        return new DoctorAssistantRole();
+         
+    }   
     
     
 }

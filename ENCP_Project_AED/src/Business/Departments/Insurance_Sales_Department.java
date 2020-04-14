@@ -16,14 +16,12 @@ import java.util.ArrayList;
 public class Insurance_Sales_Department extends Organization{
 
     public Insurance_Sales_Department(String name) {
-        super(name,Type.Sales.getValue());
+        super(name,Type.Sales_Organization.getValue());
     }
     
     @Override
-    public ArrayList<Role> getSupportedRole() {
-        ArrayList<Role> roles = new ArrayList();
-        roles.add(new SalesRepresentativeRole());
-        return roles;
+    public Role getSupportedRole() {
+        return new SalesRepresentativeRole();
     }
      
 }

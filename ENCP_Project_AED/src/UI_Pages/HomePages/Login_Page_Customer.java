@@ -227,7 +227,7 @@ public class Login_Page_Customer extends javax.swing.JFrame {
         lbl_loader.setFont(new java.awt.Font("Segoe UI Light", 3, 18)); // NOI18N
         lbl_loader.setText("Simply breathe while we connect..");
 
-        img_loader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/ring1.gif"))); // NOI18N
+        img_loader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/loadingRing.gif"))); // NOI18N
 
         javax.swing.GroupLayout loaderLayout = new javax.swing.GroupLayout(loader);
         loader.setLayout(loaderLayout);
@@ -309,7 +309,7 @@ public class Login_Page_Customer extends javax.swing.JFrame {
               dispose();*/
               
                }
-        },1000*5);
+        },1000*1);
         
         }
 

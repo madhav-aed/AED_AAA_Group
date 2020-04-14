@@ -32,8 +32,14 @@ public class EmployeeDirectory {
     }
 //  Created for Populating doc specialization in combobox Specialist type in Book an Appointment
     
+    //private ArrayList<Employee.DocType> docSpecializationList;
+    
+//  Created for Populating doc specialization in combobox Specialist type in Book an Appointment
+    
     public List<String> getDocLabSpecializationList() {
-         List<String> values = Employee.DocLabType.getValues();
+         List<String> values = Employee.DocType.getValues();
          return values;
-    }
+    }    
+    
+    
 }

@@ -15,14 +15,18 @@ import java.util.ArrayList;
 public class Admins_Department extends Organization{
 
     public Admins_Department(String name) {
-        super(name,Type.Admin.getValue());
+        super(name,Type.Admin_Organization.getValue());
     }
-    
+    /*
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
         roles.add(new AdminRole());
         return roles;
-    }
-     
+    } */
+    @Override
+    public Role getSupportedRole() {
+        return new AdminRole();
+       
+    }      
 }

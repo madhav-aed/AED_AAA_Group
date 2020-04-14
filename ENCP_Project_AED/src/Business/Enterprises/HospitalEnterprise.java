@@ -18,9 +18,13 @@ public class HospitalEnterprise extends Enterprise {
     public HospitalEnterprise(String name){
         super(name, EnterpriseType.Hospital);
     }
-   @Override
+/*   @Override
    public ArrayList<Role> getSupportedRole() {
         return null;
     }
-  
+*/
+   public Role getSupportedRole() {
+        return null;
+    }
+   
 }

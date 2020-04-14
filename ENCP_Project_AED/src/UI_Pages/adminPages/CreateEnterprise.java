@@ -606,9 +606,12 @@ public class CreateEnterprise extends javax.swing.JPanel {
     private void populateComboBox() {
         enterpriseTypeJComboBox.removeAllItems();
 
-        for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
-            enterpriseTypeJComboBox.addItem(type);
-        }
+       // for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
+            enterpriseTypeJComboBox.addItem(Enterprise.EnterpriseType.Hospital);
+            enterpriseTypeJComboBox.addItem(Enterprise.EnterpriseType.Insurance);
+//            enterpriseTypeJComboBox.addItem(type);
+            
+        //}
 
     }
     

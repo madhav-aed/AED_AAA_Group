@@ -13,6 +13,7 @@ import Business.EcoSystem;
 import Business.Employees.Employee;
 import Business.Enterprises.Enterprise;
 import Business.Network.Network;
+import Business.Role.DoctorRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -63,9 +64,27 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
     }
     public void init(){
         welcomelabel.setText("Welcome "+account.getEmployee().getName());
-     //   btn_close.setVisible(false);
-     
         namelabel.setText("Enterprise : "+enterprise.getName());
+        
+        int docCount = 0;
+        int empCount = 0;
+        int deptNo = 0;
+        for(Organization temp : directory.getOrganizationList()){
+            deptNo++;
+            for(UserAccount e : temp.getUserAccountDirectory().getUserAccountList()){
+            empCount++;
+             if(e.getRole() instanceof DoctorRole)
+                {
+                   docCount++;
+                }
+            }
+        }
+        departmentNoLbl.setText(""+deptNo);
+        docNoLbl.setText(""+docCount);
+        employeesNoLbl.setText(""+empCount);
+    
+        
+        
         
         int emp = system.getEmployeeDirectory().getEmployeeList().size();
       
@@ -142,11 +161,11 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
-        networkNoLbl = new javax.swing.JLabel();
+        departmentNoLbl = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        enterpriseNoLbl = new javax.swing.JLabel();
+        docNoLbl = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -221,7 +240,7 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,15 +249,20 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
 
         jButton3.setBackground(new java.awt.Color(247, 247, 247));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-delete_database.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(247, 247, 247));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-data_backup.png"))); // NOI18N
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
-        networkNoLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        networkNoLbl.setForeground(new java.awt.Color(96, 83, 150));
-        networkNoLbl.setText("?");
+        departmentNoLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        departmentNoLbl.setForeground(new java.awt.Color(96, 83, 150));
+        departmentNoLbl.setText("?");
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(96, 83, 150));
@@ -265,7 +289,7 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(networkNoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(departmentNoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -274,7 +298,7 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(networkNoLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(departmentNoLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -283,10 +307,10 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        enterpriseNoLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        enterpriseNoLbl.setForeground(new java.awt.Color(96, 83, 150));
-        enterpriseNoLbl.setText("?");
-        jPanel5.add(enterpriseNoLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 22, -1, -1));
+        docNoLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        docNoLbl.setForeground(new java.awt.Color(96, 83, 150));
+        docNoLbl.setText("?");
+        jPanel5.add(docNoLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 22, 50, -1));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(96, 83, 150));
@@ -392,21 +416,26 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGap(27, 27, 27)
+                .addComponent(welcomelabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(namelabel))
-                                .addGap(30, 30, 30)
+                                .addGap(25, 25, 25)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(20, 20, 20)
+                                .addGap(25, 25, 25)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -430,13 +459,7 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(addEmployees, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(158, 158, 158))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(welcomelabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(76, Short.MAX_VALUE))
+                        .addContainerGap(234, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,9 +468,9 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(welcomelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(welcomelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(namelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
@@ -489,18 +512,21 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addNetBtn)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void addNetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNetBtnActionPerformed
         Type type = (Type) departmentTypeJComboBox.getSelectedItem();
+       // String t = (String)  departmentTypeJComboBox.getSelectedItem();
         String name = networkName.getText();
+       
         if(!directory.checkIfDepartmentTypePresent(type.getValue()) &&
            !directory.checkIfDepartmentNamePresent(name)
                 )
             {   
                  directory.createOrganization(networkName.getText(), type);
+                 dB4OUtil.storeSystem(system);
             }
         else{
                 JOptionPane.showMessageDialog(null, "Similar Department "+type.getValue()+" already present");
@@ -514,16 +540,18 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
     private void populateComboBox() {
         departmentTypeJComboBox.removeAllItems();
         for (Type type :  Organization.Type.values()){
-            if (!type.getValue().equals(Type.Admin.getValue())
+            if (!type.getValue().equals(Type.Admin_Organization.getValue())
                     &&
-                !type.getValue().equals(Type.Claims.getValue())
+                !type.getValue().equals(Type.Claims_Organization.getValue())
                 &&
-                !type.getValue().equals(Type.Sales.getValue())
+                !type.getValue().equals(Type.Sales_Organization.getValue())
                 &&        
-                !type.getValue().equals(Type.InsuranceManager.getValue())                  
+                !type.getValue().equals(Type.Insurance_Manager_Organization.getValue())                  
                     )
 
-                    departmentTypeJComboBox.addItem(type);
+                  departmentTypeJComboBox.addItem(type);
+                  //  departmentTypeJComboBox.add(type);
+        
         }
     }
     
@@ -540,12 +568,18 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         int selectedRow = organizationJTable.getSelectedRow();
         if(selectedRow >= 0)
         {
-            Organization org = (Organization) organizationJTable.getValueAt(selectedRow, 1);
+            Organization org = (Organization) organizationJTable.getValueAt(selectedRow, 0);
             
             CardLayout layout = (CardLayout)rightPanel.getLayout();
-            rightPanel.add(new Add_Hospital_Employees(rightPanel, this.account, this.enterprise, org, this.system));
-            layout.next(rightPanel);
-    
+            if(org.getOrganizationType().equals("Doctor Organization"))
+            {       
+                    rightPanel.add(new Add_Hospital_Doctors(rightPanel, this.account, this.enterprise, org, this.system, dB4OUtil));
+                    layout.next(rightPanel);
+            }   
+            else{
+                    rightPanel.add(new Add_Hospital_Employees(rightPanel, this.account, this.enterprise, org, this.system, dB4OUtil));
+                    layout.next(rightPanel);                            
+                }
 
         }
 
@@ -557,13 +591,32 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         
     }//GEN-LAST:event_addEmployeesActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+                int selectedRow = organizationJTable.getSelectedRow();
+        if(selectedRow>=0){
+            int selectionButton = JOptionPane.YES_NO_OPTION;
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete??","Warning",selectionButton);
+            if(selectionResult == JOptionPane.YES_OPTION){
+                Organization org = (Organization)organizationJTable.getValueAt(selectedRow, 0);
+                directory.getOrganizationList().remove(org);
+                populateNetworkTable();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Please make a selection first.");
+        }
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEmployees;
     private javax.swing.JButton addNetBtn;
+    private javax.swing.JLabel departmentNoLbl;
     private javax.swing.JComboBox departmentTypeJComboBox;
+    private javax.swing.JLabel docNoLbl;
     private javax.swing.JLabel employeesNoLbl;
-    private javax.swing.JLabel enterpriseNoLbl;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel12;
@@ -589,7 +642,6 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel namelabel;
     private javax.swing.JTextField networkName;
-    private javax.swing.JLabel networkNoLbl;
     private javax.swing.JTable organizationJTable;
     private javax.swing.JLabel welcomelabel;
     // End of variables declaration//GEN-END:variables

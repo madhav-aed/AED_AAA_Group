@@ -147,36 +147,31 @@ public class Employee {
         this.primDoc = primDoc;
     }
 
-   //below is included for doctors and lab techincian type. get/set speciality is used 
-   //for both lab and doctor organization
+   //below is included for doctors type.
     
-    
-    private String Speciality;
+    private String docSpeciality;
 
-    public String getSpeciality() {
-         return Speciality;
+    public String getDocSpeciality() {
+         return docSpeciality;
     }
 
-    public void setSpeciality(Employee.DocLabType docType ) {
-        this.Speciality = docType.getValue();
+    public void setDocSpeciality(Employee.DocType docType ) {
+        this.docSpeciality = docType.getValue();
     }
     
-    public enum DocLabType{
-        
+    public enum DocType{
         PrimaryPhysician("Primary Physician"), 
+        
         Cardiologist("Cardiologist"), 
         Rheumatologist("Rheumatologist"),
         Surgeon("General Surgeon"), 
+        
         Psychiatrist("Psychiatrist"), 
         Dermatologist("Dermatologist"),        
-        Neurologist("Neurologist"),
-        
-        LabTechnician("Lab Technician");
-        
-		
+        Neurologist("Neurologist");
         
         private String value;
-        private DocLabType(String value) {
+        private DocType(String value) {
             this.value = value;
         }
         public String getValue() {
@@ -188,7 +183,7 @@ public class Employee {
 		
 		static {
         VALUES = new ArrayList<>();
-        for (DocLabType docType : DocLabType.values()) {
+        for (DocType docType : DocType.values()) {
             VALUES.add(docType.value);
 			}
 		}
@@ -197,5 +192,10 @@ public class Employee {
         return Collections.unmodifiableList(VALUES);
 		}
     }
-    
+        
+        
+        
+        
 }
+    
+

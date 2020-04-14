@@ -4,9 +4,7 @@
  */
 package Business.WorkQueue;
 
-import Business.Departments.Organization;
 import Business.Enterprises.Enterprise;
-import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
 
@@ -23,67 +21,21 @@ public abstract class WorkRequest {
     private Date requestDate;
     private Date resolveDate;
     
-    private Network networkState;
-    private Enterprise hospital;
-    private Organization orgRequested;
-    
-     private String specialistType;
+    /*
+    private Enterprise enterprise;
+    private String patient;
+    private String  RefBy;
+    private String doctor;
     private String WorkRequestType;
     
-    private String  RefBy;
-
-    public Network getNetworkState() {
-        return networkState;
-    }
-
-    public void setNetworkState(Network networkState) {
-        this.networkState = networkState;
-    }
-
-    public Enterprise getHospital() {
-        return hospital;
-    }
-
-    public void setHospital(Enterprise hospital) {
-        this.hospital = hospital;
-    }
-
-    public Organization getOrgRequested() {
-        return orgRequested;
-    }
-
-    public void setOrgRequested(Organization orgRequested) {
-        this.orgRequested = orgRequested;
-    }
-
-    public String getWorkRequestType() {
-        return WorkRequestType;
-    }
-
-    public void setWorkRequestType(String WorkRequestType) {
-        this.WorkRequestType = WorkRequestType;
-    }
-
-    public String getRefBy() {
-        return RefBy;
-    }
-
-    public void setRefBy(String RefBy) {
-        this.RefBy = RefBy;
-    }
+    private String appointmentType;
+    private String specialistType;
+*/
+    
    
-
     
     public WorkRequest(){
         requestDate = new Date();
-    }
-
-    public String getSpecialistType() {
-        return specialistType;
-    }
-
-    public void setSpecialistType(String specialistType) {
-        this.specialistType = specialistType;
     }
 
     public String getMessage() {
