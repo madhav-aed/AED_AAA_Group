@@ -40,7 +40,8 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
-       
+        
+        setExtendedState(getExtendedState()|JFrame.MAXIMIZED_VERT);
         // Set display image with name..
         userDisplayPic = "Jon_Snow";
         this.panelRight = userProcessContainer;
@@ -102,14 +103,20 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(232, 331));
+        setPreferredSize(new java.awt.Dimension(243, 331));
 
         jSplitPane1.setDividerLocation(-5);
 
         panelRight.setBackground(new java.awt.Color(247, 247, 247));
+        panelRight.setMinimumSize(new java.awt.Dimension(1140, 510));
+        panelRight.setPreferredSize(new java.awt.Dimension(1140, 510));
         panelRight.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(panelRight);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setMinimumSize(new java.awt.Dimension(232, 331));
+        jPanel2.setPreferredSize(new java.awt.Dimension(232, 331));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Button1.setBackground(new java.awt.Color(255, 255, 255));
@@ -361,14 +368,14 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE)
+                .addComponent(jSplitPane1)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE))
         );
 
         pack();

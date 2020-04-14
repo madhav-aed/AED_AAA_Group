@@ -69,17 +69,11 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
         MyPaymentsBtn = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        emailName1Label = new javax.swing.JLabel();
-        emailText1Label = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        emailName2Label = new javax.swing.JLabel();
-        emailText2Label = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
@@ -87,12 +81,23 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        emailName1Label = new javax.swing.JLabel();
+        emailText1Label = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        emailName2Label = new javax.swing.JLabel();
+        emailText2Label = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(247, 247, 247));
+        setMinimumSize(new java.awt.Dimension(1140, 510));
+        setPreferredSize(new java.awt.Dimension(1140, 510));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(96, 83, 150));
         jLabel5.setText("Welcome");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 23, 89, 37));
 
         bookAppointmentbt.setBackground(new java.awt.Color(255, 255, 255));
         bookAppointmentbt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -110,6 +115,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         jLabel6.setText("Book an appointment");
 
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
+        jPanel11.setPreferredSize(new java.awt.Dimension(130, 10));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -126,7 +132,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         bookAppointmentbt.setLayout(bookAppointmentbtLayout);
         bookAppointmentbtLayout.setHorizontalGroup(
             bookAppointmentbtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
             .addGroup(bookAppointmentbtLayout.createSequentialGroup()
                 .addGroup(bookAppointmentbtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bookAppointmentbtLayout.createSequentialGroup()
@@ -135,7 +141,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
                     .addGroup(bookAppointmentbtLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bookAppointmentbtLayout.setVerticalGroup(
             bookAppointmentbtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,8 +151,10 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
                 .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9))
+                .addContainerGap())
         );
+
+        add(bookAppointmentbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, -1));
 
         medicalHistoryBtn.setBackground(new java.awt.Color(255, 255, 255));
         medicalHistoryBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -181,10 +189,14 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         medicalHistoryBtn.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 10));
+
+        add(medicalHistoryBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, -1, 93));
+
+        jPanel7.setBackground(new java.awt.Color(247, 247, 247));
 
         MyPaymentsBtn.setBackground(new java.awt.Color(255, 255, 255));
         MyPaymentsBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -209,7 +221,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         MyPaymentsBtn.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 10));
@@ -219,7 +231,116 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         jLabel20.setText("My Payments");
         MyPaymentsBtn.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, 20));
 
-        jPanel7.setBackground(new java.awt.Color(247, 247, 247));
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(MyPaymentsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(MyPaymentsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(632, 149, -1, 130));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_new_message_40px.png"))); // NOI18N
+        jLabel16.setText("Recent mail");
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 100, 167, -1));
+
+        jPanel15.setBackground(new java.awt.Color(96, 83, 150));
+        jPanel15.setPreferredSize(new java.awt.Dimension(230, 70));
+
+        btn_close.setBackground(new java.awt.Color(96, 83, 150));
+        btn_close.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_close.setForeground(new java.awt.Color(255, 255, 255));
+        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_faq_56px_1.png"))); // NOI18N
+        btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_closeMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(btn_close)
+                .addContainerGap(145, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btn_close, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+        );
+
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, -1, -1));
+
+        userNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        userNameLabel.setForeground(new java.awt.Color(96, 83, 150));
+        userNameLabel.setText("Welcome");
+        add(userNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 23, 97, 37));
+
+        jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jTable1.setBackground(new java.awt.Color(247, 247, 247));
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"12-12-20", "Just Like That", "Brad Pitt"},
+                {null, "Crazy", "Tom Hanks"}
+            },
+            new String [] {
+                "Date", "Purpose of Visit", "Doctor"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.setGridColor(new java.awt.Color(247, 247, 247));
+        jTable1.setMinimumSize(new java.awt.Dimension(225, 40));
+        jTable1.setPreferredSize(new java.awt.Dimension(225, 50));
+        jTable1.setRowHeight(20);
+        jTable1.setSelectionBackground(new java.awt.Color(96, 83, 150));
+        jScrollPane1.setViewportView(jTable1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 470, 528, 114));
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel23.setText("My Appointment History");
+        add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 155, 41));
+
+        jPanel13.setBackground(new java.awt.Color(232, 201, 232));
+        jPanel13.setPreferredSize(new java.awt.Dimension(1365, 10));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1370, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+
+        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1370, -1));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -248,11 +369,13 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(emailName1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(emailName1Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(emailText1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
+
+        add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 150, -1, -1));
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -274,7 +397,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(emailName2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(emailText2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE))
+                    .addComponent(emailText2Label))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -287,147 +410,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145))
-        );
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_new_message_40px.png"))); // NOI18N
-        jLabel16.setText("Recent mail");
-
-        jPanel15.setBackground(new java.awt.Color(96, 83, 150));
-
-        btn_close.setBackground(new java.awt.Color(96, 83, 150));
-        btn_close.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btn_close.setForeground(new java.awt.Color(255, 255, 255));
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_faq_56px_1.png"))); // NOI18N
-        btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_closeMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addGap(361, 361, 361)
-                .addComponent(btn_close)
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-        );
-
-        userNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        userNameLabel.setForeground(new java.awt.Color(96, 83, 150));
-        userNameLabel.setText("Welcome");
-
-        jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        jTable1.setBackground(new java.awt.Color(247, 247, 247));
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Date", "Purpose of Visit", "Doctor"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.setGridColor(new java.awt.Color(247, 247, 247));
-        jTable1.setRowHeight(20);
-        jTable1.setSelectionBackground(new java.awt.Color(96, 83, 150));
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel23.setText("My Appointment History");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bookAppointmentbt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(medicalHistoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(MyPaymentsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bookAppointmentbt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(MyPaymentsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(medicalHistoryBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(210, Short.MAX_VALUE))
-        );
+        add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 240, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -484,6 +467,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
