@@ -6,8 +6,10 @@
 package Business.WorkQueue;
 
 import Business.Departments.Organization;
+import Business.Employees.Employee;
 import Business.Enterprises.Enterprise;
 import Business.Network.Network;
+import java.util.Date;
 
 /**
  *
@@ -19,7 +21,16 @@ public class CustomerLabWorkRequest extends WorkRequest {
     private Network networkState;
     private Enterprise hospital;
     private Organization orgRequested;
+    private Date appointmentDate;
     
+
+    public Date getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
      private String specialistType;
     private String WorkRequestType;
     

@@ -186,6 +186,7 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         namelabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(247, 247, 247));
+        setPreferredSize(new java.awt.Dimension(1101, 510));
 
         welcomelabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         welcomelabel.setForeground(new java.awt.Color(96, 83, 150));

@@ -115,7 +115,10 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
                {
                         Object[] row = new Object[5];
                         
-                        if(userAccount.getRole() == this.org.getSupportedRole())
+//                        if(userAccount.getRole() == this.org.getSupportedRole())
+                           String str = String.valueOf(userAccount.getRole());
+                           String st1 = String.valueOf(this.org.getSupportedRole());
+                           if(str == st1)
                         {
                             row[0] = userAccount.getEmployee().getOrg();
                             row[1] = userAccount.getEmployee().getName();
@@ -571,9 +574,8 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         
         JOptionPane.showMessageDialog(null, "User Created");
       
-        
+        db4outil.storeSystem(system);
         populateAdminTable();
-
       
     }//GEN-LAST:event_addAdminBtnActionPerformed
       private boolean usernamePatternCorrect(){
