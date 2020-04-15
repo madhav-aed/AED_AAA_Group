@@ -6,8 +6,10 @@
 package Business.WorkQueue;
 
 import Business.Departments.Organization;
+import Business.Employees.Employee;
 import Business.Enterprises.Enterprise;
 import Business.Network.Network;
+import java.util.Date;
 
 /**
  *
@@ -16,7 +18,30 @@ import Business.Network.Network;
 public class CustomerDoctorWorkRequest extends WorkRequest {
      private String testResult;
      
-     
+     private Employee receivingDoctor;
+private Date appointmentDate;
+private String timeOfAppointment;
+
+    public void setTimeOfAppointment(String timeOfAppointment) {
+        this.timeOfAppointment = timeOfAppointment;
+    }
+
+    public Date getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+    public Employee getReceivingDoctor() {
+        return receivingDoctor;
+    }
+
+    public void setReceivingDoctor(Employee receivingDoctor) {
+        this.receivingDoctor = receivingDoctor;
+    }
+
+
          private Network networkState;
     private Enterprise hospital;
     private Organization orgRequested;

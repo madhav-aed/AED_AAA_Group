@@ -506,7 +506,7 @@ if (passwordPatternCorrect()==false){
 }
 
         
-        Employee employee = this.enterprise.getEmployeeDirectory().createEmployee(name);
+        Employee employee = this.org.getEmployeeDirectory().createEmployee(name);
         
         // ye neechy ke do lines ki zarurat nahi hai...but kabhi kaam aa sakte hai
         employee.setEnterprise(enterprise);
@@ -520,7 +520,7 @@ if (passwordPatternCorrect()==false){
         
         }
         
-
+        employee.setDocSpeciality((Employee.DocType)employeeTypeJComboBox.getSelectedItem());
         this.org.getUserAccountDirectory().createUserAccount(username, password, employee, new DoctorRole());
 
         JOptionPane.showMessageDialog(null, "Dr. "+ employee.getName() +" Added");
