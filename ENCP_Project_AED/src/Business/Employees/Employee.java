@@ -6,6 +6,7 @@ package Business.Employees;
 
 import Business.Departments.Organization;
 import Business.Enterprises.Enterprise;
+import Business.Medical.DoctorSchedule;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -194,6 +195,29 @@ public class Employee {
     }
         
         
+        // only for Doctors and lab START
+    
+    ArrayList<DoctorSchedule> ds;
+
+    public ArrayList<DoctorSchedule> getDs() {
+        return ds;
+    }
+
+    public void setDs() {
+        this.ds = new ArrayList<>();
+    }
+    
+    public boolean checkScheduleAvailability(DoctorSchedule checkDS){
+        for(DoctorSchedule check : ds){
+           if((checkDS.getDate().compareTo(check.getDate()) == 0) &&(checkDS.getTime().equals(check.getTime())) ){
+                    System.out.println("Date compared");
+                    return false;            
+            }
+        }
+        return true;
+    }    
+    
+        // only for Doctors and lab END        
         
         
 }

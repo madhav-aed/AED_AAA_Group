@@ -12,8 +12,10 @@ import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
+import UI_Pages.MyMessages.MyMessages;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Frame;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import static javax.swing.SwingUtilities.getWindowAncestor;
@@ -444,7 +446,8 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)panelRight.getLayout();
       //  panelRight.add(new Test_Panel_4());
       
-        panelRight.add(new Home());
+        panelRight.add(new MyMessages(panelRight, (Patient)patient, organization, enterprise, business, dB4OUtil));
+        
         layout.next(panelRight);
         
         

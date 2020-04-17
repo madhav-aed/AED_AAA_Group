@@ -5,6 +5,7 @@
  */
 package UI_Pages.adminPages;
 
+import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Employees.Employee;
 import Business.Enterprises.Enterprise;
@@ -41,6 +42,10 @@ public class CreateEnterprise extends javax.swing.JPanel {
     Enterprise enterprise;
     EcoSystem system;
     Image image;
+    
+    
+    Boolean userUnique;
+    
     
     /**
      * Creates new form BillingPage1
@@ -682,20 +687,13 @@ public class CreateEnterprise extends javax.swing.JPanel {
         
         
         // Validations
-      for(UserAccount ua : this.enterprise.getUserAccountDirectory().getUserAccountList()){
-            if (ua!= null){;
-            if(ua.getUsername().equals(username)){
-                 JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
-            return;}
-            }
-      }
-      for(UserAccount ua : this.system.getUserAccountDirectory().getUserAccountList()){
-            if (ua!= null){;
-            if(ua.getUsername().equals(username)){
-                 JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
-            return;}
-            }
-      }      
+           userUnique = true;
+           userUniqueValidation();
+           if (userUnique == false){
+           JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
+                  return;}
+                  
+                  
       
             if (usernamePatternCorrect()==false){
                         adminUser.setForeground (Color.red);
@@ -792,6 +790,61 @@ public class CreateEnterprise extends javax.swing.JPanel {
 
     }//GEN-LAST:event_inPhotoBtn1ActionPerformed
 
+    
+    void userUniqueValidation(){
+        String username = adminusername.getText();
+        
+          for(UserAccount ua : this.enterprise.getUserAccountDirectory().getUserAccountList()){
+            if (ua!= null){
+            if(ua.getUsername().equals(username)){
+                 userUnique = false;
+            return;}
+            }
+      }
+      for(UserAccount ua : this.system.getUserAccountDirectory().getUserAccountList()){
+            if (ua!= null){;
+            if(ua.getUsername().equals(username)){
+                  userUnique = false;
+            return;}
+            }
+      }    
+      
+       
+       for(Network net : system.getNetworkList()){
+            for(Enterprise e : net.getEnterpriseDirectory().getEnterpriseList()){
+                
+            for(UserAccount ua : e.getUserAccountDirectory().getUserAccountList()){
+            if (ua!= null){
+            if(ua.getUsername().equals(username)){
+                  userUnique = false;
+            return;}
+            }
+            }
+            
+            for(Organization org :e.getOrganizationDirectory().getOrganizationList()){
+                
+                for(UserAccount ua1 : org.getUserAccountDirectory().getUserAccountList()){
+                
+                if(ua1.getUsername().equals(username)){
+                  userUnique = false;
+                  return;}
+            
+       
+                      }
+             
+        }
+        
+       }
+       }
+       
+       // Check if this user exists in Patient Directory
+       
+            if (system.getPatientDirectory().checkIfUsernameIsUnique(" ") == false){
+                  userUnique = false;
+                  return;
+            }
+        
+    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
         int selectedRow = adminTable.getSelectedRow();

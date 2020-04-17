@@ -5,8 +5,15 @@
  */
 package UI_Pages.hospitalEnterprise.LabAssistant;
 
+import Business.Customer.Patient;
+import Business.Departments.Organization;
 import Business.Medical.MedicalReport;
+import Business.WorkQueue.BuyInsuranceWorkRequest;
+import Business.WorkQueue.CustomerLabWorkRequest;
+import Business.WorkQueue.LabTestWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
+import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,9 +28,11 @@ public class LabProcess extends javax.swing.JPanel {
      * Creates new form BillingPage1
      */
     JPanel rightPanel;
-    public LabProcess(JPanel rightPanel) {
+    CustomerLabWorkRequest lReq;
+    public LabProcess(JPanel rightPanel,CustomerLabWorkRequest lReq) {
         initComponents();
         this.rightPanel =  rightPanel;
+        this.lReq = lReq;
     }
 
     /**
@@ -171,7 +180,7 @@ public class LabProcess extends javax.swing.JPanel {
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel18.setText("Normal Range : M : 14 to 18 gm/dL  F : 12 to 16 gm/dL");
+        jLabel18.setText("Normal Range : 14 to 18 gm/dL  ");
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(96, 83, 150));
@@ -303,7 +312,6 @@ public class LabProcess extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(outCholestrol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,7 +321,7 @@ public class LabProcess extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(createLabReport)
                         .addGap(137, 137, 137)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -325,6 +333,47 @@ public class LabProcess extends javax.swing.JPanel {
     private void createLabReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createLabReportActionPerformed
         // TODO add your handling code here:
         
+        
+         try{
+            Integer.parseInt(outGlucFast.getText());
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Please enter a number for Glucose Fasting");
+              return;  
+            }
+         
+         try{
+            Integer.parseInt(outGlucPost.getText());
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Please enter a number for Glucose Post Lunch");
+              return;  
+            }
+         
+         try{
+            Integer.parseInt(outHemo.getText());
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Please enter a number for Hemoglobin");
+              return;  
+            }
+         
+         try{
+            Integer.parseInt(outCreat.getText());
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Please enter a number for Creatinine");
+              return;  
+            }
+         
+         try{
+            Integer.parseInt(outCholestrol.getText());
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Please enter a number for Cholestrol level");
+              return;  
+            }
+        
         //MedicalReport mr = Patient.getMedicalHistory.createMedicalReport();
         HashMap<String, String> hmap1 = new HashMap<String, String>();
           
@@ -334,9 +383,67 @@ public class LabProcess extends javax.swing.JPanel {
           hmap1.put("Creatinin", outCreat.getText());
           hmap1.put("Cholestrol", outCholestrol.getText());
           
+          
+          // Check if one of the vitals abnormal
+          
+          char abNormal = ' ';
+          
+          if (Integer.parseInt(outGlucFast.getText()) > 100 ||
+              Integer.parseInt(outGlucPost.getText()) > 140 ||
+              Integer.parseInt(outHemo.getText()) < 14 ||
+              Integer.parseInt(outHemo.getText())> 18 ||
+              Integer.parseInt(outCreat.getText()) > 1.2 ||
+              Integer.parseInt(outCreat.getText()) < 0.6 ||
+              Integer.parseInt(outCholestrol.getText()) > 200)
+              
+              abNormal = 'Y';
+                  
+          
+          
+         Patient pat = lReq.getPatient();
+          
          // mr.setTestParameters(hmap1);
          
+         
+         
+         
+         MedicalReport medRep = pat.getMedHist().createMedReport();
+         medRep.setPatient(pat.getfName() + " "+  pat.getLastName());
+         medRep.setTestParameters(hmap1);
+         Date date = new Date();
+         medRep.setDate(String.valueOf(date));
+         
+         lReq.setStatus("Processed");
+         
          JOptionPane.showMessageDialog(null, "Medical Report Saved");
+         
+         
+         // If Lab test is from Insurance - Send it to Insurance
+         
+         
+         if(lReq.getWorkRequestType() == "Tests For Insurance"){
+             
+             //Write Code to Update Buy Work Request for Patient to the 
+             Organization patInsOrg = pat.getInsuranceOrganization();
+             for ( WorkRequest wr : patInsOrg.getWorkQueue().getWorkRequestList()){
+             BuyInsuranceWorkRequest br = (BuyInsuranceWorkRequest) wr;
+             
+             if(br.getPatient() == pat){
+                 
+             if(abNormal == 'Y')
+             
+             br.setTestResult("Abnormal");
+                 else
+             br.setTestResult("Normal");
+             br.setStatus("Test Processed");
+             break;
+             }   
+      
+             }
+      
+         }
+         
+         
          
          outCholestrol.setText(" ");
          outGlucFast.setText(" " );

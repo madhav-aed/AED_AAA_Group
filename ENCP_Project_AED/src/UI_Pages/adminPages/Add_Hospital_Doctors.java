@@ -52,6 +52,8 @@ public class Add_Hospital_Doctors extends javax.swing.JPanel {
     String orgType; //
     DB4OUtil db4outil;
     
+    Boolean userUnique;
+    
 
     public Add_Hospital_Doctors(JPanel rightPanel, UserAccount ua, Enterprise e, Organization org ,EcoSystem system, DB4OUtil db4outil) {
         this.network = network;
@@ -476,7 +478,13 @@ public class Add_Hospital_Doctors extends javax.swing.JPanel {
         String username = adminusername.getText();
         String password = String.valueOf(adminpassword.getPassword());
         String name = adminName.getText();
-        
+
+        userUnique = true;
+        userUniqueValidation();
+           if (userUnique == false){
+           JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
+                  return;}
+                          
         
         
       for(UserAccount ua : this.org.getUserAccountDirectory().getUserAccountList()){
@@ -595,6 +603,63 @@ if (passwordPatternCorrect()==false){
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    // Madhav 17th April
+         void userUniqueValidation(){
+        String username = adminusername.getText();
+        
+          for(UserAccount ua : this.enterprise.getUserAccountDirectory().getUserAccountList()){
+            if (ua!= null){
+            if(ua.getUsername().equals(username)){
+                 userUnique = false;
+            return;}
+            }
+      }
+      for(UserAccount ua : this.system.getUserAccountDirectory().getUserAccountList()){
+            if (ua!= null){;
+            if(ua.getUsername().equals(username)){
+                  userUnique = false;
+            return;}
+            }
+      }    
+      
+       
+       for(Network net : system.getNetworkList()){
+            for(Enterprise e : net.getEnterpriseDirectory().getEnterpriseList()){
+                
+            for(UserAccount ua : e.getUserAccountDirectory().getUserAccountList()){
+            if (ua!= null){
+            if(ua.getUsername().equals(username)){
+                  userUnique = false;
+            return;}
+            }
+            }
+            
+            for(Organization org :e.getOrganizationDirectory().getOrganizationList()){
+                
+                for(UserAccount ua1 : org.getUserAccountDirectory().getUserAccountList()){
+                
+                if(ua1.getUsername().equals(username)){
+                  userUnique = false;
+                  return;}
+            
+       
+                      }
+             
+        }
+        
+       }
+       }
+       
+       // Check if this user exists in Patient Directory
+       
+            if (system.getPatientDirectory().checkIfUsernameIsUnique(" ") == false){
+                  userUnique = false;
+                  return;
+            }
+        
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DepartmentNameLabel;

@@ -15,6 +15,16 @@ import Business.Enterprises.Enterprise;
 public class BuyInsuranceWorkRequest extends WorkRequest {
      private String testResult;
      private Enterprise currentEnterprise;
+     private String typeOfInsurance;
+     private float premiums;
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 
     public Enterprise getCurrentEnterprise() {
         return currentEnterprise;
@@ -31,8 +41,6 @@ public class BuyInsuranceWorkRequest extends WorkRequest {
     public void setTypeOfInsurance(String typeOfInsurance) {
         this.typeOfInsurance = typeOfInsurance;
     }
-     private String typeOfInsurance;
-     private float premiums;
 
     public float getPremiums() {
         return premiums;

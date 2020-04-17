@@ -4,9 +4,13 @@
  */
 package Business.Customer;
 
+import Business.Departments.Organization;
 import Business.Employees.*;
 import Business.Enterprises.Enterprise;
+import Business.Insurance.MedicalInsurance;
 import Business.Medical.MedicalHistory;
+
+import Business.Messages.MessageQueue;
 import Business.Network.Network;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
@@ -39,6 +43,63 @@ public class Patient extends UserAccount {
     private String planType;
     private String actualEmi;
 
+
+
+    private WorkQueue workQueue;
+
+    // Madhav changes start
+    private MedicalHistory medHist;
+    
+    private MedicalInsurance medIns;
+    
+    private Organization InsuranceOrganization;
+
+        public Patient()  {
+        id = count;
+        totalPatients  = count;
+        count++;
+        this.medHist = new MedicalHistory();
+
+
+// Rohit 
+        this.myAppHistory = new AppointmentHistory();
+        this.myMessages = new MessageQueue();
+
+// End
+
+//        this.network = 
+//        this.checkBoxHealth = new String[2];
+    }
+
+
+
+    public Organization getInsuranceOrganization() {
+        return InsuranceOrganization;
+    }
+
+    public void setInsuranceOrganization(Organization InsuranceOrganization) {
+        this.InsuranceOrganization = InsuranceOrganization;
+    }
+
+    public MedicalInsurance getMedIns() {
+        return medIns;
+    }
+
+    public void setMedIns(MedicalInsurance medIns) {
+        this.medIns = medIns;
+    }
+
+    public MedicalHistory getMedHist() {
+        return medHist;
+    }
+
+    public void setMedHist(MedicalHistory medHist) {
+        this.medHist = medHist;
+    }
+    
+
+    // End
+    
     public String getActualEmi() {
         return actualEmi;
     }
@@ -70,19 +131,9 @@ public class Patient extends UserAccount {
     private static int totalPatients = 1;
     
     private Role role;
-    private WorkQueue workQueue;
-    private MedicalHistory medHist;
+//    private MedicalHistory medHist;
     
     
-        public Patient()  {
-        id = count;
-        totalPatients  = count;
-        count++;
-        this.medHist = new MedicalHistory();
-
-//        this.network = 
-//        this.checkBoxHealth = new String[2];
-    }
         
         
     
@@ -162,13 +213,6 @@ public class Patient extends UserAccount {
 
 
 
-    public MedicalHistory getMedHist() {
-        return medHist;
-    }
-
-    public void setMedHist(MedicalHistory medHist) {
-        this.medHist = medHist;
-    }
     
 
 
@@ -177,7 +221,28 @@ public class Patient extends UserAccount {
         return id;
     }
 
+    // 15th April Appointment History
+    
+    AppointmentHistory myAppHistory;
 
+    public AppointmentHistory getMyAppHistory() {
+        return myAppHistory;
+    }
+
+    public void setMyAppHistory(AppointmentHistory myAppHistory) {
+        this.myAppHistory = myAppHistory;
+    }
+      
+   // 16th Msg feature
+   private MessageQueue myMessages;
+
+    public MessageQueue getMyMessages() {
+        return myMessages;
+    }
+
+    public void setMyMessages(MessageQueue myMessages) {
+        this.myMessages = myMessages;
+    }
 
     public String getProfilePicture() {
         return profilePicture;
