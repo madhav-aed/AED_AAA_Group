@@ -5,6 +5,7 @@
  */
 package UI_Pages.customerPages;
 
+import Business.Customer.Patient;
 import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
@@ -30,13 +31,13 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
     String userDisplayPic;
    // panelright used in place of userProcessContainer. So commenting this out.
    // JPanel userProcessContainer;
-    UserAccount userAccount;
+    UserAccount patient;
     Organization organization;
     Enterprise enterprise;
     EcoSystem business;
     DB4OUtil dB4OUtil;
     
-    public Customer_WorkSpace(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,DB4OUtil dB4OUtil) {
+    public Customer_WorkSpace(JPanel userProcessContainer, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business,DB4OUtil dB4OUtil) {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
@@ -47,7 +48,7 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
         // Set display image with name..
         userDisplayPic = "Jon_Snow";
         this.panelRight = userProcessContainer;
-        this.userAccount = account;
+        this.patient = patient;
         this.organization = organization;
         this.enterprise = enterprise;
         this.business = business;
@@ -59,7 +60,7 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
         initComponents();
        // home = jPanel3;
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new Customer_Workspace_1(panelRight,userAccount,organization,enterprise,business,dB4OUtil));
+        panelRight.add(new Customer_Workspace_1(panelRight, patient,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
     
     }
@@ -396,11 +397,12 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
         // Set Panel view
                 // TODO add your handling code here:
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new Customer_Workspace_1(panelRight,userAccount,organization,enterprise,business,dB4OUtil));
+        panelRight.add(new Customer_Workspace_1(panelRight,patient,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
 
         
         
+                
         
         
         
@@ -472,9 +474,10 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
         
         
         
+
         
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new buyPlanJPanel(panelRight));
+        panelRight.add(new buyPlanJPanel(panelRight, patient, organization, enterprise, business,dB4OUtil));
         layout.next(panelRight);
         
     }//GEN-LAST:event_Button3MouseClicked

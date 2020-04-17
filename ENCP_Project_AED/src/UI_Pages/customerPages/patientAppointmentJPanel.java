@@ -5,6 +5,7 @@
  */
 package UI_Pages.customerPages;
 
+import Business.Customer.Patient;
 import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
@@ -36,17 +37,17 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
      */
     
     JPanel rightPanel;
-    UserAccount customer;
+    UserAccount patient;
     Organization organization;
     Enterprise enterprise;
     EcoSystem business;
     DB4OUtil dB4OUtil;
     CustomerLabWorkRequest labWorkReq ;
     CustomerDoctorWorkRequest docWorkReq;
-    public patientAppointmentJPanel(JPanel panelRight, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil){
+    public patientAppointmentJPanel(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil){
         initComponents();
         this.rightPanel = panelRight;
-        this.customer = userAccount;
+        this.patient = patient;
         this.organization = organization;
         this.enterprise = enterprise;
         this.business = business;
@@ -420,6 +421,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup2 = new javax.swing.ButtonGroup();
+        LblTestType = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -434,7 +436,6 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         comboBoxStateNetwork = new javax.swing.JComboBox<>();
         comboBoxhospitalEnterprise = new javax.swing.JComboBox<>();
-        LblTestType = new javax.swing.JLabel();
         rBtnVitalsTest = new javax.swing.JRadioButton();
         rBtnInsuranceTest = new javax.swing.JRadioButton();
         comboBoxTime = new javax.swing.JComboBox<>();
@@ -454,6 +455,10 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         btnBookAppointment = new java.awt.Button();
         btnCancel = new java.awt.Button();
         btnChange = new java.awt.Button();
+
+        LblTestType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LblTestType.setForeground(new java.awt.Color(96, 83, 150));
+        LblTestType.setText("Lab Test Type");
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1140, 510));
@@ -548,10 +553,6 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
             }
         });
 
-        LblTestType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LblTestType.setForeground(new java.awt.Color(96, 83, 150));
-        LblTestType.setText("Lab Test Type");
-
         rBtnVitalsTest.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(rBtnVitalsTest);
         rBtnVitalsTest.setText("Vitals Test");
@@ -584,8 +585,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblTestType, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -623,9 +623,8 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
                         .addComponent(comboBoxhospitalEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(comboBoxAppTypeOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LblTestType)
                     .addComponent(rBtnVitalsTest)
                     .addComponent(rBtnInsuranceTest))
                 .addGap(24, 24, 24)
@@ -845,7 +844,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         docWorkReq.setHospital(hospital);
         docWorkReq.setOrgRequested(org);
         docWorkReq.setSpecialistType(specialistType);
-        docWorkReq.setSender(customer);
+        docWorkReq.setPatient((Patient)patient);
         docWorkReq.setReceivingDoctor(doctor);
         docWorkReq.setWorkRequestType("");
         docWorkReq.setRequestDate(new Date());
@@ -885,7 +884,7 @@ public class patientAppointmentJPanel extends javax.swing.JPanel {
         labWorkReq.setHospital(hospital);
         labWorkReq.setOrgRequested(org);
         labWorkReq.setSpecialistType(specialistType);
-        labWorkReq.setSender(customer);
+        labWorkReq.setPatient((Patient)patient);
 
         labWorkReq.setWorkRequestType(testType);
         labWorkReq.setRequestDate(new Date());

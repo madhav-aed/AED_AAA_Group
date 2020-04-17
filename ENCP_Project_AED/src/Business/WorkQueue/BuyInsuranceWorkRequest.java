@@ -6,6 +6,7 @@
 package Business.WorkQueue;
 
 import Business.Customer.Patient;
+import Business.Enterprises.Enterprise;
 
 /**
  *
@@ -13,9 +14,41 @@ import Business.Customer.Patient;
  */
 public class BuyInsuranceWorkRequest extends WorkRequest {
      private String testResult;
-     private String currentEnterprise;
+     private Enterprise currentEnterprise;
+
+    public Enterprise getCurrentEnterprise() {
+        return currentEnterprise;
+    }
+
+    public void setCurrentEnterprise(Enterprise currentEnterprise) {
+        this.currentEnterprise = currentEnterprise;
+    }
+
+    public String getTypeOfInsurance() {
+        return typeOfInsurance;
+    }
+
+    public void setTypeOfInsurance(String typeOfInsurance) {
+        this.typeOfInsurance = typeOfInsurance;
+    }
      private String typeOfInsurance;
      private float premiums;
+
+    public float getPremiums() {
+        return premiums;
+    }
+
+    public void setPremiums(float premiums) {
+        this.premiums = premiums;
+    }
+
+    public String getVitals() {
+        return vitals;
+    }
+
+    public void setVitals(String vitals) {
+        this.vitals = vitals;
+    }
      private Patient patient;
      // Below needs to be changed, file number
      private String vitals;
@@ -29,12 +62,6 @@ public class BuyInsuranceWorkRequest extends WorkRequest {
         this.testResult = testResult;
     }
 
-    public String getCurrentEnterprise() {
-        return currentEnterprise;
-    }
 
-    public void setCurrentEnterprise(String currentEnterprise) {
-        this.currentEnterprise = currentEnterprise;
-    }
    
 }

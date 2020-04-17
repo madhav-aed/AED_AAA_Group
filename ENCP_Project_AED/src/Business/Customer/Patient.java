@@ -5,11 +5,14 @@
 package Business.Customer;
 
 import Business.Employees.*;
+import Business.Enterprises.Enterprise;
 import Business.Medical.MedicalHistory;
+import Business.Network.Network;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.WorkQueue;
 import java.awt.Image;
+import java.util.Date;
 
 /**
  *
@@ -17,26 +20,147 @@ import java.awt.Image;
  */
 public class Patient extends UserAccount {
     
-    private String name;
     private int id;
     private static int count = 1;
     private String profilePicture;
     private Image picture;
+    
+    private String fName;
+    private String lastName;
     private String userName;
     private String password;
-    private String dob;
+    private Date dob;
     private String insDetail;
     private String mobno;
-    private String emerName;
-    private String emerMobile;
-    private String primDoc;
-//    private String MedicalfileNumber;
+    private String gender;
+    private String insuredAmount;
+    private String estEmi;
+    private String[] checkBoxHealth;
+    private String planType;
+    private String actualEmi;
+
+    public String getActualEmi() {
+        return actualEmi;
+    }
+
+    public void setActualEmi(String actualEmi) {
+        this.actualEmi = actualEmi;
+    }
+
+    public String getPlanType() {
+        return planType;
+    }
+
+    public void setPlanType(String planType) {
+        this.planType = planType;
+    }
+    Network network;
+    Enterprise insCompany;
+
+    public Enterprise getInsCompany() {
+        return insCompany;
+    }
+
+    public void setInsCompany(Enterprise insCompany) {
+        this.insCompany = insCompany;
+    }
+    
+    
+    //    private String MedicalfileNumber;
     private static int totalPatients = 1;
     
     private Role role;
     private WorkQueue workQueue;
-    
     private MedicalHistory medHist;
+    
+    
+        public Patient()  {
+        id = count;
+        totalPatients  = count;
+        count++;
+        this.medHist = new MedicalHistory();
+
+//        this.network = 
+//        this.checkBoxHealth = new String[2];
+    }
+        
+        
+    
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getMobno() {
+        return mobno;
+    }
+
+    public void setMobno(String mobno) {
+        this.mobno = mobno;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getEstEmi() {
+        return estEmi;
+    }
+
+    public void setEstEmi(String estEmi) {
+        this.estEmi = estEmi;
+    }
+
+    public String[] getCheckBoxHealth() {
+        return checkBoxHealth;
+    }
+
+    public void setCheckBoxHealth(String[] checkBoxHealth) {
+        this.checkBoxHealth = checkBoxHealth;
+    }
+
+    public Network getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(Network network) {
+        this.network = network;
+    }
+
+
+
+    public String getInsuredAmount() {
+        return insuredAmount;
+    }
+
+    public void setInsuredAmount(String insuredAmount) {
+        this.insuredAmount = insuredAmount;
+    }
+
+
 
     public MedicalHistory getMedHist() {
         return medHist;
@@ -47,24 +171,13 @@ public class Patient extends UserAccount {
     }
     
 
-    public Patient()  {
-        id = count;
-        totalPatients  = count;
-        count++;
-    }
+
 
     public int getId() {
         return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    
-    public String getName() {
-        return name;
-    }
 
     public String getProfilePicture() {
         return profilePicture;
@@ -98,13 +211,7 @@ public class Patient extends UserAccount {
         this.password = password;
     }
 
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
+ 
 
     public String getInsDetail() {
         return insDetail;
@@ -114,37 +221,11 @@ public class Patient extends UserAccount {
         this.insDetail = insDetail;
     }
 
-    public String getMobno() {
-        return mobno;
-    }
 
-    public void setMobno(String mobno) {
-        this.mobno = mobno;
-    }
 
-    public String getEmerName() {
-        return emerName;
-    }
 
-    public void setEmerName(String emerName) {
-        this.emerName = emerName;
-    }
 
-    public String getEmerMobile() {
-        return emerMobile;
-    }
 
-    public void setEmerMobile(String emerMobile) {
-        this.emerMobile = emerMobile;
-    }
-
-    public String getPrimDoc() {
-        return primDoc;
-    }
-
-    public void setPrimDoc(String primDoc) {
-        this.primDoc = primDoc;
-    }
 
     public static int getTotalPatients() {
         return totalPatients;
@@ -175,7 +256,7 @@ public class Patient extends UserAccount {
     
     @Override
     public String toString() {
-        return name;
+        return fName+""+lastName;
     }
     
     

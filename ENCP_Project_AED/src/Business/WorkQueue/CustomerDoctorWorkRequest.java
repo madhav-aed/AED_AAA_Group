@@ -5,6 +5,7 @@
  */
 package Business.WorkQueue;
 
+import Business.Customer.Patient;
 import Business.Departments.Organization;
 import Business.Employees.Employee;
 import Business.Enterprises.Enterprise;
@@ -17,7 +18,15 @@ import java.util.Date;
  */
 public class CustomerDoctorWorkRequest extends WorkRequest {
      private String testResult;
-     
+     private Patient patient;
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
      private Employee receivingDoctor;
 private Date appointmentDate;
 private String timeOfAppointment;
