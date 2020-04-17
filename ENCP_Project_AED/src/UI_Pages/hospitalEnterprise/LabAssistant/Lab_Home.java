@@ -5,8 +5,13 @@
  */
 package UI_Pages.hospitalEnterprise.LabAssistant;
 
+import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
+import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.CustomerLabWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
 import UI_Pages.customerPages.patientAppointmentJPanel;
 import java.awt.CardLayout;
@@ -25,26 +30,34 @@ public class Lab_Home extends javax.swing.JPanel {
     /**
      * Creates new form BillingPage1
      */
+    
     JPanel rightPanel;
-    public Lab_Home(JPanel rightPanel) {
+    UserAccount ua;
+    Organization org;
+    Enterprise ent;
+    EcoSystem business;
+    DB4OUtil dB4OUtil;
+    
+    
+    public Lab_Home(JPanel rightPanel, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,DB4OUtil dB4OUtil) {
         
-        this.rightPanel = rightPanel;
+      this.rightPanel = rightPanel;
+        this.dB4OUtil = dB4OUtil;
+        this.ent = enterprise;
+        this.ua = account;
+        this.org = organization;
+        this.business = business;
+        
         initComponents();
         btn_close.setVisible(false);
         init();
     }
-    
-    public void init(){
+      public void init(){
          // Setting welcome string
          
          //welcomelabel.setText("");
-            
-         // Pseudo Code
-         
-         
-            
-            
-        // Setting color of JTable
+       
+         // Setting color of JTable
         
         
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
@@ -65,25 +78,31 @@ public class Lab_Home extends javax.swing.JPanel {
        DefaultTableModel model1 = (DefaultTableModel) LabReqTable.getModel();
 
         model1.setRowCount(0);
-      /* for (WorkRequest wb : WorkQueue.workRequestList())
-      
-                  if (wb.getEnterprise.getName().equals(this.enterprise.getName())){
-               {
-
+      /* for (WorkRequest wb : WorkQueue.workRequestList()) */
+                
+            for (WorkRequest wb : this.org.getWorkQueue().getWorkRequestList()){
+                CustomerLabWorkRequest lb = (CustomerLabWorkRequest) wb;
+                
+            
+                  
+               
                         Object[] row = new Object[5];
                     
-                        row[0] = lb
-                        row[1] = lb.getPatient.getName();
-                        row[2] = lb.getRefby;
-                        row[3] = lb.getDate();
-                        row[4] = lb.getStatus;
+                        row[0] = lb;
+                        row[1] = lb.getAppointmentDate();
+                        row[2] = lb.getRefBy();
+                        row[3] = lb.getWorkRequestType();
+                       
+                        row[4] = lb.getSender().getEmployee().getName();
+                        
 
                         model1.addRow(row);
                     
-          }*/
+          }
                   }
         
         
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -340,7 +359,7 @@ public class Lab_Home extends javax.swing.JPanel {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(172, Short.MAX_VALUE)
+                .addContainerGap(166, Short.MAX_VALUE)
                 .addComponent(btn_close)
                 .addContainerGap())
         );
@@ -435,9 +454,9 @@ public class Lab_Home extends javax.swing.JPanel {
         int selectedRow = LabReqTable.getSelectedRow();
         if(selectedRow >= 0)
         {
-          //  WorkRequest  wReq   = (WorkRequest) LabReqTable.getValueAt(selectedRow, 0);
+        CustomerLabWorkRequest  lReq   = (CustomerLabWorkRequest) LabReqTable.getValueAt(selectedRow, 0);
         CardLayout layout = (CardLayout)this.rightPanel.getLayout();
-        this.rightPanel.add(new LabProcess(this.rightPanel));
+        this.rightPanel.add(new LabProcess(this.rightPanel,lReq));
         layout.next(this.rightPanel);
         
 
@@ -445,7 +464,7 @@ public class Lab_Home extends javax.swing.JPanel {
         else{
         JOptionPane.showMessageDialog(null, "Please select a record");
         }
-        
+       
     }//GEN-LAST:event_ProcessButtonActionPerformed
 
 

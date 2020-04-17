@@ -5,6 +5,11 @@
  */
 package UI_Pages.hospitalEnterprise.LabAssistant;
 
+import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
+import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
+import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
 import UI_Pages.customerPages.*;
@@ -25,11 +30,23 @@ public class LabAssistant_WorkSpace extends javax.swing.JFrame {
      */
    // JPanel home;
     String userDisplayPic;
+    UserAccount ua;
+    Organization org;
+    Enterprise ent;
+    EcoSystem business;
+    DB4OUtil dB4OUtil;
     
-    public LabAssistant_WorkSpace() {
+    public LabAssistant_WorkSpace(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,DB4OUtil dB4OUtil) {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        this.dB4OUtil = dB4OUtil;
+        this.ent = enterprise;
+        this.ua = account;
+        this.org = organization;
+        this.business = business;
+        
         setLocationByPlatform(true);
         setUndecorated(true);
+        setExtendedState(getExtendedState()|JFrame.MAXIMIZED_VERT);
        
         // Set display image with name..
         userDisplayPic = "Jon_Snow";
@@ -39,7 +56,7 @@ public class LabAssistant_WorkSpace extends javax.swing.JFrame {
         initComponents();
        // home = jPanel3;
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new Lab_Home(panelRight));
+        panelRight.add(new Lab_Home(panelRight,this.ua,this.org,this.ent,this.business,this.dB4OUtil));
         layout.next(panelRight);
     
     }
@@ -419,7 +436,9 @@ public class LabAssistant_WorkSpace extends javax.swing.JFrame {
 
     private void logoutLabel1btn_label(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabel1btn_label
        // System.exit(0);
+       dB4OUtil.storeSystem(business);
        dispose();
+       
        // Customer_WorkSpace.super.setVisible(false);
  
 

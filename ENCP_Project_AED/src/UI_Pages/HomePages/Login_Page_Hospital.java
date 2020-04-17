@@ -6,7 +6,10 @@
 package UI_Pages.HomePages;
 
 import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
 import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
+import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 
 import UI_Pages.customerPages.Customer_WorkSpace;
@@ -31,6 +34,7 @@ public class Login_Page_Hospital extends javax.swing.JFrame {
      */
     
     private EcoSystem system;
+    private Organization orgSave;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     public Login_Page_Hospital() {
         system = dB4OUtil.retrieveSystem();
@@ -128,7 +132,6 @@ public class Login_Page_Hospital extends javax.swing.JFrame {
         });
 
         txt_pwd.setForeground(new java.awt.Color(102, 102, 102));
-        txt_pwd.setText("jPasswordField1");
         txt_pwd.setBorder(null);
         txt_pwd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -245,7 +248,37 @@ public class Login_Page_Hospital extends javax.swing.JFrame {
         String username = txt_email.getText();
         String password = txt_pwd.getText();
         UserAccount ua = system.getUserAccountDirectory().authenticateUser(username, password);
-        if((ua != null)){
+        
+        if (ua == null){
+       for(Network net : system.getNetworkList()){
+            for(Enterprise e : net.getEnterpriseDirectory().getEnterpriseList()){
+                 if(e.getEnterpriseType().getValue().equals("Hospital")){
+            
+                    for(Organization org :e.getOrganizationDirectory().getOrganizationList()){
+                      
+                    ua  =   org.getUserAccountDirectory().authenticateUser(username, password);
+                     if (ua != null){
+                         orgSave = org;
+                         break;
+                     }
+                      }
+                    if (ua != null)
+                         break;
+            }
+                 if (ua != null)
+                         break;
+            }
+            if (ua != null)
+                         break; 
+        
+        }
+        }
+        
+       UserAccount ua1 = ua;
+       
+       
+        
+        if((ua1 != null)){
         loader.show();
         login.hide();
         
@@ -256,11 +289,11 @@ public class Login_Page_Hospital extends javax.swing.JFrame {
             public void run() {
 
 
-                            JFrame m =  ua.getRole().createWorkArea(
+                            JFrame m =  ua1.getRole().createWorkArea(
                                 containerPanel, 
-                                ua, 
-                                null,  
-                                ua.getEmployee().getEnterprise(),
+                                ua1, 
+                                orgSave,  
+                                ua1.getEmployee().getEnterprise(),
                                 system, 
                                 dB4OUtil);
                             m.setExtendedState(MAXIMIZED_BOTH);

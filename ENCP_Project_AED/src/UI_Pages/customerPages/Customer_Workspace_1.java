@@ -42,7 +42,12 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.business = business;
         this.dB4OUtil = dB4OUtil;
-        String name = "Jon" + " Snow";
+        
+        Patient p = (Patient)patient;
+        System.out.println("patient "+ p);
+        String name = p.getfName() + " "+ p.getLastName();
+        
+        System.out.println("name "+name+ " "+ p.getMobno() );
         userNameLabel.setText(name);
         
         
@@ -438,7 +443,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
 
     private void bookAppointmentbtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentbtMousePressed
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new patientAppointmentJPanel(panelRight,patient,organization,enterprise,business,dB4OUtil));
+        panelRight.add(new Customer_Appointment_Booking(panelRight,(Patient)patient,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
         // Book appointment panel calling here
         

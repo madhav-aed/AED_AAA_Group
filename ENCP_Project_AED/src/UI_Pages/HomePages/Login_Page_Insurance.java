@@ -5,12 +5,20 @@
  */
 package UI_Pages.HomePages;
 
+import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
+import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
+import Business.Network.Network;
+import Business.UserAccount.UserAccount;
 import UI_Pages.customerPages.Customer_WorkSpace;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.util.TimerTask;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -19,11 +27,13 @@ import javax.swing.Timer;
  */
 public class Login_Page_Insurance extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Home17
-     */
+    private EcoSystem system;
+    private Organization orgSave;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    
     public Login_Page_Insurance() {
-
+        
+        system = dB4OUtil.retrieveSystem();
         initComponents();
         containerPanel.setSize(750, 540);
         
@@ -118,7 +128,6 @@ public class Login_Page_Insurance extends javax.swing.JFrame {
         });
 
         txt_pwd.setForeground(new java.awt.Color(102, 102, 102));
-        txt_pwd.setText("jPasswordField1");
         txt_pwd.setBorder(null);
         txt_pwd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -231,15 +240,39 @@ public class Login_Page_Insurance extends javax.swing.JFrame {
 
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        // TODO add your handling code here:
-        //put your sql/your statements here to check for password and email if correct
-        //then
-        //also validate -
+        String username = txt_email.getText();
+        String password = txt_pwd.getText();
+        UserAccount ua = system.getUserAccountDirectory().authenticateUser(username, password);
         
-        // TODO add your handling code here:
-        //put your sql/your statements here to check for password and email if correct
-        //then
-        //also validate -
+        if (ua == null){
+       for(Network net : system.getNetworkList()){
+            for(Enterprise e : net.getEnterpriseDirectory().getEnterpriseList()){
+                 if(e.getEnterpriseType().getValue().equals("Insurance")){
+            
+                    for(Organization org :e.getOrganizationDirectory().getOrganizationList()){
+                      
+                    ua  =   org.getUserAccountDirectory().authenticateUser(username, password);
+                     if (ua != null){
+                         orgSave = org;
+                         break;
+                     }
+                      }
+                    if (ua != null)
+                         break;
+            }
+                 if (ua != null)
+                         break;
+            }
+            if (ua != null)
+                         break; 
+        
+        }
+        }
+        
+       UserAccount ua1 = ua;
+       
+        if((ua1 != null)){
+       
         loader.show();
         login.hide();
         
@@ -248,6 +281,15 @@ public class Login_Page_Insurance extends javax.swing.JFrame {
         new java.util.Timer().schedule(new TimerTask() {
             @Override
             public void run() {
+                
+                  JFrame m =  ua1.getRole().createWorkArea(
+                                containerPanel, 
+                                ua1, 
+                                orgSave,  
+                                ua1.getEmployee().getEnterprise(),
+                                system, 
+                                dB4OUtil);
+                            m.setExtendedState(MAXIMIZED_BOTH);
                 //after validating let's show the main Jframe
 //            Customer_WorkSpace m = new Customer_WorkSpace();
 //             m.setExtendedState(MAXIMIZED_BOTH);
@@ -258,7 +300,7 @@ public class Login_Page_Insurance extends javax.swing.JFrame {
                 layout.next(containerPanel); */
               // after successfull loggin let's close the login window
               //call:
- //            m.show();
+              m.show();
               dispose();
               
               //
@@ -271,8 +313,15 @@ public class Login_Page_Insurance extends javax.swing.JFrame {
               
                }
         },1000*2);
+        
+        }
 
-
+            else{
+        
+            JOptionPane.showMessageDialog(null, "Incorrect username or password! Please check..");
+            
+        
+        }
 
         
         
@@ -289,7 +338,6 @@ public class Login_Page_Insurance extends javax.swing.JFrame {
           //      m.setVisible(true);
          //       m.show();
          //       System.out.println("time pass");
-
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void txt_emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_emailFocusGained

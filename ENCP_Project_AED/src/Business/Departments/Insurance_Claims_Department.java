@@ -5,6 +5,7 @@
 package Business.Departments;
 
 import Business.Role.AdminRole;
+import Business.Role.ClaimsRepresentativeRole;
 import Business.Role.Role;
 import Business.Role.SalesRepresentativeRole;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class Insurance_Claims_Department extends Organization{
     
     @Override
     public Role getSupportedRole() {
-        return new SalesRepresentativeRole();
+        return new ClaimsRepresentativeRole();
     }
 
 }
