@@ -7,10 +7,20 @@ package UI_Pages.customerPages;
 
 import Business.Customer.Patient;
 import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Employees.Employee;
+import Business.Enterprises.Enterprise;
+import Business.Network.Network;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -24,20 +34,53 @@ public class Create_New_Patient extends javax.swing.JFrame {
      * Creates new form Create_New_Patient
      */
     JPanel rightPanel;
+
+    UserAccount patient;
+    Organization organization;
+    Enterprise enterprise;
     EcoSystem business;
-    DB4OUtil db4Util;
-    public Create_New_Patient(JPanel userProcessContainer, EcoSystem business, DB4OUtil db4Util) {
+    DB4OUtil dB4OUtil;
+    public Create_New_Patient(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
-       
-        initComponents();
-        this.business = business;
-        this.rightPanel = userProcessContainer;
-        this.db4Util = db4Util;
+       initComponents();
         
+        this.business = business;
+        this.rightPanel = panelRight;
+        this.patient = patient;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.patient = patient;
+        this.dB4OUtil = dB4OUtil;
+        
+
+        populateComboBox();
+        populateInitials();
     }
+    
+        public void populateComboBox(){
+       
+        
+         DefaultComboBoxModel dm=new DefaultComboBoxModel();
+         dm.addElement("Select");
+           for(Network n:business.getNetworkList()){
+           dm.addElement(n);    
+   }
+           comboBoxStateNetwork.setModel(dm);
+    }
+        
+        public void populateInitials(){
+        lblWarningFName.setVisible(false);
+        lblWarningLastName.setVisible(false);
+        lblWarningPhoneNumber.setVisible(false);
+        lblWarningDOB.setVisible(false);
+        lblWarningEmail.setVisible(false);
+        lblWarningGender.setVisible(false);
+        lblWarningNetwork.setVisible(false);
+        lblWarningPWD.setVisible(false);
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,38 +91,52 @@ public class Create_New_Patient extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        txtFirstName = new javax.swing.JTextField();
+        lblWarningFName = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         txtUserId = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtDOB = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JPasswordField();
+        lblWarningEmail = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        lblWarningDOB = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtMobile = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        txtEmergencyMobile = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txtEmergencyContactName = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        txtPrimaryDoctor = new javax.swing.JTextField();
+        lblWarningPhoneNumber = new javax.swing.JLabel();
+        lblLastName = new javax.swing.JLabel();
+        txtLastName = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
+        lblWarningPWD = new javax.swing.JLabel();
+        lblLastName1 = new javax.swing.JLabel();
+        rBtnMale = new javax.swing.JRadioButton();
+        rBtnFemale = new javax.swing.JRadioButton();
+        lblWarningGender = new javax.swing.JLabel();
+        lblWarningLastName = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        comboBoxStateNetwork = new javax.swing.JComboBox<>();
+        lblWarningNetwork = new javax.swing.JLabel();
         btn_Create = new java.awt.Button();
-        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1140, 510));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(96, 83, 150));
         jLabel5.setText("<html> <u>You are one step closer for hassel-free medicare!");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 433, 33));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -107,66 +164,154 @@ public class Create_New_Patient extends javax.swing.JFrame {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
+        jPanel1.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 0, -1, -1));
+
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
+        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 86, 1320, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/group_52px_1.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 26, -1, 44));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel7.setText("Name");
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel16.setText("Welcome to AAA Medicare Group!");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 32, 310, 33));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel8.setText("Email");
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 201, 232)));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel9.setText("Date of birth");
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel10.setText("First Name");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 110, 27));
 
-        txtDOB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDOBActionPerformed(evt);
+        txtFirstName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFirstNameKeyPressed(evt);
             }
         });
+        jPanel2.add(txtFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 180, -1));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel11.setText("Password");
+        lblWarningFName.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarningFName.setText("jLabel2");
+        jPanel2.add(lblWarningFName, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 230, -1));
 
-        txtPassword.setText("jPasswordField1");
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel13.setText("Email");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 110, 27));
+        jPanel2.add(txtUserId, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 180, -1));
+
+        lblWarningEmail.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarningEmail.setText("jLabel2");
+        jPanel2.add(lblWarningEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 380, -1));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel14.setText("Date of birth");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 110, 27));
+
+        jDateChooser1.setMaxSelectableDate(new java.util.Date(1586926909000L));
+        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 180, -1));
+
+        lblWarningDOB.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarningDOB.setText("jLabel2");
+        jPanel2.add(lblWarningDOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 240, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(96, 83, 150));
         jLabel12.setText("Contact number");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 274, 110, 27));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel13.setText("Emergency Contact");
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel14.setText("Relation");
-
-        txtEmergencyContactName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmergencyContactNameActionPerformed(evt);
+        txtMobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMobileKeyPressed(evt);
             }
         });
+        jPanel2.add(txtMobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 180, -1));
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel15.setText("Primary doctor");
+        lblWarningPhoneNumber.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarningPhoneNumber.setText("numberlabel");
+        jPanel2.add(lblWarningPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 470, -1));
+
+        lblLastName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblLastName.setForeground(new java.awt.Color(96, 83, 150));
+        lblLastName.setText("Last Name");
+        jPanel2.add(lblLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 80, 20));
+
+        txtLastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLastNameKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 160, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel11.setText("Password");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 80, -1));
+
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 160, -1));
+
+        lblWarningPWD.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarningPWD.setText("jLabel2");
+        jPanel2.add(lblWarningPWD, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 250, -1, -1));
+
+        lblLastName1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblLastName1.setForeground(new java.awt.Color(96, 83, 150));
+        lblLastName1.setText("Gender");
+        jPanel2.add(lblLastName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 80, 20));
+
+        buttonGroup1.add(rBtnMale);
+        rBtnMale.setText("Male");
+        rBtnMale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBtnMaleActionPerformed(evt);
+            }
+        });
+        jPanel2.add(rBtnMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, -1, -1));
+
+        buttonGroup1.add(rBtnFemale);
+        rBtnFemale.setText("Female");
+        jPanel2.add(rBtnFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, -1, -1));
+
+        lblWarningGender.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarningGender.setText("jLabel2");
+        jPanel2.add(lblWarningGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 230, -1));
+
+        lblWarningLastName.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarningLastName.setText("jLabel2");
+        jPanel2.add(lblWarningLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 220, -1));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel17.setText("Home State");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 94, -1));
+
+        comboBoxStateNetwork.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(comboBoxStateNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 160, -1));
+
+        lblWarningNetwork.setForeground(new java.awt.Color(255, 0, 0));
+        lblWarningNetwork.setText("jLabel2");
+        jPanel2.add(lblWarningNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 310, -1, -1));
 
         btn_Create.setBackground(new java.awt.Color(96, 83, 150));
         btn_Create.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -177,140 +322,23 @@ public class Create_New_Patient extends javax.swing.JFrame {
                 btn_CreateActionPerformed(evt);
             }
         });
+        jPanel2.add(btn_Create, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 357, 97, 35));
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel16.setText("Welcome to AAA Medicare Group!");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtEmergencyMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmergencyContactName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btn_Create, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPrimaryDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(37, 37, 37)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(527, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtEmergencyContactName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtEmergencyMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrimaryDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_Create, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(97, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(32, 32, 32)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(447, Short.MAX_VALUE)))
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 880, 430));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1360, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -321,14 +349,49 @@ public class Create_New_Patient extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btn_closeMouseClicked
 
-    private void txtDOBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDOBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDOBActionPerformed
-
-    private void txtEmergencyContactNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmergencyContactNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmergencyContactNameActionPerformed
-
+        public boolean userIdFound(String email){
+        int count = 0;
+        for(Patient patient: business.getPatientDirectory().getUserAccountList()) {
+            if( patient.getUserName().equals(email)){
+                count = 1;
+                break;
+            }
+          }
+        
+       if (count == 0)
+           return false;
+           else 
+           return true; 
+    }
+        
+    public boolean checkString(String string){
+        Pattern p = Pattern.compile("^[A-Za-z\\s]+$");
+        Matcher m = p.matcher(string);
+        boolean b = m.matches();
+        return b;
+    }
+    
+//    public boolean checkAge(String age){
+//        Pattern p = Pattern.compile("^(0?[1-9]|[1-9][0-9])$");
+//        Matcher m = p.matcher(age);
+//        boolean b = m.matches();
+//        return b;
+//    }
+    
+    
+    public boolean checkContactNumber(String number){
+        Pattern p = Pattern.compile("^[1-9]\\d{9}$");
+        Matcher m = p.matcher(number);
+        boolean b = m.matches();
+        return b;
+    }
+    
+    public boolean checkEmail(String email){
+        Pattern p = Pattern.compile("^[a-zA-Z0-9]+_[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
+        Matcher m = p.matcher(email);
+        boolean b = m.matches();
+        return b;
+    }
     private void btn_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateActionPerformed
         // TODO add your handling code here:
         //put your sql/your statements here to check for password and email if correct
@@ -339,71 +402,243 @@ public class Create_New_Patient extends javax.swing.JFrame {
         //put your sql/your statements here to check for password and email if correct
         //then
         //also validate -
-
-        String etpName = "";// txtEnterpriseName.getText();
-        String cusName = txtName.getText();
-        String userId = txtUserId.getText();
-        String pwd = txtPassword.getText();
-        String dob = txtDOB.getText();
-        String insDetail = ""; // txtInsuranceDetail.getText();
-        String mobno= txtMobile.getText();
-        String emerName = txtEmergencyContactName.getText();
-        String emerMobile = txtEmergencyMobile.getText();
-        String primDoc = txtPrimaryDoctor.getText();
-
-//        UserAccount ua = business.getPatientDirectory().checkIfUsernameIsUnique(userId); //  authenticateUser(userId, pwd)  getUserAccountDirectory().authenticateUser(userId, pwd);
-
-        if(!business.getPatientDirectory().checkIfUsernameIsUnique(userId)){
-            JOptionPane.showMessageDialog(null, "Email already registered. Please sign in!");
-        }
-
-        else{
-            //    UserAccount newCustomer =  business.getUserAccountDirectory().createUserAccount(userId, pwd, business.getCusDirectory().createEmployee(cusName,userId,dob,insDetail,mobno,emerName,emerMobile,primDoc), new CustomerRole());
-           
-            Patient e = new Patient();
-            e. setDob(dob);
-            e.setEmerMobile(emerMobile);
-            e.setName(cusName);
-            business.getPatientDirectory().createUserAccount(userId, pwd, cusName, new CustomerRole()); //  getUserAccountList().add(e);  // getEmployeeDirectory().getEmployeeList().add(e);
-           // business.get  createUserAccount(userId, pwd, e, new CustomerRole());
-
-            //    getUserAccountDirectory().createUserAccount(userId, pwd, business.getCusDirectory().createEmployee(cusName,userId,dob,insDetail,mobno,emerName,emerMobile,primDoc), new CustomerRole());
-
-            JOptionPane.showMessageDialog(null, "Congratulations! "+e.getName()+ " You are registered");
-        }
-        //       Customer_Dashboard m = new Customer_Dashboard();
-
-        // Get user name
-        // Get user name
-
-        //Step1: Check in the system admin user account directory if you have the user
-
-        //      if(userAccount==null){
-            //            JOptionPane.showMessageDialog(null, "Invalid credentials");
-            //        }
-        //        else{
-            //
-            //            CardLayout layout=(CardLayout)container.getLayout();
-            //            Customer_Workspace_1 cWorkSpace = new Customer_Workspace_1(container,userAccount,system);
-            //            container.add("Customer_Workspace_1",cWorkSpace);
-            //            layout.next(container);
-            //        }
-
-        //        loginJButton.setEnabled(false);
-        //        logoutJButton.setEnabled(true);
-        //        userNameJTextField.setEnabled(false);
-        //        passwordField.setEnabled(false);
-
-        //       containerPanel.add("customerDashboard",m);
-        //       CardLayout layout = (CardLayout) containerPanel.getLayout();
-        //       layout.next(containerPanel);
-        //      m.setVisible(true);
-        //       m.show();
-        //       System.out.println("time pass");
         
-        db4Util.storeSystem(business);
-        dispose();
+// New code starts here
+
+
+         Color customColor = new Color(232,201,232);
+        
+        if(txtFirstName.getText().isEmpty()){
+            lblWarningFName.setVisible(true);
+            lblWarningFName.setText("Cannot be empty");
+//                            usrNameLabel.setForeground (Color.red);
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }else if (txtLastName.getText().isEmpty()){
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningFName.setVisible(false);
+            lblWarningLastName.setVisible(true);
+            lblWarningLastName.setText("Cannot be empty");
+//                            usrNameLabel.setForeground (Color.red);
+            txtLastName.setBorder(BorderFactory.createLineBorder(Color.RED));        
+        }
+        
+//        else if(!checkString(lastName)){
+//            JOptionPane.showMessageDialog(null, "Please enter valid Last Name");
+//        }
+            else if(txtUserId.getText().isEmpty()){
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningFName.setVisible(false);
+            txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningLastName.setVisible(false);
+            lblWarningEmail.setVisible(true);
+            lblWarningEmail.setText("Username cannot be empty");
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.RED)); 
+        }
+        
+        else if(!business.getPatientDirectory().checkIfUsernameIsUnique(txtUserId.getText())){
+                        txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningLastName.setVisible(false);
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningFName.setVisible(false);
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningEmail.setVisible(true);
+            lblWarningEmail.setText("Username already exists. Please try another.");
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.RED)); 
+        }
+
+        else if(!checkEmail(txtUserId.getText())){
+                        txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningLastName.setVisible(false);
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningFName.setVisible(false);
+            lblWarningEmail.setVisible(false);
+
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningEmail.setVisible(true);
+            lblWarningEmail.setText("Username form should be XXX_XXX@xxx.com");
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.RED));  
+        }
+        else if(!rBtnMale.isSelected()&& !rBtnFemale.isSelected()){
+                        txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningLastName.setVisible(false);
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningFName.setVisible(false);
+            lblWarningEmail.setVisible(false);
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningGender.setVisible(true);
+            lblWarningGender.setText("Select your gender");
+//            lblWarningGender.setBorder(BorderFactory.createLineBorder(Color.RED));  
+        }
+        
+            else if(jDateChooser1.getDate()==null){
+                            lblWarningEmail.setVisible(false);
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
+                            txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningLastName.setVisible(false);
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningFName.setVisible(false);
+            lblWarningGender.setVisible(false);
+            lblWarningDOB.setVisible(true);
+            lblWarningDOB.setText("Please select your date of birth");
+            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.RED)); 
+        }
+            
+            else if(txtPassword.getText().isEmpty()){
+                lblWarningGender.setVisible(false);
+                            lblWarningEmail.setVisible(false);
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
+                            txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningLastName.setVisible(false);
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningFName.setVisible(false);
+            lblWarningDOB.setVisible(false);
+            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.gray));     
+            lblWarningPWD.setVisible(true);
+            lblWarningPWD.setText("Set your password");
+            txtPassword.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }
+        
+        else if(!checkContactNumber(txtMobile.getText())){
+                        lblWarningDOB.setVisible(false);
+            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.gray)); 
+            lblWarningGender.setVisible(false);
+                        lblWarningEmail.setVisible(false);
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
+                        txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningLastName.setVisible(false);
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningFName.setVisible(false);
+            lblWarningPWD.setVisible(false);
+            txtPassword.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningPhoneNumber.setVisible(true);
+            lblWarningPhoneNumber.setText("Please enter valid contact number. Number must be of 10 digits in the format of XXX-XXX-XXXX");
+            txtMobile.setBorder(BorderFactory.createLineBorder(Color.RED));  
+        }
+
+        else if(comboBoxStateNetwork.getSelectedIndex()<=0){
+                        lblWarningPWD.setVisible(false);
+            txtPassword.setBorder(BorderFactory.createLineBorder(Color.gray));
+                        lblWarningDOB.setVisible(false);
+            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.gray)); 
+            lblWarningGender.setVisible(false);
+                        lblWarningEmail.setVisible(false);
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
+                        txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningLastName.setVisible(false);
+            txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
+            lblWarningFName.setVisible(false);
+            lblWarningPhoneNumber.setVisible(false);
+            txtMobile.setBorder(BorderFactory.createLineBorder(Color.gray)); 
+            lblWarningNetwork.setVisible(true);
+            lblWarningNetwork.setText("Please select your state");
+//            lblWarningNetwork.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }
+
+        else {
+        
+        lblWarningNetwork.setVisible(false);
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        System.out.println(" txtmobile "+txtMobile.getText());
+        
+        String contactNumber = txtMobile.getText();
+            System.out.println("Phone Number"+contactNumber);
+        String email = txtUserId.getText();
+        String password = txtPassword.getText();
+        Date date = jDateChooser1.getDate();
+            
+        Network network = (Network)comboBoxStateNetwork.getSelectedItem();
+        String gender = "";  
+            
+            
+          Patient patient =  business.getPatientDirectory().createUserAccount(email, password, firstName,lastName, new CustomerRole());
+            
+          patient.setDob(date);
+          patient.setMobno(contactNumber);
+          patient.setNetwork(network);
+
+          
+          if(rBtnMale.isSelected()){
+              gender = "Male";
+          }
+          if(rBtnFemale.isSelected()){
+              gender = "Female";
+          }
+          patient.setGender(gender);
+          
+          
+         JOptionPane.showMessageDialog(null, "Congratulations! "+patient.getfName()+" "+patient.getLastName()+ " You are registered");
+          
+         
+//          Color customColor = new Color(232,201,232);
+           
+          txtFirstName.setText("");
+          txtFirstName.setBorder(BorderFactory.createLineBorder(customColor));
+          txtLastName.setText("");
+          txtLastName.setBorder(BorderFactory.createLineBorder(customColor));            
+          txtMobile.setText("");
+          txtMobile.setBorder(BorderFactory.createLineBorder(customColor));            
+          txtPassword.setText("");
+          txtPassword.setBorder(BorderFactory.createLineBorder(customColor));            
+          txtUserId.setText("");
+          txtUserId.setBorder(BorderFactory.createLineBorder(customColor));            
+          rBtnFemale.setSelected(false);
+          rBtnMale.setSelected(false);
+          jDateChooser1.setDate(null);
+
+          populateInitials();
+          
+          dB4OUtil.storeSystem(business);
+          dispose();
+          }
+        
+        
     }//GEN-LAST:event_btn_CreateActionPerformed
+
+    private void rBtnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnMaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rBtnMaleActionPerformed
+
+    private void txtLastNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameKeyPressed
+        // TODO add your handling code here:
+        
+        char c = evt.getKeyChar();
+        
+        if(Character.isLetter(c)||(Character.isWhitespace(c)||(Character.isISOControl(c)))){
+        txtLastName.setEditable(true);
+        lblWarningLastName.setVisible(false);
+        lblWarningLastName.setText("");
+        }else{
+        txtLastName.setEditable(false);
+        lblWarningLastName.setVisible(true);
+        lblWarningLastName.setText("Name should contain only characters");
+        }
+    }//GEN-LAST:event_txtLastNameKeyPressed
+
+    private void txtMobileKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMobileKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtMobileKeyPressed
+
+    private void txtFirstNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirstNameKeyPressed
+        // TODO add your handling code here:
+        
+                char c = evt.getKeyChar();
+        
+        if(Character.isLetter(c)||(Character.isWhitespace(c)||(Character.isISOControl(c)))){
+        txtFirstName.setEditable(true);
+        lblWarningFName.setVisible(false);
+        lblWarningFName.setText("");
+        }else{
+        txtFirstName.setEditable(false);
+        lblWarningFName.setVisible(true);
+        lblWarningFName.setText("Name should contain only characters");
+        }
+    }//GEN-LAST:event_txtFirstNameKeyPressed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,27 +648,38 @@ public class Create_New_Patient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btn_Create;
     private javax.swing.JLabel btn_close;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> comboBoxStateNetwork;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JTextField txtDOB;
-    private javax.swing.JTextField txtEmergencyContactName;
-    private javax.swing.JTextField txtEmergencyMobile;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblLastName1;
+    private javax.swing.JLabel lblWarningDOB;
+    private javax.swing.JLabel lblWarningEmail;
+    private javax.swing.JLabel lblWarningFName;
+    private javax.swing.JLabel lblWarningGender;
+    private javax.swing.JLabel lblWarningLastName;
+    private javax.swing.JLabel lblWarningNetwork;
+    private javax.swing.JLabel lblWarningPWD;
+    private javax.swing.JLabel lblWarningPhoneNumber;
+    private javax.swing.JRadioButton rBtnFemale;
+    private javax.swing.JRadioButton rBtnMale;
+    private javax.swing.JTextField txtFirstName;
+    private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtMobile;
-    private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtPrimaryDoctor;
     private javax.swing.JTextField txtUserId;
     // End of variables declaration//GEN-END:variables
 }

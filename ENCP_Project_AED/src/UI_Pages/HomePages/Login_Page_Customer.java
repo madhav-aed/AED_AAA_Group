@@ -7,7 +7,9 @@ package UI_Pages.HomePages;
 
 import Business.Customer.Patient;
 import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
 import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.adminPages.Admin_WorkSpace;
 import UI_Pages.customerPages.Create_New_Patient;
@@ -19,6 +21,7 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
@@ -373,8 +376,8 @@ public class Login_Page_Customer extends javax.swing.JFrame {
     private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed
         
         
-        
-             JFrame m =  new Create_New_Patient(containerPanel,system, dB4OUtil);
+                    
+             JFrame m =  new Create_New_Patient(containerPanel, null, null, null, system, dB4OUtil);
              m.setExtendedState(MAXIMIZED_BOTH);
              m.show();
              dispose();

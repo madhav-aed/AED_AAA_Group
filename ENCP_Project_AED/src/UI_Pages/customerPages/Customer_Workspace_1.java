@@ -5,6 +5,7 @@
  */
 package UI_Pages.customerPages;
 
+import Business.Customer.Patient;
 import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
@@ -25,18 +26,18 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
      */
     
     JPanel panelRight;
-    UserAccount userAccount;
+    UserAccount patient;
     Organization organization;
     Enterprise enterprise;
     EcoSystem business;
     DB4OUtil dB4OUtil;
     
-    public Customer_Workspace_1(JPanel panelRight, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
+    public Customer_Workspace_1(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
         
         
         initComponents();
         this.panelRight = panelRight;
-        this.userAccount = userAccount;
+        this.patient = patient;
         this.organization = organization;
         this.enterprise = enterprise;
         this.business = business;
@@ -437,7 +438,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
 
     private void bookAppointmentbtMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookAppointmentbtMousePressed
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new patientAppointmentJPanel(panelRight,userAccount,organization,enterprise,business,dB4OUtil));
+        panelRight.add(new patientAppointmentJPanel(panelRight,patient,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
         // Book appointment panel calling here
         

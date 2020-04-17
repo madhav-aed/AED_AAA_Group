@@ -44,8 +44,10 @@ public class PatientDirectory {
     
     
     
-    public Patient createUserAccount(String username, String password, String name, Role role){
+    public Patient createUserAccount(String username, String password, String fName,String lastName, Role role){
         Patient patient = new Patient();
+        patient.setfName(fName);
+        patient.setLastName(lastName);
         patient.setUserName(username);
         patient.setPassword(password);
         patient.setRole(role);
