@@ -11,6 +11,10 @@ import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.BuyInsuranceWorkRequest;
+import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.regex.Matcher;
@@ -35,11 +39,8 @@ public class BillingPage extends javax.swing.JPanel {
     DB4OUtil dB4OUtil;
     String paymentAmount;
     
-    public BillingPage() {
-        initComponents();
-    }
-
     BillingPage(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil,String paymentAmount) {
+    initComponents();
     this.panelRight = panelRight;
     this.patient = patient;
     this.organization = organization;
@@ -48,11 +49,13 @@ public class BillingPage extends javax.swing.JPanel {
     this.dB4OUtil = dB4OUtil;
     this.paymentAmount = paymentAmount;
     
-    txtFName.setText(((Patient)patient).getfName());
-    txtLName.setText(((Patient)patient).getLastName());
-    txtInsCompany.setText(enterprise.getName());
-    txtStateNetwork.setText(((Patient)patient).getNetwork().getName());
-    txtEmail.setText(patient.getUsername());
+    Patient p = (Patient)patient;
+        System.out.println("patient is ");
+    txtFName.setText(p.getfName());
+    txtLName.setText(p.getLastName());
+    txtInsCompany.setText(p.getInsCompany().getName());
+    txtStateNetwork.setText(p.getNetwork().getName());
+    txtEmail.setText(p.getUserName());
     txtAmount.setText(paymentAmount);
     
     
@@ -87,6 +90,7 @@ public class BillingPage extends javax.swing.JPanel {
         boolean b = m.matches();
         return b;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,7 +154,7 @@ public class BillingPage extends javax.swing.JPanel {
         btn_close.setBackground(new java.awt.Color(96, 83, 150));
         btn_close.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_close.setForeground(new java.awt.Color(255, 255, 255));
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8_multiply_40px.png"))); // NOI18N
+        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/Images/icons8_back_to_40px.png"))); // NOI18N
         btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_closeMouseClicked(evt);
@@ -226,8 +230,6 @@ public class BillingPage extends javax.swing.JPanel {
         jLabel22.setForeground(new java.awt.Color(96, 83, 150));
         jLabel22.setText("CVV");
 
-        txtCVV.setText("jPasswordField1");
-
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(96, 83, 150));
         jLabel23.setText("Expiration");
@@ -243,8 +245,6 @@ public class BillingPage extends javax.swing.JPanel {
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(96, 83, 150));
         jLabel26.setText("Paypal Password");
-
-        txtPaypalPWD.setText("jPasswordField1");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-visa 2.png"))); // NOI18N
 
@@ -349,8 +349,8 @@ public class BillingPage extends javax.swing.JPanel {
                         .addComponent(txtPaypalId, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtPaypalPWD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPaypalPWD, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backJPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel10)
@@ -437,17 +437,19 @@ public class BillingPage extends javax.swing.JPanel {
                 .addGroup(backJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
                 .addGroup(backJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backJPanelLayout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel25))
+                        .addGap(12, 12, 12)
+                        .addGroup(backJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(backJPanelLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabel25))
+                            .addGroup(backJPanelLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(txtPaypalId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(backJPanelLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(txtPaypalId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(backJPanelLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                        .addGap(16, 16, 16)
                         .addComponent(txtPaypalPWD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -466,22 +468,23 @@ public class BillingPage extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(180, 180, 180)
                                 .addComponent(merchantBillLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 971, Short.MAX_VALUE)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(206, 206, 206))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(192, 192, 192)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(backJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 208, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,7 +510,18 @@ public class BillingPage extends javax.swing.JPanel {
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+                panelRight.remove(this);
+ 
+        Component[] componentArray = panelRight.getComponents();
+        Component component = componentArray[componentArray.length-1];
+        DetailsAndPurchasePlanJPanel panel = (DetailsAndPurchasePlanJPanel) component;
+        panel.loadPageWithFields();
+        panel.loadPlan();
+        panel.loadPageAfterReqSubmission();
+        panel.paybtnmethod();
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        layout.previous(panelRight);
+//        System.exit(0);
     }//GEN-LAST:event_btn_closeMouseClicked
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
@@ -519,13 +533,13 @@ public class BillingPage extends javax.swing.JPanel {
         int expMonth = jMonthChooser1.getMonth();
         int year = jYearChooser1.getYear();
         
-        if(((txtCardNum.getText()=="")&&(txtCVV.getText()==""))&&((txtPaypalId.getText()=="")&&(txtPaypalPWD.getText()==""))){
+        if(((txtCardNum.getText().isEmpty())&&(txtCVV.getText().isEmpty()))&&((txtPaypalId.getText().isEmpty())&&(txtPaypalPWD.getText().isEmpty()))){
         JOptionPane.showMessageDialog(null, "Choose atleast one payment method");
         }
-        else if(!(txtCardNum.getText()=="")&&(!(txtPaypalPWD.getText()=="")||!(txtPaypalId.getText()==""))){
+        else if(!(txtCardNum.getText().isEmpty())&&(!(txtPaypalPWD.getText().isEmpty())||!(txtPaypalId.getText().isEmpty()))){
             JOptionPane.showMessageDialog(null, "Choose only one payment method");
         }
-        else if(!(txtCVV.getText()=="")&&(!(txtPaypalPWD.getText()=="")||!(txtPaypalId.getText()==""))){
+        else if(!(txtCVV.getText().isEmpty())&&(!(txtPaypalPWD.getText().isEmpty())||!(txtPaypalId.getText().isEmpty()))){
             JOptionPane.showMessageDialog(null, "Choose only one payment method");
         }
         else if(!(cardNum(txtCardNum.getText()))){
@@ -542,6 +556,24 @@ public class BillingPage extends javax.swing.JPanel {
             Patient p = (Patient)this.patient;
             p.setActualEmi(paymentAmount);
             
+        
+ 
+                for( WorkRequest InsuranceBuyReq: p.getInsuranceOrganization().getWorkQueue().getWorkRequestList()) {
+                    
+                   BuyInsuranceWorkRequest insWorkreq = (BuyInsuranceWorkRequest)InsuranceBuyReq;
+                   
+                   System.out.println(" in populate table "+insWorkreq.getPatient().getUserName());
+                   
+                   String s1 =insWorkreq.getPatient().getUserName();
+                   String s2 = p.getUserName();
+                   if(s1==s2){
+                       
+                       insWorkreq.setStatus("Paid");
+                   }
+                   
+                }
+            
+            btnSubmit.setEnabled(false);
         }
         
 

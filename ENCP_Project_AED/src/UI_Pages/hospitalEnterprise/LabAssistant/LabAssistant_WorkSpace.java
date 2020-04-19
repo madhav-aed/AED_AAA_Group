@@ -437,7 +437,8 @@ public class LabAssistant_WorkSpace extends javax.swing.JFrame {
     private void logoutLabel1btn_label(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabel1btn_label
        // System.exit(0);
        dB4OUtil.storeSystem(business);
-       dispose();
+         System.exit(0);
+       //dispose();
        
        // Customer_WorkSpace.super.setVisible(false);
  

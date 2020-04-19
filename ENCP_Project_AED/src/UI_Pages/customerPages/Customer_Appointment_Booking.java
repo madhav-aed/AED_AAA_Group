@@ -98,7 +98,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                 }
                 if(compareApp != null){
                     lblAppointmentDate.setText(""+compareApp.getDate());
-                    lblAppointmentDoc1.setText("with Dr. "+compareApp.getDoctor().getName());
+              //      lblAppointmentDoc1.setText("with Dr. "+compareApp.getDoctor().getName());
                 }
                 else if(compareApp == null){
                     lblAppointmentDate.setText("");
@@ -997,7 +997,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                 docWorkReq.setTestResult("");
                 docWorkReq.setTimeOfAppointment(timeOfAppointment);
 
-                CustomerDoctorWorkRequest docWorkReq = new CustomerDoctorWorkRequest();
                 org.getWorkQueue().getWorkRequestList().add(docWorkReq);
                 
                 doctor.getDs().add(ds);
@@ -1042,7 +1041,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
         labWorkReq.setRefBy("Self");
         labWorkReq.setMessage("");
         labWorkReq.setTestResult("");
-        CustomerLabWorkRequest labWorkReq = new CustomerLabWorkRequest();
         
 //        doctor.getDs().add(ds);
         

@@ -4,6 +4,7 @@
  */
 package Business.Customer;
 
+import Business.Billing.BillingHistory;
 import Business.Departments.Organization;
 import Business.Employees.*;
 import Business.Enterprises.Enterprise;
@@ -34,14 +35,15 @@ public class Patient extends UserAccount {
     private String userName;
     private String password;
     private Date dob;
-    private String insDetail;
+    private String insDetail ;
     private String mobno;
     private String gender;
     private String insuredAmount;
     private String estEmi;
     private String[] checkBoxHealth;
-    private String planType;
+    private String planType ;  //Bronze,Gold,Platinum
     private String actualEmi;
+    private BillingHistory myBillHistory;
 
 
 
@@ -51,14 +53,22 @@ public class Patient extends UserAccount {
     private MedicalHistory medHist;
     
     private MedicalInsurance medIns;
-    
+    Network network;
+    Enterprise insCompany;
     private Organization InsuranceOrganization;
+
+    public BillingHistory getMyBillHistory() {
+        return myBillHistory;
+    }
 
         public Patient()  {
         id = count;
         totalPatients  = count;
         count++;
         this.medHist = new MedicalHistory();
+        this.checkBoxHealth = new String[2];
+        this.myBillHistory = new BillingHistory();
+        this.billHist = new BillingHistory();
 
 
 // Rohit 
@@ -72,6 +82,19 @@ public class Patient extends UserAccount {
     }
 
 
+        //Madhav 
+        
+         private BillingHistory billHist;
+
+    public BillingHistory getBillHist() {
+        return billHist;
+    }
+
+    public void setBillHist(BillingHistory billHist) {
+        this.billHist = billHist;
+    }
+        
+        //Madhav
 
     public Organization getInsuranceOrganization() {
         return InsuranceOrganization;
@@ -115,8 +138,7 @@ public class Patient extends UserAccount {
     public void setPlanType(String planType) {
         this.planType = planType;
     }
-    Network network;
-    Enterprise insCompany;
+
 
     public Enterprise getInsCompany() {
         return insCompany;

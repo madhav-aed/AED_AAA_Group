@@ -5,24 +5,52 @@
  */
 package UI_Pages.customerPages;
 
+import Business.Billing.Bill;
+import Business.Customer.Patient;
+import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
+import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
+import Business.Network.Network;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.BillingWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import UI_Pages.Sudhanshu.*;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Sudhanshu Gangele
  */
+
+
 public class patientBillJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form patientBillJPanel
      */
+    JPanel panelRight;
+    UserAccount patient;
+    Organization organization;
+    Enterprise enterprise;
+    EcoSystem business;
+    DB4OUtil dB4OUtil;
     
-    JPanel rightPanel;
-    public patientBillJPanel(JPanel rightPanel) {
-        this.rightPanel = rightPanel;
+    public patientBillJPanel(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
+        
         initComponents();
+        
+        this.panelRight = panelRight;
+        this.patient = patient;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.business = business;
+        this.dB4OUtil = dB4OUtil;
+        
+        populateTable();
     }
 
     /**
@@ -36,7 +64,7 @@ public class patientBillJPanel extends javax.swing.JPanel {
 
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblBooking = new javax.swing.JTable();
+        tblBills = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         btnView = new java.awt.Button();
         btnPayBill = new java.awt.Button();
@@ -56,9 +84,9 @@ public class patientBillJPanel extends javax.swing.JPanel {
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        tblBooking.setBackground(new java.awt.Color(247, 247, 247));
-        tblBooking.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        tblBooking.setModel(new javax.swing.table.DefaultTableModel(
+        tblBills.setBackground(new java.awt.Color(247, 247, 247));
+        tblBills.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        tblBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Allan", "XLS", "2hrs", null, null},
                 {"Brian", "React", "1hr", null, null},
@@ -77,10 +105,10 @@ public class patientBillJPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        tblBooking.setGridColor(new java.awt.Color(247, 247, 247));
-        tblBooking.setRowHeight(20);
-        tblBooking.setSelectionBackground(new java.awt.Color(96, 83, 150));
-        jScrollPane1.setViewportView(tblBooking);
+        tblBills.setGridColor(new java.awt.Color(247, 247, 247));
+        tblBills.setRowHeight(20);
+        tblBills.setSelectionBackground(new java.awt.Color(96, 83, 150));
+        jScrollPane1.setViewportView(tblBills);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(96, 83, 150));
@@ -206,6 +234,38 @@ public class patientBillJPanel extends javax.swing.JPanel {
         add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 810, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    public void populateTable(){
+            DefaultTableModel dtm = (DefaultTableModel) tblBills.getModel();
+            dtm.setRowCount(0);
+           
+            Patient p = (Patient)patient;
+            ArrayList<Bill> unpaidBills =  p.getMyBillHistory().getUnpaidBills();
+                for(Bill unpaidBill : unpaidBills){
+
+//                    if(insWorkreq.getPatient().getUsername().equals(p.getUserName())){
+                        Object[] row = new Object[4];
+
+                        row[0]=unpaidBill; //BillNo
+                        
+                        row[1]=unpaidBill.getEnterprise(); //Hospital or Insurance company bill
+                        row[2]=unpaidBill.getBillType(); //whether for Claim settlement/Self Pay/ Insurance Company EMI
+                        row[3]=unpaidBill.getBillAmount(); // Total Amount
+                        row[4]=unpaidBill.getPaidThroughInsurance(); // Paid by insurance company
+                        row[5]= unpaidBill.getPaidThroughSelf(); // to be paid or already paid by self
+                        if(unpaidBill.getAppointment().getAppointmentType()==""){
+                        row[6]= "Insurance payment" ;   // Test for Insurance/Vital test/ Insurance payment
+                        }
+                        else{
+                        row[6] = unpaidBill.getAppointment().getAppointmentType(); 
+                        }
+                        row[7]= unpaidBill.getBillStatus(); //paid or unpaid
+                        dtm.addRow(row);
+                }
+                        
+                        
+
+            }
+    
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnViewActionPerformed
@@ -217,9 +277,9 @@ public class patientBillJPanel extends javax.swing.JPanel {
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
         // TODO add your handling code here:
       //  System.exit(0);
-        CardLayout layout = (CardLayout)rightPanel.getLayout();
-        rightPanel.remove(this);
-        layout.previous(rightPanel);
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        panelRight.remove(this);
+        layout.previous(panelRight);
 
         
         
@@ -259,6 +319,6 @@ public class patientBillJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelIcon;
     private javax.swing.JLabel lblPendingAmount;
-    private javax.swing.JTable tblBooking;
+    private javax.swing.JTable tblBills;
     // End of variables declaration//GEN-END:variables
 }

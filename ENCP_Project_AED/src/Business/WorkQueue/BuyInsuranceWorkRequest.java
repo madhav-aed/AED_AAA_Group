@@ -16,8 +16,24 @@ public class BuyInsuranceWorkRequest extends WorkRequest {
      private String testResult;
      private Enterprise currentEnterprise;
      private String typeOfInsurance;
+     private String insReqNo;
      private float premiums;
+     private Patient patient;
+     private String vitals;
 
+     private static int count = 2000;
+      
+
+     public BuyInsuranceWorkRequest() {
+        insReqNo = "INS"+count;
+        count++;
+    }
+ 
+
+     public String getInsReqNo() {
+        return insReqNo;
+    }
+    
     public Patient getPatient() {
         return patient;
     }
@@ -57,9 +73,9 @@ public class BuyInsuranceWorkRequest extends WorkRequest {
     public void setVitals(String vitals) {
         this.vitals = vitals;
     }
-     private Patient patient;
+     
      // Below needs to be changed, file number
-     private String vitals;
+
      
 
     public String getTestResult() {
@@ -70,6 +86,10 @@ public class BuyInsuranceWorkRequest extends WorkRequest {
         this.testResult = testResult;
     }
 
+    @Override
+    public String toString() {
+        return insReqNo; //To change body of generated methods, choose Tools | Templates.
+    }
 
    
 }

@@ -462,7 +462,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new patientBillJPanel(panelRight));
+        panelRight.add(new patientBillJPanel( panelRight,  patient,  organization,  enterprise,  business,  dB4OUtil));
         layout.next(panelRight);
         // Book appointment panel calling here
                

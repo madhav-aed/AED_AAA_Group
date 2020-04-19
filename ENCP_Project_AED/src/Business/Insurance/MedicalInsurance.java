@@ -9,6 +9,7 @@ import Business.Customer.*;
 import Business.Departments.Organization;
 import Business.Employees.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -16,10 +17,41 @@ import java.util.ArrayList;
 public class MedicalInsurance {
     
     private String Patient;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
+       private Organization org;
+       
+           private String InsuranceNumber;
+
+    public String getInsuranceNumber() {
+        return InsuranceNumber;
+    }
     
-    private Organization org;
+    
+    private static int count = 100001;
+
+        public MedicalInsurance (){
+        InsuranceNumber = "INC"+count;
+        count++;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+    
+ 
 
     public String getPatient() {
         return Patient;
@@ -29,21 +61,7 @@ public class MedicalInsurance {
         this.Patient = Patient;
     }
 
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
+ 
 
     public Organization getOrg() {
         return org;
@@ -53,13 +71,7 @@ public class MedicalInsurance {
         this.org = org;
     }
 
-    public int getInsuranceNumber() {
-        return InsuranceNumber;
-    }
 
-    public void setInsuranceNumber(int InsuranceNumber) {
-        this.InsuranceNumber = InsuranceNumber;
-    }
 
     public static int getCount() {
         return count;
@@ -69,15 +81,8 @@ public class MedicalInsurance {
         MedicalInsurance.count = count;
     }
     
-    private int InsuranceNumber;
-    
-    
-    private static int count = 100001;
 
-    public MedicalInsurance (){
-        InsuranceNumber = count;
-        count++;
-    }
+
  
  
 
