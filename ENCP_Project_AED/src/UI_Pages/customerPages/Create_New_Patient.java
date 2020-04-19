@@ -553,8 +553,9 @@ public class Create_New_Patient extends javax.swing.JFrame {
             
           Patient patient =  business.getPatientDirectory().createUserAccount(email, password, firstName,lastName, new CustomerRole());
             
+          
           patient.setDob(date);
-          patient.setMobno(contactNumber);
+          patient.setMobno(txtMobile.getText());
           patient.setNetwork(network);
 
           

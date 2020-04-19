@@ -16,6 +16,8 @@ import UI_Pages.hospitalEnterprise.doctorPages.*;
 import UI_Pages.customerPages.patientAppointmentJPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -51,6 +53,7 @@ public class Lab_Home extends javax.swing.JPanel {
         initComponents();
         btn_close.setVisible(false);
         init();
+        populateLabTable();
     }
       public void init(){
          // Setting welcome string
@@ -72,16 +75,21 @@ public class Lab_Home extends javax.swing.JPanel {
        
     
     }
+        
+        jLabel5.setText(this.ua.getEmployee().getName());
     }
     
      public void populateLabTable(){
        DefaultTableModel model1 = (DefaultTableModel) LabReqTable.getModel();
-
+       int countTot = 0;
+       int countIns = 0;
         model1.setRowCount(0);
       /* for (WorkRequest wb : WorkQueue.workRequestList()) */
                 
             for (WorkRequest wb : this.org.getWorkQueue().getWorkRequestList()){
                 CustomerLabWorkRequest lb = (CustomerLabWorkRequest) wb;
+                
+                if(lb.getStatus()!= "Processed"){
                 
             
                   
@@ -89,16 +97,29 @@ public class Lab_Home extends javax.swing.JPanel {
                         Object[] row = new Object[5];
                     
                         row[0] = lb;
+                        Format f = new SimpleDateFormat("MM/dd/yy");
+//                        Date strDate = f.format(lb.getAppointmentDate());
+//                        row[1] = strDate;
                         row[1] = lb.getAppointmentDate();
                         row[2] = lb.getRefBy();
                         row[3] = lb.getWorkRequestType();
+                        row[4] = lb.getStatus();
                        
-                        row[4] = lb.getSender().getEmployee().getName();
+                   //     row[4] = lb.getSender().getEmployee().getName();
                         
 
                         model1.addRow(row);
-                    
+                        if (lb.getWorkRequestType() == "Tests For Insurance"){
+                            countIns = countIns + 1;}
+                        
+                        countTot = countTot + 1;
+                }
           }
+            
+            
+            jLabel22.setText(String.valueOf(countTot));
+            jLabel11.setText(String.valueOf(countTot - countIns));
+            jLabel9.setText(String.valueOf(countIns));
                   }
         
         
@@ -136,7 +157,6 @@ public class Lab_Home extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
@@ -144,14 +164,13 @@ public class Lab_Home extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         ProcessButton = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(247, 247, 247));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel5.setText("Hello ");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 23, 270, 37));
+        jLabel5.setText("Ran");
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -181,12 +200,9 @@ public class Lab_Home extends javax.swing.JPanel {
 
         jPanel5.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 10));
 
-        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 130, 80));
-
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel10.setText("Doc Requests");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 102, 124, 41));
+        jLabel10.setText("Patient Tests");
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -216,12 +232,9 @@ public class Lab_Home extends javax.swing.JPanel {
         jLabel20.setText("Total");
         jPanel6.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 40, 10));
 
-        add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 140, 80));
-
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(96, 83, 150));
         jLabel12.setText("Insurance Tests");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 106, 124, 30));
 
         jPanel7.setBackground(new java.awt.Color(247, 247, 247));
 
@@ -245,7 +258,7 @@ public class Lab_Home extends javax.swing.JPanel {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                    .addComponent(jLabel15))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -278,7 +291,7 @@ public class Lab_Home extends javax.swing.JPanel {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel18))
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -304,10 +317,8 @@ public class Lab_Home extends javax.swing.JPanel {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
-
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, -1, 350));
 
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -316,14 +327,14 @@ public class Lab_Home extends javax.swing.JPanel {
         LabReqTable.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         LabReqTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Allan", "OPD", "12 Apr ", "10.30"}
+                {"Allan", "OPD", "12 Apr ", "10.30", null}
             },
             new String [] {
-                "Patient", "Ref By", "Date", "Test"
+                "Ins Request Number", "Appointment date", "Ref by", "Test Type", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -335,12 +346,9 @@ public class Lab_Home extends javax.swing.JPanel {
         LabReqTable.setSelectionBackground(new java.awt.Color(96, 83, 150));
         jScrollPane1.setViewportView(LabReqTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 460, 120));
-
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(96, 83, 150));
         jLabel16.setText("Recent messages");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 130, -1));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -359,7 +367,7 @@ public class Lab_Home extends javax.swing.JPanel {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(166, Short.MAX_VALUE)
+                .addContainerGap(172, Short.MAX_VALUE)
                 .addComponent(btn_close)
                 .addContainerGap())
         );
@@ -368,17 +376,9 @@ public class Lab_Home extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 230, 70));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel13.setText("You have 5 new Notifications");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 66, 270, 30));
-
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(96, 83, 150));
         jLabel21.setText("Process");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 100, 30));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -426,20 +426,95 @@ public class Lab_Home extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-
         ProcessButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8-treatment.png"))); // NOI18N
         ProcessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProcessButtonActionPerformed(evt);
             }
         });
-        add(ProcessButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel25.setText("Tests for Today");
-        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 102, 124, 41));
+        jLabel25.setText("Tests Pending");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel6.setText("Hello ");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(173, 173, 173)
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ProcessButton))
+                        .addGap(110, 110, 110)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(112, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel16)))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(20, 20, 20)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(ProcessButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -475,7 +550,6 @@ public class Lab_Home extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -488,6 +562,7 @@ public class Lab_Home extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;

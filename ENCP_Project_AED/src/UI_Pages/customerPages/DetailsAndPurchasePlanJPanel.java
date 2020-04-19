@@ -13,19 +13,23 @@ import Business.Enterprises.Enterprise;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.BuyInsuranceWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -38,7 +42,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
      */
     
     JPanel panelRight;
- 
+    BuyInsuranceWorkRequest buyRequest;
     UserAccount patient;
     Organization organization;
     Enterprise enterprise;
@@ -52,7 +56,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         initComponents();
         this.panelRight = panelRight;
         this.patient = patient;
-        this.organization = organization;
+ //       this.organization = organization;
         this.enterprise = enterprise;
         this.business = business;
         this.dB4OUtil = dB4OUtil;
@@ -61,9 +65,160 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
 //        }else{
 //        }
         p = (Patient)this.patient;
+        System.out.println("Patient plan"+p.getPlanType());
         btnPay.setVisible(false);
-        loadPage();
-    }
+        
+        if(!(p.getPlanType()==null)){
+        loadPageWithFields();
+        loadPlan();
+            System.out.println("landing here now");
+        loadPageAfterReqSubmission();
+        btnPay.setVisible(true);
+        btnPay.setEnabled(false);
+        Color lightPurple = new Color(232,201,232);
+        btnPay.setBackground(lightPurple);
+        btnReqInsurance.setLabel("Request submitted");
+            System.out.println("in pay enable session 1");    
+            
+        btnReqInsurance.setEnabled(false);
+        }
+        else{
+        loadPageWithFields();
+        loadPlan();
+        initialLoad();
+        }
+        
+        paybtnmethod();
+        
+        this.dB4OUtil.storeSystem(business);
+         }
+            public void paybtnmethod(){
+                
+                System.out.println("getactualemi"+p.getActualEmi());
+            if(!(p.getActualEmi()== null))   { 
+                System.out.println("in pay enable session 2"); 
+            for(Organization org : p.getInsCompany().getOrganizationDirectory().getOrganizationList()){
+                if(org.getOrganizationType().equals(Organization.Type.Sales_Organization.getValue())){
+                for( WorkRequest InsuranceBuyReq: org.getWorkQueue().getWorkRequestList()) {
+                    
+                   BuyInsuranceWorkRequest insWorkreq = (BuyInsuranceWorkRequest)InsuranceBuyReq;
+                   System.out.println(" in populate table "+insWorkreq.getPatient().getUserName());
+                   String s1 =insWorkreq.getPatient().getUserName();
+                   String s2 = p.getUserName();
+                   if(s1==s2){
+                       System.out.println(" p.getinsdetail is"+p.getInsDetail()+" for "+p.getUserName());
+                       System.out.println(" insWrokrep.getstatus is"+insWorkreq.getStatus());
+                       
+                       
+                              if(!(p.getInsDetail().isEmpty())&& (insWorkreq.getStatus().contains("Approved"))){
+                                  System.out.println("in pay enalbe session 3");
+                                btnPay.setVisible(true);
+                                btnPay.setEnabled(true);
+                                Color purple = new Color(96,83,150);
+                                btnPay.setBackground(purple);
+                                btnReqInsurance.setLabel("Request submitted");
+                                btnReqInsurance.setEnabled(false);
+                                
+                                lblAppearonAuth1.setVisible(true);
+                                lblAppearonAuth2.setVisible(true);
+                                lblAppearonAuth3.setVisible(true);
+                                txtEMIAmount.setVisible(true);  
+                                txtInsuranceNumber.setVisible(true);
+                                txtInsuredAmount.setVisible(true);
+                                txtInsuredAmount.setText(p.getInsuredAmount());
+                                txtInsuranceNumber.setText(p.getInsDetail()); 
+                                lblPaymentAmount.setText(p.getActualEmi()); 
+                                }
+                              else if(!(p.getInsDetail().isEmpty())&& (insWorkreq.getStatus().contentEquals("Paid"))){
+                                btnPay.setVisible(true);
+                                btnPay.setEnabled(false);
+                                Color purple = new Color(96,83,150);
+                                btnPay.setBackground(purple);
+                                btnPay.setLabel("Paid");
+                                btnReqInsurance.setLabel("Request submitted");
+                                btnReqInsurance.setEnabled(false);
+                                
+                                lblAppearonAuth1.setVisible(true);
+                                lblAppearonAuth2.setVisible(true);
+                                lblAppearonAuth3.setVisible(true);
+                                txtEMIAmount.setVisible(true);  
+                                txtInsuranceNumber.setVisible(true);
+                                txtInsuredAmount.setVisible(true);
+                                txtInsuredAmount.setText(p.getInsuredAmount());
+                                txtInsuranceNumber.setText(p.getInsDetail()); 
+                                txtInsuranceNumber.setText(p.getActualEmi());
+                                lblPaymentAmount.setText(p.getActualEmi());
+                                }
+                              else{
+                                btnPay.setVisible(true);
+                                btnPay.setEnabled(false);
+                                Color pinkPurple = new Color(232,201,232);
+                                btnPay.setBackground(pinkPurple);
+                                btnReqInsurance.setLabel("Request submitted");
+                                btnReqInsurance.setEnabled(false);
+                                
+                                
+                                lblAppearonAuth1.setVisible(false);
+                                lblAppearonAuth2.setVisible(false);
+                                lblAppearonAuth3.setVisible(false);
+                                txtEMIAmount.setVisible(false);  
+                                txtInsuranceNumber.setVisible(false);
+                                txtInsuredAmount.setVisible(false);
+                              }
+                   }
+                }
+                }
+            }
+            }
+            }
+            public void populateReqTableAfterReload(){
+                
+            DefaultTableModel dtm = (DefaultTableModel) tblAppear.getModel();
+            dtm.setRowCount(0);
+            for(Organization org : p.getInsCompany().getOrganizationDirectory().getOrganizationList()){
+                if(org.getOrganizationType().equals(Organization.Type.Sales_Organization.getValue())){
+                for( WorkRequest InsuranceBuyReq: org.getWorkQueue().getWorkRequestList()) {
+                    
+                   BuyInsuranceWorkRequest insWorkreq = (BuyInsuranceWorkRequest)InsuranceBuyReq;
+                   System.out.println(" in populate table "+insWorkreq.getPatient().getUserName());
+                   String s1 =insWorkreq.getPatient().getUserName();
+                   String s2 = p.getUserName();
+                   if(s1==s2){
+//                    if(insWorkreq.getPatient().getUsername().equals(p.getUserName())){
+                        Object[] row = new Object[4];
+                        row[0]=insWorkreq.getRequestDate();
+                        row[1]=insWorkreq.getCurrentEnterprise();
+                        row[2]=insWorkreq.getTypeOfInsurance();
+                        row[3]=insWorkreq.getStatus();
+                        dtm.addRow(row);
+                    }
+
+                }
+            }
+            }
+            }
+            public void populateReqTable(){
+            DefaultTableModel dtm = (DefaultTableModel) tblAppear.getModel();
+            dtm.setRowCount(0);
+           
+                for( WorkRequest InsuranceBuyReq: organization.getWorkQueue().getWorkRequestList()) {
+                    
+                   BuyInsuranceWorkRequest insWorkreq = (BuyInsuranceWorkRequest)InsuranceBuyReq;
+                   System.out.println(" in populate table "+insWorkreq.getPatient().getUserName());
+                   String s1 =insWorkreq.getPatient().getUserName();
+                   String s2 = p.getUserName();
+                   if(s1==s2){
+//                    if(insWorkreq.getPatient().getUsername().equals(p.getUserName())){
+                        Object[] row = new Object[4];
+                        row[0]=insWorkreq.getRequestDate();
+                        row[1]=insWorkreq.getCurrentEnterprise();
+                        row[2]=insWorkreq.getTypeOfInsurance();
+                        row[3]=insWorkreq.getStatus();
+                        dtm.addRow(row);
+                    }
+
+                }
+            }
     
         public void populateComboBox(){
        
@@ -82,25 +237,60 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
            comboBoxETPName.setModel(dm);
     }
         
-     public void loadPage(){
-     
-        String pattern = "MM-dd-yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        
-
+     public void loadPageAfterReqSubmission(){
          
-         txtFirstName.setText(p.getfName());
-         txtLastName.setText(p.getLastName());
-         txtMobileNo.setText(p.getMobno());
-         System.out.println("firstname"+p.getfName());
-         System.out.println("username"+p.getUserName());
-         System.out.println("mobile no"+p.getMobno());
-         System.out.println("enterprise numbers"+p.getNetwork().getEnterpriseDirectory().getEnterpriseList().size());
-         System.out.println("date of birth"+p.getDob());
-         txtNetwork.setText(p.getNetwork().getName());
-         String dob = simpleDateFormat.format(p.getDob());
-         txtDOB.setText(dob);
-         if(plan =="Bronze"){
+// When the request is hit and pay button shows up
+             lblDisappearonAuth.setVisible(false);
+             lblDisappearonAuth1.setVisible(false);
+             
+             lblAppearonAuth.setVisible(true);
+             lblAppear.setVisible(true);
+             
+            lblcbox1.setVisible(true);
+           
+             lblAppearonAuth5.setVisible(true);
+             checkBox1.setVisible(false);
+             checkbox2.setVisible(false);
+             System.out.println("value of plan "+p.getPlanType());
+             System.out.println("value of checkbostring"+p.getCheckBoxHealth().length);
+             System.out.println("value of checkbox 1"+p.getCheckBoxHealth()[0]);
+             if(!(p.getCheckBoxHealth()[0] == "")&&!(p.getCheckBoxHealth()[1]=="")){
+                 lblcbox1.setText("Smoking History , Past Surgeries ");
+             }
+             else if(!(p.getCheckBoxHealth()[0]=="")){
+                 lblcbox1.setText("Smoking History");
+             }
+             else {
+                 if(!(p.getCheckBoxHealth()[1]=="")){
+                 lblcbox1.setText("Past Surgeries");
+             }
+             }
+             comboBoxETPName.setVisible(false);
+             
+             txtEstEMI.setText(p.getEstEmi());
+             System.out.println("esemi"+p.getEstEmi());
+             txtInsuranceCompanyName.setVisible(true);
+             btnCalEStEMI.setEnabled(false);
+             btnCalEStEMI.setLabel("Estimate");
+             
+             
+             tblAppear.setVisible(true);
+             txtInsuranceCompanyName.setText(p.getInsCompany().getName());
+             txtEMIAmount.setText(p.getActualEmi());
+             checkBox1.setSelected(false);
+             checkbox2.setSelected(false);
+             lblPaymentAmount.setVisible(false);
+             lblPaymentAmount.setText("");
+             populateComboBox();
+//             populateReqTable();
+             populateReqTableAfterReload();
+             
+     
+     }
+     
+     public void loadPlan(){
+     
+                  if(plan =="Bronze"){
              Color bronze = new Color(205,127,50);
              Font font = new Font("Courier", Font.BOLD,14);
              txtPlan.setForeground(bronze);
@@ -121,8 +311,11 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
              txtPlan.setFont(font);
              txtPlan.setText(this.plan);
          }
-         
-         if(!btnPay.isVisible()){
+     }
+     
+     public void initialLoad(){
+
+         // This runs before request button is clicked
              lblDisappearonAuth.setVisible(true);
              lblDisappearonAuth1.setVisible(true);
              lblDisaapearonAuth2.setVisible(true);
@@ -152,44 +345,24 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
              checkbox2.setSelected(false);
              lblPaymentAmount.setVisible(true);
              lblPaymentAmount.setText("1");
+             lblcbox1.setVisible(false);
                      
              populateComboBox();
-             
-         }
-         else{
-             lblDisappearonAuth.setVisible(false);
-             lblDisappearonAuth1.setVisible(false);
-             lblDisaapearonAuth2.setVisible(false);
-             lblAppearonAuth.setVisible(true);
-             lblAppear.setVisible(true);
-             lblAppearonAuth1.setVisible(true);
-             lblAppearonAuth2.setVisible(true);
-             lblAppearonAuth3.setVisible(true);
-             lblAppearonAuth5.setVisible(true);
-             checkBox1.setEnabled(false);
-             checkbox2.setEnabled(false);
-             comboBoxETPName.setEnabled(false);
-             comboBoxETPName.setVisible(false);
-             txtEMIAmount.setVisible(true);
-             txtEstEMI.setVisible(false);
-             txtInsuranceCompanyName.setVisible(true);
-             txtInsuranceNumber.setVisible(true);
-             txtInsuredAmount.setVisible(true);
-             btnCalEStEMI.setVisible(false);
-             btnReqInsurance.setVisible(false);
-             tblAppear.setVisible(true);
-             txtInsuredAmount.setText(p.getInsuredAmount());
-             txtInsuranceNumber.setText(p.getInsDetail());
-             
-//             txtInsuranceCompanyName.setText(enterprise.getName());
-             txtEMIAmount.setText(p.getEstEmi());
-             checkBox1.setSelected(false);
-             checkbox2.setSelected(false);
-             lblPaymentAmount.setVisible(false);
-             lblPaymentAmount.setText("");
-             populateComboBox();
+   
+     }
+     public void loadPageWithFields(){
+     
+        String pattern = "MM-dd-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        
+         txtFirstName.setText(p.getfName());
+         txtLastName.setText(p.getLastName());
+         txtMobileNo.setText(p.getMobno());
 
-         }
+         txtNetwork.setText(p.getNetwork().getName());
+         String dob = simpleDateFormat.format(p.getDob());
+         txtDOB.setText(dob);
+
      }   
         
         
@@ -243,6 +416,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         txtInsuranceCompanyName = new javax.swing.JTextField();
         lblDisappearonAuth2 = new javax.swing.JLabel();
+        lblcbox1 = new javax.swing.JLabel();
         btnPay = new java.awt.Button();
         lblAppearonAuth = new javax.swing.JLabel();
         lblPaymentAmount = new javax.swing.JLabel();
@@ -310,25 +484,20 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        tblAppear.setBackground(new java.awt.Color(247, 247, 247));
         tblAppear.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         tblAppear.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
                 "Date", "Company", "Plan", "Status"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         tblAppear.setGridColor(new java.awt.Color(247, 247, 247));
+        tblAppear.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblAppear.setRowHeight(20);
         tblAppear.setSelectionBackground(new java.awt.Color(96, 83, 150));
         jScrollPane1.setViewportView(tblAppear);
@@ -419,9 +588,9 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEMIAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAppearonAuth3))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAppearonAuth3)
+                            .addComponent(txtEMIAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addComponent(lblDisaapearonAuth2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -493,42 +662,47 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         lblDisappearonAuth2.setForeground(new java.awt.Color(96, 83, 150));
         lblDisappearonAuth2.setText("in USD");
 
+        lblcbox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblcbox1.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblMedHistory)
-                        .addGap(31, 31, 31)
-                        .addComponent(checkBox1)
-                        .addGap(27, 27, 27)
-                        .addComponent(checkbox2))
-                    .addComponent(lblDisappearonAuth1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(comboBoxETPName, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblAppearonAuth5)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtInsuranceCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCalEStEMI, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEstEMI, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblDisappearonAuth2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(73, 73, 73))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDisappearonAuth, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblcbox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblMedHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(38, 38, 38)
+                                .addComponent(checkBox1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(checkbox2))
+                            .addComponent(comboBoxETPName, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDisappearonAuth1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblAppearonAuth5)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtInsuranceCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnCalEStEMI, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEstEMI, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblDisappearonAuth2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(73, 73, 73))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDisappearonAuth, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,21 +720,21 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
                         .addComponent(lblAppearonAuth5)
                         .addComponent(txtInsuranceCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(btnCalEStEMI, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(lblDisappearonAuth1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboBoxETPName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblcbox1)
+                        .addGap(10, 10, 10)
+                        .addComponent(lblDisappearonAuth1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBoxETPName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEstEMI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDisappearonAuth2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCalEStEMI, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtEstEMI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblDisappearonAuth2)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -573,7 +747,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblAppearonAuth.setText("Thankyou for considering us for Business. Please track your request.Once approved,proceed with the payment");
+        lblAppearonAuth.setText("Thank you for considering us for Business. Please track your request.Once approved,proceed with the payment");
 
         lblPaymentAmount.setBackground(new java.awt.Color(255, 255, 255));
         lblPaymentAmount.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -807,7 +981,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         }
 
         txtEstEMI.setText(String.valueOf(amount));
-  
+  this.dB4OUtil.storeSystem(business);
     }//GEN-LAST:event_btnCalEStEMIActionPerformed
 
     private void txtEstEMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstEMIActionPerformed
@@ -822,9 +996,16 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
     private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
         // TODO add your handling code here:
         //  System.exit(0);
-        CardLayout layout = (CardLayout)panelRight.getLayout();
+        
         panelRight.remove(this);
+ 
+        Component[] componentArray = panelRight.getComponents();
+        Component component = componentArray[componentArray.length-1];
+        buyPlanJPanel buyPanel = (buyPlanJPanel) component;
+        buyPanel.btnView();
+        CardLayout layout = (CardLayout)panelRight.getLayout();
         layout.previous(panelRight);
+        this.dB4OUtil.storeSystem(business);
     }//GEN-LAST:event_btn_backMouseClicked
 
     private void checkbox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox2ActionPerformed
@@ -833,6 +1014,21 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         // TODO add your handling code here:
+        
+             lblAppearonAuth1.setVisible(true);
+             lblAppearonAuth2.setVisible(true);
+             lblAppearonAuth3.setVisible(true);
+             txtEMIAmount.setVisible(true);  
+             txtInsuranceNumber.setVisible(true);
+             txtInsuredAmount.setVisible(true);
+             txtInsuredAmount.setText(p.getInsuredAmount());
+             txtInsuranceNumber.setText(p.getInsDetail()); 
+             
+          
+            btnPay.setLabel("Paid");
+            Color purple = new Color(96,83,150);
+            btnPay.setBackground(purple);
+            
         String paymentAmount = lblPaymentAmount.getText();
         BillingPage panel = new BillingPage(panelRight, patient, organization, enterprise, business, dB4OUtil,paymentAmount);
         panelRight.add("BillingPage", panel);
@@ -847,7 +1043,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         if(comboBoxETPName.getSelectedIndex()<=0){
              JOptionPane.showMessageDialog(null, "Please select the Insurance company");
         }
-        else if(btnCalEStEMI.isEnabled()){
+        else if(txtEstEMI.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Please calculate EMI score before submitting request");
         }
         else{
@@ -857,23 +1053,28 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
              a[0] = "Smoking";
          }
          if(checkbox2.isSelected()){
-             a[0] = "Surgery Done";
+             a[1] = "Surgery Done";
          }
          
          
+         System.out.println(" befor org check after sales confirm, size of enterprise"+enterprise.getOrganizationDirectory().getOrganizationList().size());
          BuyInsuranceWorkRequest buyReq = new BuyInsuranceWorkRequest();
          
          for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
          if(org.getOrganizationType().equals(Organization.Type.Sales_Organization.getValue())){
+//             System.out.println(" inside org check after sales confirm"+org.getName());
              this.organization = org;
-             org.getWorkQueue().getWorkRequestList().add(buyReq);
+             p.setInsuranceOrganization(organization);
+             this.enterprise = enterprise;
+             organization.getWorkQueue().getWorkRequestList().add(buyReq);
              p.setCheckBoxHealth(a);
-             p.setEstEmi("");
+             p.setEstEmi(txtEstEMI.getText());
              p.setInsCompany(enterprise);
              p.setInsDetail("");
              p.setInsuredAmount("");
              p.setPlanType(this.plan);
-             buyReq.setSender(patient);
+             p.setInsuranceOrganization(organization);
+             buyReq.setPatient((Patient)patient);
              buyReq.setTypeOfInsurance(plan);
              buyReq.setStatus("Insurance Requested");
              buyReq.setMessage("");
@@ -881,22 +1082,32 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
              buyReq.setRequestDate(new Date());
              buyReq.setPremiums(amount);
              
-//             dB4OUtil.storeSystem(business);
+             
+//             org.getWorkQueue().getWorkRequestList().add(buyReq);
+             
+//             System.out.println(" organization after adding wr "+org.getWorkQueue().getWorkRequestList().size());
+//             System.out.println(" username of patient in buyrequest "+buyReq.getPatient().getUserName());
+//             System.out.println("username of patient in object"+p.getUserName());
+             loadPageAfterReqSubmission();
+             this.buyRequest = buyReq;
+            
+             
+             btnPay.setVisible(true);
+             btnPay.setEnabled(false);
+            Color lightPurple = new Color(232,201,232);
+            btnPay.setBackground(lightPurple);
+            btnReqInsurance.setLabel("Request submitted");
+            
+            
+            btnReqInsurance.setEnabled(false);
+//            dB4OUtil.storeSystem(business);
              
              JOptionPane.showMessageDialog(null, "Insurance requested successfully");
-         }else{
-             JOptionPane.showMessageDialog(null, "No Sales Org Found in Ins. Company");
-             
          }
          }
          
-        btnPay.setVisible(true);
+         this.dB4OUtil.storeSystem(business);
         
-        Color lightPurple = new Color(232,201,232);
-
-        btnReqInsurance.setBackground(lightPurple);
-        btnReqInsurance.setEnabled(false);
-        loadPage();
     }//GEN-LAST:event_btnReqInsuranceActionPerformed
     }
     private void comboBoxETPNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxETPNameActionPerformed
@@ -945,6 +1156,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblDisappearonAuth2;
     private javax.swing.JLabel lblMedHistory;
     private javax.swing.JLabel lblPaymentAmount;
+    private javax.swing.JLabel lblcbox1;
     private javax.swing.JSeparator seperatorAppearonAuth;
     private javax.swing.JTable tblAppear;
     private javax.swing.JTextField txtDOB;

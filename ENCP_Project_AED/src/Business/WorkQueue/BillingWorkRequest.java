@@ -5,12 +5,61 @@
  */
 package Business.WorkQueue;
 
+import Business.Customer.Patient;
+
 /**
  *
  * @author rohit
  */
 public class BillingWorkRequest extends WorkRequest {
      private String testResult;
+     private String claimReqNo;
+     private Patient patient;
+     private String typeOfInsurance;
+     private String claimedAmount;
+     private String claimSantioned;
+     private String copay;
+
+    public String getClaimedAmount() {
+        return claimedAmount;
+    }
+
+    public void setClaimedAmount(String claimedAmount) {
+        this.claimedAmount = claimedAmount;
+    }
+
+    public String getClaimSantioned() {
+        return claimSantioned;
+    }
+
+    public void setClaimSantioned(String claimSantioned) {
+        this.claimSantioned = claimSantioned;
+    }
+
+    public String getCopay() {
+        return copay;
+    }
+
+    public void setCopay(String copay) {
+        this.copay = copay;
+    }
+     
+     private static int count = 2000;
+      
+
+     
+    public BillingWorkRequest() {
+        claimReqNo = "CLM"+count;
+        count++;
+    }
+
+
+    
+   
+    
+    public String getClaimReqNo() {
+        return claimReqNo;
+    }
 
     public String getTestResult() {
         return testResult;
@@ -20,4 +69,25 @@ public class BillingWorkRequest extends WorkRequest {
         this.testResult = testResult;
     }
    
+        public String getTypeOfInsurance() {
+        return typeOfInsurance;
+    }
+
+    public void setTypeOfInsurance(String typeOfInsurance) {
+        this.typeOfInsurance = typeOfInsurance;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    
+    
+        @Override
+    public String toString() {
+        return claimReqNo; //To change body of generated methods, choose Tools | Templates.
+    }
 }

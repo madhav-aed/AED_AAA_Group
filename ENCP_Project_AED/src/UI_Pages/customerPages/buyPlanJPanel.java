@@ -32,6 +32,7 @@ public class buyPlanJPanel extends javax.swing.JPanel {
     Enterprise enterprise;
     EcoSystem business;
     DB4OUtil dB4OUtil;
+    Patient p;
     buyPlanJPanel(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
         initComponents();
         this.panelRight = panelRight;
@@ -40,7 +41,10 @@ public class buyPlanJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.business = business;
         this.dB4OUtil = dB4OUtil;
-        
+        this.p = (Patient)patient;
+
+        btnView();
+        System.out.println("Patient plan"+p.getPlanType());
         btn_back.setVisible(true);
     }
 
@@ -194,7 +198,26 @@ public class buyPlanJPanel extends javax.swing.JPanel {
 
         add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 940, -1));
     }// </editor-fold>//GEN-END:initComponents
-
+    public void btnView(){
+        System.out.println("p.getplantype is "+p.getPlanType());
+        
+            if(!(p.getPlanType()==null)&&(p.getPlanType().contains("Bronze"))){
+            btnGold.setEnabled(false);
+                System.out.println("inside btnview checked for bronze");
+            btnPlatinum.setEnabled(false);
+            btnBronze.setEnabled(true);
+        }
+            if(!(p.getPlanType()==null)&&(p.getPlanType().contains("Gold"))){
+            btnGold.setEnabled(true);
+            btnPlatinum.setEnabled(false);
+            btnBronze.setEnabled(false);
+        }
+            if(!(p.getPlanType()==null)&&(p.getPlanType().contains("Platinum"))){
+            btnGold.setEnabled(false);
+            btnPlatinum.setEnabled(true);
+            btnBronze.setEnabled(false);
+        }
+    }
     private void btnPlatinumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlatinumActionPerformed
         // TODO add your handling code here:
                 String plan = "Platinum";
