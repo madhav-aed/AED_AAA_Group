@@ -5,6 +5,7 @@
  */
 package Business.WorkQueue;
 
+import Business.Customer.Appointment;
 import Business.Customer.Patient;
 import Business.Departments.Organization;
 import Business.Employees.Employee;
@@ -19,6 +20,10 @@ import java.util.Date;
 public class CustomerDoctorWorkRequest extends WorkRequest {
      private String testResult;
      private Patient patient;
+     private Employee receivingDoctor;
+//     private Date appointmentDate;
+     private Appointment appointment;
+     private String timeOfAppointment;
 
     public Patient getPatient() {
         return patient;
@@ -27,21 +32,20 @@ public class CustomerDoctorWorkRequest extends WorkRequest {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
-     private Employee receivingDoctor;
-private Date appointmentDate;
-private String timeOfAppointment;
 
     public void setTimeOfAppointment(String timeOfAppointment) {
         this.timeOfAppointment = timeOfAppointment;
     }
 
-    public Date getAppointmentDate() {
-        return appointmentDate;
+    public Appointment getAppointment() {
+        return appointment;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
+
+
     public Employee getReceivingDoctor() {
         return receivingDoctor;
     }
@@ -51,7 +55,7 @@ private String timeOfAppointment;
     }
 
 
-         private Network networkState;
+    private Network networkState;
     private Enterprise hospital;
     private Organization orgRequested;
     
@@ -116,6 +120,15 @@ private String timeOfAppointment;
 
     public void setRefBy(String RefBy) {
         this.RefBy = RefBy;
+    }
+
+    public String getTimeOfAppointment() {
+        return timeOfAppointment;
+    }
+
+    @Override
+    public String toString() {
+        return patient.getfName() + " " +patient.getLastName();
     }
    
     

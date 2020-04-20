@@ -325,11 +325,10 @@ public class MyMessages extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_closeMouseClicked
 
     private void composeEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_composeEmailKeyPressed
-       
         
-        
-        
-        
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        panelRight.add(new SendMessages(panelRight,userAccount,organization,enterprise,business,dB4OUtil));
+        layout.next(panelRight);
         
     }//GEN-LAST:event_composeEmailKeyPressed
 
@@ -339,12 +338,6 @@ public class MyMessages extends javax.swing.JPanel {
         {
             panelMsg.setVisible(true);
             
-            
-            
-            //myMessagesTbl.getValueAt(selectedRow, 0);
-            
-        
-
         }        
     }//GEN-LAST:event_jLabel18MousePressed
    

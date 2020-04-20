@@ -26,7 +26,7 @@ public class DoctorRole extends Role{
             Organization organization,
             Enterprise enterprise, 
             EcoSystem business,DB4OUtil dB4OUtil) {
-        return new Doctor_WorkSpace();
+        return new Doctor_WorkSpace(userProcessContainer, account, organization, enterprise, business, dB4OUtil);
         
     }
     

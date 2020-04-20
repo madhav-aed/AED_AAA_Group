@@ -49,4 +49,16 @@ public class UserAccountDirectory {
         }
         return true;
     }
+    
+    
+    // 17th Rohit Changes
+    public UserAccount getUserByUsername(String username){
+        for (UserAccount ua : userAccountList){
+            if (ua.getUsername().equals(username))
+                return ua;
+        }
+        return null;
+    }
+
+
 }

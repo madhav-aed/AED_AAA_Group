@@ -14,6 +14,10 @@ import java.util.ArrayList;
 public class RecievedMessages {
     ArrayList<Messages> recievedMsgsList;
 
+    public RecievedMessages() {
+        this.recievedMsgsList = new ArrayList<>();
+    }
+
 
     public ArrayList<Messages> getRecievedMsgs() {
         return recievedMsgsList;

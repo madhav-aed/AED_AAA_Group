@@ -327,9 +327,6 @@ public class LabProcess extends javax.swing.JPanel {
           
          // mr.setTestParameters(hmap1);
          
-         
-         
-         
          MedicalReport medRep = pat.getMedHist().createMedReport();
          medRep.setPatient(pat.getfName() + " "+  pat.getLastName());
          medRep.setTestParameters(hmap1);
@@ -374,7 +371,7 @@ public class LabProcess extends javax.swing.JPanel {
              
              //Check if Patient has insurance
              
-             if (!pat.getInsDetail().equals(" ")){
+             if (!(pat.getInsDetail() == null)){
                  Enterprise e1 = pat.getInsCompany();
              
                 for(Organization org :e1.getOrganizationDirectory().getOrganizationList()){
@@ -403,7 +400,7 @@ public class LabProcess extends javax.swing.JPanel {
                  b1.setBillType("Self Pay");
                  b1.setBillAmount("250");
                  b1.setPaidThroughSelf(250);
-                 pat.getBillHist().getBillingHistory().add(b1);
+                 pat.getMyBillingHistory().getBillingHistory().add(b1);
                  
                  
              

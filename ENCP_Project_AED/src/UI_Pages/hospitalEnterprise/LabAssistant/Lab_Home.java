@@ -13,7 +13,6 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CustomerLabWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
-import UI_Pages.customerPages.patientAppointmentJPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.text.Format;

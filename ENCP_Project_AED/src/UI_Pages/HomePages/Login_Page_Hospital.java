@@ -297,17 +297,9 @@ public class Login_Page_Hospital extends javax.swing.JFrame {
                                 system, 
                                 dB4OUtil);
                             m.setExtendedState(MAXIMIZED_BOTH);
-             m.show();
-              dispose();
-              
-              //
-              
-              //cool stuff.....
-              
-              
-              //Added some Jfree chart so let's see how it goes.
-              //it will include on Github
-              
+                            m.show();
+                            dispose();
+
                }
         },1000*2);
 

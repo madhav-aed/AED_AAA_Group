@@ -5,20 +5,16 @@
  */
 package UI_Pages.hospitalEnterprise.DoctorAssistantPages;
 
-import UI_Pages.hospitalEnterprise.LabAssistant.*;
 import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
-import UI_Pages.hospitalEnterprise.doctorPages.*;
-import UI_Pages.customerPages.*;
+import UI_Pages.MyMessages.MyMessages_Employees;
 import java.awt.CardLayout;
 import java.awt.Color;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import static javax.swing.SwingUtilities.getWindowAncestor;
 
 /**
  *
@@ -31,12 +27,26 @@ public class DocAssistant_WorkSpace extends javax.swing.JFrame {
      */
    // JPanel home;
     String userDisplayPic;
-    
+    JPanel userProcessContainer; 
+    UserAccount account; 
+    Organization organization; 
+    Enterprise enterprise; 
+    EcoSystem business; 
+    DB4OUtil dB4OUtil;
+       
     public DocAssistant_WorkSpace(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,DB4OUtil dB4OUtil) {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
-       
+       this.userProcessContainer = userProcessContainer;
+       this.account = account;
+       this.organization = organization;
+       this.enterprise = enterprise;
+       this.business = business;
+       this.dB4OUtil = dB4OUtil;
+        
+        
+        
         // Set display image with name..
         userDisplayPic = "Jon_Snow";
        
@@ -45,7 +55,8 @@ public class DocAssistant_WorkSpace extends javax.swing.JFrame {
         initComponents();
        // home = jPanel3;
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new DocAssistantHome(panelRight));
+        panelRight.add(new DocAssistantHome(panelRight,
+                account,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
     
     }
@@ -327,7 +338,8 @@ public class DocAssistant_WorkSpace extends javax.swing.JFrame {
         // Set Panel view
                 // TODO add your handling code here:
         CardLayout layout = (CardLayout)panelRight.getLayout();
-  //      panelRight.add(new Customer_Workspace_1(panelRight));
+        panelRight.add(new DocAssistantHome(userProcessContainer,
+                account,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
 
         
@@ -373,7 +385,7 @@ public class DocAssistant_WorkSpace extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)panelRight.getLayout();
       //  panelRight.add(new Test_Panel_4());
       
-        panelRight.add(new Home());
+        panelRight.add(new MyMessages_Employees(panelRight, this.account, this.account.getEmployee(),organization, enterprise, business, dB4OUtil));
         layout.next(panelRight);
         
         

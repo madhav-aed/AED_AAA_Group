@@ -5,7 +5,13 @@
  */
 package UI_Pages.hospitalEnterprise.doctorPages;
 
+import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
+import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
+import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
+import UI_Pages.MyMessages.MyMessages_Employees;
 import UI_Pages.customerPages.*;
 
 import java.awt.CardLayout;
@@ -25,21 +31,33 @@ public class Doctor_WorkSpace extends javax.swing.JFrame {
      */
    // JPanel home;
     String userDisplayPic;
+    UserAccount account; 
+    Organization organization; 
+    Enterprise enterprise; 
+    EcoSystem business;
+    DB4OUtil dB4OUtil;
     
-    public Doctor_WorkSpace() {
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
-        setUndecorated(true);
-       
+    public Doctor_WorkSpace(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,DB4OUtil dB4OUtil) {
+        
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.business = business;
+        this.dB4OUtil = dB4OUtil;
+        
         // Set display image with name..
         userDisplayPic = "Jon_Snow";
-       
-       
-       
         initComponents();
+      //  btn_close.setVisible(false);
+      
+       
+       
+       
        // home = jPanel3;
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new Doctor_Home(panelRight));
+      //  panelRight.add(new Doctor_Home(userProcessContainer, account, organization, enterprise, business, dB4OUtil));
+        
+        panelRight.add(new Doctor_Home(panelRight, account, organization, enterprise, business, dB4OUtil));
         layout.next(panelRight);
     
     }
@@ -289,14 +307,14 @@ public class Doctor_WorkSpace extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1145, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE))
         );
 
         pack();
@@ -319,9 +337,10 @@ public class Doctor_WorkSpace extends javax.swing.JFrame {
         
         
         // Set Panel view
-                // TODO add your handling code here:
         CardLayout layout = (CardLayout)panelRight.getLayout();
-//        panelRight.add(new Customer_Workspace_1(panelRight));
+      //  panelRight.add(new Doctor_Home(userProcessContainer, account, organization, enterprise, business, dB4OUtil));
+        
+        panelRight.add(new Doctor_Home(panelRight, account, organization, enterprise, business, dB4OUtil));
         layout.next(panelRight);
 
         
@@ -367,10 +386,10 @@ public class Doctor_WorkSpace extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)panelRight.getLayout();
       //  panelRight.add(new Test_Panel_4());
       
-        panelRight.add(new Home());
+        panelRight.add(new MyMessages_Employees(panelRight, this.account, this.account.getEmployee(),organization, enterprise, business, dB4OUtil));
         layout.next(panelRight);
         
-        
+              
     }//GEN-LAST:event_Button2MouseClicked
 
     private void Button2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button2MouseEntered

@@ -5,27 +5,134 @@
  */
 package UI_Pages.hospitalEnterprise.doctorPages;
 
-import UI_Pages.customerPages.patientAppointmentJPanel;
+import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
+import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.CustomerDoctorWorkRequest;
+import Business.WorkQueue.WorkRequest;
+import UI_Pages.hospitalEnterprise.DoctorAssistantPages.DocAssistantHome;
 import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author madhav437
+ * @author rohit
  */
 public class Doctor_Home extends javax.swing.JPanel {
 
-    /**
-     * Creates new form BillingPage1
-     */
     JPanel rightPanel;
-    public Doctor_Home(JPanel rightPanel) {
-        
-        this.rightPanel = rightPanel;
-        initComponents();
-        btn_close.setVisible(false);
-    }
+    UserAccount account;
+    Organization organization;
+    Enterprise enterprise;
+    EcoSystem business;
+    DB4OUtil dB4OUtil;
+    
+    public Doctor_Home(JPanel userProcessContainer, 
+            UserAccount account, 
+            Organization organization,
+            Enterprise enterprise, 
+            EcoSystem business,DB4OUtil dB4OUtil){
 
+            this.rightPanel = userProcessContainer;
+            this.account = account;
+            this.organization = organization;
+            this.enterprise = enterprise;
+            this.business = business;
+            this.dB4OUtil = dB4OUtil;
+
+            initComponents();
+          //  btn_close.setVisible(false);
+            init();    
+            btn_close.setVisible(false);
+        
+        
+    }
+   
+    public void init(){
+         // Setting welcome string
+         
+         //welcomelabel.setText("");
+            usernameLbl.setText(" Welcome "+this.account.getEmployee().getName());
+         // Pseudo Code
+         
+         notificationLbl.setVisible(false);
+         
+       // Setting color of JTable
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(Color.white);
+       // headerRenderer.set(Color.BLACK);
+
+        for (int i = 0; i < DocWRTable.getModel().getColumnCount(); i++) {
+            DocWRTable.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+ // Labels
+        int totApp = 0;
+        int completed = 0;
+        for(Organization org : this.enterprise.getOrganizationDirectory().getOrganizationList()){
+           if(org.getOrganizationType().equals("Doctor Organization"))
+           {
+               for(WorkRequest wr : org.getWorkQueue().getWorkRequestList()){
+                   CustomerDoctorWorkRequest wr1 =(CustomerDoctorWorkRequest) wr;
+                   if(wr1.getStatus().equals("Appointment Requested")){
+                        totApp++;
+                   }
+                   else if(wr1.getStatus().equals("Scheduled")){
+                        completed++;
+                   }        
+                   else if(wr1.getStatus().equals("Declined")){
+                        completed++;
+                   }        
+               }
+            }          
+       }
+       myScheduleLbl.setText(""+totApp);
+   //    assignedLbl.setText(""+completed);
+ 
+        populateLabTable();
+    }
+    
+     public void populateLabTable(){
+
+       DefaultTableModel model1 = (DefaultTableModel) DocWRTable.getModel();
+       model1.setRowCount(0);
+       for(Organization org : this.enterprise.getOrganizationDirectory().getOrganizationList()){
+           if(org.getOrganizationType().equals("Doctor Organization"))
+           {
+               for(WorkRequest wr : org.getWorkQueue().getWorkRequestList()){
+                  
+                   if((wr.getStatus().equals("Scheduled") || wr.getStatus().equals("Attended")
+                           || wr.getStatus().equals("Declined")
+                           )){
+                       
+                            CustomerDoctorWorkRequest wr1 = (CustomerDoctorWorkRequest) wr;
+                            if(wr1.getReceivingDoctor().equals(account.getEmployee())){
+                                    Object[] row = new Object[4];
+                                    row[0] = wr1.getAppointment().getDate();
+                                    row[2] = wr1;
+                                    row[3] = wr1.getStatus();
+                                    row[1] = wr1.getTimeOfAppointment();
+                                    model1.addRow(row);
+                            }               
+                   }
+               
+               
+               }
+            }
+           
+           
+       }
+     
+     }
+       
+        
+           
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,20 +142,10 @@ public class Doctor_Home extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        usernameLbl = new javax.swing.JLabel();
+        CancelAppointment = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -57,29 +154,40 @@ public class Doctor_Home extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        DocWRTable = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        notificationLbl = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
+        myScheduleLbl = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
+        TreatmentButton = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(247, 247, 247));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel5.setText("Hello Dr. Sudhanshu");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 23, 270, 37));
+        usernameLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        usernameLbl.setForeground(new java.awt.Color(96, 83, 150));
+        usernameLbl.setText("Hello Dr. Sudhanshu");
+        add(usernameLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 250, 37));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        CancelAppointment.setBackground(new java.awt.Color(255, 255, 255));
+        CancelAppointment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CancelAppointmentMouseClicked(evt);
+            }
+        });
+        CancelAppointment.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CancelAppointmentKeyPressed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(96, 83, 150));
@@ -89,21 +197,21 @@ public class Doctor_Home extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(96, 83, 150));
         jLabel6.setText("<html><b>Cancel <br> Appointment");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout CancelAppointmentLayout = new javax.swing.GroupLayout(CancelAppointment);
+        CancelAppointment.setLayout(CancelAppointmentLayout);
+        CancelAppointmentLayout.setHorizontalGroup(
+            CancelAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CancelAppointmentLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(75, 75, 75))
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(CancelAppointmentLayout.createSequentialGroup()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        CancelAppointmentLayout.setVerticalGroup(
+            CancelAppointmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CancelAppointmentLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -111,77 +219,7 @@ public class Doctor_Home extends javax.swing.JPanel {
                 .addGap(24, 24, 24))
         );
 
-        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 80, 90));
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel9.setText("3");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 22, -1, -1));
-
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel19.setText("Total");
-        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 30, 10));
-
-        jPanel10.setBackground(new java.awt.Color(232, 201, 232));
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
-        );
-
-        jPanel5.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 10));
-
-        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 130, 80));
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel10.setText("OPD");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 102, 124, 41));
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel11.setText("1");
-        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 21, 75, -1));
-
-        jPanel12.setBackground(new java.awt.Color(232, 201, 232));
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
-        );
-
-        jPanel6.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 10));
-
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel20.setText("Total");
-        jPanel6.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 40, 10));
-
-        add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 140, 80));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel12.setText("Surgery");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 106, 124, 30));
+        add(CancelAppointment, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 620, 90, 90));
 
         jPanel7.setBackground(new java.awt.Color(247, 247, 247));
 
@@ -205,7 +243,7 @@ public class Doctor_Home extends javax.swing.JPanel {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -267,47 +305,47 @@ public class Doctor_Home extends javax.swing.JPanel {
                 .addContainerGap(161, Short.MAX_VALUE))
         );
 
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, -1, 350));
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 260, 390, 350));
 
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable1.setBackground(new java.awt.Color(247, 247, 247));
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        DocWRTable.setBackground(new java.awt.Color(247, 247, 247));
+        DocWRTable.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        DocWRTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Allan", "OPD", "12 Apr ", "10.30"}
+                {"12 Apr ", "10.30", "Allan", null}
             },
             new String [] {
-                "Patient", "Appointment Type", "Date", "Time"
+                "Date", "Time", "Patient", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(247, 247, 247));
-        jTable1.setRowHeight(20);
-        jTable1.setSelectionBackground(new java.awt.Color(96, 83, 150));
-        jScrollPane1.setViewportView(jTable1);
+        DocWRTable.setGridColor(new java.awt.Color(247, 247, 247));
+        DocWRTable.setRowHeight(20);
+        DocWRTable.setSelectionBackground(new java.awt.Color(96, 83, 150));
+        jScrollPane1.setViewportView(DocWRTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 460, 120));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 790, 320));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_open_envelope_48px.png"))); // NOI18N
         jLabel16.setText("Recent messages");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 130, -1));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 210, 170, -1));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
         btn_close.setBackground(new java.awt.Color(96, 83, 150));
         btn_close.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_close.setForeground(new java.awt.Color(255, 255, 255));
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8_close_window_52px_2.png"))); // NOI18N
         btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_closeMouseClicked(evt);
@@ -319,7 +357,7 @@ public class Doctor_Home extends javax.swing.JPanel {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(172, Short.MAX_VALUE)
+                .addContainerGap(218, Short.MAX_VALUE)
                 .addComponent(btn_close)
                 .addContainerGap())
         );
@@ -328,23 +366,23 @@ public class Doctor_Home extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 0, 230, 70));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel13.setText("You have 5 new Notifications");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 66, 270, 30));
+        notificationLbl.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        notificationLbl.setForeground(new java.awt.Color(96, 83, 150));
+        notificationLbl.setText("You have 5 new Notifications");
+        add(notificationLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 270, 30));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel21.setText("Patients for Today");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 102, 124, 41));
+        jLabel21.setText("My Schedule");
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 124, 41));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel22.setText("4");
+        myScheduleLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        myScheduleLbl.setForeground(new java.awt.Color(96, 83, 150));
+        myScheduleLbl.setText("4");
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(96, 83, 150));
@@ -371,7 +409,7 @@ public class Doctor_Home extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(myScheduleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -380,51 +418,68 @@ public class Doctor_Home extends javax.swing.JPanel {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(myScheduleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
-        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel16.addMouseListener(new java.awt.event.MouseAdapter() {
+        TreatmentButton.setBackground(new java.awt.Color(255, 255, 255));
+        TreatmentButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TreatmentButtonMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel16MousePressed(evt);
+                TreatmentButtonMousePressed(evt);
             }
         });
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8-treatment.png"))); // NOI18N
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_treatment_48px.png"))); // NOI18N
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(96, 83, 150));
         jLabel25.setText("<html><b>Treatment");
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
+        javax.swing.GroupLayout TreatmentButtonLayout = new javax.swing.GroupLayout(TreatmentButton);
+        TreatmentButton.setLayout(TreatmentButtonLayout);
+        TreatmentButtonLayout.setHorizontalGroup(
+            TreatmentButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TreatmentButtonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(TreatmentButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
+        TreatmentButtonLayout.setVerticalGroup(
+            TreatmentButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TreatmentButtonLayout.createSequentialGroup()
                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(30, 30, 30))
+                .addGap(43, 43, 43))
         );
 
-        add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 80, 90));
+        add(TreatmentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 90, 90));
+
+        jPanel17.setBackground(new java.awt.Color(232, 201, 232));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1140, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+
+        add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 1140, 10));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -432,54 +487,104 @@ public class Doctor_Home extends javax.swing.JPanel {
         System.exit(0);
     }//GEN-LAST:event_btn_closeMouseClicked
 
-    private void jPanel16MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MousePressed
+    private void TreatmentButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreatmentButtonMousePressed
 
         
-        CardLayout layout = (CardLayout)rightPanel.getLayout();
-        rightPanel.add(new DoctorProcess(rightPanel));
-        layout.next(rightPanel);        
+        
+    }//GEN-LAST:event_TreatmentButtonMousePressed
+
+    private void CancelAppointmentKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CancelAppointmentKeyPressed
+
         
         
         
         
-    }//GEN-LAST:event_jPanel16MousePressed
+        
+    }//GEN-LAST:event_CancelAppointmentKeyPressed
+
+    private void CancelAppointmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelAppointmentMouseClicked
+        int selectedRow = DocWRTable.getSelectedRow();
+
+        if(selectedRow >= 0)
+        {
+           CustomerDoctorWorkRequest wReq   = (CustomerDoctorWorkRequest) DocWRTable.getValueAt(selectedRow, 2);
+           
+            wReq.setStatus("Declined");
+            
+            wReq.setMessage("");
+           
+            wReq.getAppointment().setStatus("Declined");
+            
+            init();
+            
+            dB4OUtil.storeSystem(business);
+                                  
+        }
+        else{
+                 JOptionPane.showMessageDialog(null, "Please select a record");
+        }
+        
+        
+    }//GEN-LAST:event_CancelAppointmentMouseClicked
+
+    private void TreatmentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreatmentButtonMouseClicked
+        int selectedRow = DocWRTable.getSelectedRow();
+        if(selectedRow >= 0)
+        {
+            CustomerDoctorWorkRequest wReq   = (CustomerDoctorWorkRequest) DocWRTable.getValueAt(selectedRow, 2);
+            if(wReq.getStatus().equals("Scheduled")){
+                CardLayout layout = (CardLayout)rightPanel.getLayout();
+              //  rightPanel.add(new DoctorProcess(rightPanel, (CustomerDoctorWorkRequest)wReq, account, organization, enterprise, business, dB4OUtil));
+                rightPanel.add(new Doctor_Work(rightPanel, wReq, account, organization, enterprise, business, dB4OUtil));
+               
+              
+              layout.next(rightPanel);        
+            
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "The Patient is "+wReq.getStatus());
+            }
+           }
+        else{
+                 
+            
+                JOptionPane.showMessageDialog(null, "Please select a record");
+        }
+     
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_TreatmentButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CancelAppointment;
+    private javax.swing.JTable DocWRTable;
+    private javax.swing.JPanel TreatmentButton;
     private javax.swing.JLabel btn_close;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel myScheduleLbl;
+    private javax.swing.JLabel notificationLbl;
+    private javax.swing.JLabel usernameLbl;
     // End of variables declaration//GEN-END:variables
 }

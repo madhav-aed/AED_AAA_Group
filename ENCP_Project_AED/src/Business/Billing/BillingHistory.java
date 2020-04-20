@@ -29,6 +29,13 @@ public class BillingHistory {
         this.billingHistory = billingHistory;
     }
     
+        
+     public Bill createNewBill(){
+        Bill patDocRec = new Bill();
+        billingHistory.add(patDocRec);
+        return patDocRec;
+    }
+    
 //    public ArrayList<Bill> getPaidBills(){
 //    
 //        return 

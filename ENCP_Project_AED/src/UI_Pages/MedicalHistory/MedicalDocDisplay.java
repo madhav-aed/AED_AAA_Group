@@ -34,7 +34,7 @@ public class MedicalDocDisplay extends javax.swing.JPanel {
     
     void fillScreen(){
     
-    outPatientName.setText(patDocRec.getPatient());
+    outPatientName.setText(patDocRec.getPatient().getfName() + " "+patDocRec.getPatient().getLastName());
     outDate.setText(patDocRec.getDate());
     outRecNumber.setText(String.valueOf(patDocRec.getPatientDocNumber()));
     outDiagnosis.setText(patDocRec.getDiagnosis());
