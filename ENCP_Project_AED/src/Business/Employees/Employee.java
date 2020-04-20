@@ -30,6 +30,7 @@ public class Employee {
     public Employee() {
         id = count;
         count++;
+        this.ds = new ArrayList<>();
     }
 
     public Image getPicture() {

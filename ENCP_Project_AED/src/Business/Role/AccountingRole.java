@@ -10,6 +10,7 @@ import Business.Enterprises.Enterprise;
 import Business.Departments.Hospital_Doctor_Department;
 import Business.Departments.Organization;
 import Business.UserAccount.UserAccount;
+import UI_Pages.hospitalEnterprise.DoctorAssistantPages.DocAssistant_WorkSpace;
 import UI_Pages.hospitalEnterprise.doctorPages.Doctor_WorkSpace;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,7 +23,7 @@ public class AccountingRole extends Role{
 
     @Override
     public JFrame createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,DB4OUtil dB4OUtil) {
-        return new Doctor_WorkSpace();
+        return new DocAssistant_WorkSpace(userProcessContainer, account, organization, enterprise, business, dB4OUtil);
     }
     
     

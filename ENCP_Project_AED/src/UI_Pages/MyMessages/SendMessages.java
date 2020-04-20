@@ -5,14 +5,18 @@
  */
 package UI_Pages.MyMessages;
 
+import Business.Customer.Patient;
 import UI_Pages.customerPages.*;
 import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
+import Business.Messages.Messages;
 import Business.UserAccount.UserAccount;
 import UI_Pages.*;
 import java.awt.CardLayout;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -26,13 +30,13 @@ public class SendMessages extends javax.swing.JPanel {
      */
     
     JPanel panelRight;
-    UserAccount userAccount;
+    Patient userAccount;
     Organization organization;
     Enterprise enterprise;
     EcoSystem business;
     DB4OUtil dB4OUtil;
     
-    public SendMessages(JPanel panelRight, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
+    public SendMessages(JPanel panelRight, Patient userAccount, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
         
         
         initComponents();
@@ -42,9 +46,10 @@ public class SendMessages extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.business = business;
         this.dB4OUtil = dB4OUtil;
-        String name = "Jon" + " Snow";
+        String name = userAccount.getfName() + " "+ userAccount.getfName();
         userNameLabel.setText(name);
-        
+    
+    
         
         
         
@@ -61,8 +66,6 @@ public class SendMessages extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel15 = new javax.swing.JPanel();
-        btn_close = new javax.swing.JLabel();
         userNameLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -74,34 +77,11 @@ public class SendMessages extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         SenderLabel3 = new javax.swing.JLabel();
         subjectText = new javax.swing.JTextField();
+        jPanel17 = new javax.swing.JPanel();
+        btn_close2 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(247, 247, 247));
-
-        jPanel15.setBackground(new java.awt.Color(96, 83, 150));
-
-        btn_close.setBackground(new java.awt.Color(96, 83, 150));
-        btn_close.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btn_close.setForeground(new java.awt.Color(255, 255, 255));
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_faq_56px_1.png"))); // NOI18N
-        btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_closeMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addGap(361, 361, 361)
-                .addComponent(btn_close)
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-        );
 
         userNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         userNameLabel.setForeground(new java.awt.Color(96, 83, 150));
@@ -191,46 +171,76 @@ public class SendMessages extends javax.swing.JPanel {
                 .addGap(21, 21, 21))
         );
 
+        jPanel17.setBackground(new java.awt.Color(96, 83, 150));
+
+        btn_close2.setBackground(new java.awt.Color(96, 83, 150));
+        btn_close2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_close2.setForeground(new java.awt.Color(255, 255, 255));
+        btn_close2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_back_to_40px.png"))); // NOI18N
+        btn_close2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_close2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                .addGap(0, 152, Short.MAX_VALUE)
+                .addComponent(btn_close2))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btn_close2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        );
+
+        jPanel11.setBackground(new java.awt.Color(232, 201, 232));
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 13, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(537, 537, 537)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btn_closeMouseClicked
 
     private void usernameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTxtActionPerformed
         // TODO add your handling code here:
@@ -246,6 +256,37 @@ public class SendMessages extends javax.swing.JPanel {
         String message = messageText.getText();
         
         // look for username, if present proceed if( system.username){  }
+        UserAccount recieverAccount = null;
+        
+        recieverAccount = business.getUserAccountDirectory().getUserByUsername(username);
+        
+        if(recieverAccount == null){
+            
+            recieverAccount = business.getPatientDirectory().getUserByUsername(username);
+        
+        }
+        if(recieverAccount == null){
+            JOptionPane.showMessageDialog(null, "The email address is invalid. Please check!");
+        
+        }
+        
+        else if(recieverAccount != null){
+            Messages msg = new Messages(userAccount, recieverAccount, subjectText.getText(), messageText.getText(), new Date());
+            
+            // sending queue
+            userAccount.getMyMessages().getSentMsgsList().getSentMsgs().add(msg);
+            
+            // sending queue
+            recieverAccount.getMyMessages().getRecievedMsgsList().getRecievedMsgs().add(msg);
+        
+            // prompt queue
+            
+            JOptionPane.showMessageDialog(null, "Email sent successfully!");
+        
+            
+        }
+        
+        
         
         // username found? then proceed to get his recieved messages, and add the message in MQ
         
@@ -255,6 +296,15 @@ public class SendMessages extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_jLabel16MousePressed
+
+    private void btn_close2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_close2MouseClicked
+        // TODO add your handling code here:
+        //  System.exit(0);
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        panelRight.remove(this);
+        layout.previous(panelRight);
+
+    }//GEN-LAST:event_btn_close2MouseClicked
    
 
 
@@ -262,11 +312,12 @@ public class SendMessages extends javax.swing.JPanel {
     private javax.swing.JLabel SenderLabel;
     private javax.swing.JLabel SenderLabel2;
     private javax.swing.JLabel SenderLabel3;
-    private javax.swing.JLabel btn_close;
+    private javax.swing.JLabel btn_close2;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea messageText;
     private javax.swing.JTextField subjectText;

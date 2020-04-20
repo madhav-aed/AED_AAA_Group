@@ -43,8 +43,13 @@ public class Patient extends UserAccount {
     private String[] checkBoxHealth;
     private String planType ;  //Bronze,Gold,Platinum
     private String actualEmi;
-    private BillingHistory myBillHistory;
+// Rohit 
 
+// End
+
+
+    //Madhav  
+    private BillingHistory myBillingHistory;
 
 
     private WorkQueue workQueue;
@@ -57,9 +62,6 @@ public class Patient extends UserAccount {
     Enterprise insCompany;
     private Organization InsuranceOrganization;
 
-    public BillingHistory getMyBillHistory() {
-        return myBillHistory;
-    }
 
         public Patient()  {
         id = count;
@@ -67,34 +69,26 @@ public class Patient extends UserAccount {
         count++;
         this.medHist = new MedicalHistory();
         this.checkBoxHealth = new String[2];
-        this.myBillHistory = new BillingHistory();
-        this.billHist = new BillingHistory();
-
-
-// Rohit 
+        this.myBillingHistory = new BillingHistory();
         this.myAppHistory = new AppointmentHistory();
         this.myMessages = new MessageQueue();
 
-// End
-
-//        this.network = 
-//        this.checkBoxHealth = new String[2];
     }
 
 
-        //Madhav 
-        
-         private BillingHistory billHist;
-
-    public BillingHistory getBillHist() {
-        return billHist;
+    public BillingHistory getMyBillingHistory() {
+        return myBillingHistory;
     }
 
-    public void setBillHist(BillingHistory billHist) {
-        this.billHist = billHist;
+    public void setMyBillingHistory(BillingHistory myBillingHistory) {
+        this.myBillingHistory = myBillingHistory;
     }
-        
-        //Madhav
+
+    
+
+
+
+//Madhav
 
     public Organization getInsuranceOrganization() {
         return InsuranceOrganization;

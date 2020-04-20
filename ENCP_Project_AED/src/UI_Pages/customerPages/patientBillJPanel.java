@@ -239,7 +239,7 @@ public class patientBillJPanel extends javax.swing.JPanel {
             dtm.setRowCount(0);
            
             Patient p = (Patient)patient;
-            ArrayList<Bill> unpaidBills =  p.getMyBillHistory().getUnpaidBills();
+            ArrayList<Bill> unpaidBills =  p.getMyBillingHistory().getUnpaidBills();
                 for(Bill unpaidBill : unpaidBills){
 
 //                    if(insWorkreq.getPatient().getUsername().equals(p.getUserName())){

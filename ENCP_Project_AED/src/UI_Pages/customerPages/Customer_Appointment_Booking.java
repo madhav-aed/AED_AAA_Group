@@ -98,7 +98,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                 }
                 if(compareApp != null){
                     lblAppointmentDate.setText(""+compareApp.getDate());
-              //      lblAppointmentDoc1.setText("with Dr. "+compareApp.getDoctor().getName());
+                    lblAppointmentDoc1.setText("with Dr. "+compareApp.getDoctor().getName());
                 }
                 else if(compareApp == null){
                     lblAppointmentDate.setText("");
@@ -170,6 +170,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
             public Enterprise[] populateHospitalEnterpriseComboBox(Network s1){
             Enterprise epList[] = new Enterprise[s1.getEnterpriseDirectory().getEnterpriseList().size()];
             int count = 0;
+
             for(Enterprise e : s1.getEnterpriseDirectory().getEnterpriseList()){
                      
                     if(e.getEnterpriseType().getValue().equals("Hospital"))
@@ -178,7 +179,20 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                          count++;
                     }
             }
-            
+            // RK Added 18th 4
+            Enterprise result[] = new Enterprise[count];
+            int counter = 0;            
+            for(Enterprise e : epList){
+                    if(e != null)
+                    { 
+                        result[counter] =  e;
+                        counter++;
+                    }
+            }
+            return result;
+
+//            return epList;
+            // END 18th
             
            /* for(Network n:business.getNetworkList()){
                 if(n.equals(s1)){
@@ -188,7 +202,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                  }
                 }
             } */   
-            return epList;
+
 
 /*
         String s[] = new String[3]; 
@@ -377,13 +391,33 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
             int count = 0;
             
             for(Organization o : s1.getOrganizationDirectory().getOrganizationList()){
-                               
+                System.out.println(" org "+o.getOrganizationType());
+                    if(o.getOrganizationType().equals("Doctor Organization"))
+                    {           
                                org[count] = o;
                                count++;
-                
-            
-            
+                    }   
+                    if(o.getOrganizationType().equals("Lab Organization"))
+                    {           
+                               org[count] = o;
+                               count++;
+                    }
+
             }
+            // RK Added 18th 4
+                Organization result[] = new Organization[count];
+                int counter = 0;            
+                for(Organization e : org){
+                 //     System.out.println(" org "+e.getOrganizationType());
+                   if(e != null){ 
+                            result[counter] =  e;
+                            counter++;
+                        }
+                }
+                return result;            
+               // return org;
+            
+            // RK End
             
          /*   for(Network n:business.getNetworkList()){
                 
@@ -400,7 +434,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                 }
             }  */
             
-            return org;
+
             
       /*      
 // ---CODE ABOVE DONOT DELETE ------            
@@ -981,7 +1015,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                 
                 docWorkReq =new CustomerDoctorWorkRequest();
                 
-            
+                docWorkReq.setPatient(customer);
                 docWorkReq.setNetworkState(state);
                 docWorkReq.setHospital(hospital);
                 docWorkReq.setOrgRequested(org);
@@ -990,22 +1024,26 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                 docWorkReq.setReceivingDoctor(doctor);
                 docWorkReq.setWorkRequestType("");
                 docWorkReq.setRequestDate(new Date());
-                docWorkReq.setAppointmentDate(date);
-                docWorkReq.setStatus("Doctor Appointment Requested");
+           //     docWorkReq.setAppointmentDate(date);
+                docWorkReq.setStatus("Appointment Requested");
                 docWorkReq.setRefBy("Self");
                 docWorkReq.setMessage("");
                 docWorkReq.setTestResult("");
                 docWorkReq.setTimeOfAppointment(timeOfAppointment);
-
-                org.getWorkQueue().getWorkRequestList().add(docWorkReq);
+                
                 
                 doctor.getDs().add(ds);
-                Appointment e = new Appointment(ds.getDate(), ds.getTime(), doctor, specialistType, "Confirmed", "Doctor");
+                Appointment e = new Appointment(ds.getDate(), ds.getTime(), doctor, specialistType, "Processing", "Doctor");
+                docWorkReq.setAppointment(e);
+                org.getWorkQueue().getWorkRequestList().add(docWorkReq);
+                
                 customer.getMyAppHistory().getMyAppointmentHistory().add(e);
                 
                 
-                JOptionPane.showMessageDialog(null, "Your Appointment With Dr. "+doctor.getName()+" is confirmed.");
+                JOptionPane.showMessageDialog(null, "Your Appointment With Dr. "+doctor.getName()+" is on request. We will process it and confirm shortly.");
 
+                populateTbl();
+                
                 comboBoxStateNetwork.removeAllItems();
                 comboBoxhospitalEnterprise.removeAllItems();
                 comboBoxAppTypeOrganization.removeAllItems();
@@ -1027,7 +1065,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
             if(rBtnInsuranceTest.isSelected()){
                 testType = "Tests For Insurance";
             } 
-            
+        labWorkReq.setPatient(customer);
         labWorkReq.setNetworkState(state);
         labWorkReq.setHospital(hospital);
         labWorkReq.setOrgRequested(org);
@@ -1050,7 +1088,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
 
         JOptionPane.showMessageDialog(null, "Your Lab Appointment is confirmed successfully");
                         
-        
+        populateTbl();
         
         comboBoxStateNetwork.removeAllItems();
         comboBoxhospitalEnterprise.removeAllItems();
@@ -1060,7 +1098,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
         jDateChooser1.setDate(null);
         populateComboBox();
         dB4OUtil.storeSystem(business);
-        populateTbl();
+        
             } 
         }
     }//GEN-LAST:event_btnBookAppointmentActionPerformed

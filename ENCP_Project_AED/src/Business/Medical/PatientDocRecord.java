@@ -11,11 +11,14 @@ import java.util.HashMap;
 
 public class PatientDocRecord {
     
-    private String patient;
+    private Patient patient;
     private String date;
     private int patientDocNumber;
     private String diagnosis;
     private String prescription;
+    private StringBuilder labTests;
+    private Appointment apt;
+    private String status;
 
     public String getDiagnosis() {
         return diagnosis;
@@ -48,11 +51,11 @@ public class PatientDocRecord {
    //     return name;
    // }
 
-    public String getPatient() {
+    public Patient getPatient() {
         return patient;
     }
 
-    public void setPatient(String patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
 
@@ -78,6 +81,30 @@ public class PatientDocRecord {
 
     public static void setCount(int count) {
         PatientDocRecord.count = count;
+    }
+
+    public Appointment getApt() {
+        return apt;
+    }
+
+    public void setApt(Appointment apt) {
+        this.apt = apt;
+    }
+
+    public StringBuilder getLabTests() {
+        return labTests;
+    }
+
+    public void setLabTests(StringBuilder labTests) {
+        this.labTests = labTests;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
    

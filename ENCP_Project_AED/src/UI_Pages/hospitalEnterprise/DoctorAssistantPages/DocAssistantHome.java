@@ -5,11 +5,15 @@
  */
 package UI_Pages.hospitalEnterprise.DoctorAssistantPages;
 
+import Business.Database.DB4OUtil;
+import Business.Departments.Organization;
+import Business.EcoSystem;
 import UI_Pages.hospitalEnterprise.LabAssistant.*;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.CustomerDoctorWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
-import UI_Pages.customerPages.patientAppointmentJPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -27,11 +31,27 @@ public class DocAssistantHome extends javax.swing.JPanel {
      * Creates new form BillingPage1
      */
     JPanel rightPanel;
-    public DocAssistantHome(JPanel rightPanel) {
+    UserAccount account;
+    Organization organization;
+    Enterprise enterprise;
+    EcoSystem business;
+    DB4OUtil dB4OUtil;
+    
+    public DocAssistantHome(JPanel userProcessContainer, 
+            UserAccount account, 
+            Organization organization,
+            Enterprise enterprise, 
+            EcoSystem business,DB4OUtil dB4OUtil) {
         
         this.rightPanel = rightPanel;
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.business = business;
+        this.dB4OUtil = dB4OUtil;
+        
         initComponents();
-        btn_close.setVisible(false);
+      //  btn_close.setVisible(false);
         init();
     }
     
@@ -39,52 +59,80 @@ public class DocAssistantHome extends javax.swing.JPanel {
          // Setting welcome string
          
          //welcomelabel.setText("");
-            
+            usernameLbl.setText(" Welcome "+this.account.getEmployee().getName());
          // Pseudo Code
          
+         notificationLbl.setVisible(false);
          
-            
-            
-        // Setting color of JTable
-        
-        
+       // Setting color of JTable
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
         headerRenderer.setBackground(Color.white);
        // headerRenderer.set(Color.BLACK);
 
-        for (int i = 0; i < LabReqTable.getModel().getColumnCount(); i++) {
-            LabReqTable.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
-           
-        
-   
-       
-    
-    }
+        for (int i = 0; i < DAWorkReqTable.getModel().getColumnCount(); i++) {
+            DAWorkReqTable.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+ // Labels
+        int totApp = 0;
+        int completed = 0;
+        for(Organization org : this.enterprise.getOrganizationDirectory().getOrganizationList()){
+           if(org.getOrganizationType().equals("Doctor Organization"))
+           {
+               for(WorkRequest wr : org.getWorkQueue().getWorkRequestList()){
+                   CustomerDoctorWorkRequest wr1 =(CustomerDoctorWorkRequest) wr;
+                   if(wr1.getStatus().equals("Appointment Requested")){
+                        totApp++;
+                   }
+                   else if(wr1.getStatus().equals("Scheduled")){
+                        completed++;
+                   }        
+                   else if(wr1.getStatus().equals("Declined")){
+                        completed++;
+                   }        
+               }
+            }          
+       }
+       totalApptLbl.setText(""+totApp);
+       assignedLbl.setText(""+completed);
+ 
+        populateLabTable();
     }
     
      public void populateLabTable(){
-       DefaultTableModel model1 = (DefaultTableModel) LabReqTable.getModel();
 
-        model1.setRowCount(0);
-      /* for (WorkRequest wb : WorkQueue.workRequestList())
-      
-                  if (wb.getEnterprise.getName().equals(this.enterprise.getName())){
-               {
-
+       DefaultTableModel model1 = (DefaultTableModel) DAWorkReqTable.getModel();
+       model1.setRowCount(0);
+       for(Organization org : this.enterprise.getOrganizationDirectory().getOrganizationList()){
+           if(org.getOrganizationType().equals("Doctor Organization"))
+           {int i = 0;
+               for(WorkRequest wr : org.getWorkQueue().getWorkRequestList()){
+                  
+//                   if(wr.getStatus().equals("Doctor Appointment Requested")){
+                        CustomerDoctorWorkRequest wr1 = (CustomerDoctorWorkRequest) wr;
                         Object[] row = new Object[5];
-                    
-                        row[0] = lb
-                        row[1] = lb.getPatient.getName();
-                        row[2] = lb.getRefby;
-                        row[3] = lb.getDate();
-                        row[4] = lb.getStatus;
-
-                        model1.addRow(row);
-                    
-          }*/
-                  }
+                        row[0] = wr1.getAppointment().getDate();
+                        row[2] = wr1;
+                        row[3] = wr1.getReceivingDoctor();
+                        row[4] = wr1.getStatus();
+                        row[1] = wr1.getTimeOfAppointment();
+                        System.out.println(" running "+i);
+                        i++;
+                        model1.addRow(row);               
+  //                 }
+               
+               
+               }
+            }
+           
+           
+       }
+     
+     }
+       
         
-        
+           
+           
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,15 +145,10 @@ public class DocAssistantHome extends javax.swing.JPanel {
 
         outLabPerson = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        assignedLbl = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -114,20 +157,22 @@ public class DocAssistantHome extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        LabReqTable = new javax.swing.JTable();
+        DAWorkReqTable = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
-        btn_close = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        notificationLbl = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
+        totalApptLbl = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
-        ProcessButton = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        usernameLbl = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        confirmAppointmentButton = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        declineAppButton = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(247, 247, 247));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -139,10 +184,10 @@ public class DocAssistantHome extends javax.swing.JPanel {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel9.setText("3");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 22, 60, -1));
+        assignedLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        assignedLbl.setForeground(new java.awt.Color(96, 83, 150));
+        assignedLbl.setText("3");
+        jPanel5.add(assignedLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 22, 60, -1));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(96, 83, 150));
@@ -164,47 +209,12 @@ public class DocAssistantHome extends javax.swing.JPanel {
 
         jPanel5.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 10));
 
-        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 130, 80));
+        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 130, 80));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(96, 83, 150));
         jLabel10.setText("Assigned");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 102, 124, 41));
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel11.setText("1");
-        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 21, 75, -1));
-
-        jPanel12.setBackground(new java.awt.Color(232, 201, 232));
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
-        );
-
-        jPanel6.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 10));
-
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel20.setText("Total");
-        jPanel6.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 40, 10));
-
-        add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 140, 80));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel12.setText("Not Assigned");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 106, 124, 30));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 124, 30));
 
         jPanel7.setBackground(new java.awt.Color(247, 247, 247));
 
@@ -228,7 +238,7 @@ public class DocAssistantHome extends javax.swing.JPanel {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -290,84 +300,74 @@ public class DocAssistantHome extends javax.swing.JPanel {
                 .addContainerGap(161, Short.MAX_VALUE))
         );
 
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, -1, 350));
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 220, 300, 350));
 
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        LabReqTable.setBackground(new java.awt.Color(247, 247, 247));
-        LabReqTable.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        LabReqTable.setModel(new javax.swing.table.DefaultTableModel(
+        DAWorkReqTable.setBackground(new java.awt.Color(247, 247, 247));
+        DAWorkReqTable.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        DAWorkReqTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Allan", "OPD", "12 Apr ", "10.30"}
+
             },
             new String [] {
-                "Patient", "Ref By", "Date", "Test"
+                "Date", "Time", "Patients", "Doctor", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        LabReqTable.setGridColor(new java.awt.Color(247, 247, 247));
-        LabReqTable.setRowHeight(20);
-        LabReqTable.setSelectionBackground(new java.awt.Color(96, 83, 150));
-        jScrollPane1.setViewportView(LabReqTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 460, 120));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        DAWorkReqTable.setGridColor(new java.awt.Color(247, 247, 247));
+        DAWorkReqTable.setRowHeight(20);
+        DAWorkReqTable.setSelectionBackground(new java.awt.Color(96, 83, 150));
+        jScrollPane1.setViewportView(DAWorkReqTable);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 1070, 260));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_open_envelope_48px.png"))); // NOI18N
         jLabel16.setText("Recent messages");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 130, -1));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 160, 190, -1));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
-
-        btn_close.setBackground(new java.awt.Color(96, 83, 150));
-        btn_close.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btn_close.setForeground(new java.awt.Color(255, 255, 255));
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8_close_window_52px_2.png"))); // NOI18N
-        btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_closeMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(172, Short.MAX_VALUE)
-                .addComponent(btn_close)
-                .addContainerGap())
+            .addGap(0, 230, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+            .addGap(0, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 0, 230, 70));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel13.setText("You have 5 new Notifications");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 270, 30));
-
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel21.setText("Assign Doctor");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 100, 30));
+        notificationLbl.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        notificationLbl.setForeground(new java.awt.Color(96, 83, 150));
+        notificationLbl.setText("You have 5 new Notifications");
+        add(notificationLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 270, 30));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel22.setText("4");
+        totalApptLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        totalApptLbl.setForeground(new java.awt.Color(96, 83, 150));
+        totalApptLbl.setText("4");
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(96, 83, 150));
@@ -390,110 +390,162 @@ public class DocAssistantHome extends javax.swing.JPanel {
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(totalApptLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalApptLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(7, 7, 7))
         );
 
-        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-
-        ProcessButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8-treatment.png"))); // NOI18N
-        ProcessButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProcessButtonActionPerformed(evt);
-            }
-        });
-        add(ProcessButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
+        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel25.setText("Total Appointments");
-        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 102, 140, 41));
+        jLabel25.setText("<html>Total Appointments<br> request");
+        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 140, 41));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(96, 83, 150));
         jLabel6.setText("Doctor Assistant Home Page");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 280, 40));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel7.setText("Hello ");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 80, 40));
+        usernameLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        usernameLbl.setForeground(new java.awt.Color(96, 83, 150));
+        usernameLbl.setText("Hello ");
+        add(usernameLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 230, 40));
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel22.setText("Confirm");
+        add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, 80, 30));
+
+        confirmAppointmentButton.setBackground(new java.awt.Color(247, 247, 247));
+        confirmAppointmentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_confirm_48px.png"))); // NOI18N
+        confirmAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmAppointmentButtonActionPerformed(evt);
+            }
+        });
+        add(confirmAppointmentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel21.setText("Decline");
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 590, 80, 30));
+
+        declineAppButton.setBackground(new java.awt.Color(247, 247, 247));
+        declineAppButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_banned_48px.png"))); // NOI18N
+        declineAppButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                declineAppButtonActionPerformed(evt);
+            }
+        });
+        add(declineAppButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, -1, -1));
+
+        jPanel12.setBackground(new java.awt.Color(232, 201, 232));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+
+        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1470, 10));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
+    private void confirmAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAppointmentButtonActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btn_closeMouseClicked
+        
 
-    private void ProcessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcessButtonActionPerformed
-        // TODO add your handling code here:
-        
-        
-        int selectedRow = LabReqTable.getSelectedRow();
+        int selectedRow = DAWorkReqTable.getSelectedRow();
         if(selectedRow >= 0)
         {
-          //  WorkRequest  wReq   = (WorkRequest) LabReqTable.getValueAt(selectedRow, 0);
-        CardLayout layout = (CardLayout)this.rightPanel.getLayout();
-        this.rightPanel.add(new DocAssistantProcess(this.rightPanel));
-        layout.next(this.rightPanel);
-        
+           CustomerDoctorWorkRequest wReq   = (CustomerDoctorWorkRequest) DAWorkReqTable.getValueAt(selectedRow, 2);
+           wReq.setStatus("Scheduled");
+           
+           wReq.getAppointment().setStatus("Confirmed");
+            init();
+            dB4OUtil.storeSystem(business);
+                                   DAWorkReqTable.removeAll();
 
+        }
+        else{
+                 JOptionPane.showMessageDialog(null, "Please select a record");
+        }
+        
+    }//GEN-LAST:event_confirmAppointmentButtonActionPerformed
+
+    private void declineAppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_declineAppButtonActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        int selectedRow = DAWorkReqTable.getSelectedRow();
+        if(selectedRow >= 0)
+        {
+           CustomerDoctorWorkRequest wReq   = (CustomerDoctorWorkRequest) DAWorkReqTable.getValueAt(selectedRow, 2);
+           wReq.setStatus("Declined");
+           wReq.getAppointment().setStatus("Appointment Declined.");
+            dB4OUtil.storeSystem(business);           
+           init();
         }
         else{
         JOptionPane.showMessageDialog(null, "Please select a record");
         }
         
-    }//GEN-LAST:event_ProcessButtonActionPerformed
+    }//GEN-LAST:event_declineAppButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable LabReqTable;
-    private javax.swing.JButton ProcessButton;
-    private javax.swing.JLabel btn_close;
+    private javax.swing.JTable DAWorkReqTable;
+    private javax.swing.JLabel assignedLbl;
+    private javax.swing.JButton confirmAppointmentButton;
+    private javax.swing.JButton declineAppButton;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel notificationLbl;
     private javax.swing.JLabel outLabPerson;
+    private javax.swing.JLabel totalApptLbl;
+    private javax.swing.JLabel usernameLbl;
     // End of variables declaration//GEN-END:variables
 }
