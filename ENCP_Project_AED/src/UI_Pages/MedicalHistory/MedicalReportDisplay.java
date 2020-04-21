@@ -45,16 +45,19 @@ public class MedicalReportDisplay extends javax.swing.JPanel {
         
         testParameters = this.medRepo.getTestParameters();
         
+        Object[] row = new Object[5];
+        model.setRowCount(0);
         for (Map.Entry mapElement : testParameters.entrySet()) { 
             String key = (String)mapElement.getKey(); 
+            String value = (String) mapElement.getValue();
   
-             model.setRowCount(0);
+             
     
 
-                        Object[] row = new Object[2];
+                       // Object[] row = new Object[5];
                     
-                        row[0] = mapElement.getKey();
-                        row[1] = mapElement.getValue();
+                        row[0] = key;
+                        row[1] = value;
                         model.addRow(row);
                     
           }
@@ -157,7 +160,12 @@ public class MedicalReportDisplay extends javax.swing.JPanel {
         tblMedReport.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         tblMedReport.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Allan", "OPD"}
+                {"Allan", "OPD"},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "Test", "Value"

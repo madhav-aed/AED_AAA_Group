@@ -6,13 +6,14 @@ package Business.Medical;
 
 import Business.Customer.*;
 import Business.Employees.*;
+import java.util.Date;
 import java.util.HashMap;
 
 
 public class MedicalReport {
     
     private String Patient;
-    private String Date;
+    private Date Date;
     private int TestNumber;
     HashMap<String, String> testParameters;
     
@@ -38,11 +39,11 @@ public class MedicalReport {
         this.Patient = Patient;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return Date;
     }
 
-    public void setDate(String Date) {
+    public void setDate(Date Date) {
         this.Date = Date;
     }
 
@@ -68,6 +69,11 @@ public class MedicalReport {
 
     public static void setCount(int count) {
         MedicalReport.count = count;
+    }
+    
+    @Override
+    public String toString() {
+        return String.valueOf(TestNumber); //To change body of generated methods, choose Tools | Templates.
     }
     
     

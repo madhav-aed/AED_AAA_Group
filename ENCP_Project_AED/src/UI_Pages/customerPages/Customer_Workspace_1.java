@@ -31,6 +31,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
     Enterprise enterprise;
     EcoSystem business;
     DB4OUtil dB4OUtil;
+    Patient pSave;
     
     public Customer_Workspace_1(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
         
@@ -44,6 +45,7 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
         this.dB4OUtil = dB4OUtil;
         
         Patient p = (Patient)patient;
+        pSave = p;
         System.out.println("patient "+ p);
         String name = p.getfName() + " "+ p.getLastName();
         
@@ -456,6 +458,9 @@ public class Customer_Workspace_1 extends javax.swing.JPanel {
 
     private void medicalHistoryBtnPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicalHistoryBtnPressed
         // TODO add your handling code here:
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        panelRight.add(new PatientMedicalHistory(panelRight,pSave));
+        layout.next(panelRight);
     }//GEN-LAST:event_medicalHistoryBtnPressed
 
     private void MyPaymentsBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MyPaymentsBtnMousePressed

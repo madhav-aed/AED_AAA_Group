@@ -98,6 +98,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                 }
                 if(compareApp != null){
                     lblAppointmentDate.setText(""+compareApp.getDate());
+                    if(compareApp.getDoctor() != null)
                     lblAppointmentDoc1.setText("with Dr. "+compareApp.getDoctor().getName());
                 }
                 else if(compareApp == null){

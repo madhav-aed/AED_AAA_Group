@@ -87,8 +87,14 @@ public class Lab_Home extends javax.swing.JPanel {
                 
             for (WorkRequest wb : this.org.getWorkQueue().getWorkRequestList()){
                 CustomerLabWorkRequest lb = (CustomerLabWorkRequest) wb;
+                String s = "Processed";
+                String s1 = " ";
+                if (lb.getStatus() == null)
+                s1 = " ";
+                else
+                s1 = lb.getStatus();
                 
-                if(lb.getStatus()!= "Processed"){
+                if(!s1.equals(s)){
                 
             
                   
@@ -96,9 +102,11 @@ public class Lab_Home extends javax.swing.JPanel {
                         Object[] row = new Object[5];
                     
                         row[0] = lb;
+                        if(lb.getAppointmentDate()!= null){
                         Format f = new SimpleDateFormat("MM/dd/yy");
-//                        Date strDate = f.format(lb.getAppointmentDate());
-//                        row[1] = strDate;
+                        String strDate = f.format(lb.getAppointmentDate());
+                        row[1] = strDate;
+                        }
                         row[1] = lb.getAppointmentDate();
                         row[2] = lb.getRefBy();
                         row[3] = lb.getWorkRequestType();
@@ -108,7 +116,10 @@ public class Lab_Home extends javax.swing.JPanel {
                         
 
                         model1.addRow(row);
-                        if (lb.getWorkRequestType() == "Tests For Insurance"){
+                        String st2 = "Tests For Insurance";
+                        String st3 = lb.getWorkRequestType();
+                                
+                        if (st2.equals(st3)){
                             countIns = countIns + 1;}
                         
                         countTot = countTot + 1;
@@ -117,8 +128,8 @@ public class Lab_Home extends javax.swing.JPanel {
             
             
             jLabel22.setText(String.valueOf(countTot));
-            jLabel11.setText(String.valueOf(countTot - countIns));
-            jLabel9.setText(String.valueOf(countIns));
+            jLabel11.setText(String.valueOf(countIns));
+            jLabel9.setText(String.valueOf(countTot - countIns));
                   }
         
         

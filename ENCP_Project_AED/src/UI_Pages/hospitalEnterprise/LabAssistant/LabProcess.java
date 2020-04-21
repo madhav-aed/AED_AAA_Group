@@ -331,7 +331,7 @@ public class LabProcess extends javax.swing.JPanel {
          medRep.setPatient(pat.getfName() + " "+  pat.getLastName());
          medRep.setTestParameters(hmap1);
          Date date = new Date();
-         medRep.setDate(String.valueOf(date));
+         medRep.setDate(date);
          
          lReq.setStatus("Processed");
          
