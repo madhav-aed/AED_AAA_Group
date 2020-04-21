@@ -495,6 +495,13 @@ public class Insurance_Admin_WorkArea extends javax.swing.JPanel {
        // String t = (String)  departmentTypeJComboBox.getSelectedItem();
         String name = networkName.getText();
        
+        
+          name = name.trim();
+       
+         if (name.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Name is empty");
+            return;}
+    
         if(!directory.checkIfDepartmentTypePresent(type.getValue()) &&
            !directory.checkIfDepartmentNamePresent(name)
                 )

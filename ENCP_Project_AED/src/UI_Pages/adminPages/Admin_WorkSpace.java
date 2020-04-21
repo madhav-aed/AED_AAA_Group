@@ -5,7 +5,14 @@
  */
 package UI_Pages.adminPages;
 
+import Business.Customer.Patient;
+import Business.Database.DB4OUtil;
+import Business.EcoSystem;
+import Business.Enterprises.Enterprise;
+import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
+import UI_Pages.MyMessages.MyMessages;
+import UI_Pages.MyMessages.MyMessages_Emp;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
 import UI_Pages.customerPages.*;
 import java.awt.CardLayout;
@@ -25,16 +32,26 @@ public class Admin_WorkSpace extends javax.swing.JFrame {
      */
    // JPanel home;
     String userDisplayPic;
+    UserAccount account;
+    EcoSystem system;
+    DB4OUtil dB4OUtil;
+    Enterprise enterprise;
     
-    public Admin_WorkSpace() {
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
-        setUndecorated(true);
-       
-        // Set display image with name..
-        userDisplayPic = "Jon_Snow";
-       
-       
+    public Admin_WorkSpace(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem system, DB4OUtil dB4OUtil ) {
+        this.account = account;
+        this.system = system;
+        this.enterprise = enterprise;  
+        this.dB4OUtil = dB4OUtil;
+        this.panelRight = userProcessContainer;
+ 
+         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+         setLocationByPlatform(true);
+         setUndecorated(true);
+
+         // Set display image with name..
+         userDisplayPic = "Jon_Snow";
+
+
        
         initComponents();
        // home = jPanel3;
@@ -364,12 +381,13 @@ public class Admin_WorkSpace extends javax.swing.JFrame {
         Indicator4.setOpaque(false);
         
         
+ 
         CardLayout layout = (CardLayout)panelRight.getLayout();
       //  panelRight.add(new Test_Panel_4());
       
-        panelRight.add(new Home());
+        panelRight.add(new MyMessages_Emp(this.panelRight, account,
+                account.getEmployee(), null,enterprise, system, dB4OUtil));
         layout.next(panelRight);
-        
         
     }//GEN-LAST:event_Button2MouseClicked
 

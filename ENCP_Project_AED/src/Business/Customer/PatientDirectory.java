@@ -76,4 +76,14 @@ public class PatientDirectory {
         }
         return null;
     }
+
+    public ArrayList<Patient> getPatientList() {
+        return patientList;
+    }
+
+    public void setPatientList(ArrayList<Patient> patientList) {
+        this.patientList = patientList;
+    }
+    
+    
 }

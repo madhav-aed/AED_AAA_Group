@@ -382,9 +382,9 @@ public class LabProcess extends javax.swing.JPanel {
                         bWR.setRequestDate(date);
                         bWR.setClaimedAmount("250");
                         bWR.setMessage("Tests");
+                        bWR.setStatus("To Insurance Enterprise");
+                        bWR.setTestType("Vitals Test");
                         org.getWorkQueue().getWorkRequestList().add(bWR);
-                        
-                        
                         
                     }
                         

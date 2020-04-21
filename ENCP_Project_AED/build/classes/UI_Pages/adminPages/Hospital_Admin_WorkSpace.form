@@ -371,6 +371,7 @@
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;&lt;font color=&quot;#605396&quot;&gt;Logout"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="logoutLabel1MouseClicked"/>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="logoutLabel1btn_label"/>
               </Events>
               <Constraints>

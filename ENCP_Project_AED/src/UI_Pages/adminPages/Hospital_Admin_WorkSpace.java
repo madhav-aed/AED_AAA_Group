@@ -10,6 +10,7 @@ import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
+import UI_Pages.MyMessages.MyMessages_Emp;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
 import UI_Pages.customerPages.*;
 import java.awt.CardLayout;
@@ -27,7 +28,6 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    JPanel rightPanel;
     String userDisplayPic;
     UserAccount account;
     EcoSystem system;
@@ -40,6 +40,7 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
        this.system = system;
        this.enterprise = enterprise;  
        this.dB4OUtil = dB4OUtil;
+       this.panelRight = userProcessContainer;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
@@ -289,6 +290,9 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
         logoutLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_exit_32px.png"))); // NOI18N
         logoutLabel1.setText("<html><b><font color=\"#605396\">Logout");
         logoutLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutLabel1MouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 logoutLabel1btn_label(evt);
             }
@@ -381,7 +385,7 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)panelRight.getLayout();
       //  panelRight.add(new Test_Panel_4());
       
-        panelRight.add(new Hospital_Admin_WorkArea(this.panelRight, account,enterprise, system, dB4OUtil));
+        panelRight.add(new MyMessages_Emp(this.panelRight, account,account.getEmployee(), null,enterprise, system, dB4OUtil));
         layout.next(panelRight);
         
         
@@ -438,6 +442,11 @@ public class Hospital_Admin_WorkSpace extends javax.swing.JFrame {
  
 
     }//GEN-LAST:event_logoutLabel1btn_label
+
+    private void logoutLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabel1MouseClicked
+            dB4OUtil.storeSystem(system);
+            dispose();
+    }//GEN-LAST:event_logoutLabel1MouseClicked
     int xx ,xy;
     
     /**

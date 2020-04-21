@@ -26,12 +26,12 @@
     <Container class="javax.swing.JPanel" name="jPanel7">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f7" green="f7" red="f7" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="110" width="710" height="840"/>
+          <AbsoluteConstraints x="30" y="110" width="820" height="840"/>
         </Constraint>
       </Constraints>
 
@@ -47,7 +47,7 @@
                       <Component id="jScrollPane2" alignment="0" min="-2" pref="516" max="-2" attributes="0"/>
                       <Component id="btnViewDocRecs" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="194" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="304" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -252,7 +252,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="550" y="0" width="230" height="70"/>
+          <AbsoluteConstraints x="700" y="0" width="230" height="70"/>
         </Constraint>
       </Constraints>
 

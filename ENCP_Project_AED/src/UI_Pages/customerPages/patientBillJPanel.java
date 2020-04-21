@@ -18,6 +18,7 @@ import Business.WorkQueue.WorkRequest;
 import UI_Pages.Sudhanshu.*;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,6 +52,10 @@ public class patientBillJPanel extends javax.swing.JPanel {
         this.dB4OUtil = dB4OUtil;
         
         populateTable();
+        
+        
+        jLabel21.setVisible(false);
+        lblPendingAmount.setVisible(false);
     }
 
     /**
@@ -66,7 +71,6 @@ public class patientBillJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBills = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        btnView = new java.awt.Button();
         btnPayBill = new java.awt.Button();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
@@ -79,7 +83,7 @@ public class patientBillJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel7.setBackground(new java.awt.Color(247, 247, 247));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -88,17 +92,17 @@ public class patientBillJPanel extends javax.swing.JPanel {
         tblBills.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         tblBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Allan", "XLS", "2hrs", null, null},
-                {"Brian", "React", "1hr", null, null},
-                {"Romeo", "C#", "3 Days", null, null},
-                {"Alex", "C++ ", "10 hrs", null, null}
+                {"Allan", "XLS", "2hrs", null, null, null, null, null},
+                {"Brian", "React", "1hr", null, null, null, null, null},
+                {"Romeo", "C#", "3 Days", null, null, null, null, null},
+                {"Alex", "C++ ", "10 hrs", null, null, null, null, null}
             },
             new String [] {
-                "Appointment Date", "Doctor ", "Appointment Type", "Amount", "Bill Status"
+                "Bill No", "From", "Type", "Amount", "Paid Through Insurance", "Self", "Bill Type", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -114,15 +118,6 @@ public class patientBillJPanel extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(96, 83, 150));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Billing History");
-
-        btnView.setBackground(new java.awt.Color(96, 83, 150));
-        btnView.setForeground(new java.awt.Color(255, 255, 255));
-        btnView.setLabel("View");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
-            }
-        });
 
         btnPayBill.setBackground(new java.awt.Color(96, 83, 150));
         btnPayBill.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,14 +137,11 @@ public class patientBillJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPayBill, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1029, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPayBill, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,15 +149,13 @@ public class patientBillJPanel extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPayBill, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(106, 106, 106))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnPayBill, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 710, 390));
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 1090, 410));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -193,7 +183,7 @@ public class patientBillJPanel extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 230, 70));
 
         jLabel13.setBackground(new java.awt.Color(41, 216, 95));
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -206,7 +196,7 @@ public class patientBillJPanel extends javax.swing.JPanel {
         labelIcon.setForeground(new java.awt.Color(96, 83, 150));
         labelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_payment_history_80px_3.png"))); // NOI18N
         labelIcon.setOpaque(true);
-        add(labelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 90, 80));
+        add(labelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, 90, 80));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(96, 83, 150));
@@ -224,14 +214,14 @@ public class patientBillJPanel extends javax.swing.JPanel {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 810, Short.MAX_VALUE)
+            .addGap(0, 1090, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 810, -1));
+        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 1090, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     public void populateTable(){
@@ -239,39 +229,63 @@ public class patientBillJPanel extends javax.swing.JPanel {
             dtm.setRowCount(0);
            
             Patient p = (Patient)patient;
-            ArrayList<Bill> unpaidBills =  p.getMyBillingHistory().getUnpaidBills();
-                for(Bill unpaidBill : unpaidBills){
+            ArrayList<Bill> bills =  p.getMyBillingHistory().getBillingHistory();
+                for(Bill mybill : bills){
 
 //                    if(insWorkreq.getPatient().getUsername().equals(p.getUserName())){
-                        Object[] row = new Object[4];
+                        Object[] row = new Object[8];
 
-                        row[0]=unpaidBill; //BillNo
+                        row[0]=mybill; //BillNo
                         
-                        row[1]=unpaidBill.getEnterprise(); //Hospital or Insurance company bill
-                        row[2]=unpaidBill.getBillType(); //whether for Claim settlement/Self Pay/ Insurance Company EMI
-                        row[3]=unpaidBill.getBillAmount(); // Total Amount
-                        row[4]=unpaidBill.getPaidThroughInsurance(); // Paid by insurance company
-                        row[5]= unpaidBill.getPaidThroughSelf(); // to be paid or already paid by self
-                        if(unpaidBill.getAppointment().getAppointmentType()==""){
+                        row[1]=mybill.getEnterprise(); //Hospital or Insurance company bill 
+                        
+                        if(!(mybill.getAppointment() == null)
+                                &&
+                             mybill.getAppointment().getAppointmentType().equalsIgnoreCase("Doctor"))
+                        {
+                            row[2]=mybill.getAppointment().getDoctor().getName(); //whether for Claim settlement/Self Pay/ Insurance Company EMI
+                        }
+                        else{
+                            row[2]="Lab Test";
+                        }//whether for Claim settlement/Self Pay/ Insurance Company EMI
+                        row[3]=mybill.getBillAmount(); // Total Amount
+                        row[4]=mybill.getPaidThroughInsurance(); // Paid by insurance company
+                        row[5]= mybill.getPaidThroughSelf(); // to be paid or already paid by self
+                        if(mybill.getBillType()==""){
                         row[6]= "Insurance payment" ;   // Test for Insurance/Vital test/ Insurance payment
                         }
                         else{
-                        row[6] = unpaidBill.getAppointment().getAppointmentType(); 
+                        row[6] = mybill.getBillType(); 
                         }
-                        row[7]= unpaidBill.getBillStatus(); //paid or unpaid
+                        row[7]= mybill.getBillStatus(); //paid or unpaid
                         dtm.addRow(row);
+                
+                        
+                        
                 }
-                        
-                        
-
             }
     
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnViewActionPerformed
-
     private void btnPayBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayBillActionPerformed
         // TODO add your handling code here:
+                int selectedRow = tblBills.getSelectedRow();
+        
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row");
+          
+        }
+        else{
+            
+            Bill payMybill = (Bill)tblBills.getValueAt(selectedRow, 1);
+                if(payMybill.getBillStatus().equals("Pending")){
+                BillingPage panel = new BillingPage(panelRight,patient,organization,enterprise,business,dB4OUtil,String.valueOf(payMybill.getPaidThroughSelf()));
+                 panelRight.add("BillingPage", panel);
+                CardLayout layout = (CardLayout) panelRight.getLayout();
+                 layout.next(panelRight);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Bill is paid already");
+                }
+            }
     }//GEN-LAST:event_btnPayBillActionPerformed
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -308,7 +322,6 @@ public class patientBillJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnPayBill;
-    private java.awt.Button btnView;
     private javax.swing.JLabel btn_close;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;

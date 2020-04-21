@@ -513,7 +513,7 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addNetBtn)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -522,7 +522,13 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
        // String t = (String)  departmentTypeJComboBox.getSelectedItem();
         String name = networkName.getText();
        
-        if(!directory.checkIfDepartmentTypePresent(type.getValue()) &&
+          name = name.trim();
+       
+         if (name.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Name is empty");
+            return;}
+        
+         if(!directory.checkIfDepartmentTypePresent(type.getValue()) &&
            !directory.checkIfDepartmentNamePresent(name)
                 )
             {   
@@ -600,8 +606,11 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
             int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete??","Warning",selectionButton);
             if(selectionResult == JOptionPane.YES_OPTION){
                 Organization org = (Organization)organizationJTable.getValueAt(selectedRow, 0);
-                directory.getOrganizationList().remove(org);
+               
+               boolean b = directory.getOrganizationList().remove(org);
+                System.out.println(" is directory removed"+b);
                 populateNetworkTable();
+                dB4OUtil.storeSystem(system);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Please make a selection first.");

@@ -424,8 +424,8 @@ public class Add_Hospital_Doctors extends javax.swing.JPanel {
         
                 Component[] comps = this.rightPanel.getComponents();
         for(Component comp: comps){
-            if(comp instanceof SysAdmin_WorkArea){
-                SysAdmin_WorkArea manageAdmin = (SysAdmin_WorkArea) comp;
+            if(comp instanceof Hospital_Admin_WorkArea){
+                Hospital_Admin_WorkArea manageAdmin = (Hospital_Admin_WorkArea) comp;
                 manageAdmin.populateNetworkTable();
                 manageAdmin.init();
             
@@ -478,9 +478,18 @@ public class Add_Hospital_Doctors extends javax.swing.JPanel {
         String username = adminusername.getText();
         String password = String.valueOf(adminpassword.getPassword());
         String name = adminName.getText();
-
+        name = name.trim();
+       
+         if (name.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Name is empty");
+            return;}
+        if(name.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter appropriate name");
+        return;
+        }
         userUnique = true;
         userUniqueValidation();
+
            if (userUnique == false){
            JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
                   return;}
@@ -535,9 +544,9 @@ if (passwordPatternCorrect()==false){
       
         db4outil.storeSystem(system);
         
-        adminusername.setText(" ");
-        adminpassword.setText(" ");
-        adminName.setText(" ");
+        adminusername.setText("");
+        adminpassword.setText("");
+        adminName.setText("");
         
         populateAdminTable();
 
@@ -593,14 +602,12 @@ if (passwordPatternCorrect()==false){
             if(selectionResult == JOptionPane.YES_OPTION){
                 UserAccount airliner = (UserAccount)adminTable.getValueAt(selectedRow, 3);
                 Employee e = airliner.getEmployee();
-                this.system.getEmployeeDirectory().getEmployeeList().remove(airliner);//  mainTravelAgency.deleteAirline(airliner);
-                this.enterprise.getEmployeeDirectory().getEmployeeList().remove(airliner); // createUserAccount(username, password, employee, new AdminRole());
-                
-                this.system.getUserAccountDirectory().getUserAccountList().remove(airliner);//  mainTravelAgency.deleteAirline(airliner);
-                this.enterprise.getUserAccountDirectory().getUserAccountList().remove(airliner); // createUserAccount(username, password, employee, new AdminRole());
-                
+                org.getEmployeeDirectory().getEmployeeList().remove(e);  adminName.setText("");
+                org.getUserAccountDirectory().getUserAccountList().remove(airliner);
                 
                 populateAdminTable();
+                db4outil.storeSystem(system);
+//                populateAdminTable();
             }
         }else{
             JOptionPane.showMessageDialog(null, "Please make a selection first.");
