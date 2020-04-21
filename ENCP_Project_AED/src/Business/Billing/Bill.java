@@ -20,7 +20,7 @@ public class Bill {
     private double paidThroughSelf;
     private String billStatus;
     private String billNo;
-    
+    private String testType;//Doctor
     private String billAmount;
 
     public Enterprise getEnterprise() {
@@ -102,6 +102,14 @@ public class Bill {
 
     public void setBillStatus(String billStatus) {
         this.billStatus = billStatus;
+    }
+
+    public String getTestType() {
+        return testType;
+    }
+
+    public void setTestType(String testType) {
+        this.testType = testType;
     }
     
     

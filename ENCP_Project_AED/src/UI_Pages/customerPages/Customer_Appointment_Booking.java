@@ -580,7 +580,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
         lblAppointmentDoc1 = new javax.swing.JLabel();
         btnBookAppointment = new java.awt.Button();
         btnCancel = new java.awt.Button();
-        btnChange = new java.awt.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1140, 510));
@@ -920,16 +919,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
             }
         });
         add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 620, 130, 40));
-
-        btnChange.setBackground(new java.awt.Color(96, 83, 150));
-        btnChange.setForeground(new java.awt.Color(255, 255, 255));
-        btnChange.setLabel("Change Date");
-        btnChange.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeActionPerformed(evt);
-            }
-        });
-        add(btnChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 620, 130, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -1108,10 +1097,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnChangeActionPerformed
-
     private void comboBoxAppTypeOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAppTypeOrganizationActionPerformed
         // TODO add your handling code here:
      //   comboBoxDoctor.removeAllItems();
@@ -1241,7 +1226,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
     private javax.swing.JLabel LblTestType;
     private java.awt.Button btnBookAppointment;
     private java.awt.Button btnCancel;
-    private java.awt.Button btnChange;
     private javax.swing.JLabel btn_close;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> comboBoxAppTypeOrganization;

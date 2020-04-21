@@ -278,6 +278,11 @@ public class CreateEnterprise extends javax.swing.JPanel {
 
         jButton3.setBackground(new java.awt.Color(247, 247, 247));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_minus_40px_2.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         addAdminPanel.setBackground(new java.awt.Color(247, 247, 247));
 
@@ -443,7 +448,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
                             .addComponent(jButton5))))
                 .addGap(67, 67, 67)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
@@ -559,8 +564,8 @@ public class CreateEnterprise extends javax.swing.JPanel {
                                 .addComponent(jButton4))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(addAdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(184, 184, 184))
+                .addComponent(addAdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(168, 168, 168)
@@ -629,9 +634,21 @@ public class CreateEnterprise extends javax.swing.JPanel {
 
         String name = enterpriseName.getText();
         Enterprise.EnterpriseType selectedType = (Enterprise.EnterpriseType) enterpriseTypeJComboBox.getSelectedItem();
-        
+        name = name.trim();
+       
+         if (name.isEmpty()){
+         
+             JOptionPane.showMessageDialog(null, "Name is empty");
+            return;
+         
+         
+         }
         System.out.println(""+selectedType);
         
+        if(name.equals("")){
+        JOptionPane.showMessageDialog(null, "Please enter enterprise name");
+        return;
+        }
         if(network.checkEnterpriseNameUnique(name)){
             Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, selectedType);
             populateEnterpriseTable();
@@ -684,7 +701,12 @@ public class CreateEnterprise extends javax.swing.JPanel {
         String username = adminusername.getText();
         String password = String.valueOf(adminpassword.getPassword());
         String name = adminName.getText();
-        
+        name = name.trim();
+       
+         if (name.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Name is empty");
+            return;
+         }
         
         // Validations
            userUnique = true;
@@ -867,6 +889,10 @@ public class CreateEnterprise extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please make a selection first.");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

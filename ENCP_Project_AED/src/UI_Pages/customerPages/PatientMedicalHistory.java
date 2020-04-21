@@ -79,12 +79,12 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
                         Object[] row = new Object[3];
                     
                         row[0] = pDoc;
-                        
-                        if(pDoc.getDate()!= null){
-                        Format f = new SimpleDateFormat("MM/dd/yy");
-                        String strDate = f.format(pDoc.getDate());
-                        row[1] = strDate;
-                        }
+//                        
+//                        if(pDoc.getDate()!= null){
+//                        Format f = new SimpleDateFormat("MM/dd/yy");
+//                        String strDate = f.format(pDoc.getDate());
+//                        row[1] = strDate;
+//                        }
                         
                         row[1] = pDoc.getDate();
                         //row[2] = pDoc;
@@ -175,7 +175,7 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel7.setBackground(new java.awt.Color(247, 247, 247));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -269,7 +269,7 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnViewDocRecs, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 194, Short.MAX_VALUE))
+                .addGap(0, 304, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +289,7 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
                 .addContainerGap(442, Short.MAX_VALUE))
         );
 
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 710, 840));
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 820, 840));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -317,7 +317,7 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 230, 70));
 
         patientLabel.setBackground(new java.awt.Color(41, 216, 95));
         patientLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

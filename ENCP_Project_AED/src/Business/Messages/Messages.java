@@ -69,7 +69,7 @@ public class Messages {
 
     @Override
     public String toString() {
-        return "Messages{" + "sender=" + sender + '}';
+        return "sender=" + sender;
     }
         
 }

@@ -117,7 +117,7 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         for(Employee e : system.getEmployeeDirectory().getEmployeeList()){
                          
                             emp += 1; // et.getEmployeeDirectory().getEmployeeList().size();
-                        }
+             }
         
         for(Network net : system.getNetworkList()){
             for(Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()){
@@ -529,8 +529,17 @@ public class SysAdmin_WorkArea extends javax.swing.JPanel {
         
         
         String name = networkName.getText();
-        String loc = (String)networkLocation.getSelectedItem();
         
+        
+        
+        String loc = (String)networkLocation.getSelectedItem();
+           
+          name = name.trim();
+       
+         if (name.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Name is empty");
+            return;}
+    
         if(this.system.checkIfNetworkLocationUnique(loc))
         {
             Network network = system.createAndAddNetwork();

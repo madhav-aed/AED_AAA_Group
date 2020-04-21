@@ -45,17 +45,16 @@ public class MedicalDocDisplay extends javax.swing.JPanel {
     void fillScreen(){
     
     outPatientName.setText(pat1.getfName() + " " + pat1.getLastName());
-    if(appt.getDate()!= null){
-        Format f = new SimpleDateFormat("MM/dd/yy");
-         String strDate = f.format(pDoc.getDate());
-         outDate.setText(strDate);
-                       
-    }
+//    if(appt.getDate()!= null){
+//        Format f = new SimpleDateFormat("MM/dd/yy");
+//         String strDate = f.format(pDoc.getDate());
+//                       
+//    }
     
-   
-    outDiagnosis.setText(pDoc.getDiagnosis());
-    outPrescription.setText(pDoc.getPrescription());
-    
+   outDate.setText(pDoc.getDate());
+   outDiagnosis.setText(pDoc.getDiagnosis());
+   outPrescription.setText(pDoc.getPrescription());
+   outRecNumber.setText(String.valueOf(pDoc.getPatientDocNumber()));
     
     
     }

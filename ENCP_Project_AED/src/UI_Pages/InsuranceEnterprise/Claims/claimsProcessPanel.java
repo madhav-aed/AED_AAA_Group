@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package UI_Pages.InsuranceEnterprise.Claims;
+import Business.Billing.Bill;
 import UI_Pages.InsuranceEnterprise.Manager.*;
 import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
@@ -101,8 +102,8 @@ public class claimsProcessPanel extends javax.swing.JPanel {
                                  txtLastName.setText(claimFileReq.getPatient().getLastName());
                                  txtMobileNo.setText(claimFileReq.getPatient().getMobno());
                                  txtNetwork.setText(claimFileReq.getPatient().getNetwork().getName());
-                                String dob = simpleDateFormat.format(claimFileReq.getPatient().getDob());
-                                txtDOB.setText(dob);
+                                 String dob = simpleDateFormat.format(claimFileReq.getPatient().getDob());
+                                 txtDOB.setText(dob);
 //                                txtTestresult.setVisible(false);
 //                                lblVitTestReport.setVisible(false);
 //                                txtTestresult.setText(claimReq.getTestResult());
@@ -187,7 +188,6 @@ public class claimsProcessPanel extends javax.swing.JPanel {
         txtClaimAmount = new javax.swing.JTextField();
         txtFileNo = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
-        btn_close = new javax.swing.JLabel();
         btn_back = new javax.swing.JLabel();
         btnApprove = new java.awt.Button();
         jPanel11 = new javax.swing.JPanel();
@@ -376,20 +376,10 @@ public class claimsProcessPanel extends javax.swing.JPanel {
 
         jPanel15.setBackground(new java.awt.Color(12, 115, 101));
 
-        btn_close.setBackground(new java.awt.Color(96, 83, 150));
-        btn_close.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
-        btn_close.setForeground(new java.awt.Color(255, 255, 255));
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8_delete_50px.png"))); // NOI18N
-        btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_closeMouseClicked(evt);
-            }
-        });
-
         btn_back.setBackground(new java.awt.Color(96, 83, 150));
         btn_back.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_back.setForeground(new java.awt.Color(255, 255, 255));
-        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_back_to_40px.png"))); // NOI18N
+        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_previous_48px.png"))); // NOI18N
         btn_back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_backMouseClicked(evt);
@@ -401,15 +391,12 @@ public class claimsProcessPanel extends javax.swing.JPanel {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addGap(0, 144, Short.MAX_VALUE)
-                .addComponent(btn_back)
-                .addGap(46, 46, 46)
-                .addComponent(btn_close))
+                .addGap(0, 182, Short.MAX_VALUE)
+                .addComponent(btn_back))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-            .addComponent(btn_back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
         add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 230, 70));
@@ -457,21 +444,6 @@ public class claimsProcessPanel extends javax.swing.JPanel {
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 80, 41));
     }// </editor-fold>//GEN-END:initComponents
 
-//    public double calculateEmi(double amount){
-//         
-//        if(txtTestresult.getText()=="Normal"){
-//         amount = amount - (amount*0.1);
-//        }
-//        if(txtTestresult.getText()=="Abnormal"){
-//         amount = amount + (amount*0.1);
-//        }
-//        return amount;
-//    }
-    private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btn_closeMouseClicked
-
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
 
 
@@ -516,8 +488,10 @@ public class claimsProcessPanel extends javax.swing.JPanel {
 //            medIns.setStartDate(new Date());
 //            buyReq.getPatient().setMedIns(medIns);
             
-            claimFileReq.setStatus("Approved");
-            JOptionPane.showMessageDialog(null, " Claim Approved successfully");
+            
+           
+            claimFileReq.setStatus("In Process");
+            JOptionPane.showMessageDialog(null, " Claim Processed successfully");
             btnApprove.setEnabled(false);
             
 //        }   
@@ -550,7 +524,6 @@ public class claimsProcessPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnApprove;
     private javax.swing.JLabel btn_back;
-    private javax.swing.JLabel btn_close;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

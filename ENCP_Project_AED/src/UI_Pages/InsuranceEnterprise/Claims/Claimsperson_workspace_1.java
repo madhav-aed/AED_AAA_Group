@@ -463,7 +463,7 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
                 for( WorkRequest workRequest: organization.getWorkQueue().getWorkRequestList()) {
                 
                    BillingWorkRequest claimReq = (BillingWorkRequest)workRequest;
-                    if(claimReq.getStatus().equals("In process")){
+                    if(!(claimReq.getStatus().equals("In Process"))){
                         Object[] row = new Object[5];
                         row[0]=claimReq.getRequestDate();
                         row[1]=claimReq;
@@ -498,7 +498,7 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
         }
         else{
 //            BillingWorkRequest claimReq = (BillingWorkRequest)workRequest;
-            BillingWorkRequest claimReq = (BillingWorkRequest)tblCustdetails.getValueAt(selectedRow, 0);
+            BillingWorkRequest claimReq = (BillingWorkRequest)tblCustdetails.getValueAt(selectedRow, 1);
         
                 claimsProcessPanel panel = new claimsProcessPanel(panelRight,userAccount,organization,enterprise,business,dB4OUtil,claimReq);
                  panelRight.add("claimsProcessPanel", panel);

@@ -10,6 +10,7 @@ import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
+import UI_Pages.MyMessages.MyMessages_Emp;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
 import UI_Pages.customerPages.*;
 import java.awt.CardLayout;
@@ -378,11 +379,13 @@ public class Insurance_Admin_WorkSpace extends javax.swing.JFrame {
         Indicator4.setOpaque(false);
         
         
+    
+        
         CardLayout layout = (CardLayout)panelRight.getLayout();
-      //  panelRight.add(new Test_Panel_4());
-      
-        panelRight.add(new Insurance_Admin_WorkArea(this.panelRight, account,enterprise, system, dB4OUtil));
+        panelRight.add(new MyMessages_Emp(this.panelRight, account,account.getEmployee(), null,enterprise, system, dB4OUtil));
         layout.next(panelRight);
+        
+    
         
         
     }//GEN-LAST:event_Button2MouseClicked

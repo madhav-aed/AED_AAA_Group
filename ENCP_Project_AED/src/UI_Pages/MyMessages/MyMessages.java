@@ -16,6 +16,8 @@ import Business.UserAccount.UserAccount;
 import UI_Pages.*;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -109,6 +111,7 @@ public class MyMessages extends javax.swing.JPanel {
         composeEmail = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
+        btn_close1 = new javax.swing.JLabel();
         userNameLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         myMessagesTbl = new javax.swing.JTable();
@@ -117,8 +120,8 @@ public class MyMessages extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         panelMsg = new javax.swing.JPanel();
-        SenderLabel = new javax.swing.JLabel();
-        SubjectLabel = new javax.swing.JLabel();
+        senderSubjectlabel = new javax.swing.JLabel();
+        sendernameLbl = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
@@ -128,6 +131,11 @@ public class MyMessages extends javax.swing.JPanel {
         composeEmail.setForeground(new java.awt.Color(96, 83, 150));
         composeEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_new_message_40px.png"))); // NOI18N
         composeEmail.setText("Compose A New Messages");
+        composeEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                composeEmailMouseClicked(evt);
+            }
+        });
         composeEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 composeEmailKeyPressed(evt);
@@ -146,18 +154,30 @@ public class MyMessages extends javax.swing.JPanel {
             }
         });
 
+        btn_close1.setBackground(new java.awt.Color(96, 83, 150));
+        btn_close1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_close1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_close1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_back_to_40px.png"))); // NOI18N
+        btn_close1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_close1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addGap(361, 361, 361)
+                .addGap(0, 350, Short.MAX_VALUE)
                 .addComponent(btn_close)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_close1))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+            .addComponent(btn_close1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
         userNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -201,6 +221,11 @@ public class MyMessages extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(96, 83, 150));
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_deleted_message_48px.png"))); // NOI18N
         jLabel17.setText("Delete Message");
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel17MouseClicked(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(96, 83, 150));
@@ -216,6 +241,11 @@ public class MyMessages extends javax.swing.JPanel {
         jLabel19.setForeground(new java.awt.Color(96, 83, 150));
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_outbox_48px_1.png"))); // NOI18N
         jLabel19.setText("My Outbox");
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel19MouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(96, 83, 150));
@@ -223,13 +253,13 @@ public class MyMessages extends javax.swing.JPanel {
 
         panelMsg.setBackground(new java.awt.Color(247, 247, 247));
 
-        SenderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        SenderLabel.setForeground(new java.awt.Color(96, 83, 150));
-        SenderLabel.setText("Welcome");
+        senderSubjectlabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        senderSubjectlabel.setForeground(new java.awt.Color(96, 83, 150));
+        senderSubjectlabel.setText("Message");
 
-        SubjectLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        SubjectLabel.setForeground(new java.awt.Color(96, 83, 150));
-        SubjectLabel.setText("Welcome");
+        sendernameLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        sendernameLbl.setForeground(new java.awt.Color(96, 83, 150));
+        sendernameLbl.setText("Welcome");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -241,25 +271,23 @@ public class MyMessages extends javax.swing.JPanel {
         panelMsgLayout.setHorizontalGroup(
             panelMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMsgLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(117, 117, 117)
                 .addGroup(panelMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SubjectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SenderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(senderSubjectlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sendernameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         panelMsgLayout.setVerticalGroup(
             panelMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMsgLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelMsgLayout.createSequentialGroup()
-                        .addComponent(SenderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SubjectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addComponent(sendernameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(senderSubjectlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -267,28 +295,26 @@ public class MyMessages extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(composeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(560, 560, 560)
-                                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(composeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))))))
-                .addContainerGap(123, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,10 +325,8 @@ public class MyMessages extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(composeEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,38 +339,101 @@ public class MyMessages extends javax.swing.JPanel {
                         .addComponent(jLabel17)))
                 .addGap(18, 18, 18)
                 .addComponent(panelMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+      //  System.exit(0);
     }//GEN-LAST:event_btn_closeMouseClicked
 
     private void composeEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_composeEmailKeyPressed
         
-        CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new SendMessages(panelRight,userAccount,organization,enterprise,business,dB4OUtil));
-        layout.next(panelRight);
+
         
     }//GEN-LAST:event_composeEmailKeyPressed
 
     private void jLabel18MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MousePressed
+          
         int selectedRow = myMessagesTbl.getSelectedRow();
         if(selectedRow >= 0)
         {
+            Messages msgs   = (Messages) myMessagesTbl.getValueAt(selectedRow, 0);
+            
             panelMsg.setVisible(true);
+            sendernameLbl.setText(""+msgs.getSender());
+            senderSubjectlabel.setText(""+msgs.getSubject());
+            jTextArea1.setText(""+msgs.getMessage());
             
         }        
     }//GEN-LAST:event_jLabel18MousePressed
+
+    private void composeEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_composeEmailMouseClicked
+
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        panelRight.add(new SendMessages(panelRight,userAccount,organization,enterprise,business,dB4OUtil));
+        layout.next(panelRight);
+        
+        
+        
+    }//GEN-LAST:event_composeEmailMouseClicked
+
+    private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
+        
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        panelRight.add(new MyOutbox(panelRight,userAccount,organization,enterprise,business,dB4OUtil));
+        layout.next(panelRight);
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jLabel19MouseClicked
+
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+        int selectedRow = myMessagesTbl.getSelectedRow();
+        if(selectedRow>=0){
+            int selectionButton = JOptionPane.YES_NO_OPTION;
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete??","Warning",selectionButton);
+            if(selectionResult == JOptionPane.YES_OPTION){
+               Messages  msg = (Messages)myMessagesTbl.getValueAt(selectedRow, 0);
+                
+                userAccount.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().remove(msg);
+                
+                populateTable();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Please make a selection first.");
+        }
+
+    }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void btn_close1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_close1MouseClicked
+        // TODO add your handling code here:
+
+        Component[] comps = this.panelRight.getComponents();// k nnm,nm
+        for(Component comp: comps){
+            if(comp instanceof Customer_Workspace_1){
+                Customer_Workspace_1 manageAdmin = (Customer_Workspace_1) comp;
+                manageAdmin.setMyEmails();
+                manageAdmin.init();
+
+            }
+
+        }
+
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        panelRight.remove(this);
+        layout.previous(panelRight);
+
+    }//GEN-LAST:event_btn_close1MouseClicked
    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel SenderLabel;
-    private javax.swing.JLabel SubjectLabel;
     private javax.swing.JLabel btn_close;
+    private javax.swing.JLabel btn_close1;
     private javax.swing.JLabel composeEmail;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -358,6 +445,8 @@ public class MyMessages extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable myMessagesTbl;
     private javax.swing.JPanel panelMsg;
+    private javax.swing.JLabel senderSubjectlabel;
+    private javax.swing.JLabel sendernameLbl;
     private javax.swing.JLabel userNameLabel;
     // End of variables declaration//GEN-END:variables
 }

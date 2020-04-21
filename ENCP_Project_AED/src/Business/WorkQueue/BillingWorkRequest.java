@@ -6,6 +6,7 @@
 package Business.WorkQueue;
 
 import Business.Customer.Patient;
+import Business.Enterprises.Enterprise;
 
 /**
  *
@@ -19,6 +20,24 @@ public class BillingWorkRequest extends WorkRequest {
      private String claimedAmount;
      private String claimSantioned;
      private String copay;
+     private String testType;//Doctor
+     private Enterprise enterprise;
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public String getTestType() {
+        return testType;
+    }
+
+    public void setTestType(String testType) {
+        this.testType = testType;
+    }
 
     public String getClaimedAmount() {
         return claimedAmount;

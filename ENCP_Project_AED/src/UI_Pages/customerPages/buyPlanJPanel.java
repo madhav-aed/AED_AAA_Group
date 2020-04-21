@@ -203,7 +203,7 @@ public class buyPlanJPanel extends javax.swing.JPanel {
         
             if(!(p.getPlanType()==null)&&(p.getPlanType().contains("Bronze"))){
             btnGold.setEnabled(false);
-                System.out.println("inside btnview checked for bronze");
+            System.out.println("inside btnview checked for bronze");
             btnPlatinum.setEnabled(false);
             btnBronze.setEnabled(true);
         }

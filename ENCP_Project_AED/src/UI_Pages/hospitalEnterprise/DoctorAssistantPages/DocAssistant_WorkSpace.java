@@ -11,6 +11,7 @@ import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
+import UI_Pages.MyMessages.MyMessages_Emp;
 import UI_Pages.MyMessages.MyMessages_Employees;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -306,14 +307,14 @@ public class DocAssistant_WorkSpace extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1126, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE))
         );
 
         pack();
@@ -382,13 +383,12 @@ public class DocAssistant_WorkSpace extends javax.swing.JFrame {
         Indicator4.setOpaque(false);
         
         
+        
         CardLayout layout = (CardLayout)panelRight.getLayout();
-      //  panelRight.add(new Test_Panel_4());
-      
-        panelRight.add(new MyMessages_Employees(panelRight, this.account, this.account.getEmployee(),organization, enterprise, business, dB4OUtil));
+        panelRight.add(new MyMessages_Emp(panelRight, account, account.getEmployee(),null, enterprise, 
+                business, dB4OUtil));
         layout.next(panelRight);
-        
-        
+
     }//GEN-LAST:event_Button2MouseClicked
 
     private void Button2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button2MouseEntered

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package UI_Pages.InsuranceEnterprise.Manager;
+import Business.Billing.Bill;
 import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
@@ -631,6 +632,16 @@ public class managerSalesProcessPanel extends javax.swing.JPanel {
             //end date to be set 
             buyReq.getPatient().setMedIns(medIns);
             
+//            Bill newBill =buyReq.getPatient().getMyBillingHistory().createNewBill();
+//            
+//            newBill.setBillType("Insurance Bill");
+//            newBill.setBillAmount(txtInsPremium.getText());
+//            newBill.setBillStatus("Pending");
+//            newBill.setEnterprise(buyReq.getPatient().getInsCompany());
+////            newBill.setPaidThroughInsurance(Double.parseDouble(txtClaimSanctioned.getText()));
+//            newBill.setPaidThroughSelf(Double.parseDouble(txtInsPremium.getText()));
+//            
+            
             buyReq.setStatus("Approved");
           
             JOptionPane.showMessageDialog(null, " Insurance sale Approved successfully");
@@ -643,6 +654,19 @@ public class managerSalesProcessPanel extends javax.swing.JPanel {
             claimFileReq.setClaimSantioned(txtClaimSanctioned.getText());
 
 
+            Bill newBill =claimFileReq.getPatient().getMyBillingHistory().createNewBill();
+            if(claimFileReq.getTestType().equals("Vitals Test")){
+                newBill.setBillType("ClaimBill for Vital Test");
+            }
+            else if(claimFileReq.getTestType().equals("Doctor")){
+                newBill.setBillType("ClaimBill for Doctor");
+            }
+            
+            newBill.setBillAmount(txtClaimAmount.getText());
+            newBill.setBillStatus("Pending");
+            newBill.setEnterprise(claimFileReq.getEnterprise());
+            newBill.setPaidThroughInsurance(Double.parseDouble(txtClaimSanctioned.getText()));
+            newBill.setPaidThroughSelf(Double.parseDouble(txtCopay.getText()));
             
             claimFileReq.setStatus("Approved");
             JOptionPane.showMessageDialog(null, " Claim Approved successfully");

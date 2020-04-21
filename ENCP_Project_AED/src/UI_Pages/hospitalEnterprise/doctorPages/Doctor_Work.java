@@ -477,7 +477,7 @@ public class Doctor_Work extends javax.swing.JPanel {
             // Billing Record
             Bill myBill = patient.getMyBillingHistory().createNewBill();
             myBill.setAppointment(apt);
-            myBill.setBillStatus("unpaid");
+            myBill.setBillStatus("Pending");
             
 
             // confirm
@@ -497,14 +497,16 @@ public class Doctor_Work extends javax.swing.JPanel {
                         bWR.setRequestDate(date);
                         bWR.setClaimedAmount("100");
                         bWR.setMessage("Doc Consultation");
+                        bWR.setStatus("To Insurance Enterprise");
+                        bWR.setTestType("Doctor");
                         org.getWorkQueue().getWorkRequestList().add(bWR);                     
                     }
                 }
             }
             else{
-                myBill.setPaidThroughSelf(100.00);
+                         myBill.setPaidThroughSelf(100.00);
             }
-                        disableEverything();
+            disableEverything();
             JOptionPane.showMessageDialog(null, "Patient "+patient.getfName()+" report generated.");
     
             dB4OUtil.storeSystem(business);
@@ -516,7 +518,7 @@ public class Doctor_Work extends javax.swing.JPanel {
                       sb.append(it.next());
                       sb.append("\n");
                 }        
-             Patient patient = workReq.getPatient();
+            Patient patient = workReq.getPatient();
             Appointment apt = workReq.getAppointment();
             Date date = workReq.getAppointment().getDate();
 
@@ -555,6 +557,7 @@ public class Doctor_Work extends javax.swing.JPanel {
                     labWorkReq.setRefBy("Self");
                     labWorkReq.setMessage("");
                     labWorkReq.setTestResult("");
+                    
                     disableEverything();
                     JOptionPane.showMessageDialog(null, "Lab Tests for Patient "+patient.getfName()+" requested to Lab");
             

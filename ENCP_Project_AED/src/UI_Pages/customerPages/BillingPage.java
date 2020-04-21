@@ -5,6 +5,7 @@
  */
 package UI_Pages.customerPages;
 
+import Business.Billing.Bill;
 import Business.Customer.Patient;
 import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
@@ -568,6 +569,15 @@ public class BillingPage extends javax.swing.JPanel {
                    String s2 = p.getUserName();
                    if(s1==s2){
                        
+                   Bill newBill =p.getMyBillingHistory().createNewBill();
+            
+                    newBill.setBillType("Insurance Bill");
+                    newBill.setBillAmount(paymentAmount);
+                    newBill.setBillStatus("Paid");
+                    newBill.setEnterprise(p.getInsCompany());
+//            newBill.setPaidThroughInsurance(Double.parseDouble(txtClaimSanctioned.getText()));
+                    newBill.setPaidThroughSelf(Double.parseDouble(paymentAmount));
+                    JOptionPane.showMessageDialog(null, "Payment completed");
                        insWorkreq.setStatus("Paid");
                    }
                    
