@@ -637,6 +637,11 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "User Created");
       
         db4outil.storeSystem(system);
+        
+        adminusername.setText(" ");
+        adminpassword.setText(" ");
+        adminName.setText(" ");
+        
         populateAdminTable();
       
     }//GEN-LAST:event_addAdminBtnActionPerformed

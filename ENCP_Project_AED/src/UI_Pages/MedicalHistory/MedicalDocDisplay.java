@@ -6,10 +6,15 @@
 package UI_Pages.MedicalHistory;
 
 //import UI_Pages.LabAssistant.*;
+import Business.Customer.Appointment;
+import Business.Customer.Patient;
 import Business.Medical.MedicalReport;
 import Business.Medical.PatientDocRecord;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
 import java.awt.CardLayout;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,21 +29,32 @@ public class MedicalDocDisplay extends javax.swing.JPanel {
      * Creates new form BillingPage1
      */
     JPanel rightPanel;
-    PatientDocRecord patDocRec;
-    public MedicalDocDisplay(JPanel rightPanel,PatientDocRecord patDocRec) {
+    Patient pat1;
+    Appointment appt;
+    PatientDocRecord pDoc;
+    public MedicalDocDisplay(JPanel rightPanel,PatientDocRecord pDoc,Patient pat1) {
         initComponents();
         this.rightPanel =  rightPanel;
-        this.patDocRec = patDocRec;
+        this.pat1 = pat1;
+        this.appt = appt;
+        this.pDoc = pDoc;
+        
         fillScreen();
     }
     
     void fillScreen(){
     
-    outPatientName.setText(patDocRec.getPatient().getfName() + " "+patDocRec.getPatient().getLastName());
-    outDate.setText(patDocRec.getDate());
-    outRecNumber.setText(String.valueOf(patDocRec.getPatientDocNumber()));
-    outDiagnosis.setText(patDocRec.getDiagnosis());
-    outPrescription.setText(patDocRec.getPrescription());
+    outPatientName.setText(pat1.getfName() + " " + pat1.getLastName());
+    if(appt.getDate()!= null){
+        Format f = new SimpleDateFormat("MM/dd/yy");
+         String strDate = f.format(pDoc.getDate());
+         outDate.setText(strDate);
+                       
+    }
+    
+   
+    outDiagnosis.setText(pDoc.getDiagnosis());
+    outPrescription.setText(pDoc.getPrescription());
     
     
     

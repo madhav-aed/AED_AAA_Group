@@ -17,13 +17,24 @@ import java.util.Date;
  * @author rohit
  */
 public class CustomerLabWorkRequest extends WorkRequest {
-    private String testResult;
+     private String testResult;
      private Patient patient;
-
+     private String labReqNo;
+     
+     
+    public CustomerLabWorkRequest(){ 
+    labReqNo = "LAB"+count;
+        count++;
+    }
     public Patient getPatient() {
         return patient;
     }
+    
+    private static int count = 2000;
+      
 
+   
+    
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
@@ -107,7 +118,10 @@ public class CustomerLabWorkRequest extends WorkRequest {
     }
     
     
-    
+    @Override
+    public String toString() {
+        return labReqNo; //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

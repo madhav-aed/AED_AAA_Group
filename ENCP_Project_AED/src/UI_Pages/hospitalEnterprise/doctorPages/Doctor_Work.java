@@ -19,6 +19,7 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.BillingWorkRequest;
 import Business.WorkQueue.CustomerDoctorWorkRequest;
 import Business.WorkQueue.CustomerLabWorkRequest;
+import UI_Pages.customerPages.PatientMedicalHistory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Date;
@@ -294,6 +295,14 @@ public class Doctor_Work extends javax.swing.JPanel {
         myScheduleLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         myScheduleLbl.setForeground(new java.awt.Color(96, 83, 150));
         myScheduleLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_time_machine_40px_2.png"))); // NOI18N
+        myScheduleLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                myScheduleLblMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                myScheduleLblMouseClicked(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/Images/icons8_add_40px_1.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -572,6 +581,20 @@ public class Doctor_Work extends javax.swing.JPanel {
         layout.previous(rightPanel);
 
     }//GEN-LAST:event_btn_close1MouseClicked
+
+    private void myScheduleLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myScheduleLblMouseClicked
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_myScheduleLblMouseClicked
+
+    private void myScheduleLblMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myScheduleLblMousePressed
+        // TODO add your handling code here:
+         CardLayout layout = (CardLayout)rightPanel.getLayout();
+        rightPanel.add(new PatientMedicalHistory(rightPanel,this.p));
+        layout.next(rightPanel);
+        
+    }//GEN-LAST:event_myScheduleLblMousePressed
     public void disableEverything(){
         diagnosisTA.setEnabled(false);
         prescriptionTA.setEnabled(false);

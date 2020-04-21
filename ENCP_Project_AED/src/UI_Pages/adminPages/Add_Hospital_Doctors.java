@@ -535,6 +535,10 @@ if (passwordPatternCorrect()==false){
       
         db4outil.storeSystem(system);
         
+        adminusername.setText(" ");
+        adminpassword.setText(" ");
+        adminName.setText(" ");
+        
         populateAdminTable();
 
       
