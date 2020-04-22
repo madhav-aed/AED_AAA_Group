@@ -36,9 +36,8 @@
                           </Group>
                           <Component id="jLabel5" min="-2" pref="270" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="969" max="-2" attributes="0"/>
                       <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -48,7 +47,7 @@
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   <Component id="backJPanel" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="208" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -102,9 +101,8 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="172" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="184" max="32767" attributes="0"/>
                   <Component id="btn_close" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -164,6 +162,11 @@
       </Layout>
     </Container>
     <Container class="javax.swing.JPanel" name="backJPanel">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="f7" green="f7" red="f7" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -373,7 +376,7 @@
                           <Component id="txtPaypalPWD" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="78" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                   <Component id="btnSubmit" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               </Group>

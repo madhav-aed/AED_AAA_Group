@@ -1030,7 +1030,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
             btnPay.setBackground(purple);
             
         String paymentAmount = lblPaymentAmount.getText();
-        BillingPage panel = new BillingPage(panelRight, patient, organization, enterprise, business, dB4OUtil,paymentAmount);
+        BillingPage panel = new BillingPage(panelRight, patient, organization, enterprise, business, dB4OUtil,paymentAmount,null);
         panelRight.add("BillingPage", panel);
         CardLayout layout = (CardLayout) panelRight.getLayout();
         layout.next(panelRight);

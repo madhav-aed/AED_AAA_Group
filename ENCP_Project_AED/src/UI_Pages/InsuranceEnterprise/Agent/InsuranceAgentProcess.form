@@ -312,7 +312,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="550" y="0" width="230" height="70"/>
+          <AbsoluteConstraints x="650" y="0" width="230" height="70"/>
         </Constraint>
       </Constraints>
 
@@ -344,7 +344,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/UI_Pages/images/icons8_back_to_40px.png"/>
+              <Image iconType="3" name="/UI_Pages/images/icons8_previous_48px.png"/>
             </Property>
           </Properties>
           <Events>

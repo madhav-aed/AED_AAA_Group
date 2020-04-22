@@ -10,6 +10,7 @@ import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
+import Business.Messages.Messages;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.BillingWorkRequest;
 import Business.WorkQueue.BuyInsuranceWorkRequest;
@@ -46,6 +47,52 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
         this.dB4OUtil = dB4OUtil;
         
         populateTable();
+         setMyEmails();
+        lblAgentName.setText("Welcome "+this.userAccount.getEmployee().getName());
+    }
+    
+    
+        public void setMyEmails(){
+        int myInboxNumber = userAccount.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().size();
+ //       for(Messages msgs : patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList())
+            if(myInboxNumber > 1){
+                Messages msgs = userAccount.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText(""+msgs.getSender());
+                emailText1Label.setText(""+msgs.getSubject());                
+            
+                Messages lastButone  = userAccount.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText(""+lastButone.getSender());
+                emailText2Label.setText(""+lastButone.getSubject());                
+            
+            }
+            else if(myInboxNumber == 1){
+                Messages msgs = userAccount.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText(""+msgs.getSender());
+                emailText1Label.setText(""+msgs.getSubject());                
+            
+            //    Messages lastButone  = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText("                                               ");; // .setText(""+lastButone.getSender());
+                emailText2Label.setText("                                               ");; //.setText(""+lastButone.getSubject());                
+            
+            }
+            else if(myInboxNumber == 0){
+//                Messages msgs = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText("No new messages");
+                emailText1Label.setText("                                               ");;               
+            
+            //    Messages lastButone  = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText("                                               "); // .setText(""+lastButone.getSender());
+                emailText2Label.setText("                                               "); //.setText(""+lastButone.getSubject());                
+            
+            }
+
+
+
+            
+        
     }
 
     /**
@@ -58,13 +105,7 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
     private void initComponents() {
 
         lblAgentName = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
-        btn_close = new javax.swing.JLabel();
-        btn_back = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        lblNewCustCount = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -80,15 +121,16 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
         lblSalesCount = new javax.swing.JLabel();
         lblPlanName = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        lblMessage1 = new javax.swing.JLabel();
+        emailName1Label = new javax.swing.JLabel();
+        emailText1Label = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        lblMessage2 = new javax.swing.JLabel();
+        emailName2Label = new javax.swing.JLabel();
+        emailText2Label = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(247, 247, 247));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAgentName.setBackground(new java.awt.Color(41, 216, 95));
@@ -97,65 +139,11 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
         lblAgentName.setText("Kal Bugrara");
         add(lblAgentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 27, 320, 30));
 
-        jPanel15.setBackground(new java.awt.Color(12, 115, 101));
-
-        btn_close.setBackground(new java.awt.Color(96, 83, 150));
-        btn_close.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
-        btn_close.setForeground(new java.awt.Color(255, 255, 255));
-        btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_closeMouseClicked(evt);
-            }
-        });
-
-        btn_back.setBackground(new java.awt.Color(96, 83, 150));
-        btn_back.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btn_back.setForeground(new java.awt.Color(255, 255, 255));
-        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_back_to_40px.png"))); // NOI18N
-        btn_back.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_backMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addGap(0, 172, Short.MAX_VALUE)
-                .addComponent(btn_back)
-                .addGap(18, 18, 18)
-                .addComponent(btn_close))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-        );
-
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 230, 70));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(12, 115, 101));
-        jLabel13.setText("new Customer requests");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 270, 20));
-
         jLabel11.setBackground(new java.awt.Color(41, 216, 95));
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(12, 115, 101));
         jLabel11.setText("Welcome back ");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 23, 130, 37));
-
-        lblNewCustCount.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        lblNewCustCount.setForeground(new java.awt.Color(12, 115, 101));
-        lblNewCustCount.setText(" 5 ");
-        add(lblNewCustCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 40, 20));
-
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(12, 115, 101));
-        jLabel21.setText("You have ");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 60, 20));
 
         jPanel12.setBackground(new java.awt.Color(16, 190, 121));
 
@@ -163,14 +151,16 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 820, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 720, -1));
+        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 820, -1));
+
+        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(12, 115, 101));
@@ -283,54 +273,17 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
                 .addComponent(lblPlanName, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(12, 115, 101));
-        jLabel16.setText("Recent mail");
-
         jPanel7.setBackground(new java.awt.Color(247, 247, 247));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(12, 115, 101));
-        jLabel14.setText("Oscar");
+        emailName1Label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        emailName1Label.setForeground(new java.awt.Color(96, 83, 150));
+        emailName1Label.setText("Oscar");
 
-        lblMessage1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        lblMessage1.setForeground(new java.awt.Color(12, 115, 101));
-        lblMessage1.setText("<html> Payment received </html>");
-
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(12, 115, 101));
-        jLabel17.setText("Omar");
-
-        lblMessage2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        lblMessage2.setForeground(new java.awt.Color(12, 115, 101));
-        lblMessage2.setText("<html> Request for platinum approved<br>Send user Mail </html>");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblMessage2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMessage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-        );
+        emailText1Label.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        emailText1Label.setForeground(new java.awt.Color(96, 83, 150));
+        emailText1Label.setText("<html> New incoming story on this side<br> Nothing major happening </html>");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -339,96 +292,121 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblMessage1))
+                    .addComponent(emailName1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emailText1Label))
                 .addContainerGap())
-            .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(emailName1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMessage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailText1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        emailName2Label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        emailName2Label.setForeground(new java.awt.Color(96, 83, 150));
+        emailName2Label.setText("Omar");
+
+        emailText2Label.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        emailText2Label.setForeground(new java.awt.Color(96, 83, 150));
+        emailText2Label.setText("<html>\nNew incoming story on this side<br>\nNothing major happening\n</html>");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emailName2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emailText2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
                 .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(emailName2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(emailText2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(289, Short.MAX_VALUE))
         );
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_new_message_40px.png"))); // NOI18N
+        jLabel16.setText("Recent mail");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 729, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(130, 130, 130)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(140, 140, 140)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(150, 150, 150)
-                                    .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(30, 30, 30)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(140, 140, 140)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(2, 2, 2)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 64, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jLabel16)))
-                    .addGap(4, 4, 4)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(20, 20, 20)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel16)))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 830, 630));
     }// </editor-fold>//GEN-END:initComponents
 
     public void populateTable(){
@@ -482,11 +460,6 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
 //            lblSalesCount.setText(String.valueOf(countSaleReq));
             lblCaimsCount.setText(String.valueOf(countClmReq));
     }
-    private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btn_closeMouseClicked
-
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
         
@@ -509,39 +482,22 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnProcessActionPerformed
 
-    private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
-        // TODO add your handling code here:
-        //  System.exit(0);
-
-        panelRight.remove(this);
-//
-//        Component[] componentArray = panelRight.getComponents();
-//        Component component = componentArray[componentArray.length-1];
-//        buyPlanJPanel buyPanel = (buyPlanJPanel) component;
-//        buyPanel.btnView();
-//        CardLayout layout = (CardLayout)panelRight.getLayout();
-//        layout.previous(panelRight);
-    }//GEN-LAST:event_btn_backMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnProcess;
-    private javax.swing.JLabel btn_back;
-    private javax.swing.JLabel btn_close;
+    private javax.swing.JLabel emailName1Label;
+    private javax.swing.JLabel emailName2Label;
+    private javax.swing.JLabel emailText1Label;
+    private javax.swing.JLabel emailText2Label;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
@@ -550,9 +506,6 @@ public class Claimsperson_workspace_1 extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAgentName;
     private javax.swing.JLabel lblCaimsCount;
-    private javax.swing.JLabel lblMessage1;
-    private javax.swing.JLabel lblMessage2;
-    private javax.swing.JLabel lblNewCustCount;
     private javax.swing.JLabel lblPlanName;
     private javax.swing.JLabel lblSalesCount;
     private javax.swing.JTable tblCustdetails;
