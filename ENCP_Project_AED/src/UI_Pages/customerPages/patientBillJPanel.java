@@ -15,11 +15,13 @@ import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.BillingWorkRequest;
 import Business.WorkQueue.WorkRequest;
-import UI_Pages.Sudhanshu.*;
+//import UI_Pages.Sudhanshu.*;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -54,8 +56,14 @@ public class patientBillJPanel extends javax.swing.JPanel {
         populateTable();
         
         
-        jLabel21.setVisible(false);
-        lblPendingAmount.setVisible(false);
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(Color.white);
+       // headerRenderer.set(Color.BLACK);
+
+        for (int i = 0; i < tblBills.getModel().getColumnCount(); i++) {
+            tblBills.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+
     }
 
     /**
@@ -76,8 +84,6 @@ public class patientBillJPanel extends javax.swing.JPanel {
         btn_close = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         labelIcon = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        lblPendingAmount = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -198,16 +204,6 @@ public class patientBillJPanel extends javax.swing.JPanel {
         labelIcon.setOpaque(true);
         add(labelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, 90, 80));
 
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel21.setText("Your have a pending bill for  ");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 66, 160, 30));
-
-        lblPendingAmount.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        lblPendingAmount.setForeground(new java.awt.Color(96, 83, 150));
-        lblPendingAmount.setText("100 USD");
-        add(lblPendingAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 90, 20));
-
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -275,12 +271,12 @@ public class patientBillJPanel extends javax.swing.JPanel {
         }
         else{
             
-            Bill payMybill = (Bill)tblBills.getValueAt(selectedRow, 1);
+            Bill payMybill = (Bill)tblBills.getValueAt(selectedRow, 0);
                 if(payMybill.getBillStatus().equals("Pending")){
-                BillingPage panel = new BillingPage(panelRight,patient,organization,enterprise,business,dB4OUtil,String.valueOf(payMybill.getPaidThroughSelf()));
-                 panelRight.add("BillingPage", panel);
-                CardLayout layout = (CardLayout) panelRight.getLayout();
-                 layout.next(panelRight);
+                    BillingPage panel = new BillingPage(panelRight,patient,organization,enterprise,business,dB4OUtil,String.valueOf(payMybill.getPaidThroughSelf()), payMybill);
+                     panelRight.add("BillingPage", panel);
+                    CardLayout layout = (CardLayout) panelRight.getLayout();
+                     layout.next(panelRight);
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Bill is paid already");
@@ -325,13 +321,11 @@ public class patientBillJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel btn_close;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelIcon;
-    private javax.swing.JLabel lblPendingAmount;
     private javax.swing.JTable tblBills;
     // End of variables declaration//GEN-END:variables
 }

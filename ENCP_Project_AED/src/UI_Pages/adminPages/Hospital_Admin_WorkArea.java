@@ -159,7 +159,6 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
         addNetBtn = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         departmentNoLbl = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -255,9 +254,6 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-
-        jButton4.setBackground(new java.awt.Color(247, 247, 247));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-data_backup.png"))); // NOI18N
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -457,10 +453,9 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(addEmployees, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(234, Short.MAX_VALUE))))
+                        .addContainerGap(233, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,9 +489,7 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                         .addGap(64, 64, 64)
                         .addComponent(addEmployees)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
+                        .addComponent(jButton3))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
@@ -513,7 +506,7 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addNetBtn)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -628,7 +621,6 @@ public class Hospital_Admin_WorkArea extends javax.swing.JPanel {
     private javax.swing.JLabel docNoLbl;
     private javax.swing.JLabel employeesNoLbl;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

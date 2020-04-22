@@ -9,6 +9,7 @@ import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
+import Business.Messages.Messages;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CustomerDoctorWorkRequest;
 import Business.WorkQueue.WorkRequest;
@@ -49,6 +50,7 @@ public class Doctor_Home extends javax.swing.JPanel {
             initComponents();
           //  btn_close.setVisible(false);
             init();    
+            setMyEmails();
             btn_close.setVisible(false);
         
         
@@ -96,7 +98,49 @@ public class Doctor_Home extends javax.swing.JPanel {
  
         populateLabTable();
     }
-    
+        public void setMyEmails(){
+        int myInboxNumber = account.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().size();
+ //       for(Messages msgs : patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList())
+            if(myInboxNumber > 1){
+                Messages msgs = account.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText(""+msgs.getSender());
+                emailText1Label.setText(""+msgs.getSubject());                
+            
+                Messages lastButone  = account.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText(""+lastButone.getSender());
+                emailText2Label.setText(""+lastButone.getSubject());                
+            
+            }
+            else if(myInboxNumber == 1){
+                Messages msgs = account.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText(""+msgs.getSender());
+                emailText1Label.setText(""+msgs.getSubject());                
+            
+            //    Messages lastButone  = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText("                                               ");; // .setText(""+lastButone.getSender());
+                emailText2Label.setText("                                               ");; //.setText(""+lastButone.getSubject());                
+            
+            }
+            else if(myInboxNumber == 0){
+//                Messages msgs = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText("No new messages");
+                emailText1Label.setText("                                               ");;               
+            
+            //    Messages lastButone  = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText("                                               "); // .setText(""+lastButone.getSender());
+                emailText2Label.setText("                                               "); //.setText(""+lastButone.getSubject());                
+            
+            }
+
+
+
+            
+        
+    }
+
      public void populateLabTable(){
 
        DefaultTableModel model1 = (DefaultTableModel) DocWRTable.getModel();
@@ -148,11 +192,11 @@ public class Doctor_Home extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        emailName1Label = new javax.swing.JLabel();
+        emailText1Label = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        emailName2Label = new javax.swing.JLabel();
+        emailText2Label = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         DocWRTable = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
@@ -225,13 +269,13 @@ public class Doctor_Home extends javax.swing.JPanel {
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel14.setText("Dr Rohit");
+        emailName1Label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        emailName1Label.setForeground(new java.awt.Color(96, 83, 150));
+        emailName1Label.setText("Dr Rohit");
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel15.setText("<html> Check Ron's Report<br> Surgery needed </html>");
+        emailText1Label.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        emailText1Label.setForeground(new java.awt.Color(96, 83, 150));
+        emailText1Label.setText("<html> Check Ron's Report<br> Surgery needed </html>");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -241,30 +285,30 @@ public class Doctor_Home extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(emailName1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
+                    .addComponent(emailText1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(emailName1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailText1Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel17.setText("Dr Sanskruthi");
+        emailName2Label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        emailName2Label.setForeground(new java.awt.Color(96, 83, 150));
+        emailName2Label.setText("Omar");
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel18.setText("<html> Are we done with Corona Tests ?<br></html>");
+        emailText2Label.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        emailText2Label.setForeground(new java.awt.Color(96, 83, 150));
+        emailText2Label.setText("<html> Are we done with Corona Tests ?<br></html>");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -274,18 +318,18 @@ public class Doctor_Home extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(emailName2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel18))
+                    .addComponent(emailText2Label))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(emailName2Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailText2Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
 
@@ -366,7 +410,7 @@ public class Doctor_Home extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 0, 230, 70));
 
         notificationLbl.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         notificationLbl.setForeground(new java.awt.Color(96, 83, 150));
@@ -472,14 +516,14 @@ public class Doctor_Home extends javax.swing.JPanel {
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1140, Short.MAX_VALUE)
+            .addGap(0, 1210, Short.MAX_VALUE)
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 1140, 10));
+        add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 1210, 10));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -564,11 +608,11 @@ public class Doctor_Home extends javax.swing.JPanel {
     private javax.swing.JTable DocWRTable;
     private javax.swing.JPanel TreatmentButton;
     private javax.swing.JLabel btn_close;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel emailName1Label;
+    private javax.swing.JLabel emailName2Label;
+    private javax.swing.JLabel emailText1Label;
+    private javax.swing.JLabel emailText2Label;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;

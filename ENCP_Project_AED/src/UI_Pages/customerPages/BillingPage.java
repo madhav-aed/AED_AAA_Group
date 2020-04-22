@@ -39,8 +39,9 @@ public class BillingPage extends javax.swing.JPanel {
     EcoSystem business;
     DB4OUtil dB4OUtil;
     String paymentAmount;
+    Bill myBill;
     
-    BillingPage(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil,String paymentAmount) {
+    BillingPage(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil,String paymentAmount,Bill myBill) {
     initComponents();
     this.panelRight = panelRight;
     this.patient = patient;
@@ -49,12 +50,17 @@ public class BillingPage extends javax.swing.JPanel {
     this.business = business;
     this.dB4OUtil = dB4OUtil;
     this.paymentAmount = paymentAmount;
+    this.myBill = myBill;
     
     Patient p = (Patient)patient;
         System.out.println("patient is ");
     txtFName.setText(p.getfName());
     txtLName.setText(p.getLastName());
-    txtInsCompany.setText(p.getInsCompany().getName());
+    
+    if(!(p.getInsDetail() == null))
+    {    
+        txtInsCompany.setText(p.getInsCompany().getName());
+    }   
     txtStateNetwork.setText(p.getNetwork().getName());
     txtEmail.setText(p.getUserName());
     txtAmount.setText(paymentAmount);
@@ -167,9 +173,8 @@ public class BillingPage extends javax.swing.JPanel {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(172, Short.MAX_VALUE)
-                .addComponent(btn_close)
-                .addContainerGap())
+                .addGap(0, 184, Short.MAX_VALUE)
+                .addComponent(btn_close))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,6 +195,8 @@ public class BillingPage extends javax.swing.JPanel {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
+
+        backJPanel.setBackground(new java.awt.Color(247, 247, 247));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(96, 83, 150));
@@ -452,7 +459,7 @@ public class BillingPage extends javax.swing.JPanel {
                     .addGroup(backJPanelLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(txtPaypalPWD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGap(102, 102, 102)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -477,15 +484,14 @@ public class BillingPage extends javax.swing.JPanel {
                                 .addGap(180, 180, 180)
                                 .addComponent(merchantBillLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(206, 206, 206))))
+                        .addGap(969, 969, 969)
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(192, 192, 192)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(backJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 208, Short.MAX_VALUE))
+                .addGap(208, 208, 208))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,7 +517,23 @@ public class BillingPage extends javax.swing.JPanel {
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
         // TODO add your handling code here:
-                panelRight.remove(this);
+                    // TODO add your handling code here:
+        //  System.exit(0);
+         
+                Component[] comps = this.panelRight.getComponents();
+            for(Component comp: comps){
+            if(comp instanceof patientBillJPanel){
+                patientBillJPanel manageAdmin = (patientBillJPanel) comp;
+                manageAdmin.populateTable();// populateNetworkTable();
+                
+            }}
+        
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        panelRight.remove(this);
+        layout.previous(panelRight);
+            
+        /*
+        panelRight.remove(this);
  
         Component[] componentArray = panelRight.getComponents();
         Component component = componentArray[componentArray.length-1];
@@ -522,7 +544,7 @@ public class BillingPage extends javax.swing.JPanel {
         panel.paybtnmethod();
         CardLayout layout = (CardLayout)panelRight.getLayout();
         layout.previous(panelRight);
-//        System.exit(0);
+//        System.exit(0); */
     }//GEN-LAST:event_btn_closeMouseClicked
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
@@ -553,12 +575,13 @@ public class BillingPage extends javax.swing.JPanel {
         }else if((year==currYear)&&(expMonth<currMonth)){
                 JOptionPane.showMessageDialog(null, "Sorry card is expired!");
         } else{
-        
-            Patient p = (Patient)this.patient;
+        Patient p = (Patient)this.patient;
+            
+        //  Insurance present
+        if(p.getInsDetail() != null){
             p.setActualEmi(paymentAmount);
             
         
- 
                 for( WorkRequest InsuranceBuyReq: p.getInsuranceOrganization().getWorkQueue().getWorkRequestList()) {
                     
                    BuyInsuranceWorkRequest insWorkreq = (BuyInsuranceWorkRequest)InsuranceBuyReq;
@@ -569,23 +592,41 @@ public class BillingPage extends javax.swing.JPanel {
                    String s2 = p.getUserName();
                    if(s1==s2){
                        
-                   Bill newBill =p.getMyBillingHistory().createNewBill();
+                   
+                    Bill newBill =p.getMyBillingHistory().createNewBill();
             
                     newBill.setBillType("Insurance Bill");
                     newBill.setBillAmount(paymentAmount);
                     newBill.setBillStatus("Paid");
                     newBill.setEnterprise(p.getInsCompany());
-//            newBill.setPaidThroughInsurance(Double.parseDouble(txtClaimSanctioned.getText()));
+                    // newBill.setPaidThroughInsurance(Double.parseDouble(txtClaimSanctioned.getText()));
                     newBill.setPaidThroughSelf(Double.parseDouble(paymentAmount));
                     JOptionPane.showMessageDialog(null, "Payment completed");
-                       insWorkreq.setStatus("Paid");
+                    insWorkreq.setStatus("Paid");
+                    dB4OUtil.storeSystem(business);
                    }
                    
                 }
             
-            btnSubmit.setEnabled(false);
-        }
+                    btnSubmit.setEnabled(false);
+     
+        }   
+        // Insurance not present
+        else{
+            /*
+                    Bill newBill =p.getMyBillingHistory().createNewBill();
+                    newBill.setBillType("Self Paid");
+                    newBill.setBillAmount(paymentAmount);
+                    newBill.setBillStatus("Paid");
+                    // newBill.setPaidThroughInsurance(Double.parseDouble(txtClaimSanctioned.getText()));
+                    newBill.setPaidThroughSelf(Double.parseDouble(paymentAmount)); */
+                        myBill.setBillStatus("Paid");
+                        JOptionPane.showMessageDialog(null, "Payment completed");
+                        btnSubmit.setEnabled(false);
+                        dB4OUtil.storeSystem(business);
         
+        }    
+}        
 
 //        BillingPage panel = new BillingPage(panelRight, patient, organization, enterprise, business, dB4OUtil);
 //        panelRight.add("BillingPage", panel);

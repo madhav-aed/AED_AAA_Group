@@ -73,7 +73,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
   //      this.docWorkReq = business.getWorkQueue().createCustomerDoctorWorkRequest();
  //       this.labWorkReq = business.getWorkQueue().createCustomerLabWorkRequest();
 //        this.labWorkReq = 
-        latestAppointmentHeading();
+  //      latestAppointmentHeading();
         populateComboBox();
         populateTbl();
    //     popEnterprise(); DELETE THIS METHOD
@@ -81,43 +81,8 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
     }
     
     
-    public void latestAppointmentHeading(){
-
-        Appointment compareApp = null;
-        if(customer.getMyAppHistory().getMyAppointmentHistory().size() != 0){
-                for(Appointment a : customer.getMyAppHistory().getMyAppointmentHistory()){
-                    if(compareApp == null){
-                        compareApp = a;
-                    }
-                    else{
-                        if(a.getDate().compareTo(compareApp.getDate()) < 0){
-                            compareApp = a;
-                        }    
-                    }
-
-                }
-                if(compareApp != null){
-                    lblAppointmentDate.setText(""+compareApp.getDate());
-                    if(compareApp.getDoctor() != null)
-                    lblAppointmentDoc1.setText("with Dr. "+compareApp.getDoctor().getName());
-                }
-                else if(compareApp == null){
-                    lblAppointmentDate.setText("");
-                    lblAppointmentDoc1.setText("");
-                    jLabel21.setText("");
-
-                }    
-        }
-        else{
-                    lblAppointmentDate.setText("");
-                    lblAppointmentDoc1.setText("");
-                    jLabel21.setText("");
-        
-        }
     
     
-    
-    }
     
     public void populateTbl(){
         
@@ -571,13 +536,8 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
         tblBooking = new javax.swing.JTable();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        lblPatientName = new javax.swing.JLabel();
         labelIcon = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        lblAppointmentDate = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        lblAppointmentDoc1 = new javax.swing.JLabel();
         btnBookAppointment = new java.awt.Button();
         btnCancel = new java.awt.Button();
 
@@ -853,32 +813,10 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
 
         add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 230, 70));
 
-        jLabel13.setBackground(new java.awt.Color(41, 216, 95));
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel13.setText("Welcome back ");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 23, 130, 37));
-
-        lblPatientName.setBackground(new java.awt.Color(41, 216, 95));
-        lblPatientName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblPatientName.setForeground(new java.awt.Color(96, 83, 150));
-        lblPatientName.setText("Dino Konstantopolos");
-        add(lblPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 27, 240, 30));
-
         labelIcon.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         labelIcon.setForeground(new java.awt.Color(96, 83, 150));
         labelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_health_checkup_80px.png"))); // NOI18N
-        add(labelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 140, 90));
-
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel21.setText("Your next appointment is on ");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 66, 160, 30));
-
-        lblAppointmentDate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        lblAppointmentDate.setForeground(new java.awt.Color(96, 83, 150));
-        lblAppointmentDate.setText(" 5th April 2020 ");
-        add(lblAppointmentDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 90, 20));
+        add(labelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 90));
 
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -894,11 +832,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
         );
 
         add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1370, -1));
-
-        lblAppointmentDoc1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        lblAppointmentDoc1.setForeground(new java.awt.Color(96, 83, 150));
-        lblAppointmentDoc1.setText("with Dr. Madhav ");
-        add(lblAppointmentDoc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 90, 20));
 
         btnBookAppointment.setBackground(new java.awt.Color(96, 83, 150));
         btnBookAppointment.setForeground(new java.awt.Color(255, 255, 255));
@@ -1237,12 +1170,10 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel11;
@@ -1251,9 +1182,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelIcon;
-    private javax.swing.JLabel lblAppointmentDate;
-    private javax.swing.JLabel lblAppointmentDoc1;
-    private javax.swing.JLabel lblPatientName;
     private javax.swing.JRadioButton rBtnInsuranceTest;
     private javax.swing.JRadioButton rBtnVitalsTest;
     private javax.swing.JTable tblBooking;

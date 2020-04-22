@@ -65,7 +65,6 @@ public class LabProcess extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         outGlucFast = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         createLabReport = new javax.swing.JButton();
@@ -94,7 +93,7 @@ public class LabProcess extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(96, 83, 150));
         jLabel7.setText("Patient details");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 78, 115, 26));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 115, 26));
 
         jPanel7.setBackground(new java.awt.Color(247, 247, 247));
 
@@ -109,14 +108,14 @@ public class LabProcess extends javax.swing.JPanel {
             .addGap(0, 350, Short.MAX_VALUE)
         );
 
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(824, 164, -1, -1));
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, -1, -1));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
         btn_close.setBackground(new java.awt.Color(96, 83, 150));
         btn_close.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_close.setForeground(new java.awt.Color(255, 255, 255));
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8_close_window_52px_2.png"))); // NOI18N
+        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_back_to_40px.png"))); // NOI18N
         btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_closeMouseClicked(evt);
@@ -140,15 +139,15 @@ public class LabProcess extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(942, 6, -1, -1));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, -1));
 
         outPatientName.setEditable(false);
-        add(outPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 79, 290, -1));
+        add(outPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 290, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(96, 83, 150));
         jLabel15.setText("Submit Medical Test");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 282, 166, -1));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 166, -1));
 
         jPanel12.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -163,19 +162,16 @@ public class LabProcess extends javax.swing.JPanel {
             .addGap(0, 11, Short.MAX_VALUE)
         );
 
-        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 65, 900, -1));
+        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 900, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(96, 83, 150));
         jLabel8.setText("Normal Range : < 100 mg/dL");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 111, 253, 26));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/Images/icons8-american_express.png"))); // NOI18N
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 11, -1, -1));
-        add(outGlucFast, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 112, 146, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 253, 26));
+        add(outGlucFast, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 146, -1));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-test_tube_rack.png"))); // NOI18N
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 11, -1, -1));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
         createLabReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8-treatment.png"))); // NOI18N
         createLabReport.addActionListener(new java.awt.event.ActionListener() {
@@ -183,76 +179,57 @@ public class LabProcess extends javax.swing.JPanel {
                 createLabReportActionPerformed(evt);
             }
         });
-        add(createLabReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 317, -1, -1));
+        add(createLabReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(96, 83, 150));
         jLabel9.setText("Glucose (Post)");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 144, 115, 26));
-        add(outGlucPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 145, 146, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 115, 26));
+        add(outGlucPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 146, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(96, 83, 150));
         jLabel10.setText("Hemoglobin");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 177, 115, 26));
-        add(outHemo, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 178, 146, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 115, 26));
+        add(outHemo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 146, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(96, 83, 150));
         jLabel11.setText("Creatinine");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 210, 115, 26));
-        add(outCreat, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 211, 146, -1));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 115, 26));
+        add(outCreat, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 146, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(96, 83, 150));
         jLabel13.setText("Cholesterol");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 237, 115, 26));
-        add(outCholestrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 238, 146, -1));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 115, 26));
+        add(outCholestrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 146, -1));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(96, 83, 150));
         jLabel14.setText("Glucose (Fast)");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 111, 115, 26));
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 115, 26));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(96, 83, 150));
         jLabel17.setText("Normal Range : < 140 mg/dL");
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 144, 253, 26));
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 253, 26));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(96, 83, 150));
         jLabel18.setText("Normal Range : 14 to 18 gm/dL  ");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 179, 482, 26));
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 482, 26));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(96, 83, 150));
         jLabel19.setText("Normal Range : 0.6 to 1.2 (mg)/(dL)");
-        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 210, 281, 26));
+        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 281, 26));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(96, 83, 150));
         jLabel20.setText("Normal Range : < 200 mg/dL");
-        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 237, 253, 26));
+        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 253, 26));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
-        // TODO add your handling code here:
-        //System.exit(0);
-        
-        
-            Component[] comps = this.rightPanel.getComponents();
-        for(Component comp: comps){
-            if(comp instanceof Lab_Home){
-                Lab_Home lHome = (Lab_Home) comp;
-                lHome.populateLabTable();
-                //manageAdmin.init();
-            }
-        }
-        
-        CardLayout layout = (CardLayout)rightPanel.getLayout();
-        rightPanel.remove(this);
-        layout.previous(rightPanel);
-    }//GEN-LAST:event_btn_closeMouseClicked
 
     private void createLabReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createLabReportActionPerformed
         // TODO add your handling code here:
@@ -384,6 +361,7 @@ public class LabProcess extends javax.swing.JPanel {
                         bWR.setMessage("Tests");
                         bWR.setStatus("To Insurance Enterprise");
                         bWR.setTestType("Vitals Test");
+                        
                         org.getWorkQueue().getWorkRequestList().add(bWR);
                         
                     }
@@ -443,13 +421,30 @@ public class LabProcess extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_closeMouseEntered
 
+    private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
+        // TODO add your handling code here:
+        //System.exit(0);
+
+        Component[] comps = this.rightPanel.getComponents();
+        for(Component comp: comps){
+            if(comp instanceof Lab_Home){
+                Lab_Home lHome = (Lab_Home) comp;
+                lHome.populateLabTable();
+                //manageAdmin.init();
+            }
+        }
+
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        rightPanel.remove(this);
+        layout.previous(rightPanel);
+    }//GEN-LAST:event_btn_closeMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btn_close;
     private javax.swing.JButton createLabReport;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;

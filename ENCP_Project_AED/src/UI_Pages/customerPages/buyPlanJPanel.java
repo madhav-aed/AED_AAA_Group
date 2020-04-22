@@ -11,7 +11,7 @@ import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
-import UI_Pages.Sudhanshu.*;
+//import UI_Pages.Sudhanshu.*;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -59,10 +59,13 @@ public class buyPlanJPanel extends javax.swing.JPanel {
 
         jPanel4 = new javax.swing.JPanel();
         btnBronze = new java.awt.Button();
+        jLabel12 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnGold = new java.awt.Button();
+        jLabel15 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         btnPlatinum = new java.awt.Button();
+        jLabel16 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         btn_back = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -83,19 +86,28 @@ public class buyPlanJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel12.setBackground(new java.awt.Color(41, 216, 95));
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(12, 115, 101));
+        jLabel12.setText("<html> The plan pays 60% of the costs <br>    You pay the other 40%");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(btnBronze, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBronze, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(297, Short.MAX_VALUE)
+                .addContainerGap(84, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
                 .addComponent(btnBronze, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -116,6 +128,12 @@ public class buyPlanJPanel extends javax.swing.JPanel {
         });
         jPanel5.add(btnGold, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 130, 40));
 
+        jLabel15.setBackground(new java.awt.Color(41, 216, 95));
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(12, 115, 101));
+        jLabel15.setText("<html> The plan pays 70% of the costs <br>    You pay the other 30%");
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 170, 140));
+
         add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 236, 370));
 
         jPanel7.setBackground(new java.awt.Color(247, 247, 247));
@@ -130,19 +148,31 @@ public class buyPlanJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel16.setBackground(new java.awt.Color(41, 216, 95));
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(12, 115, 101));
+        jLabel16.setText("<html> The plan pays 80% of the costs <br>    You pay the other 20%");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(btnPlatinum, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(btnPlatinum, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(298, Short.MAX_VALUE)
+                .addContainerGap(70, Short.MAX_VALUE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
                 .addComponent(btnPlatinum, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
@@ -180,8 +210,8 @@ public class buyPlanJPanel extends javax.swing.JPanel {
         jLabel11.setBackground(new java.awt.Color(41, 216, 95));
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(12, 115, 101));
-        jLabel11.setText("Choose Plan ");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 23, 130, 37));
+        jLabel11.setText("Choose a Plan! ");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 23, 380, 37));
 
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -261,6 +291,9 @@ public class buyPlanJPanel extends javax.swing.JPanel {
     private java.awt.Button btnPlatinum;
     private javax.swing.JLabel btn_back;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel4;
