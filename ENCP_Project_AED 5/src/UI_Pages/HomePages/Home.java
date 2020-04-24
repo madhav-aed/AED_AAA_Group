@@ -441,18 +441,18 @@ public class Home extends javax.swing.JFrame {
 
     private void jPanel10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseExited
         // TODO add your handling code here:
-    //    resetColor(jPanel10);
+                resetColor(jPanel10);
     }//GEN-LAST:event_jPanel10MouseExited
 
     private void jPanel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MousePressed
         // TODO add your handling code here:
    //     new Login_Page_Customer().show();
-new Query().show();
+            new Query().show();
     }//GEN-LAST:event_jPanel10MousePressed
 
     private void jPanel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseEntered
         // TODO add your handling code here:
-     //   setColor(jPanel11);
+       setColor(jPanel11);
     }//GEN-LAST:event_jPanel11MouseEntered
 
     private void jPanel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseExited
@@ -462,16 +462,17 @@ new Query().show();
 
     private void jPanel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MousePressed
         // TODO add your handling code here:
-     //   new Login_Page_Hospital().show();
+        new Login_Page_Hospital().show();
     }//GEN-LAST:event_jPanel11MousePressed
 
     private void jPanel12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseEntered
         // TODO add your handling code here:
+        setColor(jPanel12);
     }//GEN-LAST:event_jPanel12MouseEntered
 
     private void jPanel12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseExited
         // TODO add your handling code here:
-    //    setColor(jPanel12);
+        resetColor(jPanel12);
     }//GEN-LAST:event_jPanel12MouseExited
 
     private void jPanel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MousePressed

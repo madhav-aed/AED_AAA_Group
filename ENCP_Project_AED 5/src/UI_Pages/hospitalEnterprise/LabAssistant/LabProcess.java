@@ -57,16 +57,17 @@ public class LabProcess extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        outGlucFast = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         outPatientName = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        outGlucFast = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
         createLabReport = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         outGlucPost = new javax.swing.JTextField();
@@ -82,7 +83,7 @@ public class LabProcess extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(247, 247, 247));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -90,25 +91,20 @@ public class LabProcess extends javax.swing.JPanel {
         jLabel5.setText("Medical Report");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 24, 220, 30));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel7.setText("Patient details");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 115, 26));
-
-        jPanel7.setBackground(new java.awt.Color(247, 247, 247));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 260, Short.MAX_VALUE)
+            .addGap(0, 240, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 350, Short.MAX_VALUE)
         );
 
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, -1, -1));
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 140, 240, -1));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -139,15 +135,7 @@ public class LabProcess extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, -1));
-
-        outPatientName.setEditable(false);
-        add(outPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 290, -1));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel15.setText("Submit Medical Test");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 166, -1));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, -1, -1));
 
         jPanel12.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -155,23 +143,34 @@ public class LabProcess extends javax.swing.JPanel {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 1120, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 11, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 900, -1));
+        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 91, 1120, 10));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-test_tube_rack.png"))); // NOI18N
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 201, 232)));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel7.setText("Patient details");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(96, 83, 150));
         jLabel8.setText("Normal Range : < 100 mg/dL");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 253, 26));
-        add(outGlucFast, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 146, -1));
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/icons8-test_tube_rack.png"))); // NOI18N
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        outPatientName.setEditable(false);
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel15.setText("Submit Medical Test");
 
         createLabReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8-treatment.png"))); // NOI18N
         createLabReport.addActionListener(new java.awt.event.ActionListener() {
@@ -179,56 +178,143 @@ public class LabProcess extends javax.swing.JPanel {
                 createLabReportActionPerformed(evt);
             }
         });
-        add(createLabReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(96, 83, 150));
         jLabel9.setText("Glucose (Post)");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 115, 26));
-        add(outGlucPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 146, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(96, 83, 150));
         jLabel10.setText("Hemoglobin");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 115, 26));
-        add(outHemo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 146, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(96, 83, 150));
         jLabel11.setText("Creatinine");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 115, 26));
-        add(outCreat, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 146, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(96, 83, 150));
         jLabel13.setText("Cholesterol");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 115, 26));
-        add(outCholestrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 146, -1));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(96, 83, 150));
         jLabel14.setText("Glucose (Fast)");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 115, 26));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(96, 83, 150));
         jLabel17.setText("Normal Range : < 140 mg/dL");
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 253, 26));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(96, 83, 150));
         jLabel18.setText("Normal Range : 14 to 18 gm/dL  ");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 482, 26));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(96, 83, 150));
         jLabel19.setText("Normal Range : 0.6 to 1.2 (mg)/(dL)");
-        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 281, 26));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(96, 83, 150));
         jLabel20.setText("Normal Range : < 200 mg/dL");
-        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 253, 26));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createLabReport))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(outGlucFast, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(outGlucPost, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(outCholestrol, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(outCreat, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(outHemo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(112, 112, 112))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 3, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(15, 15, 15)
+                            .addComponent(outPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(185, 185, 185)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 112, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(outGlucFast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outGlucPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outHemo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outCreat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outCholestrol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(jLabel15)
+                .addGap(10, 10, 10)
+                .addComponent(createLabReport)
+                .addGap(23, 23, 23))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 18, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(outPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(4, 4, 4)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 284, Short.MAX_VALUE)))
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 670, 360));
     }// </editor-fold>//GEN-END:initComponents
 
     private void createLabReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createLabReportActionPerformed
@@ -300,7 +386,7 @@ public class LabProcess extends javax.swing.JPanel {
               abNormal = 'Y';
                   
           
-              Patient pat = (Patient) lReq.getSender();
+         Patient pat = (Patient) lReq.getSender();
           
          // mr.setTestParameters(hmap1);
          
@@ -309,7 +395,7 @@ public class LabProcess extends javax.swing.JPanel {
          medRep.setTestParameters(hmap1);
          Date date = new Date();
          medRep.setDate(date);
-         
+         medRep.setTestNumber(getRandomNumber(1000,2000));
          lReq.setStatus("Processed");
          
          JOptionPane.showMessageDialog(null, "Medical Report Saved");
@@ -318,24 +404,21 @@ public class LabProcess extends javax.swing.JPanel {
          // If Lab test is from Insurance - Send it to Insurance
          String str = lReq.getWorkRequestType();
          String str1 = "Tests For Insurance";
-         
+         // Get sender agar doctor raha toh..
          if(str.equals(str1)){
              
-             //Write Code to Update Buy Work Request for Patient to the 
-             Organization patInsOrg = pat.getInsuranceOrganization();
-             for ( WorkRequest wr : patInsOrg.getWorkQueue().getWorkRequestList()){
+         Organization patInsOrg = pat.getInsuranceOrganization();
+         for ( WorkRequest wr : patInsOrg.getWorkQueue().getWorkRequestList()){
              BuyInsuranceWorkRequest br = (BuyInsuranceWorkRequest) wr;
-             
              Patient pat1 =  br.getPatient();
              if(pat1 == pat){
                  
-             if(abNormal == 'Y')
-             
-             br.setTestResult("Abnormal");
-                 else
-             br.setTestResult("Normal");
-             br.setStatus("Test Result Updated");
-             break;
+                if(abNormal == 'Y')
+                    br.setTestResult("Abnormal");
+                        else
+                    br.setTestResult("Normal");
+                    br.setStatus("Test Result Updated");
+                    break;
              }   
       
              }
@@ -352,7 +435,7 @@ public class LabProcess extends javax.swing.JPanel {
                  Enterprise e1 = pat.getInsCompany();
              
                 for(Organization org :e1.getOrganizationDirectory().getOrganizationList()){
-                    if (org.getOrganizationType().equals("Claims Organization")){
+                    if (org.getOrganizationType().equals("Claims  Organization")){
                         
                         BillingWorkRequest bWR  = new BillingWorkRequest();
                         bWR.setPatient(pat);
@@ -360,14 +443,15 @@ public class LabProcess extends javax.swing.JPanel {
                         bWR.setClaimedAmount("250");
                         bWR.setMessage("Tests");
                         bWR.setStatus("To Insurance Enterprise");
+                    //    bWR.setEnterprise(e1);
                         bWR.setTestType("Vitals Test");
                         
                         org.getWorkQueue().getWorkRequestList().add(bWR);
                         
-                    }
+                         }
                         
                        
-                    }
+                  }
                 }
              else{
                  
@@ -377,6 +461,7 @@ public class LabProcess extends javax.swing.JPanel {
                  //b1.setAppointment(appointment);
                  b1.setBillType("Self Pay");
                  b1.setBillAmount("250");
+                 b1.setBillStatus("Pending");
                  b1.setPaidThroughSelf(250);
                  pat.getMyBillingHistory().getBillingHistory().add(b1);
                  
@@ -416,7 +501,12 @@ public class LabProcess extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_createLabReportActionPerformed
-
+    
+    public int getRandomNumber(int min, int max)
+    {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+    
     private void btn_closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_closeMouseEntered
@@ -457,6 +547,7 @@ public class LabProcess extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel7;

@@ -539,7 +539,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
         labelIcon = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         btnBookAppointment = new java.awt.Button();
-        btnCancel = new java.awt.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1140, 510));
@@ -665,7 +664,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
@@ -811,7 +810,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 230, 70));
 
         labelIcon.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         labelIcon.setForeground(new java.awt.Color(96, 83, 150));
@@ -841,17 +840,7 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
                 btnBookAppointmentActionPerformed(evt);
             }
         });
-        add(btnBookAppointment, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 620, 130, 40));
-
-        btnCancel.setBackground(new java.awt.Color(96, 83, 150));
-        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancel.setLabel("Cancel Appointment");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
-        add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 620, 130, 40));
+        add(btnBookAppointment, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 610, 130, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -1026,10 +1015,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnBookAppointmentActionPerformed
    
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelActionPerformed
-
     private void comboBoxAppTypeOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAppTypeOrganizationActionPerformed
         // TODO add your handling code here:
      //   comboBoxDoctor.removeAllItems();
@@ -1158,7 +1143,6 @@ public class Customer_Appointment_Booking extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblTestType;
     private java.awt.Button btnBookAppointment;
-    private java.awt.Button btnCancel;
     private javax.swing.JLabel btn_close;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> comboBoxAppTypeOrganization;

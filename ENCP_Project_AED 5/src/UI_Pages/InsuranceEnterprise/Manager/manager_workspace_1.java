@@ -14,8 +14,10 @@ import Business.WorkQueue.BillingWorkRequest;
 import Business.WorkQueue.BuyInsuranceWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,7 +46,21 @@ public class manager_workspace_1 extends javax.swing.JPanel {
         this.business = business;
         this.dB4OUtil = dB4OUtil;
         
+        
         populateTable();
+        
+        lblAgentName.setText(this.userAccount.getEmployee().getName());
+        
+                
+        
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(Color.white);
+       // headerRenderer.set(Color.BLACK);
+
+        for (int i = 0; i < tblCustdetails.getModel().getColumnCount(); i++) {
+            tblCustdetails.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+  
     }
 
     /**
@@ -59,7 +75,6 @@ public class manager_workspace_1 extends javax.swing.JPanel {
         lblAgentName = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
-        btn_back = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -69,13 +84,13 @@ public class manager_workspace_1 extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        btnProcess = new java.awt.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCustdetails = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         lblSalesCount = new javax.swing.JLabel();
         lblPlanName = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
+        btnProcess = new java.awt.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1140, 510));
@@ -85,7 +100,7 @@ public class manager_workspace_1 extends javax.swing.JPanel {
         lblAgentName.setBackground(new java.awt.Color(41, 216, 95));
         lblAgentName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblAgentName.setForeground(new java.awt.Color(12, 115, 101));
-        lblAgentName.setText("Kal Bugrara");
+        lblAgentName.setText("Carl");
         add(lblAgentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 27, 320, 30));
 
         jPanel15.setBackground(new java.awt.Color(12, 115, 101));
@@ -99,33 +114,20 @@ public class manager_workspace_1 extends javax.swing.JPanel {
             }
         });
 
-        btn_back.setBackground(new java.awt.Color(96, 83, 150));
-        btn_back.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btn_back.setForeground(new java.awt.Color(255, 255, 255));
-        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_back_to_40px.png"))); // NOI18N
-        btn_back.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_backMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addGap(0, 172, Short.MAX_VALUE)
-                .addComponent(btn_back)
-                .addGap(18, 18, 18)
+                .addGap(0, 230, Short.MAX_VALUE)
                 .addComponent(btn_close))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+            .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 0, 230, 70));
 
         jLabel11.setBackground(new java.awt.Color(41, 216, 95));
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -139,14 +141,14 @@ public class manager_workspace_1 extends javax.swing.JPanel {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 910, Short.MAX_VALUE)
+            .addGap(0, 1110, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 910, 10));
+        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 1110, 10));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -185,15 +187,6 @@ public class manager_workspace_1 extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(12, 115, 101));
         jLabel10.setText("Pendings Claims Requests");
-
-        btnProcess.setBackground(new java.awt.Color(16, 190, 121));
-        btnProcess.setForeground(new java.awt.Color(255, 255, 255));
-        btnProcess.setLabel("Approve");
-        btnProcess.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProcessActionPerformed(evt);
-            }
-        });
 
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -279,10 +272,7 @@ public class manager_workspace_1 extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(140, 140, 140)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(150, 150, 150)
-                            .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(0, 271, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -293,7 +283,7 @@ public class manager_workspace_1 extends javax.swing.JPanel {
                 .addGap(55, 55, 55))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 1, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(2, 2, 2)
@@ -303,12 +293,20 @@ public class manager_workspace_1 extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(220, 220, 220)
-                    .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 10, Short.MAX_VALUE)))
+                    .addGap(0, 270, Short.MAX_VALUE)))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
+
+        btnProcess.setBackground(new java.awt.Color(16, 190, 121));
+        btnProcess.setForeground(new java.awt.Color(255, 255, 255));
+        btnProcess.setLabel("Approve");
+        btnProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessActionPerformed(evt);
+            }
+        });
+        add(btnProcess, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 130, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     public void populateTable(){
@@ -369,20 +367,6 @@ public class manager_workspace_1 extends javax.swing.JPanel {
         System.exit(0);
     }//GEN-LAST:event_btn_closeMouseClicked
 
-    private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
-        // TODO add your handling code here:
-        //  System.exit(0);
-
-        panelRight.remove(this);
-//
-//        Component[] componentArray = panelRight.getComponents();
-//        Component component = componentArray[componentArray.length-1];
-//        buyPlanJPanel buyPanel = (buyPlanJPanel) component;
-//        buyPanel.btnView();
-//        CardLayout layout = (CardLayout)panelRight.getLayout();
-//        layout.previous(panelRight);
-    }//GEN-LAST:event_btn_backMouseClicked
-
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
 
@@ -407,7 +391,6 @@ public class manager_workspace_1 extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnProcess;
-    private javax.swing.JLabel btn_back;
     private javax.swing.JLabel btn_close;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -39,7 +39,9 @@ public class Doctor_WorkSpace extends javax.swing.JFrame {
     DB4OUtil dB4OUtil;
     
     public Doctor_WorkSpace(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,DB4OUtil dB4OUtil) {
-        
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setUndecorated(true);   
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;

@@ -38,19 +38,20 @@ public class Create_New_Patient extends javax.swing.JFrame {
      * Creates new form Create_New_Patient
      */
     JPanel rightPanel;
-    Image image;
+  //  Image image;
+    String photoPath; 
     UserAccount patient;
     Organization organization;
     Enterprise enterprise;
     EcoSystem business;
     DB4OUtil dB4OUtil;
     public Create_New_Patient(JPanel panelRight, UserAccount patient, Organization organization, Enterprise enterprise, EcoSystem business, DB4OUtil dB4OUtil) {
-        
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
        initComponents();
-        
+
         this.business = business;
         this.rightPanel = panelRight;
         this.patient = patient;
@@ -58,23 +59,23 @@ public class Create_New_Patient extends javax.swing.JFrame {
         this.enterprise = enterprise;
         this.patient = patient;
         this.dB4OUtil = dB4OUtil;
-        
+
 
         populateComboBox();
         populateInitials();
     }
-    
+
         public void populateComboBox(){
-       
-        
+
+
          DefaultComboBoxModel dm=new DefaultComboBoxModel();
          dm.addElement("Select");
            for(Network n:business.getNetworkList()){
-           dm.addElement(n);    
+           dm.addElement(n);
    }
            comboBoxStateNetwork.setModel(dm);
     }
-        
+
         public void populateInitials(){
         lblWarningFName.setVisible(false);
         lblWarningLastName.setVisible(false);
@@ -142,7 +143,7 @@ public class Create_New_Patient extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel5.setText("<html> <u>You are one step closer for hassel-free medicare!");
+        jLabel5.setText("<html> <u>You are one step closer for hassle-free medicare!");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 433, 33));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
@@ -171,7 +172,7 @@ public class Create_New_Patient extends javax.swing.JFrame {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 0, -1, -1));
+        jPanel1.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 0, -1, -1));
 
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -186,7 +187,7 @@ public class Create_New_Patient extends javax.swing.JFrame {
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 86, 1320, -1));
+        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 86, 1370, 10));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/group_52px_1.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 26, -1, 44));
@@ -349,15 +350,11 @@ public class Create_New_Patient extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1360, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1367, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 98, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -376,35 +373,35 @@ public class Create_New_Patient extends javax.swing.JFrame {
                 break;
             }
           }
-        
+
        if (count == 0)
            return false;
-           else 
-           return true; 
+           else
+           return true;
     }
-        
+
     public boolean checkString(String string){
         Pattern p = Pattern.compile("^[A-Za-z\\s]+$");
         Matcher m = p.matcher(string);
         boolean b = m.matches();
         return b;
     }
-    
+
 //    public boolean checkAge(String age){
 //        Pattern p = Pattern.compile("^(0?[1-9]|[1-9][0-9])$");
 //        Matcher m = p.matcher(age);
 //        boolean b = m.matches();
 //        return b;
 //    }
-    
-    
+
+
     public boolean checkContactNumber(String number){
         Pattern p = Pattern.compile("^[1-9]\\d{9}$");
         Matcher m = p.matcher(number);
         boolean b = m.matches();
         return b;
     }
-    
+
     public boolean checkEmail(String email){
         Pattern p = Pattern.compile("^[a-zA-Z0-9]+_[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
         Matcher m = p.matcher(email);
@@ -415,7 +412,7 @@ public class Create_New_Patient extends javax.swing.JFrame {
 
 
          Color customColor = new Color(232,201,232);
-        
+
         if(txtFirstName.getText().isEmpty()){
             lblWarningFName.setVisible(true);
             lblWarningFName.setText("Cannot be empty");
@@ -427,9 +424,9 @@ public class Create_New_Patient extends javax.swing.JFrame {
             lblWarningLastName.setVisible(true);
             lblWarningLastName.setText("Cannot be empty");
 //                            usrNameLabel.setForeground (Color.red);
-            txtLastName.setBorder(BorderFactory.createLineBorder(Color.RED));        
+            txtLastName.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
-        
+
 //        else if(!checkString(lastName)){
 //            JOptionPane.showMessageDialog(null, "Please enter valid Last Name");
 //        }
@@ -440,9 +437,9 @@ public class Create_New_Patient extends javax.swing.JFrame {
             lblWarningLastName.setVisible(false);
             lblWarningEmail.setVisible(true);
             lblWarningEmail.setText("Username cannot be empty");
-            txtUserId.setBorder(BorderFactory.createLineBorder(Color.RED)); 
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
-        
+
         else if(!business.getPatientDirectory().checkIfUsernameIsUnique(txtUserId.getText())){
                         txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningLastName.setVisible(false);
@@ -451,7 +448,7 @@ public class Create_New_Patient extends javax.swing.JFrame {
             txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningEmail.setVisible(true);
             lblWarningEmail.setText("Username already exists. Please try another.");
-            txtUserId.setBorder(BorderFactory.createLineBorder(Color.RED)); 
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
 
         else if(!checkEmail(txtUserId.getText())){
@@ -464,7 +461,7 @@ public class Create_New_Patient extends javax.swing.JFrame {
             txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningEmail.setVisible(true);
             lblWarningEmail.setText("Username form should be XXX_XXX@xxx.com");
-            txtUserId.setBorder(BorderFactory.createLineBorder(Color.RED));  
+            txtUserId.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
         else if(!rBtnMale.isSelected()&& !rBtnFemale.isSelected()){
                         txtLastName.setBorder(BorderFactory.createLineBorder(Color.gray));
@@ -475,9 +472,9 @@ public class Create_New_Patient extends javax.swing.JFrame {
             txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningGender.setVisible(true);
             lblWarningGender.setText("Select your gender");
-//            lblWarningGender.setBorder(BorderFactory.createLineBorder(Color.RED));  
+//            lblWarningGender.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
-        
+
             else if(jDateChooser1.getDate()==null){
                             lblWarningEmail.setVisible(false);
             txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
@@ -488,9 +485,9 @@ public class Create_New_Patient extends javax.swing.JFrame {
             lblWarningGender.setVisible(false);
             lblWarningDOB.setVisible(true);
             lblWarningDOB.setText("Please select your date of birth");
-            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.RED)); 
+            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
-            
+
             else if(txtPassword.getText().isEmpty()){
                 lblWarningGender.setVisible(false);
                             lblWarningEmail.setVisible(false);
@@ -500,15 +497,15 @@ public class Create_New_Patient extends javax.swing.JFrame {
             txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningFName.setVisible(false);
             lblWarningDOB.setVisible(false);
-            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.gray));     
+            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningPWD.setVisible(true);
             lblWarningPWD.setText("Set your password");
             txtPassword.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
-        
+
         else if(!checkContactNumber(txtMobile.getText())){
                         lblWarningDOB.setVisible(false);
-            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.gray)); 
+            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningGender.setVisible(false);
                         lblWarningEmail.setVisible(false);
             txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
@@ -520,14 +517,14 @@ public class Create_New_Patient extends javax.swing.JFrame {
             txtPassword.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningPhoneNumber.setVisible(true);
             lblWarningPhoneNumber.setText("Please enter valid contact number. Number must be of 10 digits in the format of XXX-XXX-XXXX");
-            txtMobile.setBorder(BorderFactory.createLineBorder(Color.RED));  
+            txtMobile.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
 
         else if(comboBoxStateNetwork.getSelectedIndex()<=0){
                         lblWarningPWD.setVisible(false);
             txtPassword.setBorder(BorderFactory.createLineBorder(Color.gray));
                         lblWarningDOB.setVisible(false);
-            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.gray)); 
+            jDateChooser1.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningGender.setVisible(false);
                         lblWarningEmail.setVisible(false);
             txtUserId.setBorder(BorderFactory.createLineBorder(Color.gray));
@@ -536,40 +533,40 @@ public class Create_New_Patient extends javax.swing.JFrame {
             txtFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningFName.setVisible(false);
             lblWarningPhoneNumber.setVisible(false);
-            txtMobile.setBorder(BorderFactory.createLineBorder(Color.gray)); 
+            txtMobile.setBorder(BorderFactory.createLineBorder(Color.gray));
             lblWarningNetwork.setVisible(true);
             lblWarningNetwork.setText("Please select your state");
 //            lblWarningNetwork.setBorder(BorderFactory.createLineBorder(Color.RED));
         }
-        else if(image == null){
-            JOptionPane.showMessageDialog(null, "Please upload your picture");         
-        }
-        
+        else if(this.photoPath == null){
+            JOptionPane.showMessageDialog(null, "Please upload your picture");
+        } 
+
         else {
-        
+
         lblWarningNetwork.setVisible(false);
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         System.out.println(" txtmobile "+txtMobile.getText());
-        
+
         String contactNumber = txtMobile.getText();
             System.out.println("Phone Number"+contactNumber);
         String email = txtUserId.getText();
         String password = txtPassword.getText();
         Date date = jDateChooser1.getDate();
-            
+
         Network network = (Network)comboBoxStateNetwork.getSelectedItem();
-        String gender = "";  
-            
-            
+        String gender = "";
+
+
           Patient patient =  business.getPatientDirectory().createUserAccount(email, password, firstName,lastName, new CustomerRole());
-            
-          
+
+
           patient.setDob(date);
           patient.setMobno(txtMobile.getText());
           patient.setNetwork(network);
-          patient.setPicture(image);
-          
+          patient.setProfilePicture(photoPath);
+
           if(rBtnMale.isSelected()){
               gender = "Male";
           }
@@ -577,34 +574,34 @@ public class Create_New_Patient extends javax.swing.JFrame {
               gender = "Female";
           }
           patient.setGender(gender);
-          
-          
+
+
          JOptionPane.showMessageDialog(null, "Congratulations! "+patient.getfName()+" "+patient.getLastName()+ " You are registered");
-          
-         
+
+
 //          Color customColor = new Color(232,201,232);
-           
+
           txtFirstName.setText("");
           txtFirstName.setBorder(BorderFactory.createLineBorder(customColor));
           txtLastName.setText("");
-          txtLastName.setBorder(BorderFactory.createLineBorder(customColor));            
+          txtLastName.setBorder(BorderFactory.createLineBorder(customColor));
           txtMobile.setText("");
-          txtMobile.setBorder(BorderFactory.createLineBorder(customColor));            
+          txtMobile.setBorder(BorderFactory.createLineBorder(customColor));
           txtPassword.setText("");
-          txtPassword.setBorder(BorderFactory.createLineBorder(customColor));            
+          txtPassword.setBorder(BorderFactory.createLineBorder(customColor));
           txtUserId.setText("");
-          txtUserId.setBorder(BorderFactory.createLineBorder(customColor));            
+          txtUserId.setBorder(BorderFactory.createLineBorder(customColor));
           rBtnFemale.setSelected(false);
           rBtnMale.setSelected(false);
           jDateChooser1.setDate(null);
 
           populateInitials();
-          
+
           dB4OUtil.storeSystem(business);
           dispose();
           }
-        
-        
+
+
     }//GEN-LAST:event_btn_CreateActionPerformed
 
     private void rBtnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnMaleActionPerformed
@@ -613,9 +610,9 @@ public class Create_New_Patient extends javax.swing.JFrame {
 
     private void txtLastNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameKeyPressed
         // TODO add your handling code here:
-        
+
         char c = evt.getKeyChar();
-        
+
         if(Character.isLetter(c)||(Character.isWhitespace(c)||(Character.isISOControl(c)))){
         txtLastName.setEditable(true);
         lblWarningLastName.setVisible(false);
@@ -634,9 +631,9 @@ public class Create_New_Patient extends javax.swing.JFrame {
 
     private void txtFirstNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirstNameKeyPressed
         // TODO add your handling code here:
-        
+
                 char c = evt.getKeyChar();
-        
+
         if(Character.isLetter(c)||(Character.isWhitespace(c)||(Character.isISOControl(c)))){
         txtFirstName.setEditable(true);
         lblWarningFName.setVisible(false);
@@ -664,15 +661,18 @@ public class Create_New_Patient extends javax.swing.JFrame {
             System.out.println("You chose to open this file: " +
                 chooser.getSelectedFile().getName());}
 
-        //photoPath = chooser.getSelectedFile().getPath();
-
+                this.photoPath = chooser.getSelectedFile().getPath();
+                ImageIcon iconLogo = new ImageIcon(photoPath);
+                jPhoto1.setIcon(iconLogo);        
+        
+        /*
         ImageIcon icon = new ImageIcon(chooser.getSelectedFile().getPath());
         image = icon.getImage();
         Image newimg = image.getScaledInstance(70,70,Image.SCALE_SMOOTH);
         ImageIcon icon2 = new ImageIcon(newimg);
         jPhoto1.setVisible(true);
-        jPhoto1.setIcon(icon2);
-        
+        jPhoto1.setIcon(icon2);   */
+
     }//GEN-LAST:event_inPhotoBtn1ActionPerformed
 
     /**

@@ -67,11 +67,9 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         this.org = org;
         this.role = org.getSupportedRole();
         this.enterprise = e;
-        this.db4outil = db4outil;
-        
-        jPhoto1.setVisible(false);
-        
+        this.db4outil = db4outil;        
         initComponents();
+        jPhoto1.setVisible(false);
         init();
         populateAdminTable();
         employeeTypeJComboBox.setVisible(false);
@@ -86,7 +84,7 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
             
          // Setting welcome string
          
-         welcomelabel.setText(" Hospital Name : "+enterprise.getName()+" "+enterprise.getEnterpriseType());
+         welcomelabel.setText(" Hospital Name : "+enterprise.getName());
          DepartmentNameLabel.setText("Department Name : "+this.org.getName());
     //     jLabel7.setText("Department Name : "+this.org.getName());
                
@@ -222,7 +220,7 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         employeeTypeJComboBox = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(247, 247, 247));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -256,7 +254,7 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 893, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,14 +265,14 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         welcomelabel.setForeground(new java.awt.Color(96, 83, 150));
         welcomelabel.setText("Hello");
 
-        addAdminPanel.setBackground(new java.awt.Color(247, 247, 247));
+        addAdminPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         adminLabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         adminLabel.setForeground(new java.awt.Color(96, 83, 150));
         adminLabel.setText("Name");
 
         adminName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        adminName.setBorder(null);
+        adminName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         adminName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         adminName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -287,7 +285,7 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         adminUser.setText("Username");
 
         adminusername.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        adminusername.setBorder(null);
+        adminusername.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         adminusername.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         adminusername.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -322,7 +320,7 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         });
 
         adminpassword.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        adminpassword.setBorder(null);
+        adminpassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jScrollPane3.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -456,20 +454,15 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(welcomelabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(38, 38, 38)
+                .addComponent(welcomelabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(addAdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 88, Short.MAX_VALUE))
+                .addGap(0, 58, Short.MAX_VALUE))
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,7 +484,7 @@ public class Add_Hospital_Employees extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
-                Component[] comps = this.rightPanel.getComponents();// k nnm,nm
+        Component[] comps = this.rightPanel.getComponents();// k nnm,nm
         for(Component comp: comps){
             if(comp instanceof Hospital_Admin_WorkArea){
                 Hospital_Admin_WorkArea manageAdmin = (Hospital_Admin_WorkArea) comp;

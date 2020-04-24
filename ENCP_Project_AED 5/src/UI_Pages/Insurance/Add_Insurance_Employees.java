@@ -169,7 +169,8 @@ public class Add_Insurance_Employees extends javax.swing.JPanel {
         employeeTypeJComboBox = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(247, 247, 247));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -197,31 +198,36 @@ public class Add_Insurance_Employees extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, -1, -1));
+
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1050, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        welcomelabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 86, 1050, -1));
+
+        welcomelabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         welcomelabel.setForeground(new java.awt.Color(96, 83, 150));
         welcomelabel.setText("Hello");
+        add(welcomelabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 27, -1, -1));
 
-        addAdminPanel.setBackground(new java.awt.Color(247, 247, 247));
+        addAdminPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         adminLabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         adminLabel.setForeground(new java.awt.Color(96, 83, 150));
         adminLabel.setText("Name");
 
         adminName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        adminName.setBorder(null);
+        adminName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         adminName.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         adminName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -234,7 +240,7 @@ public class Add_Insurance_Employees extends javax.swing.JPanel {
         adminUser.setText("Username");
 
         adminusername.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        adminusername.setBorder(null);
+        adminusername.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         adminusername.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         adminusername.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -251,7 +257,7 @@ public class Add_Insurance_Employees extends javax.swing.JPanel {
         adminPasswordLabel.setForeground(new java.awt.Color(96, 83, 150));
         adminPasswordLabel.setText("Password");
 
-        addAdminBtn.setBackground(new java.awt.Color(247, 247, 247));
+        addAdminBtn.setBackground(new java.awt.Color(255, 255, 255));
         addAdminBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/Images/icons8_add_40px_1.png"))); // NOI18N
         addAdminBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +265,7 @@ public class Add_Insurance_Employees extends javax.swing.JPanel {
             }
         });
 
-        inPhotoBtn1.setBackground(new java.awt.Color(247, 247, 247));
+        inPhotoBtn1.setBackground(new java.awt.Color(255, 255, 255));
         inPhotoBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8-client_management.png"))); // NOI18N
         inPhotoBtn1.setText("Upload Photo");
         inPhotoBtn1.addActionListener(new java.awt.event.ActionListener() {
@@ -269,7 +275,7 @@ public class Add_Insurance_Employees extends javax.swing.JPanel {
         });
 
         adminpassword.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        adminpassword.setBorder(null);
+        adminpassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jScrollPane3.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -296,7 +302,7 @@ public class Add_Insurance_Employees extends javax.swing.JPanel {
         adminTable.setSelectionBackground(new java.awt.Color(96, 83, 150));
         jScrollPane3.setViewportView(adminTable);
 
-        jButton5.setBackground(new java.awt.Color(247, 247, 247));
+        jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_minus_40px_2.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,8 +391,8 @@ public class Add_Insurance_Employees extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(adminUser)
-                                    .addComponent(adminusername, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(adminusername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(addAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(adminPasswordLabel)
                                     .addComponent(adminpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -402,35 +408,7 @@ public class Add_Insurance_Employees extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(welcomelabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(addAdminPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(welcomelabel)))
-                .addGap(16, 16, 16)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(addAdminPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(144, 144, 144))
-        );
+        add(addAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 133, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked

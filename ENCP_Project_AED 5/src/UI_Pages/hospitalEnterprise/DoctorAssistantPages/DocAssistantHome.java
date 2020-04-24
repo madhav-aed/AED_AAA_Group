@@ -10,12 +10,15 @@ import Business.Departments.Organization;
 import Business.EcoSystem;
 import UI_Pages.hospitalEnterprise.LabAssistant.*;
 import Business.Enterprises.Enterprise;
+import Business.Messages.Messages;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CustomerDoctorWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -53,6 +56,7 @@ public class DocAssistantHome extends javax.swing.JPanel {
         initComponents();
       //  btn_close.setVisible(false);
         init();
+        setMyEmails();
     }
     
     public void init(){
@@ -97,7 +101,48 @@ public class DocAssistantHome extends javax.swing.JPanel {
  
         populateLabTable();
     }
-    
+ public void setMyEmails(){
+        int myInboxNumber = account.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().size();
+ //       for(Messages msgs : patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList())
+            if(myInboxNumber > 1){
+                Messages msgs = account.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText(""+msgs.getSender());
+                emailText1Label.setText(""+msgs.getSubject());                
+            
+                Messages lastButone  = account.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText(""+lastButone.getSender());
+                emailText2Label.setText(""+lastButone.getSubject());                
+            
+            }
+            else if(myInboxNumber == 1){
+                Messages msgs = account.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText(""+msgs.getSender());
+                emailText1Label.setText(""+msgs.getSubject());                
+            
+            //    Messages lastButone  = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText("                                               ");; // .setText(""+lastButone.getSender());
+                emailText2Label.setText("                                               ");; //.setText(""+lastButone.getSubject());                
+            
+            }
+            else if(myInboxNumber == 0){
+//                Messages msgs = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText("No new messages");
+                emailText1Label.setText("                                               ");;               
+            
+            //    Messages lastButone  = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText("                                               "); // .setText(""+lastButone.getSender());
+                emailText2Label.setText("                                               "); //.setText(""+lastButone.getSubject());                
+            
+            }
+
+
+
+            
+        
+    }   
      public void populateLabTable(){
 
        DefaultTableModel model1 = (DefaultTableModel) DAWorkReqTable.getModel();
@@ -110,7 +155,11 @@ public class DocAssistantHome extends javax.swing.JPanel {
 //                   if(wr.getStatus().equals("Doctor Appointment Requested")){
                         CustomerDoctorWorkRequest wr1 = (CustomerDoctorWorkRequest) wr;
                         Object[] row = new Object[5];
-                        row[0] = wr1.getAppointment().getDate();
+                        
+                        Format f = new SimpleDateFormat("MM/dd/yy");
+                        String strDate = f.format(wr1.getAppointment().getDate());
+                        row[0] = strDate;
+                       // row[0] = wr1.getAppointment().getDate();
                         row[2] = wr1;
                         row[3] = wr1.getReceivingDoctor();
                         row[4] = wr1.getStatus();
@@ -174,14 +223,14 @@ public class DocAssistantHome extends javax.swing.JPanel {
         emailText2Label = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(247, 247, 247));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         outLabPerson.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         outLabPerson.setForeground(new java.awt.Color(96, 83, 150));
         add(outLabPerson, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, 40));
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 204));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         assignedLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -209,17 +258,16 @@ public class DocAssistantHome extends javax.swing.JPanel {
 
         jPanel5.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 10));
 
-        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 130, 80));
+        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 130, 80));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(96, 83, 150));
         jLabel10.setText("Assigned");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 124, 30));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 124, 30));
 
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        DAWorkReqTable.setBackground(new java.awt.Color(247, 247, 247));
         DAWorkReqTable.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         DAWorkReqTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -249,7 +297,7 @@ public class DocAssistantHome extends javax.swing.JPanel {
         DAWorkReqTable.setSelectionBackground(new java.awt.Color(96, 83, 150));
         jScrollPane1.setViewportView(DAWorkReqTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 990, 260));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 540, 260));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -264,14 +312,14 @@ public class DocAssistantHome extends javax.swing.JPanel {
             .addGap(0, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, 230, 70));
 
         notificationLbl.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         notificationLbl.setForeground(new java.awt.Color(96, 83, 150));
         notificationLbl.setText("You have 5 new Notifications");
         add(notificationLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 270, 30));
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel13.setBackground(new java.awt.Color(255, 255, 204));
 
         totalApptLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         totalApptLbl.setForeground(new java.awt.Color(96, 83, 150));
@@ -307,7 +355,7 @@ public class DocAssistantHome extends javax.swing.JPanel {
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +368,7 @@ public class DocAssistantHome extends javax.swing.JPanel {
                 .addGap(7, 7, 7))
         );
 
-        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 120, -1));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(96, 83, 150));
@@ -371,7 +419,7 @@ public class DocAssistantHome extends javax.swing.JPanel {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1470, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,9 +428,9 @@ public class DocAssistantHome extends javax.swing.JPanel {
 
         add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1470, 10));
 
-        jPanel7.setBackground(new java.awt.Color(247, 247, 247));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBackground(new java.awt.Color(255, 255, 204));
 
         emailName1Label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         emailName1Label.setForeground(new java.awt.Color(96, 83, 150));
@@ -402,7 +450,7 @@ public class DocAssistantHome extends javax.swing.JPanel {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(emailName1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(emailText1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
+                    .addComponent(emailText1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -415,7 +463,7 @@ public class DocAssistantHome extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setBackground(new java.awt.Color(255, 255, 204));
 
         emailName2Label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         emailName2Label.setForeground(new java.awt.Color(96, 83, 150));
@@ -435,7 +483,7 @@ public class DocAssistantHome extends javax.swing.JPanel {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(emailName2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(emailText2Label))
+                    .addComponent(emailText2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -452,8 +500,12 @@ public class DocAssistantHome extends javax.swing.JPanel {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,13 +516,13 @@ public class DocAssistantHome extends javax.swing.JPanel {
                 .addContainerGap(161, Short.MAX_VALUE))
         );
 
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 330, 390, 350));
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 390, 350));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(96, 83, 150));
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_open_envelope_48px.png"))); // NOI18N
         jLabel16.setText("Recent messages");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 270, 170, -1));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 170, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAppointmentButtonActionPerformed

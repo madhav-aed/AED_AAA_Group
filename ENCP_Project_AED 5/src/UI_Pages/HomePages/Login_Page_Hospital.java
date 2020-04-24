@@ -132,6 +132,7 @@ public class Login_Page_Hospital extends javax.swing.JFrame {
         });
 
         txt_pwd.setForeground(new java.awt.Color(102, 102, 102));
+        txt_pwd.setText("jPasswordField1");
         txt_pwd.setBorder(null);
         txt_pwd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -198,7 +199,7 @@ public class Login_Page_Hospital extends javax.swing.JFrame {
         loader.setBackground(new java.awt.Color(255, 255, 255));
 
         lbl_loader.setFont(new java.awt.Font("Segoe UI Light", 3, 18)); // NOI18N
-        lbl_loader.setText("Simply breath while we connect..");
+        lbl_loader.setText("Simply breathe while we connect..");
 
         img_loader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/ring1.gif"))); // NOI18N
 
@@ -214,7 +215,7 @@ public class Login_Page_Hospital extends javax.swing.JFrame {
                     .addGroup(loaderLayout.createSequentialGroup()
                         .addGap(159, 159, 159)
                         .addComponent(lbl_loader)))
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addContainerGap(364, Short.MAX_VALUE))
         );
         loaderLayout.setVerticalGroup(
             loaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

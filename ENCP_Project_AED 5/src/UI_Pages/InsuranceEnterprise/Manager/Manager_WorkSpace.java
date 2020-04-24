@@ -14,6 +14,7 @@ import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
 import UI_Pages.MyMessages.MyMessages;
+import UI_Pages.MyMessages.MyMessages_Emp;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Frame;
@@ -65,6 +66,7 @@ public class Manager_WorkSpace extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)panelRight.getLayout();
         panelRight.add(new manager_workspace_1(panelRight, patient,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
+        Button3.setVisible(false);
     
     }
     
@@ -448,7 +450,7 @@ public class Manager_WorkSpace extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)panelRight.getLayout();
       //  panelRight.add(new Test_Panel_4());
       
-        panelRight.add(new MyMessages(panelRight, (Patient)patient, organization, enterprise, business, dB4OUtil));
+        panelRight.add(new MyMessages_Emp(panelRight, patient,patient.getEmployee(), organization, enterprise, business, dB4OUtil));
         
         layout.next(panelRight);
         
@@ -466,38 +468,6 @@ public class Manager_WorkSpace extends javax.swing.JFrame {
         
 
     }//GEN-LAST:event_Button2MouseExited
-
-    private void Button3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button3MouseClicked
-        // TODO add your handling code here:
-        onClick(Button3);
-        onLeaveClick(Button2);
-        onLeaveClick(Button1);
-        onLeaveClick(Button4);
-
-        //indicators
-        Indicator1.setOpaque(false);
-        Indicator2.setOpaque(false);
-        Indicator3.setOpaque(true);
-        Indicator4.setOpaque(false);
-        
-        
-        
-
-        
-        CardLayout layout = (CardLayout)panelRight.getLayout();
- //       panelRight.add(new buyPlanJPanel(panelRight, patient, organization, enterprise, business,dB4OUtil));
-        layout.next(panelRight);
-        
-    }//GEN-LAST:event_Button3MouseClicked
-
-    private void Button3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button3MouseEntered
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_Button3MouseEntered
-
-    private void Button3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button3MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Button3MouseExited
 
     private void Button4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button4MouseClicked
         // TODO add your handling code here:
@@ -530,7 +500,7 @@ public class Manager_WorkSpace extends javax.swing.JFrame {
     }//GEN-LAST:event_Button4MouseExited
 
     private void logoutLabelbtn_label(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelbtn_label
-        System.exit(0);
+     //   System.exit(0);
 
     }//GEN-LAST:event_logoutLabelbtn_label
 
@@ -542,6 +512,33 @@ public class Manager_WorkSpace extends javax.swing.JFrame {
  
 
     }//GEN-LAST:event_logoutLabel1btn_label
+
+    private void Button3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button3MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button3MouseExited
+
+    private void Button3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button3MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button3MouseEntered
+
+    private void Button3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button3MouseClicked
+        // TODO add your handling code here:
+        onClick(Button3);
+        onLeaveClick(Button2);
+        onLeaveClick(Button1);
+        onLeaveClick(Button4);
+
+        //indicators
+        Indicator1.setOpaque(false);
+        Indicator2.setOpaque(false);
+        Indicator3.setOpaque(true);
+        Indicator4.setOpaque(false);
+
+        CardLayout layout = (CardLayout)panelRight.getLayout();
+        //       panelRight.add(new buyPlanJPanel(panelRight, patient, organization, enterprise, business,dB4OUtil));
+        layout.next(panelRight);
+
+    }//GEN-LAST:event_Button3MouseClicked
     int xx ,xy;
     
     /**

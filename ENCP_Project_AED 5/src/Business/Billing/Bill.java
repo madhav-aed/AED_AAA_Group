@@ -57,10 +57,13 @@ public class Bill {
     }
     
     private static int count = 100;
-      
+      public int getRandomNumber(int min, int max) {
+    return (int) ((Math.random() * (max - min)) + min);
+}
 
      public Bill() {
-        this.billNo = "Bill"+count;
+         
+        this.billNo = "Bill "+count;
         count++;
     }
     

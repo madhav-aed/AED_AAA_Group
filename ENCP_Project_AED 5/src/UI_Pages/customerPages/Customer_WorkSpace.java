@@ -35,7 +35,8 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
     String userDisplayPic;
    // panelright used in place of userProcessContainer. So commenting this out.
    // JPanel userProcessContainer;
-    UserAccount patient;
+   // UserAccount patient;
+    Patient patient;
     Organization organization;
     Enterprise enterprise;
     EcoSystem business;
@@ -54,30 +55,40 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
         
                 
         this.panelRight = userProcessContainer;
-        this.patient = patient;
+        this.patient = (Patient)patient;
 
          this.organization = organization;
         this.enterprise = enterprise;
         this.business = business;
         this.dB4OUtil = dB4OUtil;
+         /*       
                 
-                
-              Patient p = (Patient) patient;
+         Patient p = (Patient) patient;
+         String
        // Image img = p.getPicture();
         userDisplayPic = "Jon_Snow";
-        if(p.getPicture() == null){
+        if(p.getProfilePicture() == null){
             userDisplayPic = "Jon_Snow";
-        
         }
         else{
-             icon2 = new ImageIcon(p.getPicture());
             
         }
-       
+       */
         initComponents();
-        
+                    // Import ImageIcon
+                    
+                    
+                    if(this.patient.getProfilePicture() == null){
+                                        
+                    }
+                    else {
+                     //   ImageIcon iconLogo = new ImageIcon(this.patient.getProfilePicture());
+                        icon2 = new ImageIcon(this.patient.getProfilePicture());
+                        jLabel21.setIcon(icon2);               
+                    }
+                // In init() method write this code
+           // jLabelYourCompanyLogo.setIcon(iconLogo);
             
-         jLabel21.setIcon(icon2);
         
        // home = jPanel3;
         CardLayout layout = (CardLayout)panelRight.getLayout();
@@ -335,8 +346,6 @@ public class Customer_WorkSpace extends javax.swing.JFrame {
 
         jPanel2.add(Button4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 331, 232, -1));
         jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 39, -1, -1));
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/"+userDisplayPic+".png")));
         jPanel2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 57, -1, -1));
 
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
