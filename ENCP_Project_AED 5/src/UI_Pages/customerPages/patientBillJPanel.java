@@ -120,7 +120,7 @@ public class patientBillJPanel extends javax.swing.JPanel {
         tblBills.setSelectionBackground(new java.awt.Color(96, 83, 150));
         jScrollPane1.setViewportView(tblBills);
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(96, 83, 150));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Billing History");

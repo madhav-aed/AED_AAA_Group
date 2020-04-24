@@ -12,6 +12,7 @@ import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
+import UI_Pages.MyMessages.MyMessages_Emp;
 import UI_Pages.hospitalEnterprise.doctorPages.*;
 import UI_Pages.customerPages.*;
 import java.awt.CardLayout;
@@ -340,7 +341,7 @@ public class InsuranceAgent_WorkSpace extends javax.swing.JFrame {
         // Set Panel view
                 // TODO add your handling code here:
         CardLayout layout = (CardLayout)panelRight.getLayout();
-  //      panelRight.add(new Customer_Workspace_1(panelRight));
+        panelRight.add(new InsuranceAgentDashboard(panelRight,this.ua,this.org,this.ent,this.business,this.dB4OUtil));
         layout.next(panelRight);
 
         
@@ -384,9 +385,9 @@ public class InsuranceAgent_WorkSpace extends javax.swing.JFrame {
         
         
         CardLayout layout = (CardLayout)panelRight.getLayout();
-      //  panelRight.add(new Test_Panel_4());
-      
-        panelRight.add(new Home());
+        
+        panelRight.add(new MyMessages_Emp(panelRight, ua, ua.getEmployee(), org, ent, business, dB4OUtil));
+//        panelRight.add(new Home());
         layout.next(panelRight);
         
         

@@ -98,8 +98,9 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
 //                        String strDate = f.format(pDoc.getDate());
 //                        row[1] = strDate;
 //                        }
-                        
-                        row[1] = pDoc.getDate();
+                        String helloWorld = pDoc.getDate();
+                        String hellWrld = helloWorld.replace(" 00:00:00 EST "," ");
+                        row[1] = hellWrld;
                         //row[2] = pDoc;
                         
                         
@@ -180,7 +181,6 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
         jPanel15 = new javax.swing.JPanel();
         btn_close = new javax.swing.JLabel();
         patientLabel = new javax.swing.JLabel();
-        labelIcon = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -193,7 +193,6 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        tblMedicalReports.setBackground(new java.awt.Color(247, 247, 247));
         tblMedicalReports.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         tblMedicalReports.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -238,7 +237,6 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
         jScrollPane2.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        tblDocReports.setBackground(new java.awt.Color(247, 247, 247));
         tblDocReports.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         tblDocReports.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -324,7 +322,7 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(184, Short.MAX_VALUE)
+                .addContainerGap(180, Short.MAX_VALUE)
                 .addComponent(btn_close)
                 .addContainerGap())
         );
@@ -333,19 +331,12 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
             .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 230, 70));
 
         patientLabel.setBackground(new java.awt.Color(41, 216, 95));
         patientLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         patientLabel.setForeground(new java.awt.Color(96, 83, 150));
-        add(patientLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 110, 30));
-
-        labelIcon.setBackground(new java.awt.Color(255, 255, 255));
-        labelIcon.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        labelIcon.setForeground(new java.awt.Color(96, 83, 150));
-        labelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8-treatment 2.png"))); // NOI18N
-        labelIcon.setOpaque(true);
-        add(labelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 50, 80));
+        add(patientLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 110, 30));
 
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -353,14 +344,14 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 810, Short.MAX_VALUE)
+            .addGap(0, 930, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 810, -1));
+        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 930, -1));
 
         jLabel15.setBackground(new java.awt.Color(41, 216, 95));
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -372,7 +363,7 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(96, 83, 150));
         jLabel16.setText("Patient Name");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 230, 30));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 230, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewMedReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewMedReportsActionPerformed
@@ -443,7 +434,6 @@ public class PatientMedicalHistory extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelIcon;
     private javax.swing.JLabel patientLabel;
     private javax.swing.JTable tblDocReports;
     private javax.swing.JTable tblMedicalReports;

@@ -5,6 +5,7 @@
  */
 package UI_Pages.customerPages;
 
+import Business.Billing.Bill;
 import Business.Customer.Patient;
 import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
@@ -67,7 +68,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         p = (Patient)this.patient;
         System.out.println("Patient plan"+p.getPlanType());
         btnPay.setVisible(false);
-        
+        txtcustomerName.setText(p.getfName() + " "+p.getLastName());
         if(!(p.getPlanType()==null)){
         loadPageWithFields();
         loadPlan();
@@ -344,7 +345,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
              checkBox1.setSelected(false);
              checkbox2.setSelected(false);
              lblPaymentAmount.setVisible(true);
-             lblPaymentAmount.setText("1");
+             lblPaymentAmount.setText("");
              lblcbox1.setVisible(false);
                      
              populateComboBox();
@@ -421,13 +422,11 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         lblAppearonAuth = new javax.swing.JLabel();
         lblPaymentAmount = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
-        btn_close = new javax.swing.JLabel();
         btn_back = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         txtcustomerName = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtFileNo1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1140, 510));
@@ -751,7 +750,6 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
 
         lblPaymentAmount.setBackground(new java.awt.Color(255, 255, 255));
         lblPaymentAmount.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblPaymentAmount.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -843,19 +841,9 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
                 .addGap(168, 168, 168))
         );
 
-        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 930, 630));
+        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 930, 710));
 
         jPanel15.setBackground(new java.awt.Color(96, 83, 150));
-
-        btn_close.setBackground(new java.awt.Color(96, 83, 150));
-        btn_close.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
-        btn_close.setForeground(new java.awt.Color(255, 255, 255));
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_multiply_40px.png"))); // NOI18N
-        btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_closeMouseClicked(evt);
-            }
-        });
 
         btn_back.setBackground(new java.awt.Color(96, 83, 150));
         btn_back.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -872,19 +860,15 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addGap(0, 68, Short.MAX_VALUE)
-                .addComponent(btn_back)
-                .addGap(26, 26, 26)
-                .addComponent(btn_close)
-                .addGap(56, 56, 56))
+                .addGap(0, 190, Short.MAX_VALUE)
+                .addComponent(btn_back))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_close, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-            .addComponent(btn_back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, 230, 70));
 
         jPanel11.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -916,12 +900,7 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(96, 83, 150));
         jLabel9.setText("Below are your details with us");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 200, 41));
-
-        txtFileNo1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtFileNo1.setForeground(new java.awt.Color(96, 83, 150));
-        txtFileNo1.setText("1001");
-        add(txtFileNo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 80, 41));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 200, 41));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFirstNameComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_txtFirstNameComponentMoved
@@ -988,11 +967,6 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEstEMIActionPerformed
 
-    private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btn_closeMouseClicked
-
     private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
         // TODO add your handling code here:
         //  System.exit(0);
@@ -1030,7 +1004,8 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
             btnPay.setBackground(purple);
             
         String paymentAmount = lblPaymentAmount.getText();
-        BillingPage panel = new BillingPage(panelRight, patient, organization, enterprise, business, dB4OUtil,paymentAmount,null);
+        Bill newBill = new Bill();
+        BillingPage panel = new BillingPage(panelRight, patient, organization, enterprise, business, dB4OUtil,paymentAmount,newBill);
         panelRight.add("BillingPage", panel);
         CardLayout layout = (CardLayout) panelRight.getLayout();
         layout.next(panelRight);
@@ -1124,7 +1099,6 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
     private java.awt.Button btnPay;
     private java.awt.Button btnReqInsurance;
     private javax.swing.JLabel btn_back;
-    private javax.swing.JLabel btn_close;
     private javax.swing.JCheckBox checkBox1;
     private javax.swing.JCheckBox checkbox2;
     private javax.swing.JComboBox<String> comboBoxETPName;
@@ -1162,7 +1136,6 @@ public class DetailsAndPurchasePlanJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtDOB;
     private javax.swing.JTextField txtEMIAmount;
     private javax.swing.JTextField txtEstEMI;
-    private javax.swing.JLabel txtFileNo1;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtInsuranceCompanyName;
     private javax.swing.JTextField txtInsuranceNumber;

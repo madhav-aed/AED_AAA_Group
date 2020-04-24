@@ -9,14 +9,17 @@ import Business.Database.DB4OUtil;
 import Business.Departments.Organization;
 import Business.EcoSystem;
 import Business.Enterprises.Enterprise;
+import Business.Messages.Messages;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.BuyInsuranceWorkRequest;
 import Business.WorkQueue.CustomerLabWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import UI_Pages.hospitalEnterprise.LabAssistant.LabProcess;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -46,6 +49,16 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
         this.business = business;
         init();
         populateInsuranceTable();
+        setMyEmails();
+        
+                
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(Color.white);
+       // headerRenderer.set(Color.BLACK);
+
+        for (int i = 0; i < CustomerInsuranceTbl.getModel().getColumnCount(); i++) {
+            CustomerInsuranceTbl.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
         
     }
     
@@ -83,7 +96,48 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
                   }
         
         
-      
+              public void setMyEmails(){
+        int myInboxNumber = ua.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().size();
+ //       for(Messages msgs : patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList())
+            if(myInboxNumber > 1){
+                Messages msgs = ua.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText(""+msgs.getSender());
+                emailText1Label.setText(""+msgs.getSubject());                
+            
+                Messages lastButone  = ua.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText(""+lastButone.getSender());
+                emailText2Label.setText(""+lastButone.getSubject());                
+            
+            }
+            else if(myInboxNumber == 1){
+                Messages msgs = ua.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText(""+msgs.getSender());
+                emailText1Label.setText(""+msgs.getSubject());                
+            
+            //    Messages lastButone  = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText("                                               ");; // .setText(""+lastButone.getSender());
+                emailText2Label.setText("                                               ");; //.setText(""+lastButone.getSubject());                
+            
+            }
+            else if(myInboxNumber == 0){
+//                Messages msgs = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 1);
+                
+                emailName1Label.setText("No new messages");
+                emailText1Label.setText("                                               ");;               
+            
+            //    Messages lastButone  = patient.getMyMessages().getRecievedMsgsList().getRecievedMsgsList().get(myInboxNumber - 2);
+                emailName2Label.setText("                                               "); // .setText(""+lastButone.getSender());
+                emailText2Label.setText("                                               "); //.setText(""+lastButone.getSubject());                
+            
+            }
+
+
+
+            
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,7 +157,6 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
         CustomerInsuranceTbl = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         btnSendProc = new java.awt.Button();
-        jLabel16 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         emailName1Label = new javax.swing.JLabel();
@@ -112,14 +165,18 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
         emailName2Label = new javax.swing.JLabel();
         emailText2Label = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(247, 247, 247));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAgentName.setBackground(new java.awt.Color(41, 216, 95));
         lblAgentName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblAgentName.setForeground(new java.awt.Color(12, 115, 101));
+        add(lblAgentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 170, 30));
 
-        jPanel4.setBackground(new java.awt.Color(247, 247, 247));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 204));
 
         lblPendingCount.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblPendingCount.setForeground(new java.awt.Color(12, 115, 101));
@@ -157,9 +214,12 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
                 .addGap(22, 22, 22))
         );
 
+        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 156, -1, -1));
+
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(12, 115, 101));
         jLabel7.setText("Requests Pending");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 108, 170, 41));
 
         jScrollPane1.setBackground(new java.awt.Color(247, 247, 247));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -189,10 +249,13 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
         CustomerInsuranceTbl.setSelectionBackground(new java.awt.Color(153, 255, 153));
         jScrollPane1.setViewportView(CustomerInsuranceTbl);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 258, 492, 190));
+
         jLabel11.setBackground(new java.awt.Color(41, 216, 95));
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(12, 115, 101));
         jLabel11.setText("Welcome");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 23, 90, 37));
 
         btnSendProc.setBackground(new java.awt.Color(16, 190, 121));
         btnSendProc.setForeground(new java.awt.Color(255, 255, 255));
@@ -202,15 +265,11 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
                 btnSendProcActionPerformed(evt);
             }
         });
+        add(btnSendProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 458, 170, 40));
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(96, 83, 150));
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_new_message_40px.png"))); // NOI18N
-        jLabel16.setText("Recent mail");
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel7.setBackground(new java.awt.Color(247, 247, 247));
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBackground(new java.awt.Color(255, 255, 204));
 
         emailName1Label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         emailName1Label.setForeground(new java.awt.Color(96, 83, 150));
@@ -241,7 +300,7 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setBackground(new java.awt.Color(255, 255, 204));
 
         emailName2Label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         emailName2Label.setForeground(new java.awt.Color(96, 83, 150));
@@ -288,80 +347,43 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
                 .addContainerGap(116, Short.MAX_VALUE))
         );
 
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, -1, -1));
+
         jPanel12.setBackground(new java.awt.Color(16, 190, 121));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1050, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(lblAgentName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(141, 141, 141)
-                                        .addComponent(btnSendProc, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(24, 24, 24))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, 1050, 10));
+
+        jPanel15.setBackground(new java.awt.Color(12, 115, 101));
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAgentName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSendProc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70))))
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
         );
+
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 230, 70));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI_Pages/images/icons8_open_envelope_48px.png"))); // NOI18N
+        jLabel17.setText("Recent messages");
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSendProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendProcActionPerformed
@@ -390,10 +412,11 @@ public class InsuranceAgentDashboard extends javax.swing.JPanel {
     private javax.swing.JLabel emailText1Label;
     private javax.swing.JLabel emailText2Label;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;

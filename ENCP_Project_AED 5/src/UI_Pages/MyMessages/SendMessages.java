@@ -86,7 +86,7 @@ public class SendMessages extends javax.swing.JPanel {
         btn_close2 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(247, 247, 247));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         userNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         userNameLabel.setForeground(new java.awt.Color(96, 83, 150));
@@ -96,7 +96,7 @@ public class SendMessages extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(96, 83, 150));
         jLabel6.setText("Welcome");
 
-        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         SenderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         SenderLabel.setForeground(new java.awt.Color(96, 83, 150));
@@ -224,14 +224,15 @@ public class SendMessages extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

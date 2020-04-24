@@ -15,6 +15,7 @@ import Business.Enterprises.Enterprise;
 import Business.UserAccount.UserAccount;
 import UI_Pages.HomePages.Home;
 import UI_Pages.MyMessages.MyMessages;
+import UI_Pages.MyMessages.MyMessages_Emp;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Frame;
@@ -66,6 +67,7 @@ public class Claim_WorkSpace extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)panelRight.getLayout();
         panelRight.add(new Claimsperson_workspace_1(panelRight, patient,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
+        Button3.setVisible(false);
     
     }
     
@@ -401,7 +403,7 @@ public class Claim_WorkSpace extends javax.swing.JFrame {
         // Set Panel view
                 // TODO add your handling code here:
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new manager_workspace_1(panelRight,patient,organization,enterprise,business,dB4OUtil));
+        panelRight.add(new Claimsperson_workspace_1(panelRight, patient,organization,enterprise,business,dB4OUtil));
         layout.next(panelRight);
 
         
@@ -448,7 +450,7 @@ public class Claim_WorkSpace extends javax.swing.JFrame {
         CardLayout layout = (CardLayout)panelRight.getLayout();
       //  panelRight.add(new Test_Panel_4());
       
-        panelRight.add(new MyMessages(panelRight, (Patient)patient, organization, enterprise, business, dB4OUtil));
+        panelRight.add(new MyMessages_Emp(panelRight, patient, patient.getEmployee(), organization, enterprise, business, dB4OUtil));
         
         layout.next(panelRight);
         

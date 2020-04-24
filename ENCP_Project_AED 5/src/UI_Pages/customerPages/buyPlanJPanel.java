@@ -205,7 +205,7 @@ public class buyPlanJPanel extends javax.swing.JPanel {
             .addComponent(btn_back, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 0, 230, 70));
+        add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 230, 70));
 
         jLabel11.setBackground(new java.awt.Color(41, 216, 95));
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -219,14 +219,14 @@ public class buyPlanJPanel extends javax.swing.JPanel {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 940, Short.MAX_VALUE)
+            .addGap(0, 1070, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 940, -1));
+        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 1070, -1));
     }// </editor-fold>//GEN-END:initComponents
     public void btnView(){
         System.out.println("p.getplantype is "+p.getPlanType());

@@ -339,7 +339,7 @@ public class LabAssistant_WorkSpace extends javax.swing.JFrame {
         // Set Panel view
                 // TODO add your handling code here:
         CardLayout layout = (CardLayout)panelRight.getLayout();
-  //      panelRight.add(new Customer_Workspace_1(panelRight));
+        panelRight.add(new Lab_Home(panelRight,this.ua,this.org,this.ent,this.business,this.dB4OUtil));
         layout.next(panelRight);
 
         
@@ -437,8 +437,8 @@ public class LabAssistant_WorkSpace extends javax.swing.JFrame {
     private void logoutLabel1btn_label(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabel1btn_label
        // System.exit(0);
        dB4OUtil.storeSystem(business);
-         System.exit(0);
-       //dispose();
+       //  System.exit(0);
+       dispose();
        
        // Customer_WorkSpace.super.setVisible(false);
  

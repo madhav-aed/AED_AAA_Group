@@ -87,7 +87,7 @@ public class SendMessages_Emp extends javax.swing.JPanel {
         btn_close2 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(247, 247, 247));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         userNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         userNameLabel.setForeground(new java.awt.Color(96, 83, 150));
@@ -97,7 +97,7 @@ public class SendMessages_Emp extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(96, 83, 150));
         jLabel6.setText("Welcome");
 
-        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         SenderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         SenderLabel.setForeground(new java.awt.Color(96, 83, 150));
